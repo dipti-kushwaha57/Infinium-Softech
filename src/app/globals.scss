@@ -24,8 +24,8 @@ html {
 
 html,
 body {
-  max-width: 100vw;
-  overflow-x: hidden;
+  max-width: 100%;
+  overflow-x: clip;
 }
 
 body {
@@ -70,155 +70,7 @@ svg {
 // next to Banner.tsx), scoped under its own root class the same way
 // Header/Footer are scoped here.
 
-// ============================================================
-// Header — scoped under .site-header to avoid colliding with
-// other components' CSS.
-// ============================================================
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 70;
-  background: rgba($color-bg, 0.86);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid $color-border;
-
-  .nav {
-    @include container;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    padding-block: 18px;
-  }
-
-  .logo {
-    display: flex;
-    align-items: center;
-    flex: none;
-
-    img {
-      height: 38px;
-      width: auto;
-    }
-  }
-
-  .links {
-    display: none;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-    list-style: none;
-    flex: none;
-
-    a {
-      display: inline-flex;
-      align-items: center;
-      padding: 12px 16px;
-      border-radius: 3px;
-      font-size: 17px;
-      font-weight: 500;
-      color: $color-ink-soft;
-      white-space: nowrap;
-      transition: background 0.25s ease, color 0.25s ease;
-
-      &:hover {
-        background: rgba($color-ink, 0.06);
-        color: $color-ink;
-      }
-    }
-
-    @include respond($bp-nav) {
-      display: flex;
-    }
-  }
-
-  .actions {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    flex: none;
-  }
-
-  .cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 9px;
-    background: $color-ink;
-    color: $color-bg;
-    font-size: 15.5px;
-    font-weight: 500;
-    padding: 14px 23px;
-    border-radius: 2px;
-    white-space: nowrap;
-
-    span {
-      opacity: 0.6;
-    }
-  }
-
-  .menu-toggle {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    border: 1px solid $color-border;
-    background: transparent;
-    color: $color-ink;
-    font-family: $font-body;
-    font-size: 15px;
-    font-weight: 500;
-    padding: 12px 16px;
-    border-radius: 3px;
-
-    @include respond($bp-nav) {
-      display: none;
-    }
-  }
-
-  .menu-toggle-bars {
-    display: inline-flex;
-    flex-direction: column;
-    gap: 3px;
-
-    span {
-      width: 15px;
-      height: 1.5px;
-      background: $color-ink;
-      display: block;
-    }
-  }
-
-  .mobile-nav {
-    border-top: 1px solid $color-border;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-
-    ul {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      list-style: none;
-    }
-
-    a {
-      display: block;
-      padding: 12px 6px;
-      font-size: 17px;
-      font-weight: 500;
-      color: $color-ink-soft;
-    }
-
-    .cta {
-      align-self: flex-start;
-    }
-
-    @include respond($bp-nav) {
-      display: none;
-    }
-  }
-}
+// Header is styled in src/components/Header/Header.scss
 
 // ============================================================
 // Footer — global, site-wide chrome. Scoped under .site-footer.

@@ -29,6 +29,10 @@ export function Banner() {
         text.style.opacity = "";
         text.style.filter = "";
         deck.style.transform = "";
+        const parallaxEls = deck.querySelectorAll<HTMLElement>("[data-parallax]");
+        parallaxEls.forEach((el) => {
+          el.style.marginTop = "";
+        });
         return;
       }
 

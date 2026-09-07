@@ -1,67 +1,193 @@
 @use "../../styles/variables" as *;
 @use "../../styles/mixins" as *;
 
-// Plain global stylesheet (not a CSS Module) — scoped under .banner
-// so its child class names can't collide with other components.
 .banner {
   position: relative;
-  overflow: hidden;
-  padding: 72px 24px 0;
-  text-align: center;
+  background: $color-bg;
+  color: $color-ink;
+  width: 100%;
+  overflow-x: clip;
 
-  @include respond($bp-md) {
-    padding-top: 96px;
+  // On mobile / tablet, banner flows naturally
+  padding: 40px 16px 48px;
+
+  @include respond($bp-sm) {
+    padding: 48px 20px 56px;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .glow {
-      animation: none;
+  @include respond($bp-md) {
+    padding: 64px 28px 64px;
+  }
+
+  // Desktop multi-viewport sticky scroll canvas
+  @include respond($bp-lg) {
+    height: 220vh;
+    padding: 0;
+    overflow: visible;
+  }
+
+  .banner-sticky-frame {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include respond($bp-lg) {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding-top: clamp(24px, 4.5vh, 48px);
     }
   }
 
-  .glow {
+  /* ──────────────────────────────────────────────
+     Ambient Glowing Backgrounds
+     ────────────────────────────────────────────── */
+  .banner-glow-layer {
     position: absolute;
     inset: 0;
-    z-index: 0;
+    overflow: hidden;
     pointer-events: none;
-    background:
-      radial-gradient(
-          closest-side,
-          rgba($color-accent-lime, 0.5),
-          rgba($color-accent-lime, 0.14) 54%,
-          rgba($color-accent-lime, 0) 76%
-        )
-        top right / 55% 55% no-repeat,
-      radial-gradient(
-          closest-side,
-          rgba($tint-green, 0.4),
-          rgba($color-accent-lime, 0.12) 56%,
-          rgba($color-accent-lime, 0) 78%
-        )
-        bottom left / 60% 60% no-repeat;
-    filter: blur(30px);
-    animation: banner-glow 30s ease-in-out infinite;
+    z-index: 0;
   }
 
-  .content {
+  .banner-glow-tr {
+    position: absolute;
+    right: -10%;
+    top: -16%;
+    width: 50vw;
+    height: 50vw;
+    max-width: 660px;
+    max-height: 660px;
+    background: radial-gradient(
+      closest-side,
+      rgba($color-accent-lime, 0.5),
+      rgba($color-accent-lime, 0.14) 54%,
+      rgba($color-accent-lime, 0) 76%
+    );
+    filter: blur(28px);
+    animation: im-glow-tr 28s ease-in-out infinite;
+  }
+
+  .banner-glow-bl {
+    position: absolute;
+    left: -12%;
+    bottom: -18%;
+    width: 50vw;
+    height: 50vw;
+    max-width: 700px;
+    max-height: 700px;
+    background: radial-gradient(
+      closest-side,
+      rgba(122, 214, 120, 0.44),
+      rgba($color-accent-lime, 0.12) 56%,
+      rgba($color-accent-lime, 0) 78%
+    );
+    filter: blur(32px);
+    animation: im-glow-bl 34s ease-in-out infinite;
+  }
+
+  .banner-glow-center {
+    position: absolute;
+    left: -12%;
+    right: -12%;
+    top: -4%;
+    height: 56%;
+    background: radial-gradient(
+      60% 70% at 50% 40%,
+      rgba($color-accent, 0.12),
+      rgba($color-accent, 0) 72%
+    );
+    filter: blur(6px);
+  }
+
+  /* ──────────────────────────────────────────────
+     Animated SVG Wave Ribbons
+     ────────────────────────────────────────────── */
+  .banner-waves-layer {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .banner-wave-track {
+    position: absolute;
+    width: 200%;
+    height: 56%;
+
+    &.wave-track-a {
+      left: 0;
+      top: 2%;
+      animation: im-wave-a 30s linear infinite;
+    }
+
+    &.wave-track-b {
+      left: 0;
+      top: 0;
+      height: 62%;
+      opacity: 0.75;
+      animation: im-wave-b 44s linear infinite;
+    }
+  }
+
+  .banner-wave-svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ──────────────────────────────────────────────
+     Banner Text Content (Fluid Typography Scale)
+     ────────────────────────────────────────────── */
+  .banner-content {
     position: relative;
-    z-index: 2;
-    max-width: 46rem;
+    z-index: 3;
+    width: 100%;
+    max-width: 1200px;
     margin-inline: auto;
+    padding: 0 4px;
+    text-align: center;
+    transform-origin: 50% 0%;
+    will-change: transform, opacity, filter;
+
+    @include respond($bp-md) {
+      padding: 0 24px;
+    }
   }
 
-  .eyebrow {
+  .banner-eyebrow {
     display: inline-flex;
     align-items: center;
-    gap: 14px;
-    border: 1px solid $color-border;
+    gap: 8px;
+    border: 1px solid rgba($color-ink, 0.16);
     border-radius: 100px;
-    padding: 7px 8px 7px 16px;
-    font-size: 11px;
-    letter-spacing: 0.22em;
+    padding: 5px 6px 5px 12px;
+    font-size: var(--fs-xs);
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     color: $color-ink-soft;
-    background: rgba($color-bg, 0.7);
+    background: rgba($color-bg, 0.8);
+    backdrop-filter: blur(8px);
+    max-width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    @include respond($bp-sm) {
+      gap: 12px;
+      padding: 6px 8px 6px 14px;
+      letter-spacing: 0.22em;
+      flex-wrap: nowrap;
+    }
+
+    @include respond($bp-md) {
+      gap: 14px;
+      padding: 7px 8px 7px 16px;
+    }
   }
 
   .eyebrow-dot {
@@ -69,167 +195,507 @@
     height: 6px;
     border-radius: 50%;
     background: $color-accent;
+    flex-shrink: 0;
+    animation: im-pulse 2.4s ease-in-out infinite;
+  }
+
+  .eyebrow-text {
+    font-weight: 500;
   }
 
   .eyebrow-pill {
     background: $color-ink;
     color: $color-bg;
     border-radius: 100px;
-    padding: 5px 12px;
-    letter-spacing: 0.08em;
+    padding: 3px 8px;
+    letter-spacing: 0.06em;
     text-transform: none;
-    font-size: 11.5px;
+    font-size: clamp(0.6875rem, 0.5vw + 0.35rem, 0.75rem);
+    font-weight: 500;
     white-space: nowrap;
+
+    @include respond($bp-sm) {
+      padding: 4px 10px;
+    }
+
+    @include respond($bp-md) {
+      padding: 5px 12px;
+      font-size: 11.5px;
+    }
   }
 
-  .headline {
+  .banner-headline {
+    font-family: $font-display;
     font-weight: 800;
-    font-size: clamp(2.25rem, 6vw, 4.5rem);
-    line-height: 0.95;
-    letter-spacing: -0.03em;
+    font-size: var(--fs-display);
+    line-height: 0.94;
+    letter-spacing: -0.04em;
+    max-width: 22ch;
+    margin: min(20px, 2vh) auto 0;
     text-wrap: balance;
-    margin-top: 24px;
+
+    @include respond($bp-md) {
+      margin-top: 24px;
+    }
   }
 
   .accent {
     color: $color-accent;
   }
 
-  .lede {
-    max-width: 40rem;
-    margin: 24px auto 0;
-    font-size: 17px;
+  .banner-lede {
+    max-width: 640px;
+    margin: 16px auto 0;
+    font-size: var(--fs-lead);
     line-height: 1.55;
     color: $color-body;
-  }
 
-  .actions {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 28px;
-  }
-
-  .primary-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: $color-accent;
-    color: #fff;
-    font-size: 14px;
-    font-weight: 500;
-    padding: 15px 26px;
-    border-radius: 2px;
-
-    span {
-      opacity: 0.65;
+    @include respond($bp-md) {
+      margin-top: 20px;
     }
   }
 
-  .secondary-cta {
+  .banner-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+
+    @include respond($bp-md) {
+      margin-top: 28px;
+    }
+  }
+
+  .btn-primary {
     display: inline-flex;
     align-items: center;
-    border: 1px solid $color-border;
-    color: $color-ink;
-    font-size: 14px;
+    justify-content: center;
+    gap: 10px;
+    background: $color-accent;
+    color: #ffffff;
+    font-size: var(--fs-body);
     font-weight: 500;
-    padding: 15px 26px;
+    padding: 13px 24px;
     border-radius: 2px;
+    white-space: nowrap;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+
+    @include respond($bp-sm) {
+      padding: 14px 26px;
+    }
+
+    span {
+      opacity: 0.65;
+      transition: transform 0.2s ease;
+    }
+
+    &:hover {
+      opacity: 0.95;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba($color-accent, 0.35);
+
+      span {
+        transform: translateX(3px);
+      }
+    }
   }
 
-  .deck {
-    position: relative;
-    z-index: 1;
-    max-width: 62rem;
-    margin: 56px auto 0;
-    padding: 0 24px;
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border: 1px solid rgba($color-ink, 0.2);
+    color: $color-ink;
+    font-size: var(--fs-body);
+    font-weight: 500;
+    padding: 13px 24px;
+    border-radius: 2px;
+    white-space: nowrap;
+    background: transparent;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+
+    @include respond($bp-sm) {
+      padding: 14px 26px;
+    }
+
+    &:hover {
+      background: rgba($color-ink, 0.05);
+      border-color: rgba($color-ink, 0.4);
+      transform: translateY(-1px);
+    }
   }
 
-  .deck-image {
+  /* ──────────────────────────────────────────────
+     Hero Deck & Floating Zoom Effect
+     ────────────────────────────────────────────── */
+  .banner-deck {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1240px;
+    margin: 36px auto 0;
+    padding: 0 4px;
+
+    @include respond($bp-sm) {
+      margin-top: 44px;
+      padding: 0 12px;
+    }
+
+    @include respond($bp-md) {
+      margin-top: 52px;
+      padding: 0 24px;
+    }
+
+    @include respond($bp-lg) {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      width: min(1240px, 90vw);
+      margin: 0;
+      padding: 0;
+      transform: translate3d(-50%, 460px, 0) scale(0.86);
+      transform-origin: 50% 0%;
+      will-change: transform;
+    }
+  }
+
+  .deck-container {
+    position: relative;
+    width: 100%;
+  }
+
+  .deck-preview {
     position: relative;
     z-index: 1;
-    border-radius: 14px 14px 0 0;
+    border-radius: 12px 12px 0 0;
     overflow: hidden;
-    box-shadow: 0 -8px 90px rgba($color-ink, 0.28), 0 0 0 1px rgba($color-ink, 0.1);
+    box-shadow: 0 -8px 80px rgba($color-ink, 0.24), 0 0 0 1px rgba($color-ink, 0.08);
 
-    img {
+    @include respond($bp-md) {
+      border-radius: 14px 14px 0 0;
+      box-shadow: 0 -8px 90px rgba($color-ink, 0.28), 0 0 0 1px rgba($color-ink, 0.1);
+    }
+
+    .preview-img {
       display: block;
       width: 100%;
       height: auto;
     }
   }
 
-  .stat-card {
+  /* Floating Cards on Desktop */
+  .floating-card {
     display: none;
     position: absolute;
-    z-index: 2;
-    width: 190px;
-    background: rgba($color-bg, 0.9);
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.8);
-    box-shadow: 0 24px 60px rgba($color-ink, 0.16);
-    border-radius: 14px;
-    padding: 16px;
-    text-align: left;
+    z-index: 4;
+    transition: margin-top 0.15s ease-out;
 
     @include respond($bp-lg) {
       display: block;
     }
   }
 
-  .stat-card-head {
+  .card-glass {
+    background: rgba($color-bg, 0.74);
+    backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    box-shadow: 0 24px 60px rgba($color-ink, 0.16);
+    border-radius: 14px;
+    padding: 16px;
+    text-align: left;
+  }
+
+  .card-head {
     display: flex;
     align-items: center;
     gap: 9px;
-    font-size: 12px;
-    font-weight: 600;
   }
 
-  .stat-card-mark {
+  .card-mark {
     width: 26px;
     height: 26px;
     border-radius: 7px;
-    color: #fff;
+    color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: $font-display;
     font-weight: 800;
     font-size: 10.5px;
+
+    &.mark-blue {
+      background: $tint-blue;
+    }
+
+    &.mark-amber {
+      background: $tint-amber;
+    }
+
+    &.mark-green {
+      background: $tint-green;
+      width: 24px;
+      height: 24px;
+      font-size: 10px;
+    }
   }
 
-  .stat-card-value {
+  .card-title {
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    color: $color-ink;
+  }
+
+  .card-metric {
     font-family: $font-display;
     font-weight: 800;
-    font-size: 24px;
+    font-size: clamp(1.25rem, 1.5vw + 0.5rem, 1.5rem);
     letter-spacing: -0.03em;
-    margin-top: 12px;
+    color: $color-ink;
+    margin-top: 10px;
   }
 
-  .stat-card-label {
-    font-size: 10.5px;
-    color: $color-muted;
+  .card-caption {
+    font-size: var(--fs-xs);
+    color: #78787c;
     margin-top: 3px;
   }
 
-  .stat-card-one {
-    left: -24px;
-    top: 40px;
+  .card-spark-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    height: 32px;
+    margin-top: 12px;
+
+    .spark-bar {
+      flex: 1;
+      border-radius: 2px;
+      background: $tint-green;
+    }
   }
 
-  .stat-card-two {
-    right: -24px;
-    top: 110px;
+  /* Desktop Floating Card Positioning */
+  .card-appointgem {
+    left: -3%;
+    top: 34px;
+    width: 200px;
+    animation: im-float-a 8s ease-in-out infinite;
+
+    @include respond($bp-xl) {
+      left: -6%;
+      width: 210px;
+    }
+  }
+
+  .card-truckguru {
+    right: -3%;
+    top: 96px;
+    width: 190px;
+    animation: im-float-b 9.4s ease-in-out infinite;
+
+    @include respond($bp-xl) {
+      right: -5%;
+      width: 196px;
+    }
+  }
+
+  .card-welzokart {
+    left: 4%;
+    top: 220px;
+    width: 176px;
+    animation: im-float-b 10.2s ease-in-out infinite;
+
+    @include respond($bp-xl) {
+      left: 6%;
+      width: 184px;
+    }
+  }
+
+  /* ──────────────────────────────────────────────
+     Mobile / Tablet Bottom Stat Pills Row
+     ────────────────────────────────────────────── */
+  .mobile-stats-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 18px;
+    flex-wrap: wrap;
+
+    @include respond($bp-sm) {
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    @include respond($bp-lg) {
+      display: none;
+    }
+  }
+
+  .mobile-stat-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba($color-bg, 0.85);
+    border: 1px solid rgba($color-ink, 0.12);
+    border-radius: 100px;
+    padding: 6px 12px;
+    box-shadow: 0 4px 12px rgba($color-ink, 0.05);
+
+    .stat-pill-mark {
+      width: 20px;
+      height: 20px;
+      border-radius: 5px;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: $font-display;
+      font-weight: 800;
+      font-size: 9px;
+
+      &.mark-blue {
+        background: $tint-blue;
+      }
+      &.mark-amber {
+        background: $tint-amber;
+      }
+      &.mark-green {
+        background: $tint-green;
+      }
+    }
+
+    div {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      line-height: 1.1;
+
+      strong {
+        font-family: $font-display;
+        font-size: var(--fs-xs);
+        font-weight: 800;
+        color: $color-ink;
+      }
+
+      small {
+        font-size: 10px;
+        color: $color-muted;
+      }
+    }
   }
 }
 
-@keyframes banner-glow {
+/* ──────────────────────────────────────────────
+   Keyframe Animations
+   ────────────────────────────────────────────── */
+@keyframes im-pulse {
   0%,
   100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.25;
+    transform: scale(0.85);
+  }
+}
+
+@keyframes im-wave-a {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes im-wave-b {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes im-glow-tr {
+  0% {
     transform: translate3d(0, 0, 0) scale(1);
   }
   50% {
-    transform: translate3d(-2%, 2%, 0) scale(1.08);
+    transform: translate3d(-7vw, 6vh, 0) scale(1.16);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes im-glow-bl {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1.06);
+  }
+  50% {
+    transform: translate3d(8vw, -5vh, 0) scale(0.9);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1.06);
+  }
+}
+
+@keyframes im-float-a {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -16px, 0);
+  }
+}
+
+@keyframes im-float-b {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, 14px, 0);
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .banner {
+    height: auto !important;
+
+    .banner-sticky-frame {
+      position: static !important;
+      height: auto !important;
+    }
+
+    .banner-deck {
+      position: static !important;
+      transform: none !important;
+    }
+
+    .banner-content {
+      transform: none !important;
+      opacity: 1 !important;
+      filter: none !important;
+    }
+
+    .banner-glow-tr,
+    .banner-glow-bl,
+    .wave-track-a,
+    .wave-track-b,
+    .eyebrow-dot,
+    .card-appointgem,
+    .card-truckguru,
+    .card-welzokart {
+      animation: none !important;
+    }
   }
 }

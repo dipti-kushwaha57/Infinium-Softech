@@ -30,6 +30,19 @@ $tint-indigo: #4338ca;
 $font-display: var(--font-archivo), system-ui, sans-serif;
 $font-body: var(--font-instrument-sans), system-ui, sans-serif;
 
+// Fluid Typography Scale (CSS Custom Properties)
+$fs-display: var(--fs-display);
+$fs-h1: var(--fs-h1);
+$fs-h2: var(--fs-h2);
+$fs-h3: var(--fs-h3);
+$fs-h4: var(--fs-h4);
+$fs-h5: var(--fs-h5);
+$fs-h6: var(--fs-h6);
+$fs-body: var(--fs-body);
+$fs-sm: var(--fs-sm);
+$fs-xs: var(--fs-xs);
+$fs-lead: var(--fs-lead);
+
 // Layout
 $max-width: 1440px;
 $radius: 8px;

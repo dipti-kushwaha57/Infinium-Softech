@@ -1,19 +1,15 @@
 @use "../styles/variables" as *;
+@use "../styles/mixins" as *;
 
+// The Infinium Softech brand is a fixed light-paper aesthetic with
+// deliberately dark sections (header dropdown, footer) — not a
+// light/dark theme toggle — so these tokens are not swapped per
+// prefers-color-scheme.
 :root {
   --background: #{$color-bg};
-  --foreground: #{$color-fg};
+  --foreground: #{$color-ink};
   --muted: #{$color-muted};
   --border: #{$color-border};
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --muted: #a1a1aa;
-    --border: #262626;
-  }
 }
 
 * {
@@ -38,9 +34,18 @@ body {
   flex-direction: column;
   color: var(--foreground);
   background: var(--background);
-  font-family: $font-sans;
+  font-family: $font-body;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-display;
 }
 
 a {
@@ -54,8 +59,264 @@ svg {
   max-width: 100%;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+.main {
+  flex: 1;
+}
+
+// Header and Footer are the only components styled here — they're
+// site-wide chrome rendered once in the root layout. Every other
+// component keeps its own plain (non-module) .scss file inside its
+// own folder, imported directly by that component (e.g. Banner.scss
+// next to Banner.tsx), scoped under its own root class the same way
+// Header/Footer are scoped here.
+
+// ============================================================
+// Header — scoped under .site-header to avoid colliding with
+// other components' CSS.
+// ============================================================
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 70;
+  background: rgba($color-bg, 0.86);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid $color-border;
+
+  .nav {
+    @include container;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding-block: 18px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    flex: none;
+
+    img {
+      height: 38px;
+      width: auto;
+    }
+  }
+
+  .links {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    list-style: none;
+    flex: none;
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      padding: 12px 16px;
+      border-radius: 3px;
+      font-size: 17px;
+      font-weight: 500;
+      color: $color-ink-soft;
+      white-space: nowrap;
+      transition: background 0.25s ease, color 0.25s ease;
+
+      &:hover {
+        background: rgba($color-ink, 0.06);
+        color: $color-ink;
+      }
+    }
+
+    @include respond($bp-nav) {
+      display: flex;
+    }
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex: none;
+  }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    background: $color-ink;
+    color: $color-bg;
+    font-size: 15.5px;
+    font-weight: 500;
+    padding: 14px 23px;
+    border-radius: 2px;
+    white-space: nowrap;
+
+    span {
+      opacity: 0.6;
+    }
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    border: 1px solid $color-border;
+    background: transparent;
+    color: $color-ink;
+    font-family: $font-body;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 12px 16px;
+    border-radius: 3px;
+
+    @include respond($bp-nav) {
+      display: none;
+    }
+  }
+
+  .menu-toggle-bars {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 3px;
+
+    span {
+      width: 15px;
+      height: 1.5px;
+      background: $color-ink;
+      display: block;
+    }
+  }
+
+  .mobile-nav {
+    border-top: 1px solid $color-border;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      list-style: none;
+    }
+
+    a {
+      display: block;
+      padding: 12px 6px;
+      font-size: 17px;
+      font-weight: 500;
+      color: $color-ink-soft;
+    }
+
+    .cta {
+      align-self: flex-start;
+    }
+
+    @include respond($bp-nav) {
+      display: none;
+    }
+  }
+}
+
+// ============================================================
+// Footer — global, site-wide chrome. Scoped under .site-footer.
+// ============================================================
+.site-footer {
+  background: $color-ink;
+  color: $color-bg;
+  padding: 80px 24px 34px;
+
+  .top {
+    @include container;
+    padding-inline: 0;
+    display: grid;
+    gap: 48px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    @include respond($bp-md) {
+      grid-template-columns: 1.5fr repeat(4, 1fr);
+    }
+  }
+
+  .brand {
+    grid-column: 1 / -1;
+
+    @include respond($bp-md) {
+      grid-column: auto;
+    }
+
+    img {
+      height: 34px;
+      width: auto;
+    }
+
+    p {
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: $color-on-dark-muted;
+      margin-top: 20px;
+      max-width: 280px;
+    }
+  }
+
+  .column-title {
+    font-size: 10.5px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: $color-muted;
+  }
+
+  .column {
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      list-style: none;
+      margin-top: 20px;
+    }
+
+    a {
+      font-size: 17px;
+      color: $color-on-dark-link;
+
+      &:hover {
+        color: $color-bg;
+      }
+    }
+  }
+
+  .bottom {
+    @include container;
+    padding-inline: 0;
+    margin-top: 64px;
+    border-top: 1px solid $color-border-on-dark;
+    padding-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    font-size: 12.5px;
+    color: $color-muted;
+
+    @include respond($bp-md) {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  .legal {
+    display: flex;
+    gap: 26px;
+    flex-wrap: wrap;
+
+    a {
+      color: $color-muted;
+
+      &:hover {
+        color: $color-on-dark-link;
+      }
+    }
   }
 }

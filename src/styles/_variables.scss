@@ -1,20 +1,42 @@
-// Design tokens — placeholders until the real design is wired in section by section.
+// Design tokens — sourced from the Infinium Softech brand reference
+// (design-reference-infinium/Infinium Softech Standalone.html).
 
-// Colors
-$color-bg: #ffffff;
-$color-fg: #171717;
-$color-muted: #6b7280;
-$color-border: #e5e7eb;
+// Core palette
+$color-bg: #f1f0ec; // paper background
+$color-ink: #0c0c0d; // primary text / dark surfaces (footer, buttons)
+$color-ink-soft: #3a3a3e; // secondary text on light surfaces
+$color-body: #55555a; // paragraph text on light surfaces
+$color-muted: #8a8a8e; // tertiary text, works on light and dark
+$color-on-dark-muted: #a9a9ae; // secondary text on dark surfaces
+$color-on-dark-link: #d6d6d9; // link text on dark surfaces (footer)
+$color-border: rgba(12, 12, 13, 0.12);
+$color-border-on-dark: rgba(241, 240, 236, 0.14);
 
-// Typography
-$font-sans: "Geist", Arial, Helvetica, sans-serif;
+// Accents
+$color-accent: #1f31e8; // primary brand blue
+$color-accent-lime: #c8f24e; // secondary accent, used on dark surfaces
+
+// Product tint palette (ecosystem cards, badges)
+$tint-blue: #1f31e8;
+$tint-green: #1e9e5a;
+$tint-amber: #e8a21f;
+$tint-violet: #8b3fe8;
+$tint-teal: #0f8f87;
+$tint-cyan: #2aa8c4;
+$tint-rose: #e0452f;
+$tint-indigo: #4338ca;
+
+// Typography — bound to next/font CSS variables set on <html> in layout.tsx
+$font-display: var(--font-archivo), system-ui, sans-serif;
+$font-body: var(--font-instrument-sans), system-ui, sans-serif;
 
 // Layout
-$max-width: 1280px;
+$max-width: 1440px;
 $radius: 8px;
 
 // Breakpoints
 $bp-sm: 480px;
 $bp-md: 768px;
 $bp-lg: 1024px;
+$bp-nav: 1240px; // header switches to compact/mobile nav below this
 $bp-xl: 1280px;

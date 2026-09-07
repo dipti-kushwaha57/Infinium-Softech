@@ -163,30 +163,30 @@
   .banner-eyebrow {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     border: 1px solid rgba($color-ink, 0.16);
     border-radius: 100px;
-    padding: 5px 6px 5px 12px;
-    font-size: var(--fs-xs);
-    letter-spacing: 0.16em;
+    padding: 4px 5px 4px 10px;
+    font-size: clamp(9px, 2.6vw, 11px);
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: $color-ink-soft;
     background: rgba($color-bg, 0.8);
     backdrop-filter: blur(8px);
     max-width: 100%;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-wrap: nowrap;
+    white-space: nowrap;
 
     @include respond($bp-sm) {
       gap: 12px;
       padding: 6px 8px 6px 14px;
-      letter-spacing: 0.22em;
-      flex-wrap: nowrap;
+      letter-spacing: 0.18em;
     }
 
     @include respond($bp-md) {
       gap: 14px;
       padding: 7px 8px 7px 16px;
+      letter-spacing: 0.22em;
     }
   }
 
@@ -208,19 +208,21 @@
     color: $color-bg;
     border-radius: 100px;
     padding: 3px 8px;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.04em;
     text-transform: none;
-    font-size: clamp(0.6875rem, 0.5vw + 0.35rem, 0.75rem);
+    font-size: clamp(9px, 2.5vw, 11.5px);
     font-weight: 500;
     white-space: nowrap;
 
     @include respond($bp-sm) {
       padding: 4px 10px;
+      letter-spacing: 0.06em;
     }
 
     @include respond($bp-md) {
       padding: 5px 12px;
       font-size: 11.5px;
+      letter-spacing: 0.08em;
     }
   }
 
@@ -329,7 +331,7 @@
   }
 
   /* ──────────────────────────────────────────────
-     Hero Deck & Floating Zoom Effect
+     Hero Deck & Platform Preview
      ────────────────────────────────────────────── */
   .banner-deck {
     position: relative;
@@ -386,45 +388,140 @@
     }
   }
 
-  /* Floating Cards on Desktop */
-  .floating-card {
-    display: none;
-    position: absolute;
-    z-index: 4;
-    transition: margin-top 0.15s ease-out;
+  /* ──────────────────────────────────────────────
+     Cards Layout:
+     - On mobile / tablet (< 1024px): shows all 3 compact boxes side-by-side at once (no scroll)
+     - On desktop (>= 1024px): floats over image sides with parallax
+     ────────────────────────────────────────────── */
+  .deck-cards-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    margin-top: 14px;
+    margin-bottom: 28px;
+    width: 100%;
+
+    @include respond($bp-sm) {
+      gap: 10px;
+      margin-top: 18px;
+      margin-bottom: 36px;
+    }
+
+    @include respond($bp-md) {
+      gap: 16px;
+      margin-top: 24px;
+      margin-bottom: 48px;
+    }
 
     @include respond($bp-lg) {
       display: block;
+      position: static;
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  .stat-card {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    text-align: left;
+
+    @include respond($bp-lg) {
+      position: absolute;
+      z-index: 4;
+      transition: margin-top 0.15s ease-out;
+
+      &.card-appointgem {
+        left: -3%;
+        top: 34px;
+        width: 200px;
+        animation: im-float-a 8s ease-in-out infinite;
+
+        @include respond($bp-xl) {
+          left: -6%;
+          width: 210px;
+        }
+      }
+
+      &.card-truckguru {
+        right: -3%;
+        top: 96px;
+        width: 190px;
+        animation: im-float-b 9.4s ease-in-out infinite;
+
+        @include respond($bp-xl) {
+          right: -5%;
+          width: 196px;
+        }
+      }
+
+      &.card-welzokart {
+        left: 4%;
+        top: 220px;
+        width: 176px;
+        animation: im-float-b 10.2s ease-in-out infinite;
+
+        @include respond($bp-xl) {
+          left: 6%;
+          width: 184px;
+        }
+      }
     }
   }
 
   .card-glass {
-    background: rgba($color-bg, 0.74);
-    backdrop-filter: blur(18px);
+    background: rgba($color-bg, 0.78);
+    backdrop-filter: blur(14px);
     border: 1px solid rgba(255, 255, 255, 0.85);
-    box-shadow: 0 24px 60px rgba($color-ink, 0.16);
-    border-radius: 14px;
-    padding: 16px;
+    box-shadow: 0 8px 24px rgba($color-ink, 0.08);
+    border-radius: 8px;
+    padding: 8px 7px;
     text-align: left;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    @include respond($bp-sm) {
+      border-radius: 10px;
+      padding: 10px 12px;
+      box-shadow: 0 12px 32px rgba($color-ink, 0.1);
+    }
+
+    @include respond($bp-md) {
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: 0 24px 60px rgba($color-ink, 0.16);
+    }
   }
 
   .card-head {
     display: flex;
     align-items: center;
-    gap: 9px;
+    gap: 4px;
+
+    @include respond($bp-sm) {
+      gap: 7px;
+    }
+
+    @include respond($bp-md) {
+      gap: 9px;
+    }
   }
 
   .card-mark {
-    width: 26px;
-    height: 26px;
-    border-radius: 7px;
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
     color: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: $font-display;
     font-weight: 800;
-    font-size: 10.5px;
+    font-size: 8px;
+    flex-shrink: 0;
 
     &.mark-blue {
       background: $tint-blue;
@@ -436,155 +533,112 @@
 
     &.mark-green {
       background: $tint-green;
-      width: 24px;
-      height: 24px;
-      font-size: 10px;
+      width: 16px;
+      height: 16px;
+      font-size: 7.5px;
+    }
+
+    @include respond($bp-sm) {
+      width: 22px;
+      height: 22px;
+      font-size: 9.5px;
+      border-radius: 6px;
+
+      &.mark-green {
+        width: 20px;
+        height: 20px;
+        font-size: 9px;
+      }
+    }
+
+    @include respond($bp-md) {
+      width: 26px;
+      height: 26px;
+      font-size: 10.5px;
+      border-radius: 7px;
+
+      &.mark-green {
+        width: 24px;
+        height: 24px;
+        font-size: 10px;
+      }
     }
   }
 
   .card-title {
-    font-size: var(--fs-xs);
+    font-size: clamp(8.5px, 2.2vw, 11px);
     font-weight: 600;
     color: $color-ink;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @include respond($bp-md) {
+      font-size: var(--fs-xs);
+    }
   }
 
   .card-metric {
     font-family: $font-display;
     font-weight: 800;
-    font-size: clamp(1.25rem, 1.5vw + 0.5rem, 1.5rem);
+    font-size: clamp(13px, 3.6vw, 18px);
     letter-spacing: -0.03em;
     color: $color-ink;
-    margin-top: 10px;
+    margin-top: 3px;
+
+    @include respond($bp-sm) {
+      margin-top: 6px;
+      font-size: 18px;
+    }
+
+    @include respond($bp-md) {
+      margin-top: 10px;
+      font-size: clamp(1.35rem, 1.8vw + 0.5rem, 1.6rem);
+    }
   }
 
   .card-caption {
-    font-size: var(--fs-xs);
+    font-size: clamp(7.5px, 1.8vw, 9.5px);
     color: #78787c;
-    margin-top: 3px;
+    margin-top: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.15;
+
+    @include respond($bp-sm) {
+      margin-top: 2px;
+    }
+
+    @include respond($bp-md) {
+      font-size: var(--fs-xs);
+      margin-top: 3px;
+    }
   }
 
   .card-spark-bars {
     display: flex;
     align-items: flex-end;
-    gap: 4px;
-    height: 32px;
-    margin-top: 12px;
+    gap: 2px;
+    height: 16px;
+    margin-top: 3px;
+
+    @include respond($bp-sm) {
+      gap: 3px;
+      height: 22px;
+      margin-top: 6px;
+    }
+
+    @include respond($bp-md) {
+      gap: 4px;
+      height: 32px;
+      margin-top: 12px;
+    }
 
     .spark-bar {
       flex: 1;
-      border-radius: 2px;
+      border-radius: 1px;
       background: $tint-green;
-    }
-  }
-
-  /* Desktop Floating Card Positioning */
-  .card-appointgem {
-    left: -3%;
-    top: 34px;
-    width: 200px;
-    animation: im-float-a 8s ease-in-out infinite;
-
-    @include respond($bp-xl) {
-      left: -6%;
-      width: 210px;
-    }
-  }
-
-  .card-truckguru {
-    right: -3%;
-    top: 96px;
-    width: 190px;
-    animation: im-float-b 9.4s ease-in-out infinite;
-
-    @include respond($bp-xl) {
-      right: -5%;
-      width: 196px;
-    }
-  }
-
-  .card-welzokart {
-    left: 4%;
-    top: 220px;
-    width: 176px;
-    animation: im-float-b 10.2s ease-in-out infinite;
-
-    @include respond($bp-xl) {
-      left: 6%;
-      width: 184px;
-    }
-  }
-
-  /* ──────────────────────────────────────────────
-     Mobile / Tablet Bottom Stat Pills Row
-     ────────────────────────────────────────────── */
-  .mobile-stats-row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 18px;
-    flex-wrap: wrap;
-
-    @include respond($bp-sm) {
-      gap: 12px;
-      margin-top: 24px;
-    }
-
-    @include respond($bp-lg) {
-      display: none;
-    }
-  }
-
-  .mobile-stat-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba($color-bg, 0.85);
-    border: 1px solid rgba($color-ink, 0.12);
-    border-radius: 100px;
-    padding: 6px 12px;
-    box-shadow: 0 4px 12px rgba($color-ink, 0.05);
-
-    .stat-pill-mark {
-      width: 20px;
-      height: 20px;
-      border-radius: 5px;
-      color: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: $font-display;
-      font-weight: 800;
-      font-size: 9px;
-
-      &.mark-blue {
-        background: $tint-blue;
-      }
-      &.mark-amber {
-        background: $tint-amber;
-      }
-      &.mark-green {
-        background: $tint-green;
-      }
-    }
-
-    div {
-      display: flex;
-      flex-direction: column;
-      text-align: left;
-      line-height: 1.1;
-
-      strong {
-        font-family: $font-display;
-        font-size: var(--fs-xs);
-        font-weight: 800;
-        color: $color-ink;
-      }
-
-      small {
-        font-size: 10px;
-        color: $color-muted;
-      }
     }
   }
 }

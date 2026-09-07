@@ -23,7 +23,7 @@ export function Banner() {
       const sticky = stickyRef.current;
       if (!section || !text || !deck || !sticky) return;
 
-      // On screen widths < 1024px, rely on natural responsive CSS layout
+      // On mobile / tablet (< 1024px), keep natural responsive layout
       if (window.innerWidth < 1024) {
         text.style.transform = "";
         text.style.opacity = "";
@@ -56,7 +56,7 @@ export function Banner() {
 
       deck.style.transform = `translate3d(-50%, ${top.toFixed(1)}px, 0) scale(${scale.toFixed(4)})`;
 
-      // Floating card parallax
+      // Parallax effect on floating cards
       const parallaxEls = deck.querySelectorAll<HTMLElement>("[data-parallax]");
       parallaxEls.forEach((el) => {
         const rate = parseFloat(el.getAttribute("data-parallax") || "0");
@@ -170,7 +170,7 @@ export function Banner() {
           </div>
         </div>
 
-        {/* Main Content Area (Fluid Typography & Scroll Transforms) */}
+        {/* Main Content Area */}
         <div ref={textRef} className="banner-content">
           <div className="banner-eyebrow">
             <span className="eyebrow-dot" aria-hidden="true" />
@@ -198,64 +198,9 @@ export function Banner() {
           </div>
         </div>
 
-        {/* Hero Platform Deck with Responsive Cards & Zoom Effect */}
+        {/* Hero Platform Deck with Dynamic Cards */}
         <div ref={deckRef} className="banner-deck">
           <div className="deck-container">
-            {/* Floating Card 1: AppointGem */}
-            <div
-              data-parallax="-0.09"
-              className="floating-card card-appointgem"
-              aria-hidden="true"
-            >
-              <div className="card-glass">
-                <div className="card-head">
-                  <div className="card-mark mark-blue">AG</div>
-                  <div className="card-title">AppointGem</div>
-                </div>
-                <div className="card-metric">18,412</div>
-                <div className="card-caption">bookings this month</div>
-              </div>
-            </div>
-
-            {/* Floating Card 2: Truck Guru */}
-            <div
-              data-parallax="0.07"
-              className="floating-card card-truckguru"
-              aria-hidden="true"
-            >
-              <div className="card-glass">
-                <div className="card-head">
-                  <div className="card-mark mark-amber">TG</div>
-                  <div className="card-title">Truck Guru</div>
-                </div>
-                <div className="card-metric">482</div>
-                <div className="card-caption">trucks on road now</div>
-              </div>
-            </div>
-
-            {/* Floating Card 3: WelzoKart Spark Chart */}
-            <div
-              data-parallax="0.11"
-              className="floating-card card-welzokart"
-              aria-hidden="true"
-            >
-              <div className="card-glass">
-                <div className="card-head">
-                  <div className="card-mark mark-green">WK</div>
-                  <div className="card-title">WelzoKart</div>
-                </div>
-                <div className="card-spark-bars">
-                  {SPARK_BARS.map((height, idx) => (
-                    <div
-                      key={idx}
-                      className="spark-bar"
-                      style={{ height }}
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
-
             {/* Hero Platform Preview Image */}
             <div className="deck-preview">
               <Image
@@ -268,29 +213,62 @@ export function Banner() {
                 className="preview-img"
               />
             </div>
-          </div>
 
-          {/* Mobile / Tablet Stats Bar: Neatly displays the 3 products on small screens */}
-          <div className="mobile-stats-row">
-            <div className="mobile-stat-pill">
-              <span className="stat-pill-mark mark-blue">AG</span>
-              <div>
-                <strong>18,412</strong>
-                <small>bookings/mo</small>
+            {/* Cards Container: On desktop floats over image with parallax; on mobile/tablet displays as full cards below image */}
+            <div className="deck-cards-wrapper">
+              {/* Card 1: AppointGem */}
+              <div
+                data-parallax="-0.09"
+                className="stat-card card-appointgem"
+                aria-hidden="true"
+              >
+                <div className="card-glass">
+                  <div className="card-head">
+                    <div className="card-mark mark-blue">AG</div>
+                    <div className="card-title">AppointGem</div>
+                  </div>
+                  <div className="card-metric">18,412</div>
+                  <div className="card-caption">bookings this month</div>
+                </div>
               </div>
-            </div>
-            <div className="mobile-stat-pill">
-              <span className="stat-pill-mark mark-amber">TG</span>
-              <div>
-                <strong>482</strong>
-                <small>trucks active</small>
+
+              {/* Card 2: Truck Guru */}
+              <div
+                data-parallax="0.07"
+                className="stat-card card-truckguru"
+                aria-hidden="true"
+              >
+                <div className="card-glass">
+                  <div className="card-head">
+                    <div className="card-mark mark-amber">TG</div>
+                    <div className="card-title">Truck Guru</div>
+                  </div>
+                  <div className="card-metric">482</div>
+                  <div className="card-caption">trucks on road now</div>
+                </div>
               </div>
-            </div>
-            <div className="mobile-stat-pill">
-              <span className="stat-pill-mark mark-green">WK</span>
-              <div>
-                <strong>Live</strong>
-                <small>quick commerce</small>
+
+              {/* Card 3: WelzoKart Spark Chart */}
+              <div
+                data-parallax="0.11"
+                className="stat-card card-welzokart"
+                aria-hidden="true"
+              >
+                <div className="card-glass">
+                  <div className="card-head">
+                    <div className="card-mark mark-green">WK</div>
+                    <div className="card-title">WelzoKart</div>
+                  </div>
+                  <div className="card-spark-bars">
+                    {SPARK_BARS.map((height, idx) => (
+                      <div
+                        key={idx}
+                        className="spark-bar"
+                        style={{ height }}
+                      />
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>

@@ -17,6 +17,7 @@ export function Ecosystem() {
   const [activeRail, setActiveRail] = useState<string>("01");
 
   const railTriggersRef = useRef<ScrollTrigger[]>([]);
+  const stickyTriggersRef = useRef<ScrollTrigger[]>([]);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -97,28 +98,40 @@ export function Ecosystem() {
       });
 
       /*
-       * Active rail item
+       * Active rail item:
+       * In CSS sticky stacking, Card i is active when it reaches top 120px
+       * until the next card reaches top 120px and stacks over it.
+       * This gives perfect synchronization across all screen widths including 1200px+.
        */
       railTriggersRef.current = [];
+      stickyTriggersRef.current = [];
+
       cards.forEach((card, index) => {
         const nextCard = cards[index + 1];
+        const isFirst = index === 0;
+        const isLast = index === cards.length - 1;
 
-        const trigger = ScrollTrigger.create({
+        // Sticky trigger for click-to-scroll navigation
+        const stickySt = ScrollTrigger.create({
           trigger: card,
           start: "top 96px",
-          endTrigger: nextCard || section,
-          end: nextCard ? "top 96px" : "bottom 96px",
+        });
+        stickyTriggersRef.current.push(stickySt);
 
-          onEnter: () => {
-            setActiveRail(ECOSYSTEM_PRODUCTS[index].n);
-          },
-
-          onEnterBack: () => {
-            setActiveRail(ECOSYSTEM_PRODUCTS[index].n);
+        // Rail active indicator trigger
+        const railSt = ScrollTrigger.create({
+          trigger: card,
+          start: isFirst ? "top 75%" : "top 120px",
+          endTrigger: isLast ? section : nextCard,
+          end: isLast ? "bottom 60%" : "top 120px",
+          onToggle: (self) => {
+            if (self.isActive) {
+              setActiveRail(ECOSYSTEM_PRODUCTS[index].n);
+            }
           },
         });
 
-        railTriggersRef.current.push(trigger);
+        railTriggersRef.current.push(railSt);
       });
 
       /*
@@ -131,6 +144,7 @@ export function Ecosystem() {
        */
       return () => {
         railTriggersRef.current = [];
+        stickyTriggersRef.current = [];
         cards.forEach((card) => {
           const inner = card.querySelector<HTMLElement>(".card-inner");
           if (inner) {
@@ -176,11 +190,13 @@ export function Ecosystem() {
   }, []);
 
   const scrollToCard = (index: number) => {
-    const trigger = railTriggersRef.current[index];
+    setActiveRail(ECOSYSTEM_PRODUCTS[index].n);
 
-    if (trigger && typeof trigger.start === "number") {
+    const st = stickyTriggersRef.current[index];
+
+    if (st && typeof st.start === "number") {
       window.scrollTo({
-        top: trigger.start,
+        top: st.start + 2,
         behavior: "smooth",
       });
       return;
@@ -192,10 +208,10 @@ export function Ecosystem() {
       const offsetTop =
         card.getBoundingClientRect().top +
         window.scrollY -
-        100;
+        96;
 
       window.scrollTo({
-        top: offsetTop,
+        top: offsetTop + 2,
         behavior: "smooth",
       });
     }

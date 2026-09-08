@@ -1,0 +1,99 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.inside-product-section {
+  position: relative;
+  background-color: $color-bg;
+  color: $color-ink;
+  @include section-padding;
+
+  .inside-product-container {
+    @include container;
+  }
+
+  // Section Header
+  .inside-product-header {
+    max-width: 760px;
+  }
+
+  .inside-product-eyebrow {
+    font-size: 10.5px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: $color-muted;
+    font-weight: 600;
+  }
+
+  .inside-product-headline {
+    font-family: $font-display;
+    font-weight: 800;
+    font-stretch: 110%;
+    font-size: clamp(30px, 3.6vw, 66px);
+    line-height: 0.94;
+    letter-spacing: -0.045em;
+    color: $color-ink;
+    margin: 18px 0 0;
+  }
+
+  .inside-product-intro {
+    font-size: 16.5px;
+    line-height: 1.6;
+    color: $color-body;
+    margin: 24px 0 0;
+    max-width: 560px;
+  }
+
+  // Capabilities 8-Card Grid
+  .inside-product-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1px;
+    background: rgba(12, 12, 13, 0.12);
+    border: 1px solid rgba(12, 12, 13, 0.12);
+    margin-top: 44px;
+
+    @include respond($bp-sm) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @include respond($bp-lg) {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .capability-card {
+      background: $color-bg;
+      padding: 28px 24px 26px;
+      display: flex;
+      flex-direction: column;
+      transition: background-color 0.25s ease;
+
+      &:hover {
+        background: #ebeae6;
+      }
+
+      .capability-icon {
+        width: 34px;
+        height: 34px;
+        border-radius: 9px;
+        flex-shrink: 0;
+      }
+
+      .capability-name {
+        font-family: $font-display;
+        font-weight: 700;
+        font-stretch: 106%;
+        font-size: 19px;
+        letter-spacing: -0.025em;
+        color: $color-ink;
+        margin-top: 20px;
+      }
+
+      .capability-desc {
+        font-size: 13.5px;
+        line-height: 1.55;
+        color: #5f5f64;
+        margin-top: 8px;
+      }
+    }
+  }
+}

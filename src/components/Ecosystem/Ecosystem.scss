@@ -136,32 +136,37 @@
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 6px 18px rgba(12, 12, 13, 0.04);
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 26px 20px 24px;
     transform-origin: 50% 0%;
 
     @include respond($bp-md) {
       border-radius: 24px;
+      padding: 32px 28px 28px;
     }
 
     @include respond($bp-lg) {
+      display: grid;
       grid-template-columns: minmax(300px, 0.94fr) minmax(320px, 1.06fr);
+      padding: 0;
     }
   }
 
-  // Left Content Column
+  // Content Area
   .card-content {
-    padding: 30px 24px 28px;
-    display: flex;
-    flex-direction: column;
-    position: relative;
+    display: contents;
 
-    @include respond($bp-md) {
-      padding: 38px 32px 32px;
+    @include respond($bp-lg) {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      padding: 32px 28px 30px;
     }
 
     @include respond($bp-xl) {
-      padding: 42px 38px 36px;
+      padding: 40px 38px 40px;
     }
   }
 
@@ -171,13 +176,19 @@
     top: 0;
     width: 5px;
     height: 100%;
+    z-index: 2;
   }
 
   .card-header-row {
+    order: 1;
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
     gap: 18px;
+
+    @include respond($bp-lg) {
+      order: initial;
+    }
   }
 
   .card-tag-pill {
@@ -229,6 +240,7 @@
   }
 
   .card-title {
+    order: 2;
     font-family: $font-display;
     font-weight: 800;
     font-stretch: 110%;
@@ -236,27 +248,109 @@
     line-height: 0.96;
     letter-spacing: -0.04em;
     color: $color-ink;
-    margin: 22px 0 0;
+    margin: 18px 0 0;
 
     @include respond($bp-md) {
-      margin: 26px 0 0;
+      margin: 22px 0 0;
+    }
+
+    @include respond($bp-lg) {
+      order: initial;
+      margin: 22px 0 0;
+    }
+  }
+
+  // Right Visual Column (Screenshot Preview) - Reordered on Mobile
+  .card-visual {
+    order: 3;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 14px;
+    margin: 20px 0 0;
+    border-radius: 14px;
+    overflow: hidden;
+
+    @include respond($bp-md) {
+      padding: 24px;
+    }
+
+    @include respond($bp-lg) {
+      order: initial;
+      margin: 0;
+      border-radius: 0;
+      min-height: 420px;
+      padding: 40px 36px;
+    }
+
+    .visual-glow {
+      position: absolute;
+      right: -14%;
+      top: -24%;
+      width: 70%;
+      height: 80%;
+      background: radial-gradient(
+        closest-side,
+        rgba(255, 255, 255, 0.85),
+        rgba(255, 255, 255, 0) 70%
+      );
+      pointer-events: none;
+    }
+
+    .preview-img-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 540px;
+      height: auto;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 16px 40px rgba(12, 12, 13, 0.12);
+
+      @include respond($bp-lg) {
+        box-shadow: 0 26px 60px rgba(12, 12, 13, 0.18);
+      }
+    }
+
+    .preview-shot {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    &:hover .preview-shot {
+      transform: scale(1.02);
     }
   }
 
   .card-desc {
+    order: 4;
     font-size: 15.5px;
     line-height: 1.6;
     color: $color-body;
-    margin: 14px 0 0;
+    margin: 18px 0 0;
     max-width: 420px;
+
+    @include respond($bp-lg) {
+      order: initial;
+      margin: 14px 0 0;
+    }
   }
 
   // Feature List
   .card-features {
+    order: 5;
     display: flex;
     flex-direction: column;
-    margin-top: 22px;
+    margin-top: 18px;
     border-bottom: 1px solid rgba(12, 12, 13, 0.1);
+
+    @include respond($bp-lg) {
+      order: initial;
+      margin-top: 22px;
+    }
 
     .feature-item {
       display: flex;
@@ -278,21 +372,37 @@
 
   // Metrics Chips
   .card-metrics {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 22px;
-    flex-wrap: wrap;
+    order: 6;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 18px;
+    align-items: stretch;
+
+    @include respond($bp-md) {
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    @include respond($bp-lg) {
+      order: initial;
+      margin-top: 20px;
+    }
 
     .metric-chip {
       border-radius: 12px;
-      padding: 10px 14px;
-      flex: 1 1 auto;
-      min-width: 100px;
+      padding: 10px 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-width: 0;
 
-      @include respond($bp-sm) {
+      @include respond($bp-md) {
+        padding: 10px 14px;
+      }
+
+      @include respond($bp-xl) {
         padding: 12px 16px;
-        flex: 0 1 auto;
       }
 
       &.metric-primary {
@@ -322,34 +432,41 @@
       }
 
       .chip-label {
-        font-size: 9.5px;
-        letter-spacing: 0.16em;
+        font-size: clamp(8px, 0.9vw, 9.5px);
+        letter-spacing: 0.14em;
         text-transform: uppercase;
         font-weight: 600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .chip-value {
         font-family: $font-display;
         font-weight: 800;
-        font-size: 20px;
+        font-size: clamp(16px, 1.8vw, 22px);
         letter-spacing: -0.035em;
         margin-top: 4px;
         white-space: nowrap;
-
-        @include respond($bp-md) {
-          font-size: 22px;
-        }
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
   }
 
   // Card Actions
   .card-actions {
+    order: 7;
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-top: 26px;
+    margin-top: 22px;
     flex-wrap: wrap;
+
+    @include respond($bp-lg) {
+      order: initial;
+      margin-top: 26px;
+    }
 
     .btn-card-primary {
       display: inline-flex;
@@ -405,62 +522,6 @@
         background: rgba(12, 12, 13, 0.05);
         border-color: rgba(12, 12, 13, 0.45);
       }
-    }
-  }
-
-  // Right Visual Column (Screenshot Preview)
-  .card-visual {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
-    min-height: 280px;
-    overflow: hidden;
-
-    @include respond($bp-md) {
-      padding: 26px;
-      min-height: 380px;
-    }
-
-    @include respond($bp-lg) {
-      min-height: 420px;
-    }
-
-    .visual-glow {
-      position: absolute;
-      right: -14%;
-      top: -24%;
-      width: 70%;
-      height: 80%;
-      background: radial-gradient(
-        closest-side,
-        rgba(255, 255, 255, 0.85),
-        rgba(255, 255, 255, 0) 70%
-      );
-      pointer-events: none;
-    }
-
-    .preview-img-wrapper {
-      position: relative;
-      width: 100%;
-      max-width: 540px;
-      height: auto;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 26px 60px rgba(12, 12, 13, 0.18);
-    }
-
-    .preview-shot {
-      width: 100%;
-      height: auto;
-      display: block;
-      object-fit: cover;
-      transition: transform 0.4s ease;
-    }
-
-    &:hover .preview-shot {
-      transform: scale(1.02);
     }
   }
 }

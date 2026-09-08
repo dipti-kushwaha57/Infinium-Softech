@@ -123,7 +123,7 @@ export function Header() {
       }}
     >
       <header className="site-header">
-        <nav className="nav" aria-label="Main Navigation">
+        <nav className="nav content-padding" aria-label="Main Navigation">
           <Link
             href="/"
             className="logo"

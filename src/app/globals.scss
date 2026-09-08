@@ -126,17 +126,27 @@ svg {
   flex: 1;
 }
 
+// Global responsive content and section padding utility classes
+.content-padding {
+  @include content-padding;
+}
+
+.section-padding {
+  @include section-padding;
+}
+
 // ============================================================
 // Footer — global, site-wide chrome. Scoped under .site-footer.
 // ============================================================
 .site-footer {
   background: $color-ink;
   color: $color-bg;
-  padding: 80px 24px 34px;
+  padding-top: clamp(60px, 7vw, 100px);
+  padding-bottom: 34px;
+  padding-inline: 0;
 
   .top {
     @include container;
-    padding-inline: 0;
     display: grid;
     gap: 48px;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -195,7 +205,6 @@ svg {
 
   .bottom {
     @include container;
-    padding-inline: 0;
     margin-top: 64px;
     border-top: 1px solid $color-border-on-dark;
     padding-top: 24px;

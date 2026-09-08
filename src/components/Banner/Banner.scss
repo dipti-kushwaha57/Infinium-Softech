@@ -9,14 +9,18 @@
   overflow-x: clip;
 
   // On mobile / tablet, banner flows naturally
-  padding: 40px 16px 48px;
+  padding-top: 40px;
+  padding-bottom: 48px;
+  @include content-padding;
 
   @include respond($bp-sm) {
-    padding: 48px 20px 56px;
+    padding-top: 48px;
+    padding-bottom: 56px;
   }
 
   @include respond($bp-md) {
-    padding: 64px 28px 64px;
+    padding-top: 64px;
+    padding-bottom: 64px;
   }
 
   // Desktop multi-viewport sticky scroll canvas

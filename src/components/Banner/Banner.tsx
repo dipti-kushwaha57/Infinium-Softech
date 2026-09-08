@@ -92,7 +92,7 @@ export function Banner() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="banner" aria-label="Hero Banner">
+    <section ref={sectionRef} className="banner content-padding" aria-label="Hero Banner">
       <div ref={stickyRef} className="banner-sticky-frame">
         {/* Background Ambient Glows */}
         <div className="banner-glow-layer" aria-hidden="true">

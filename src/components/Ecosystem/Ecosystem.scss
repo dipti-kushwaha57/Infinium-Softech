@@ -374,10 +374,24 @@
   .card-metrics {
     order: 6;
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 8px;
     margin-top: 18px;
     align-items: stretch;
+
+    @media (max-width: 479px) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+
+      .metric-primary {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @include respond($bp-sm) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
 
     @include respond($bp-md) {
       gap: 10px;
@@ -391,7 +405,7 @@
 
     .metric-chip {
       border-radius: 12px;
-      padding: 10px 10px;
+      padding: 10px 12px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -410,7 +424,7 @@
         color: #f1f0ec;
 
         .chip-label {
-          color: #6e7280;
+          color: #8a8a8e;
         }
 
         .chip-value {
@@ -432,13 +446,16 @@
       }
 
       .chip-label {
-        font-size: clamp(8px, 0.9vw, 9.5px);
-        letter-spacing: 0.14em;
+        font-size: 9px;
+        letter-spacing: 0.12em;
         text-transform: uppercase;
         font-weight: 600;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        line-height: 1.3;
+
+        @include respond($bp-sm) {
+          font-size: clamp(8.5px, 0.9vw, 9.5px);
+          letter-spacing: 0.14em;
+        }
       }
 
       .chip-value {
@@ -447,9 +464,7 @@
         font-size: clamp(16px, 1.8vw, 22px);
         letter-spacing: -0.035em;
         margin-top: 4px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        line-height: 1.15;
       }
     }
   }
@@ -462,6 +477,19 @@
     gap: 12px;
     margin-top: 22px;
     flex-wrap: wrap;
+
+    @media (max-width: 479px) {
+      gap: 8px;
+
+      .btn-card-primary,
+      .btn-card-secondary {
+        flex: 1;
+        justify-content: center;
+        text-align: center;
+        padding: 11px 12px;
+        font-size: 13px;
+      }
+    }
 
     @include respond($bp-lg) {
       order: initial;

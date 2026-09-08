@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import "./Footer.scss";
 
 const FOOTER_COLUMNS = [
   {
@@ -26,7 +27,7 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="site-footer content-padding">
+    <footer className="site-footer">
       <div className="top">
         <div className="brand">
           <Image src="/brand/logo-light.png" alt="Infinium Softech" width={154} height={35} />

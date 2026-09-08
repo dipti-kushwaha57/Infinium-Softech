@@ -2,6 +2,7 @@ import { Banner } from "@/components/Banner/Banner";
 import { Ecosystem } from "@/components/Ecosystem/Ecosystem";
 import { Why } from "@/components/Why/Why";
 import { InsideProduct } from "@/components/InsideProduct/InsideProduct";
+import { TechStack } from "@/components/TachStack/TechStack"
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <Ecosystem />
       <Why />
       <InsideProduct />
+      <TechStack />
     </main>
   );
 }

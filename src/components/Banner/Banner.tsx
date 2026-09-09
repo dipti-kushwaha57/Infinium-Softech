@@ -183,7 +183,10 @@ export function Banner() {
           </div>
 
           <h1 className="banner-headline">
-            One Platform. Multiple Industries.{" "}
+            One Platform.
+            <br />
+            Multiple Industries.
+            <br />
             <span className="accent">Infinite Possibilities.</span>
           </h1>
 

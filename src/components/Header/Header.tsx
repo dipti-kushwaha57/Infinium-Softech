@@ -175,6 +175,7 @@ export function Header() {
               >
                 <span className="compact-toggle-icon" aria-hidden="true">
                   <span className="bar bar-top" />
+                  <span className="bar bar-middle" />
                   <span className="bar bar-bottom" />
                 </span>
               </button>

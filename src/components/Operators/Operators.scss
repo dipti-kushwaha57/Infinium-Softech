@@ -56,6 +56,7 @@
   border: 1px solid rgba(12, 12, 13, 0.12);
   border-radius: 4px;
   overflow: hidden;
+  margin-bottom: 0;
 
   @media (max-width: $bp-sm) {
     grid-template-columns: 1fr;
@@ -96,6 +97,15 @@
   gap: 10px;
   width: 100%;
   overflow: hidden;
+  margin-top: 32px;
+
+  @include respond($bp-md) {
+    margin-top: 52px;
+  }
+
+  @media (min-width: 1200px) {
+    margin-top: 56px;
+  }
 
   &:hover {
     .marquee-track {

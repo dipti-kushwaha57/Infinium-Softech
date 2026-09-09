@@ -1,10 +1,14 @@
+import type { Metadata } from "next";
+import { getPageMetadata } from "@/lib/seo";
 import { Banner } from "@/components/Banner/Banner";
 import { Ecosystem } from "@/components/Ecosystem/Ecosystem";
 import { Why } from "@/components/Why/Why";
 import { InsideProduct } from "@/components/InsideProduct/InsideProduct";
-import { TechStack } from "@/components/TachStack/TechStack"
+import { TechStack } from "@/components/TachStack/TechStack";
 import { Delivery } from "@/components/Delivery/Delivery";
 import { Operators } from "@/components/Operators/Operators";
+
+export const metadata: Metadata = getPageMetadata("/");
 
 export default function Home() {
   return (

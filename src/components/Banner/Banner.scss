@@ -23,9 +23,9 @@
     padding-bottom: 64px;
   }
 
-  // Desktop multi-viewport sticky scroll canvas
+  // Desktop multi-viewport sticky scroll canvas (>= 1024px)
   @include respond($bp-lg) {
-    height: 220vh;
+    height: 240vh;
     padding: 0;
     overflow: visible;
   }
@@ -43,7 +43,7 @@
       position: sticky;
       top: 0;
       height: 100vh;
-      padding-top: clamp(24px, 4.5vh, 48px);
+      padding-top: min(7vh, 54px);
     }
   }
 
@@ -74,6 +74,17 @@
     );
     filter: blur(28px);
     animation: im-glow-tr 28s ease-in-out infinite;
+
+    @include respond($bp-lg) {
+      width: 44vw;
+      height: 44vw;
+      background: radial-gradient(
+        closest-side,
+        rgba(200, 242, 78, 0.5),
+        rgba(200, 242, 78, 0.14) 54%,
+        rgba(200, 242, 78, 0) 76%
+      );
+    }
   }
 
   .banner-glow-bl {
@@ -92,6 +103,17 @@
     );
     filter: blur(32px);
     animation: im-glow-bl 34s ease-in-out infinite;
+
+    @include respond($bp-lg) {
+      width: 46vw;
+      height: 46vw;
+      background: radial-gradient(
+        closest-side,
+        rgba(122, 214, 120, 0.44),
+        rgba(200, 242, 78, 0.12) 56%,
+        rgba(200, 242, 78, 0) 78%
+      );
+    }
   }
 
   .banner-glow-center {
@@ -162,6 +184,11 @@
     @include respond($bp-md) {
       padding: 0 24px;
     }
+
+    @include respond($bp-lg) {
+      max-width: 1300px;
+      padding: 0 40px;
+    }
   }
 
   .banner-eyebrow {
@@ -191,6 +218,7 @@
       gap: 14px;
       padding: 7px 8px 7px 16px;
       letter-spacing: 0.22em;
+      background: rgba(241, 240, 236, 0.7);
     }
   }
 
@@ -243,6 +271,14 @@
     @include respond($bp-md) {
       margin-top: 24px;
     }
+
+    @include respond($bp-lg) {
+      font-stretch: 110%;
+      font-size: clamp(48px, min(7.4vw, 11vh), 128px);
+      line-height: 0.9;
+      letter-spacing: -0.045em;
+      margin-top: min(26px, 2.4vh);
+    }
   }
 
   .accent {
@@ -258,6 +294,11 @@
 
     @include respond($bp-md) {
       margin-top: 20px;
+    }
+
+    @include respond($bp-lg) {
+      margin-top: 24px;
+      font-size: 17px;
     }
   }
 
@@ -290,6 +331,11 @@
 
     @include respond($bp-sm) {
       padding: 10px 23px;
+    }
+
+    @include respond($bp-lg) {
+      font-size: 14px;
+      padding: 15px 26px;
     }
 
     span {
@@ -327,6 +373,11 @@
       padding: 10px 23px;
     }
 
+    @include respond($bp-lg) {
+      font-size: 14px;
+      padding: 15px 26px;
+    }
+
     &:hover {
       background: rgba($color-ink, 0.05);
       border-color: rgba($color-ink, 0.4);
@@ -362,7 +413,7 @@
       width: min(1240px, 90vw);
       margin: 0;
       padding: 0;
-      transform: translate3d(-50%, 460px, 0) scale(0.86);
+      transform: translate3d(-50%, 100vh, 0) scale(0.86);
       transform-origin: 50% 0%;
       will-change: transform;
     }
@@ -441,39 +492,26 @@
       transition: margin-top 0.15s ease-out;
 
       &.card-appointgem {
-        left: -3%;
+        left: -9%;
         top: 34px;
-        width: 200px;
+        width: 210px;
         animation: im-float-a 8s ease-in-out infinite;
-
-        @include respond($bp-xl) {
-          left: -6%;
-          width: 210px;
-        }
       }
 
       &.card-truckguru {
-        right: -3%;
+        right: -8%;
         top: 96px;
-        width: 190px;
+        width: 196px;
+        z-index: 4;
         animation: im-float-b 9.4s ease-in-out infinite;
-
-        @include respond($bp-xl) {
-          right: -5%;
-          width: 196px;
-        }
       }
 
       &.card-welzokart {
-        left: 4%;
-        top: 220px;
-        width: 176px;
+        left: 6%;
+        top: 210px;
+        width: 184px;
+        z-index: 4;
         animation: im-float-b 10.2s ease-in-out infinite;
-
-        @include respond($bp-xl) {
-          left: 6%;
-          width: 184px;
-        }
       }
     }
   }
@@ -502,6 +540,16 @@
       border-radius: 14px;
       padding: 16px;
       box-shadow: 0 24px 60px rgba($color-ink, 0.16), 0 4px 12px rgba($color-ink, 0.06);
+    }
+
+    @include respond($bp-lg) {
+      background: rgba(241, 240, 236, 0.72);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 24px 60px rgba(12, 12, 13, 0.16);
+      border-radius: 14px;
+      padding: 16px;
     }
   }
 
@@ -585,6 +633,10 @@
     @include respond($bp-md) {
       font-size: var(--fs-xs);
     }
+
+    @include respond($bp-lg) {
+      font-size: 12px;
+    }
   }
 
   .card-metric {
@@ -604,6 +656,11 @@
       margin-top: 10px;
       font-size: clamp(1.35rem, 1.8vw + 0.5rem, 1.6rem);
     }
+
+    @include respond($bp-lg) {
+      font-size: 24px;
+      margin-top: 12px;
+    }
   }
 
   .card-caption {
@@ -621,6 +678,11 @@
 
     @include respond($bp-md) {
       font-size: var(--fs-xs);
+      margin-top: 3px;
+    }
+
+    @include respond($bp-lg) {
+      font-size: 10.5px;
       margin-top: 3px;
     }
   }
@@ -648,6 +710,10 @@
       flex: 1;
       border-radius: 1px;
       background: $tint-green;
+
+      @include respond($bp-lg) {
+        border-radius: 2px;
+      }
     }
   }
 }

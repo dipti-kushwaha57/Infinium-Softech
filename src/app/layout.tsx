@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Archivo, Instrument_Sans } from "next/font/google";
+import { GoogleTagManager } from "@next/third-parties/google";
 import "./globals.scss";
-import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/seo";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_URL, getOrganizationSchema } from "@/lib/seo";
 import { Header } from "@/components/Header/Header";
 import { Footer } from "@/components/Footer/Footer";
 
@@ -16,6 +17,8 @@ const instrumentSans = Instrument_Sans({
   weight: ["400", "500", "600", "700"],
 });
 
+const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
@@ -27,24 +30,33 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
-  openGraph: {
-    type: "website",
-    siteName: SITE_NAME,
-    title: SITE_NAME,
-    description: SITE_DESCRIPTION,
-    url: SITE_URL,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: SITE_NAME,
-    description: SITE_DESCRIPTION,
-  },
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" className={`${archivo.variable} ${instrumentSans.variable}`}>
+      {GTM_ID && <GoogleTagManager gtmId={GTM_ID} />}
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(getOrganizationSchema()),
+          }}
+        />
+        {GTM_ID && (
+          <noscript>
+            <iframe
+              src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+              height="0"
+              width="0"
+              style={{ display: "none", visibility: "hidden" }}
+            />
+          </noscript>
+        )}
         <Header />
         {children}
         <Footer />

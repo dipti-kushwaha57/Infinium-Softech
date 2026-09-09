@@ -23,7 +23,7 @@ export function Banner() {
       const sticky = stickyRef.current;
       if (!section || !text || !deck || !sticky) return;
 
-      // On mobile / tablet (< 1024px), keep natural responsive layout
+      // On mobile / tablet (< 1024px), keep natural responsive layout completely intact
       if (window.innerWidth < 1024) {
         text.style.transform = "";
         text.style.opacity = "";
@@ -36,13 +36,10 @@ export function Banner() {
         return;
       }
 
-      const rect = section.getBoundingClientRect();
+      // 1024px+ desktop scroll & zoom animation
       const vh = window.innerHeight || 1;
-      const totalScroll = section.offsetHeight - vh;
-      if (totalScroll <= 0) return;
-
-      const currentScroll = -rect.top;
-      const p = Math.max(0, Math.min(1, currentScroll / (vh * 1.15)));
+      const y = window.scrollY || window.pageYOffset || 0;
+      const p = Math.max(0, Math.min(1, y / (vh * 1.2)));
       const e = 1 - Math.pow(1 - p, 2); // Quad ease-out
 
       // Text animation: smoothly shift up, fade out, scale down and blur
@@ -50,13 +47,13 @@ export function Banner() {
       text.style.opacity = String(Math.max(0, 1 - e * 1.5));
       text.style.filter = `blur(${(e * 5).toFixed(2)}px)`;
 
-      // Hero Deck & Image Zoom: smoothly scale from 0.86 to 1.00 and glide upwards
-      const padTop = parseFloat(getComputedStyle(sticky).paddingTop) || 48;
-      const textH = text.offsetHeight || 280;
-      const startTop = padTop + textH + 16;
-      const endTop = vh * 0.08;
+      // Hero Deck & Image: smoothly scale from 0.86 to 1.00 and glide upwards
+      const padTop = parseFloat(getComputedStyle(sticky).paddingTop) || 0;
+      const textH = text.offsetHeight || 0;
+      const startTop = padTop + textH + 24;
+      const endTop = vh * 0.09;
       const top = startTop + (endTop - startTop) * e;
-      const scale = 0.86 + e * 0.14; // Zoom effect up to 100%
+      const scale = 0.86 + e * 0.14;
 
       deck.style.transform = `translate3d(-50%, ${top.toFixed(1)}px, 0) scale(${scale.toFixed(4)})`;
 
@@ -66,7 +63,7 @@ export function Banner() {
         const rate = parseFloat(el.getAttribute("data-parallax") || "0");
         const r = el.getBoundingClientRect();
         const mid = r.top + r.height / 2 - vh / 2;
-        const off = Math.max(-18, Math.min(18, mid * rate * -0.15));
+        const off = Math.max(-14, Math.min(14, mid * rate * -0.12));
         el.style.marginTop = `${off.toFixed(1)}px`;
       });
     };
@@ -215,7 +212,7 @@ export function Banner() {
                 alt="Infinium Softech platform dashboard"
                 width={1976}
                 height={962}
-                sizes="(min-width: 1280px) 1200px, (min-width: 1024px) 88vw, 100vw"
+                sizes="(min-width: 1280px) 1240px, (min-width: 1024px) 90vw, 100vw"
                 priority
                 className="preview-img"
               />
@@ -271,7 +268,7 @@ export function Banner() {
                       <div
                         key={idx}
                         className="spark-bar"
-                       style={{ height }}
+                        style={{ height }}
                       />
                     ))}
                   </div>

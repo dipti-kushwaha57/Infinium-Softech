@@ -1,0 +1,32 @@
+{
+  "site": {
+    "name": "Infinium Softech",
+    "url": "https://www.infiniumsoftech.com",
+    "titleTemplate": "%s | Infinium Softech",
+    "defaultOgImage": "/og/default.png",
+    "twitterSite": "@infiniumsoftech",
+    "locale": "en_US",
+    "organization": {
+      "name": "Infinium Softech",
+      "url": "https://www.infiniumsoftech.com",
+      "logo": "https://www.infiniumsoftech.com/logo.png",
+      "sameAs": [
+        "https://www.linkedin.com/company/infinium-softech"
+      ]
+    }
+  },
+  "routes": {
+    "/": {
+      "title": "Custom Software, Web & Mobile Development",
+      "description": "Infinium Softech designs and builds custom software, web platforms, and mobile apps for growing businesses.",
+      "changeFrequency": "weekly",
+      "priority": 1.0
+    },
+    "/about": {
+      "title": "About Us",
+      "description": "Learn about Infinium Softech's mission, team, and approach to building software that lasts.",
+      "changeFrequency": "monthly",
+      "priority": 0.7
+    }
+  }
+}

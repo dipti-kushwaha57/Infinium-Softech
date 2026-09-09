@@ -168,14 +168,14 @@ export function Header() {
               <button
                 type="button"
                 className={`compact-toggle-btn ${activeMenu ? "is-active" : ""}`}
+                aria-label={activeMenu ? "Close menu" : "Open menu"}
                 aria-expanded={!!activeMenu}
                 aria-controls="mega-menu-dropdown"
                 onClick={() => toggleMenuKey(activeMenu ? activeMenu : "products")}
               >
-                <span>{activeMenu ? MENU_DEFS[activeMenu]?.label : "Menu"}</span>
-                <span className="compact-toggle-bars" aria-hidden="true">
-                  <span />
-                  <span />
+                <span className="compact-toggle-icon" aria-hidden="true">
+                  <span className="bar bar-top" />
+                  <span className="bar bar-bottom" />
                 </span>
               </button>
             </div>

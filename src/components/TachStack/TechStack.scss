@@ -74,8 +74,12 @@
   .stack-layers {
     display: flex;
     flex-direction: column;
-    margin-top: 56px;
+    margin-top: 32px;
     border-top: 1px solid rgba(241, 240, 236, 0.14);
+
+    @include respond($bp-md) {
+      margin-top: 52px;
+    }
   }
 
   .stack-layer-row {

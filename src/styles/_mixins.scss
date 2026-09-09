@@ -38,34 +38,29 @@
   }
 }
 
-// Section vertical padding that scales down by viewport
+// Section vertical padding that scales down gracefully by viewport
 @mixin section-padding {
-  padding-top: 120px;
-  padding-bottom: 130px;
+  padding-top: 100px;
+  padding-bottom: 110px;
   padding-inline: 0;
 
   @media (max-width: 1240px) {
-    padding-top: 100px;
-    padding-bottom: 110px;
-  }
-
-  @media (max-width: 1024px) {
     padding-top: 80px;
     padding-bottom: 90px;
   }
 
+  @media (max-width: 1024px) {
+    padding-top: 68px;
+    padding-bottom: 76px;
+  }
+
   @media (max-width: 768px) {
-    padding-top: 60px;
-    padding-bottom: 70px;
+    padding-top: 52px;
+    padding-bottom: 60px;
   }
 
   @media (max-width: 480px) {
-    padding-top: 48px;
-    padding-bottom: 56px;
-  }
-
-  @media (max-width: 360px) {
-    padding-top: 40px;
+    padding-top: 44px;
     padding-bottom: 48px;
   }
 }

@@ -268,7 +268,7 @@ export function Banner() {
                       <div
                         key={idx}
                         className="spark-bar"
-                        style={{ height }}
+                       style={{ height }}
                       />
                     ))}
                   </div>

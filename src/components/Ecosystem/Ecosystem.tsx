@@ -230,9 +230,9 @@ export function Ecosystem() {
           <div className="ecosystem-eyebrow">The ecosystem</div>
 
           <h2 className="ecosystem-headline">
-            Nine platforms. Nine industries.
+            <span>Nine platforms.</span> <span>Nine industries.</span>
             <br />
-            One spine.
+            <span>One spine.</span>
           </h2>
 
           <p className="ecosystem-intro">

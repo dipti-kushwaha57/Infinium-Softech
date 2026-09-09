@@ -59,7 +59,7 @@ export function Operators() {
   return (
     <section
       id="operators"
-      className="operators-section"
+      className="operators-section content-padding"
       aria-label="Trusted by operators"
     >
       <div className="operators-container">

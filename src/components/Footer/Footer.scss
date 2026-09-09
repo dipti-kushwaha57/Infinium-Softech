@@ -12,16 +12,10 @@
   .top {
     @include container;
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 36px 24px;
+    grid-template-columns: 1fr;
+    gap: 0;
 
-    // Mobile xs (< 480px)
-    @media (max-width: 479px) {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 32px 18px;
-    }
-
-    // Tablet (768px to 991px): strictly 2 columns for links
+    // Tablet (768px to 991px): 2 columns for links
     @media (min-width: 768px) and (max-width: 991px) {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 40px 48px;
@@ -36,6 +30,15 @@
 
   .brand {
     grid-column: 1 / -1;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid $color-border-on-dark;
+
+    @media (min-width: 768px) {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
 
     @media (min-width: 992px) {
       grid-column: auto;
@@ -70,31 +73,83 @@
 
   .column {
     min-width: 0;
+    border-bottom: 1px solid $color-border-on-dark;
 
-    .column-title {
-      font-size: 11px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: $color-muted;
-      font-weight: 600;
-      margin-bottom: 18px;
+    @media (min-width: 768px) {
+      border-bottom: none;
+    }
 
-      @media (max-width: 480px) {
-        font-size: 10px;
-        margin-bottom: 14px;
+    .column-header-btn {
+      width: 100%;
+      background: transparent;
+      border: none;
+      padding: 16px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      text-align: left;
+      color: inherit;
+
+      @media (min-width: 768px) {
+        cursor: default;
+        pointer-events: none;
+        padding: 0 0 18px 0;
+        display: block;
+      }
+
+      .column-title {
+        font-size: 11px;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: $color-muted;
+        font-weight: 600;
+
+        @media (max-width: 480px) {
+          font-size: 10.5px;
+        }
+      }
+
+      .toggle-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $color-muted;
+        transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
+
+        @media (min-width: 768px) {
+          display: none;
+        }
       }
     }
 
-    ul {
-      display: flex;
+    &.is-open {
+      .column-header-btn .toggle-icon {
+        transform: rotate(180deg);
+        color: #ffffff;
+      }
+
+      .column-list {
+        display: flex;
+      }
+    }
+
+    .column-list {
+      display: none;
       flex-direction: column;
       gap: 12px;
       list-style: none;
-      padding: 0;
+      padding: 0 0 18px 0;
       margin: 0;
+
+      @media (min-width: 768px) {
+        display: flex !important;
+        padding: 0;
+      }
 
       @media (max-width: 480px) {
         gap: 10px;
+        padding-bottom: 16px;
       }
     }
 

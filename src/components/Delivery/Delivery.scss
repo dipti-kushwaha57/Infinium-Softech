@@ -52,7 +52,11 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: 12px;
-    margin-top: 56px;
+    margin-top: 32px;
+
+    @include respond($bp-md) {
+      margin-top: 52px;
+    }
 
     @include respond($bp-sm) {
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -183,11 +187,12 @@
   .engagement-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 22px;
+    gap: 20px;
     margin-top: 34px;
 
-    @include respond($bp-md) {
+    @include respond($bp-lg) {
       grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
     }
   }
 
@@ -394,7 +399,7 @@
       font-family: $font-display;
       font-weight: 800;
       font-stretch: 112%;
-      font-size: clamp(28px, 4vw, 58px);
+      font-size: clamp(28px, 3.8vw, 50px);
       line-height: 0.96;
       letter-spacing: -0.045em;
       color: #f1f0ec;

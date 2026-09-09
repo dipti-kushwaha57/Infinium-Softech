@@ -50,7 +50,11 @@
     gap: 1px;
     background: rgba(12, 12, 13, 0.12);
     border: 1px solid rgba(12, 12, 13, 0.12);
-    margin-top: 44px;
+    margin-top: 32px;
+
+    @include respond($bp-md) {
+      margin-top: 48px;
+    }
 
     @include respond($bp-sm) {
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -85,14 +89,14 @@
         font-size: 19px;
         letter-spacing: -0.025em;
         color: $color-ink;
-        margin-top: 20px;
+        margin-top: 8px;
       }
 
       .capability-desc {
         font-size: 13.5px;
         line-height: 1.55;
         color: #5f5f64;
-        margin-top: 8px;
+        margin-top: 6px;
       }
     }
   }

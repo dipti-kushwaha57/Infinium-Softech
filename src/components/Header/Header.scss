@@ -130,20 +130,16 @@
   .compact-toggle-btn {
     cursor: pointer;
     box-sizing: border-box;
+    width: 44px;
     height: 44px;
+    padding: 0;
     border: 1px solid rgba(12, 12, 13, 0.16);
     background: transparent;
     color: $color-ink;
-    font-family: $font-body;
-    font-size: 14.5px;
-    font-weight: 500;
-    padding: 0 16px;
-    border-radius: 3px;
+    border-radius: 4px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    white-space: nowrap;
     transition: background 0.2s ease, border-color 0.2s ease;
 
     &:hover,
@@ -153,37 +149,57 @@
     }
 
     @media (max-width: 768px) {
+      width: 40px;
       height: 40px;
-      padding: 0 13px;
-      font-size: 14px;
-      gap: 7px;
     }
 
     @media (max-width: 480px) {
+      width: 36px;
       height: 36px;
-      padding: 0 10px;
-      font-size: 13px;
-      gap: 6px;
     }
 
     @media (max-width: 360px) {
+      width: 32px;
       height: 32px;
-      padding: 0 8px;
-      font-size: 12px;
-      gap: 5px;
     }
   }
 
-  .compact-toggle-bars {
-    display: inline-flex;
+  .compact-toggle-icon {
+    position: relative;
+    width: 16px;
+    height: 12px;
+    display: flex;
     flex-direction: column;
-    gap: 3px;
+    justify-content: space-between;
+    align-items: center;
 
-    span {
-      width: 13px;
+    .bar {
+      width: 16px;
       height: 1.5px;
       background: $color-ink;
-      display: block;
+      border-radius: 1px;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                  background-color 0.2s ease;
+      transform-origin: center;
+    }
+
+    .bar-top {
+      transform-origin: center;
+    }
+
+    .bar-bottom {
+      transform-origin: center;
+    }
+  }
+
+  .compact-toggle-btn.is-active {
+    .compact-toggle-icon {
+      .bar-top {
+        transform: translateY(5.25px) rotate(45deg);
+      }
+      .bar-bottom {
+        transform: translateY(-5.25px) rotate(-45deg);
+      }
     }
   }
 

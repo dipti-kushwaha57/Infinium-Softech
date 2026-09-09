@@ -5,26 +5,12 @@
   position: relative;
   background-color: $color-bg;
   border-top: 1px solid rgba(12, 12, 13, 0.1);
-  padding: 64px 0 72px 0;
+  @include section-padding;
   overflow: hidden;
-
-  @media (max-width: $bp-md) {
-    padding: 48px 0 56px 0;
-  }
 }
 
 .operators-container {
-  max-width: $max-width;
-  margin: 0 auto;
-  padding: 0 40px 32px;
-
-  @media (max-width: $bp-md) {
-    padding: 0 24px 28px;
-  }
-
-  @media (max-width: $bp-sm) {
-    padding: 0 16px 24px;
-  }
+  @include container;
 }
 
 .operators-header {
@@ -54,7 +40,7 @@
     font-family: $font-display;
     font-weight: 800;
     font-stretch: 110%;
-    font-size: clamp(28px, 3.2vw, 50px);
+    font-size: clamp(28px, 3.6vw, 64px);
     line-height: 0.98;
     letter-spacing: -0.04em;
     color: $color-ink;

@@ -56,11 +56,11 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     border: 1px solid rgba(241, 240, 236, 0.14);
-    margin-top: 48px;
+    margin-top: 32px;
 
     @include respond($bp-md) {
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      margin-top: 56px;
+      margin-top: 52px;
     }
 
     .stat-item {

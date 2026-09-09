@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import "./Footer.scss";
@@ -25,6 +28,11 @@ const LEGAL_LINKS = ["Privacy Policy", "Terms of Service", "Security"];
 
 export function Footer() {
   const year = new Date().getFullYear();
+  const [openColumn, setOpenColumn] = useState<string | null>(null);
+
+  const toggleColumn = (title: string) => {
+    setOpenColumn((prev) => (prev === title ? null : title));
+  };
 
   return (
     <footer className="site-footer">
@@ -37,18 +45,48 @@ export function Footer() {
           </p>
         </div>
 
-        {FOOTER_COLUMNS.map((col) => (
-          <div key={col.title} className="column">
-            <div className="column-title">{col.title}</div>
-            <ul>
-              {col.items.map((item) => (
-                <li key={item}>
-                  <Link href="#demo">{item}</Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+        {FOOTER_COLUMNS.map((col) => {
+          const isOpen = openColumn === col.title;
+          return (
+            <div
+              key={col.title}
+              className={`column ${isOpen ? "is-open" : ""}`}
+            >
+              <button
+                type="button"
+                className="column-header-btn"
+                onClick={() => toggleColumn(col.title)}
+                aria-expanded={isOpen}
+              >
+                <span className="column-title">{col.title}</span>
+                <span className="toggle-icon" aria-hidden="true">
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 12 12"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M2.5 4.5L6 8L9.5 4.5"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </span>
+              </button>
+              <ul className="column-list">
+                {col.items.map((item) => (
+                  <li key={item}>
+                    <Link href="#demo">{item}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          );
+        })}
       </div>
 
       <div className="bottom">

@@ -1,0 +1,230 @@
+@use "../../styles/mixins" as *;
+@use "../../styles/variables" as *;
+
+.operators-section {
+  position: relative;
+  background-color: $color-bg;
+  border-top: 1px solid rgba(12, 12, 13, 0.1);
+  padding: 64px 0 72px 0;
+  overflow: hidden;
+
+  @media (max-width: $bp-md) {
+    padding: 48px 0 56px 0;
+  }
+}
+
+.operators-container {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: 0 40px 32px;
+
+  @media (max-width: $bp-md) {
+    padding: 0 24px 28px;
+  }
+
+  @media (max-width: $bp-sm) {
+    padding: 0 16px 24px;
+  }
+}
+
+.operators-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+  gap: 56px;
+  align-items: end;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
+
+.operators-title-wrap {
+  .operators-eyebrow {
+    display: block;
+    font-size: 10.5px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: #8a8a8e;
+    font-family: $font-body;
+    margin-bottom: 14px;
+  }
+
+  .operators-headline {
+    font-family: $font-display;
+    font-weight: 800;
+    font-stretch: 110%;
+    font-size: clamp(28px, 3.2vw, 50px);
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+    color: $color-ink;
+    margin: 0;
+  }
+}
+
+.operators-stats-box {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background-color: rgba(12, 12, 13, 0.12);
+  border: 1px solid rgba(12, 12, 13, 0.12);
+  border-radius: 4px;
+  overflow: hidden;
+
+  @media (max-width: $bp-sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.operator-stat-item {
+  background-color: $color-bg;
+  padding: 18px 20px 16px;
+
+  @media (max-width: $bp-md) {
+    padding: 14px 14px 12px;
+  }
+}
+
+.operator-stat-value {
+  font-family: $font-display;
+  font-weight: 800;
+  font-size: clamp(22px, 2.2vw, 26px);
+  letter-spacing: -0.035em;
+  line-height: 1;
+  color: $color-ink;
+}
+
+.operator-stat-label {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #8a8a8e;
+  margin-top: 8px;
+  font-family: $font-body;
+}
+
+.operators-marquee-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  overflow: hidden;
+
+  &:hover {
+    .marquee-track {
+      animation-play-state: paused;
+    }
+  }
+}
+
+.marquee-row-wrapper {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+
+  &.marquee-left {
+    animation: operator-marquee-left 42s linear infinite;
+  }
+
+  &.marquee-right {
+    animation: operator-marquee-right 48s linear infinite;
+  }
+}
+
+.marquee-group {
+  display: flex;
+  gap: 10px;
+  padding-right: 10px;
+}
+
+.operator-client-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  width: 252px;
+  flex: none;
+  border: 1px solid rgba(12, 12, 13, 0.12);
+  border-radius: 12px;
+  padding: 14px 16px;
+  background-color: #ffffff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  user-select: none;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(12, 12, 13, 0.06);
+    border-color: rgba(12, 12, 13, 0.2);
+  }
+}
+
+.operator-client-mark {
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: $font-display;
+  font-weight: 800;
+  font-size: 11px;
+  flex-shrink: 0;
+  text-transform: uppercase;
+}
+
+.operator-client-info {
+  min-width: 0;
+}
+
+.operator-client-name {
+  display: block;
+  font-family: $font-display;
+  font-weight: 700;
+  font-stretch: 105%;
+  font-size: 15px;
+  letter-spacing: -0.015em;
+  color: $color-ink;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.operator-client-sector {
+  display: block;
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #9a9a9e;
+  margin-top: 3px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: $font-body;
+}
+
+@keyframes operator-marquee-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes operator-marquee-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}

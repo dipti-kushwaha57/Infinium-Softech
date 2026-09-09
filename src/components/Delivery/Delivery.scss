@@ -51,21 +51,24 @@
   .delivery-steps-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1px;
-    background: rgba(12, 12, 13, 0.12);
-    border: 1px solid rgba(12, 12, 13, 0.12);
+    gap: 12px;
     margin-top: 56px;
 
     @include respond($bp-sm) {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
     }
 
-    @include respond($bp-md) {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+    @media (min-width: 768px) and (max-width: 1279px) {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 16px;
     }
 
     @include respond($bp-xl) {
       grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 1px;
+      background: rgba(12, 12, 13, 0.12);
+      border: 1px solid rgba(12, 12, 13, 0.12);
     }
   }
 
@@ -74,7 +77,45 @@
     padding: 28px 22px 26px;
     display: flex;
     flex-direction: column;
+    border: 1px solid rgba(12, 12, 13, 0.12);
+    border-radius: 4px;
     transition: background-color 0.25s ease;
+
+    @include respond($bp-sm) {
+      grid-column: span 2;
+
+      &:last-child {
+        grid-column: 2 / span 2;
+      }
+    }
+
+    @media (min-width: 768px) and (max-width: 1279px) {
+      &:nth-child(1),
+      &:nth-child(2),
+      &:nth-child(3) {
+        grid-column: span 2;
+      }
+
+      // Center Week 4 and Week 5 on 768px to 1024px+
+      &:nth-child(4) {
+        grid-column: 2 / span 2;
+      }
+
+      &:nth-child(5) {
+        grid-column: 4 / span 2;
+      }
+    }
+
+    @include respond($bp-xl) {
+      border: none;
+      border-radius: 0;
+      grid-column: auto;
+
+      &:nth-child(4),
+      &:nth-child(5) {
+        grid-column: auto;
+      }
+    }
 
     &:hover {
       background: #ebeae6;
@@ -282,13 +323,21 @@
   .consultation-card {
     background: #0c0c0d;
     color: #f1f0ec;
-    padding: 50px 30px;
+    padding: 40px 22px;
     position: relative;
     overflow: hidden;
     margin-top: 34px;
     border-radius: 4px;
 
+    @include respond($bp-sm) {
+      padding: 48px 32px;
+    }
+
     @include respond($bp-md) {
+      padding: 60px 44px;
+    }
+
+    @media (min-width: 992px) {
       padding: 70px 60px;
     }
 
@@ -305,18 +354,28 @@
       );
       filter: blur(10px);
       pointer-events: none;
+      z-index: 0;
     }
 
     .consultation-content-wrap {
       position: relative;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 40px;
-      align-items: center;
+      z-index: 1;
 
-      @include respond($bp-lg) {
+      @media (min-width: 992px) {
+        display: grid;
         grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
         gap: 56px;
+        align-items: center;
+      }
+    }
+
+    .consultation-info {
+      position: relative;
+      z-index: 2;
+      max-width: 580px;
+
+      @media (min-width: 992px) {
+        max-width: none;
       }
     }
 
@@ -335,25 +394,42 @@
       font-family: $font-display;
       font-weight: 800;
       font-stretch: 112%;
-      font-size: clamp(30px, 3.4vw, 58px);
-      line-height: 0.94;
+      font-size: clamp(28px, 4vw, 58px);
+      line-height: 0.96;
       letter-spacing: -0.045em;
       color: #f1f0ec;
       margin: 22px 0 0;
+
+      @media (max-width: 480px) {
+        font-size: clamp(26px, 7vw, 34px);
+        line-height: 1.05;
+      }
     }
 
     .consultation-desc {
-      font-size: 16px;
+      font-size: 15.5px;
       line-height: 1.6;
       color: #a9a9ae;
       margin: 18px 0 26px;
-      max-width: 440px;
+      max-width: 460px;
     }
 
     .consultation-actions {
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
+
+      @media (max-width: 479px) {
+        flex-direction: column;
+        width: 100%;
+
+        .btn-primary-consult,
+        .btn-secondary-consult {
+          width: 100%;
+          justify-content: center;
+          text-align: center;
+        }
+      }
 
       .btn-primary-consult {
         display: inline-flex;
@@ -404,13 +480,28 @@
       }
     }
 
-    // Animated Wave Sway Visual
+    // Animated Wave Sway Visual (Background on <= 991px, Right Column on >= 992px)
     .consultation-wave-wrap {
-      position: relative;
-      align-self: stretch;
-      min-height: 280px;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      min-height: 0;
       overflow: hidden;
       pointer-events: none;
+      opacity: 0.35;
+      z-index: 1;
+
+      @media (min-width: 992px) {
+        position: relative;
+        inset: auto;
+        width: auto;
+        height: auto;
+        min-height: 280px;
+        align-self: stretch;
+        opacity: 1;
+        z-index: 1;
+      }
 
       .wave-inner {
         position: absolute;

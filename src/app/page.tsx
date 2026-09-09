@@ -4,6 +4,7 @@ import { Why } from "@/components/Why/Why";
 import { InsideProduct } from "@/components/InsideProduct/InsideProduct";
 import { TechStack } from "@/components/TachStack/TechStack"
 import { Delivery } from "@/components/Delivery/Delivery";
+import { Operators } from "@/components/Operators/Operators";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <InsideProduct />
       <TechStack />
       <Delivery />
+      <Operators />
     </main>
   );
 }

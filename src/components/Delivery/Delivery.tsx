@@ -103,7 +103,7 @@ export function Delivery() {
           <div className="consultation-glow" aria-hidden="true" />
 
           <div className="consultation-content-wrap">
-            <div>
+            <div className="consultation-info">
               <span className="consultation-badge">Book consultation</span>
 
               <h3 className="consultation-title">

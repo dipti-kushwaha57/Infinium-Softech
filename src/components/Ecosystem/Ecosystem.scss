@@ -47,20 +47,92 @@
   }
 
   // Layout Grid
+  // Layout Grid
   .ecosystem-body {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 24px;
-    margin-top: 32px;
+    gap: 16px;
+    margin-top: 28px;
     align-items: start;
 
     @include respond($bp-lg) {
       grid-template-columns: 72px minmax(0, 1fr);
       margin-top: 56px;
+      gap: 24px;
     }
   }
 
-  // Left Number Rail (Desktop)
+  // Mobile Horizontal Product Rail (< 1024px)
+  .ecosystem-mobile-rail {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding: 2px 0 10px;
+    width: 100%;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    @include respond($bp-lg) {
+      display: none;
+    }
+
+    .mobile-rail-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 14px 6px 10px;
+      border-radius: 100px;
+      border: 1px solid rgba(12, 12, 13, 0.14);
+      background: #ffffff;
+      color: $color-ink-soft;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+
+      .pill-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+
+      .pill-n {
+        font-family: $font-display;
+        font-weight: 700;
+        font-size: 11px;
+        color: #8a8a8e;
+      }
+
+      .pill-name {
+        font-size: 12px;
+      }
+
+      &.is-active {
+        background: $color-ink;
+        color: #ffffff;
+        border-color: $color-ink;
+
+        .pill-n {
+          color: rgba(255, 255, 255, 0.6);
+        }
+      }
+
+      &:hover:not(.is-active) {
+        background: rgba(12, 12, 13, 0.04);
+        border-color: rgba(12, 12, 13, 0.28);
+      }
+    }
+  }
+
+  // Left Number Rail (Desktop >= 1024px)
   .ecosystem-rail {
     display: none;
 
@@ -111,23 +183,175 @@
     }
   }
 
-  // Stacking Cards Area
+  // Cards Wrapper
+  .ecosystem-cards-wrapper {
+    position: relative;
+    width: 100%;
+    min-width: 0;
+  }
+
+  // Mobile Navigation Arrow Buttons (Middle of card on < 1024px)
+  .ecosystem-mobile-arrow {
+    position: absolute;
+    top: calc(50% - 18px);
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid rgba(12, 12, 13, 0.16);
+    background: #ffffff;
+    color: $color-ink;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 4px 14px rgba(12, 12, 13, 0.12);
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+
+    @include respond($bp-sm) {
+      width: 42px;
+      height: 42px;
+    }
+
+    &.prev-btn {
+      left: -6px;
+
+      @include respond($bp-sm) {
+        left: -12px;
+      }
+
+      @include respond($bp-md) {
+        left: -20px;
+      }
+    }
+
+    &.next-btn {
+      right: -6px;
+
+      @include respond($bp-sm) {
+        right: -12px;
+      }
+
+      @include respond($bp-md) {
+        right: -20px;
+      }
+    }
+
+    &:hover {
+      background: $color-ink;
+      color: #ffffff;
+      border-color: $color-ink;
+      transform: translateY(-50%) scale(1.08);
+      box-shadow: 0 8px 22px rgba(12, 12, 13, 0.2);
+    }
+
+    &:active {
+      transform: translateY(-50%) scale(0.95);
+    }
+
+    @include respond($bp-lg) {
+      display: none;
+    }
+  }
+
+  // Mobile Bottom Pagination Dots (< 1024px)
+  .ecosystem-mobile-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    margin-top: 20px;
+
+    @include respond($bp-lg) {
+      display: none;
+    }
+
+    .ecosystem-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 100px;
+      border: none;
+      background: rgba(12, 12, 13, 0.16);
+      cursor: pointer;
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+      transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease;
+
+      .dot-fill {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+        background-color: transparent;
+        transition: background-color 0.25s ease;
+      }
+
+      &.is-active {
+        width: 26px;
+        background: $color-ink;
+
+        .dot-fill {
+          background-color: currentColor;
+        }
+      }
+
+      &:hover:not(.is-active) {
+        background: rgba(12, 12, 13, 0.32);
+      }
+    }
+  }
+
+  // Stacking Cards Area (Horizontal scroll on < 1024px, GSAP sticky stack on >= 1024px)
   .ecosystem-cards {
     position: relative;
     display: flex;
-    flex-direction: column;
-    gap: 24px;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 16px;
+    padding-bottom: 12px;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
 
     @include respond($bp-lg) {
+      flex-direction: column;
+      overflow-x: visible;
+      overflow-y: visible;
+      scroll-snap-type: none;
       gap: 0;
+      padding-bottom: 0;
     }
   }
 
   .ecosystem-card {
     position: relative;
+    flex: 0 0 calc(100vw - 52px);
+    max-width: 440px;
+    scroll-snap-align: center;
     padding-bottom: 0;
 
+    &.is-clone {
+      @include respond($bp-lg) {
+        display: none !important;
+      }
+    }
+
+    @include respond($bp-md) {
+      flex: 0 0 520px;
+      max-width: 520px;
+    }
+
     @include respond($bp-lg) {
+      flex: initial;
+      max-width: none;
+      scroll-snap-align: none;
       position: sticky;
       top: 96px;
       padding-bottom: 26px;

@@ -5,6 +5,7 @@ import "./globals.scss";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL, getOrganizationSchema } from "@/lib/seo";
 import { Header } from "@/components/Header/Header";
 import { Footer } from "@/components/Footer/Footer";
+import { ScrollAnimationProvider } from "@/components/providers/ScrollAnimationProvider";
 
 const archivo = Archivo({
   variable: "--font-archivo",
@@ -57,9 +58,11 @@ export default function RootLayout({
             />
           </noscript>
         )}
-        <Header />
-        {children}
-        <Footer />
+        <ScrollAnimationProvider>
+          <Header />
+          {children}
+          <Footer />
+        </ScrollAnimationProvider>
       </body>
     </html>
   );

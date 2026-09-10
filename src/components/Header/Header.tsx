@@ -9,9 +9,6 @@ import {
   ECOSYSTEM_PRODUCTS,
   MENU_DEFS,
   MENU_KEYS,
-  type ProductItem,
-  type GenericMenuItem,
-  type MenuDef,
 } from "@/data/headerData";
 
 export function Header() {
@@ -163,6 +160,14 @@ export function Header() {
 
           {/* Responsive Toggle & Action Button */}
           <div className="actions">
+            <Link
+              href="#demo"
+              className="cta"
+              onClick={() => setActiveMenu(null)}
+            >
+              Book a demo <span aria-hidden="true">→</span>
+            </Link>
+
             {/* Mobile/Compact Trigger Button */}
             <div className="nav-compact">
               <button
@@ -180,14 +185,6 @@ export function Header() {
                 </span>
               </button>
             </div>
-
-            <Link
-              href="#demo"
-              className="cta"
-              onClick={() => setActiveMenu(null)}
-            >
-              Book a demo <span aria-hidden="true">→</span>
-            </Link>
           </div>
         </nav>
       </header>
@@ -336,10 +333,13 @@ export function Header() {
                 className="preview-image-wrapper"
                 style={{ backgroundColor: currentPreviewProduct.wash }}
               >
-                <img
+                <Image
                   src={currentPreviewProduct.shot}
                   alt={currentPreviewProduct.name}
+                  width={480}
+                  height={300}
                   className="preview-img"
+                  loading="eager"
                 />
               </div>
               <div className="preview-content">

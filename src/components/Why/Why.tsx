@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { WHY_STATS, WHY_CAPABILITIES } from "@/data/whyData";
+import { WHY_STATS } from "@/data/whyData";
 import "./Why.scss";
 
 gsap.registerPlugin(ScrollTrigger);

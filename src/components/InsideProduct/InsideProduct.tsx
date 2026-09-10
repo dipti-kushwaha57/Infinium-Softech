@@ -1,55 +1,73 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { WHY_STATS, WHY_CAPABILITIES } from "@/data/whyData";
+import { useEffect, useRef, useState, useCallback } from "react";
+import { WHY_CAPABILITIES } from "@/data/whyData";
 import "./InsideProduct.scss";
 
-gsap.registerPlugin(ScrollTrigger);
-
 export function InsideProduct() {
-  const statsRowRef = useRef<HTMLDivElement>(null);
-  const statRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const [slideDirection, setSlideDirection] = useState<"next" | "prev">("next");
 
+  // Touch swipe support
+  const touchStartXRef = useRef<number | null>(null);
+  const touchEndXRef = useRef<number | null>(null);
+
+  const totalCards = WHY_CAPABILITIES.length;
+
+  const goToNext = useCallback(() => {
+    setSlideDirection("next");
+    setActiveIndex((prev) => (prev + 1) % totalCards);
+  }, [totalCards]);
+
+  const goToPrev = useCallback(() => {
+    setSlideDirection("prev");
+    setActiveIndex((prev) => (prev - 1 + totalCards) % totalCards);
+  }, [totalCards]);
+
+  const goToIndex = (index: number) => {
+    setSlideDirection(index > activeIndex ? "next" : "prev");
+    setActiveIndex(index);
+  };
+
+  // Auto-scroll / Auto-play timer (4s)
   useEffect(() => {
-    const row = statsRowRef.current;
-    if (!row) return;
+    if (isPaused) return;
 
-    const ctx = gsap.context(() => {
-      ScrollTrigger.create({
-        trigger: row,
-        start: "top 85%",
-        once: true,
-        onEnter: () => {
-          WHY_STATS.forEach((stat, idx) => {
-            const el = statRefs.current[idx];
-            if (!el) return;
+    const timer = setInterval(() => {
+      goToNext();
+    }, 4000);
 
-            const proxy = { val: 0 };
-            gsap.to(proxy, {
-              val: stat.raw,
-              duration: 2,
-              ease: "power2.out",
-              onUpdate: () => {
-                let formatted: string;
-                if (stat.decimals && stat.decimals > 0) {
-                  formatted = proxy.val.toFixed(stat.decimals);
-                } else {
-                  formatted = Math.round(proxy.val).toLocaleString("en-US");
-                }
-                el.textContent = `${stat.prefix || ""}${formatted}${
-                  stat.suffix || ""
-                }`;
-              },
-            });
-          });
-        },
-      });
-    }, row);
+    return () => clearInterval(timer);
+  }, [isPaused, goToNext]);
 
-    return () => ctx.revert();
-  }, []);
+  // Touch handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setIsPaused(true);
+    touchStartXRef.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndXRef.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (touchStartXRef.current !== null && touchEndXRef.current !== null) {
+      const diff = touchStartXRef.current - touchEndXRef.current;
+      if (diff > 45) {
+        goToNext();
+      } else if (diff < -45) {
+        goToPrev();
+      }
+    }
+    touchStartXRef.current = null;
+    touchEndXRef.current = null;
+    setIsPaused(false);
+  };
+
+  const currentCap = WHY_CAPABILITIES[activeIndex];
+  const formattedIndex = String(activeIndex + 1).padStart(2, "0");
+  const formattedTotal = String(totalCards).padStart(2, "0");
 
   return (
     <section
@@ -74,10 +92,8 @@ export function InsideProduct() {
           </p>
         </div>
 
-        
-
-        {/* Platform Capabilities 4x2 Grid */}
-        <div className="inside-product-grid">
+        {/* DESKTOP VIEW: 4x2 Platform Capabilities Grid (Desktop >= 1024px) */}
+        <div className="inside-product-grid" aria-label="Platform capabilities grid">
           {WHY_CAPABILITIES.map((cap, idx) => (
             <div key={idx} className="capability-card">
               <div
@@ -90,6 +106,130 @@ export function InsideProduct() {
               <p className="capability-desc">{cap.desc}</p>
             </div>
           ))}
+        </div>
+
+        {/* MOBILE / SMALL SIZE VIEW: Centered Single Card Slider with Middle Arrows (< 1024px) */}
+        <div className="inside-product-mobile-slider-area">
+          <div
+            className="inside-product-slider-wrapper"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
+            {/* Left Arrow Button - Vertically in Middle of Card */}
+            <button
+              type="button"
+              className="slider-arrow-btn prev-btn"
+              onClick={goToPrev}
+              aria-label="Previous capability card"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            </button>
+
+            {/* Single Centered Active Card Stage */}
+            <div className="slider-card-stage">
+              <div
+                key={activeIndex}
+                className={`single-capability-card slide-${slideDirection}`}
+              >
+                {/* Accent Strip */}
+                <div
+                  className="card-accent-strip"
+                  style={{ backgroundColor: currentCap.tint }}
+                  aria-hidden="true"
+                />
+
+                {/* Header Row: Icon, Category Badge & Counter */}
+                <div className="card-header-row">
+                  <div className="card-badge-wrap">
+                    <div
+                      className="capability-icon"
+                      style={{ backgroundColor: currentCap.tint }}
+                      aria-hidden="true"
+                    />
+                    <span className="card-badge">Core Capability</span>
+                  </div>
+
+                  <div className="card-counter">
+                    <span className="current-num">{formattedIndex}</span>
+                    <span className="divider">/</span>
+                    <span className="total-num">{formattedTotal}</span>
+                  </div>
+                </div>
+
+                {/* Title & Description */}
+                <h3 className="capability-name">{currentCap.name}</h3>
+                <p className="capability-desc">{currentCap.desc}</p>
+
+                {/* Bottom Details Row */}
+                <div className="card-bottom-row">
+                  <div className="card-chips">
+                    <span className="card-chip">9 Ecosystem Products</span>
+                  </div>
+
+                  <div
+                    className="card-indicator-dot"
+                    style={{ backgroundColor: currentCap.tint }}
+                    aria-hidden="true"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Right Arrow Button - Vertically in Middle of Card */}
+            <button
+              type="button"
+              className="slider-arrow-btn next-btn"
+              onClick={goToNext}
+              aria-label="Next capability card"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </button>
+          </div>
+
+          {/* Pagination Dots */}
+          <div className="slider-pagination" aria-label="Card navigation dots">
+            {WHY_CAPABILITIES.map((cap, idx) => (
+              <button
+                key={idx}
+                type="button"
+                className={`pagination-dot ${activeIndex === idx ? "is-active" : ""}`}
+                onClick={() => goToIndex(idx)}
+                aria-label={`Go to slide ${idx + 1}: ${cap.name}`}
+              >
+                <span
+                  className="dot-fill"
+                  style={{
+                    backgroundColor: activeIndex === idx ? cap.tint : undefined,
+                  }}
+                />
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </section>

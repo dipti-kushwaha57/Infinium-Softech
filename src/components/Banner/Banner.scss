@@ -10,24 +10,28 @@
 
   // On mobile / tablet, banner flows naturally
   padding-top: 40px;
-  padding-bottom: 48px;
+  padding-bottom: 12px;
   @include content-padding;
 
   @include respond($bp-sm) {
     padding-top: 48px;
-    padding-bottom: 56px;
+    padding-bottom: 16px;
   }
 
   @include respond($bp-md) {
     padding-top: 64px;
-    padding-bottom: 64px;
+    padding-bottom: 20px;
   }
 
   // Desktop multi-viewport sticky scroll canvas (>= 1024px)
   @include respond($bp-lg) {
-    height: 240vh;
+    height: 140vh;
     padding: 0;
     overflow: visible;
+  }
+
+  @media (min-width: 1440px) {
+    height: 135vh;
   }
 
   .banner-sticky-frame {
@@ -42,8 +46,9 @@
     @include respond($bp-lg) {
       position: sticky;
       top: 0;
-      height: 100vh;
-      padding-top: min(7vh, 54px);
+      height: calc(min(1240px, 90vw) * 0.49 + clamp(44px, 5.5vh, 60px) + 32px);
+      padding-top: min(6vh, 48px);
+      overflow: visible;
     }
   }
 

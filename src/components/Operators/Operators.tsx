@@ -15,7 +15,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export function Operators() {
   const statsBoxRef = useRef<HTMLDivElement>(null);
-  const statRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const statRefs = useRef<(HTMLElement | null)[]>([]);
 
   useEffect(() => {
     const box = statsBoxRef.current;
@@ -78,13 +78,30 @@ export function Operators() {
           <div ref={statsBoxRef} className="operators-stats-box">
             {OPERATOR_STATS.map((stat, idx) => (
               <div key={idx} className="operator-stat-item">
-                <div
-                  ref={(el) => {
-                    statRefs.current[idx] = el;
-                  }}
-                  className="operator-stat-value"
-                >
-                  {stat.display}
+                <div className="operator-stat-value-wrap">
+                  <span
+                    ref={(el) => {
+                      statRefs.current[idx] = el;
+                    }}
+                    className="operator-stat-value"
+                  >
+                    {stat.display}
+                  </span>
+                  <span className="operator-stat-arrow" aria-hidden="true">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <line x1="7" y1="17" x2="17" y2="7" />
+                      <polyline points="7 7 17 7 17 17" />
+                    </svg>
+                  </span>
                 </div>
                 <div className="operator-stat-label">{stat.label}</div>
               </div>

@@ -6,6 +6,25 @@
   background-color: $color-bg;
   @include section-padding;
 
+  // Moderate middle space specifically between Banner and Ecosystem section locally
+  padding-top: 12px;
+
+  @media (max-width: 480px) {
+    padding-top: 10px;
+  }
+
+  @include respond($bp-sm) {
+    padding-top: 14px;
+  }
+
+  @include respond($bp-md) {
+    padding-top: 18px;
+  }
+
+  @include respond($bp-lg) {
+    padding-top: clamp(20px, 2.5vw, 32px);
+  }
+
   .ecosystem-container {
     @include container;
   }
@@ -377,8 +396,12 @@
 
     @include respond($bp-lg) {
       display: grid;
-      grid-template-columns: minmax(300px, 0.94fr) minmax(320px, 1.06fr);
+      grid-template-columns: minmax(280px, 0.88fr) minmax(340px, 1.12fr);
       padding: 0;
+    }
+
+    @include respond($bp-xl) {
+      grid-template-columns: minmax(290px, 0.85fr) minmax(380px, 1.15fr);
     }
   }
 
@@ -495,13 +518,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 18px 14px;
+    padding: 12px 10px;
     margin: 20px 0 0;
     border-radius: 14px;
     overflow: hidden;
 
     @include respond($bp-md) {
-      padding: 24px;
+      padding: 16px;
     }
 
     @include respond($bp-lg) {
@@ -509,7 +532,11 @@
       margin: 0;
       border-radius: 0;
       min-height: 420px;
-      padding: 40px 36px;
+      padding: 22px 20px;
+    }
+
+    @include respond($bp-xl) {
+      padding: 24px 22px;
     }
 
     .visual-glow {
@@ -529,7 +556,7 @@
     .preview-img-wrapper {
       position: relative;
       width: 100%;
-      max-width: 540px;
+      max-width: 100%;
       height: auto;
       border-radius: 12px;
       overflow: hidden;
@@ -602,26 +629,36 @@
   .card-metrics {
     order: 6;
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 3fr) minmax(0, 3fr);
+    gap: 6px;
     margin-top: 18px;
     align-items: stretch;
 
     @media (max-width: 479px) {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 8px;
+      grid-template-columns: minmax(0, 4fr) minmax(0, 3fr) minmax(0, 3fr);
+      gap: 6px;
 
-      .metric-primary {
-        grid-column: 1 / -1;
+      .metric-chip {
+        padding: 8px 7px;
+      }
+
+      .chip-label {
+        font-size: clamp(7.5px, 2vw, 8.5px);
+        letter-spacing: 0.08em;
+      }
+
+      .chip-value {
+        font-size: clamp(12.5px, 3.2vw, 16px);
       }
     }
 
     @include respond($bp-sm) {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: minmax(0, 4fr) minmax(0, 3fr) minmax(0, 3fr);
       gap: 8px;
     }
 
     @include respond($bp-md) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 10px;
       margin-top: 20px;
     }

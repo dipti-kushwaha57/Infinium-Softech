@@ -211,23 +211,29 @@
       padding: 14px 12px 14px;
     }
 
+    &--clone {
+      @media (min-width: 768px) {
+        display: none !important;
+      }
+    }
+
     @include respond($bp-sm) {
       grid-column: span 2;
     }
 
     @media (min-width: 768px) and (max-width: 1279px) {
-      &:nth-child(1),
-      &:nth-child(2),
-      &:nth-child(3) {
+      &.step-card--1,
+      &.step-card--2,
+      &.step-card--3 {
         grid-column: span 2;
       }
 
-      // Center Week 4 and Week 5 on 768px to 1024px+
-      &:nth-child(4) {
+      // Center Week 4 and Week 5 on 768px to 1279px
+      &.step-card--4 {
         grid-column: 2 / span 2;
       }
 
-      &:nth-child(5) {
+      &.step-card--5 {
         grid-column: 4 / span 2;
       }
     }
@@ -235,11 +241,11 @@
     @include respond($bp-xl) {
       border: none;
       border-radius: 0;
-      grid-column: auto;
+      grid-column: auto !important;
 
-      &:nth-child(4),
-      &:nth-child(5) {
-        grid-column: auto;
+      &.step-card--4,
+      &.step-card--5 {
+        grid-column: auto !important;
       }
     }
 
@@ -389,6 +395,12 @@
     flex-direction: column;
     box-shadow: 0 4px 16px rgba(12, 12, 13, 0.03);
     transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+    &--clone {
+      @media (min-width: 768px) {
+        display: none !important;
+      }
+    }
 
     @media (max-width: 768px) {
       padding: 18px 16px;

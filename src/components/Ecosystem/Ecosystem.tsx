@@ -592,7 +592,7 @@ export function Ecosystem() {
                           alt={`${prod.name} product screen preview`}
                           width={960}
                           height={600}
-                          sizes="(min-width: 1280px) 540px, (min-width: 1024px) 45vw, 100vw"
+                          sizes="(min-width: 1280px) 720px, (min-width: 1024px) 55vw, 100vw"
                           className="preview-shot"
                           loading="eager"
                         />

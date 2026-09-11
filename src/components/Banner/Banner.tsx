@@ -39,21 +39,22 @@ export function Banner() {
       // 1024px+ desktop scroll & zoom animation
       const vh = window.innerHeight || 1;
       const y = window.scrollY || window.pageYOffset || 0;
-      const p = Math.max(0, Math.min(1, y / (vh * 1.2)));
+      const scrollTrack = Math.max(1, section.offsetHeight - sticky.offsetHeight);
+      const p = Math.max(0, Math.min(1, y / (scrollTrack * 0.88)));
       const e = 1 - Math.pow(1 - p, 2); // Quad ease-out
 
       // Text animation: smoothly shift up, fade out, scale down and blur
-      text.style.transform = `translate3d(0, ${(-e * 130).toFixed(1)}px, 0) scale(${(1 - e * 0.16).toFixed(4)})`;
-      text.style.opacity = String(Math.max(0, 1 - e * 1.5));
-      text.style.filter = `blur(${(e * 5).toFixed(2)}px)`;
+      text.style.transform = `translate3d(0, ${(-e * 110).toFixed(1)}px, 0) scale(${(1 - e * 0.14).toFixed(4)})`;
+      text.style.opacity = String(Math.max(0, 1 - e * 1.45));
+      text.style.filter = `blur(${(e * 4).toFixed(2)}px)`;
 
-      // Hero Deck & Image: smoothly scale from 0.86 to 1.00 and glide upwards
+      // Hero Deck & Image: smoothly scale from 0.88 to 1.00 and glide upwards
       const padTop = parseFloat(getComputedStyle(sticky).paddingTop) || 0;
       const textH = text.offsetHeight || 0;
-      const startTop = padTop + textH + 24;
-      const endTop = vh * 0.09;
+      const startTop = padTop + textH + 20;
+      const endTop = Math.min(60, Math.max(36, vh * 0.065));
       const top = startTop + (endTop - startTop) * e;
-      const scale = 0.86 + e * 0.14;
+      const scale = 0.88 + e * 0.12;
 
       deck.style.transform = `translate3d(-50%, ${top.toFixed(1)}px, 0) scale(${scale.toFixed(4)})`;
 

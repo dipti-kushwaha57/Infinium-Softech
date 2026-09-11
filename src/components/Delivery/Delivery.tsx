@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRef, useEffect, useCallback, RefObject } from "react";
 import {
   DELIVERY_STEPS,
   ENGAGEMENT_MODELS,
@@ -9,7 +10,288 @@ import {
 } from "@/data/deliverData";
 import "./Delivery.scss";
 
+function useCarousel(ref: RefObject<HTMLDivElement | null>, itemCount: number) {
+  const pausedRef = useRef(false);
+  const resumeTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const getVisibleCards = useCallback(() => {
+    const el = ref.current;
+    if (!el) return [];
+    return Array.from(el.querySelectorAll<HTMLElement>("[data-card]")).filter(
+      (card) => {
+        return (
+          card.offsetParent !== null ||
+          window.getComputedStyle(card).display !== "none"
+        );
+      }
+    );
+  }, [ref]);
+
+  const getCardCenterScrollLeft = useCallback(
+    (el: HTMLElement, card: HTMLElement) => {
+      const cardRect = card.getBoundingClientRect();
+      const elRect = el.getBoundingClientRect();
+      const cardRelativeLeft = cardRect.left - elRect.left + el.scrollLeft;
+      return cardRelativeLeft - (el.clientWidth - card.offsetWidth) / 2;
+    },
+    []
+  );
+
+  const getActiveIndex = useCallback(() => {
+    const el = ref.current;
+    if (!el) return 0;
+    const cards = getVisibleCards();
+    if (cards.length === 0) return 0;
+
+    const containerCenter = el.scrollLeft + el.clientWidth / 2;
+    let closestIndex = 0;
+    let minDistance = Infinity;
+
+    cards.forEach((card, index) => {
+      const cardRect = card.getBoundingClientRect();
+      const elRect = el.getBoundingClientRect();
+      const cardRelativeLeft = cardRect.left - elRect.left + el.scrollLeft;
+      const cardCenter = cardRelativeLeft + card.offsetWidth / 2;
+      const distance = Math.abs(containerCenter - cardCenter);
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestIndex = index;
+      }
+    });
+
+    return closestIndex;
+  }, [ref, getVisibleCards]);
+
+  const scrollToIndex = useCallback(
+    (targetIndex: number, smooth = true) => {
+      const el = ref.current;
+      if (!el) return;
+      const cards = getVisibleCards();
+      if (cards.length === 0) return;
+
+      const clampedIndex = Math.max(0, Math.min(cards.length - 1, targetIndex));
+      const targetCard = cards[clampedIndex];
+      const targetScrollLeft = getCardCenterScrollLeft(el, targetCard);
+
+      el.scrollTo({
+        left: Math.max(
+          0,
+          Math.min(el.scrollWidth - el.clientWidth, targetScrollLeft)
+        ),
+        behavior: smooth ? "smooth" : "instant",
+      });
+    },
+    [ref, getVisibleCards, getCardCenterScrollLeft]
+  );
+
+  const handleNext = useCallback(() => {
+    const el = ref.current;
+    if (!el) return;
+    const cards = getVisibleCards();
+    if (cards.length === 0) return;
+
+    const currentIndex = getActiveIndex();
+    const nextIndex = currentIndex + 1;
+
+    if (nextIndex < cards.length) {
+      scrollToIndex(nextIndex, true);
+    } else {
+      scrollToIndex(0, true);
+    }
+  }, [ref, getVisibleCards, getActiveIndex, scrollToIndex]);
+
+  const handlePrev = useCallback(() => {
+    const el = ref.current;
+    if (!el) return;
+    const cards = getVisibleCards();
+    if (cards.length === 0) return;
+
+    const currentIndex = getActiveIndex();
+    const prevIndex = currentIndex - 1;
+
+    if (prevIndex >= 0) {
+      scrollToIndex(prevIndex, true);
+    } else {
+      scrollToIndex(cards.length - 1, true);
+    }
+  }, [ref, getVisibleCards, getActiveIndex, scrollToIndex]);
+
+  const pauseTemporarily = useCallback(() => {
+    pausedRef.current = true;
+    if (resumeTimeout.current) clearTimeout(resumeTimeout.current);
+    resumeTimeout.current = setTimeout(() => {
+      pausedRef.current = false;
+    }, 4500);
+  }, []);
+
+  // Initialize position to first real card on mobile mount
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const mq = window.matchMedia("(max-width: 767px)");
+    if (!mq.matches) return;
+
+    const cards = getVisibleCards();
+    if (cards.length === itemCount + 2) {
+      scrollToIndex(1, false);
+    }
+  }, [ref, itemCount, getVisibleCards, scrollToIndex]);
+
+  // Seamless jump between clones and original cards
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    let jumpTimeout: ReturnType<typeof setTimeout> | null = null;
+
+    const handleScroll = () => {
+      if (jumpTimeout) clearTimeout(jumpTimeout);
+
+      jumpTimeout = setTimeout(() => {
+        const cards = getVisibleCards();
+        if (cards.length !== itemCount + 2) return;
+
+        const currentIndex = getActiveIndex();
+        if (currentIndex === 0) {
+          // At prepended clone of last item -> jump silently to real last item
+          scrollToIndex(itemCount, false);
+        } else if (currentIndex === itemCount + 1) {
+          // At appended clone of first item -> jump silently to real first item
+          scrollToIndex(1, false);
+        }
+      }, 150);
+    };
+
+    el.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      el.removeEventListener("scroll", handleScroll);
+      if (jumpTimeout) clearTimeout(jumpTimeout);
+    };
+  }, [ref, itemCount, getVisibleCards, getActiveIndex, scrollToIndex]);
+
+  // Auto-scroll on mobile
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const mq = window.matchMedia("(min-width: 768px)");
+    if (!mq.matches) return;
+
+    const interval = setInterval(() => {
+      if (pausedRef.current || !el) return;
+      handleNext();
+    }, 3200);
+
+    return () => clearInterval(interval);
+  }, [ref, handleNext]);
+
+  return {
+    handleNext,
+    handlePrev,
+    pauseTemporarily,
+  };
+}
+
+function StepCardView({
+  step,
+  isClone = false,
+  index = 0,
+}: {
+  step: DeliveryStep;
+  isClone?: boolean;
+  index?: number;
+}) {
+  return (
+    <div
+      className={`step-card ${
+        isClone ? "step-card--clone" : `step-card--${index + 1}`
+      }`}
+      data-card
+      aria-hidden={isClone ? "true" : undefined}
+    >
+      <div className="step-header">
+        <span className="step-num">{step.n}</span>
+        <span className="step-time">{step.time}</span>
+      </div>
+
+      <div
+        className="step-bar"
+        style={{ backgroundColor: step.tint }}
+        aria-hidden="true"
+      />
+
+      <h3 className="step-title">{step.title}</h3>
+      <p className="step-desc">{step.desc}</p>
+      <div className="step-owner">{step.owner}</div>
+    </div>
+  );
+}
+
+function EngagementCardView({
+  model,
+  isClone = false,
+  index = 0,
+}: {
+  model: EngagementModel;
+  isClone?: boolean;
+  index?: number;
+}) {
+  return (
+    <div
+      className={`engagement-card ${
+        isClone ? "engagement-card--clone" : `engagement-card--${index + 1}`
+      }`}
+      data-card
+      aria-hidden={isClone ? "true" : undefined}
+    >
+      <div className="engagement-top">
+        <span className="engagement-tag">{model.tag}</span>
+        <div
+          className="engagement-icon"
+          style={{ backgroundColor: model.tint }}
+          aria-hidden="true"
+        />
+      </div>
+
+      <h3 className="engagement-title">{model.title}</h3>
+      <p className="engagement-desc">{model.desc}</p>
+
+      <div className="engagement-points">
+        {model.points.map((point: string, pIdx: number) => (
+          <div key={pIdx} className="point-item">
+            <span className="check-icon" aria-hidden="true">
+              ✓
+            </span>
+            <span>{point}</span>
+          </div>
+        ))}
+        <div className="point-divider-bottom" aria-hidden="true" />
+      </div>
+
+      <div className="engagement-footer">
+        <span className="fit-label">{model.fit}</span>
+        <Link href="#demo" className="btn-talk">
+          Talk to us{" "}
+          <span className="arrow" aria-hidden="true">
+            →
+          </span>
+        </Link>
+      </div>
+    </div>
+  );
+}
+
 export function Delivery() {
+  const stepsRef = useRef<HTMLDivElement>(null);
+  const engagementRef = useRef<HTMLDivElement>(null);
+
+  const stepsCarousel = useCarousel(stepsRef, DELIVERY_STEPS.length);
+  const engagementCarousel = useCarousel(
+    engagementRef,
+    ENGAGEMENT_MODELS.length
+  );
+
   return (
     <section
       id="demo"
@@ -36,66 +318,137 @@ export function Delivery() {
         </div>
 
         {/* 5-Step Delivery Pipeline */}
-        <div className="delivery-steps-grid">
-          {DELIVERY_STEPS.map((step: DeliveryStep) => (
-            <div key={step.n} className="step-card">
-              <div className="step-header">
-                <span className="step-num">{step.n}</span>
-                <span className="step-time">{step.time}</span>
-              </div>
+        <div className="delivery-steps-wrap">
+          <div className="delivery-steps-grid" ref={stepsRef}>
+            {/* Clone of last card placed before first card for seamless reverse scroll */}
+            <StepCardView
+              step={DELIVERY_STEPS[DELIVERY_STEPS.length - 1]}
+              isClone={true}
+            />
 
-              <div
-                className="step-bar"
-                style={{ backgroundColor: step.tint }}
-                aria-hidden="true"
-              />
+            {/* Real Delivery Steps */}
+            {DELIVERY_STEPS.map((step: DeliveryStep, idx: number) => (
+              <StepCardView key={step.n} step={step} index={idx} />
+            ))}
 
-              <h3 className="step-title">{step.title}</h3>
-              <p className="step-desc">{step.desc}</p>
-              <div className="step-owner">{step.owner}</div>
-            </div>
-          ))}
+            {/* Clone of first card placed right next to last card for seamless forward scroll */}
+            <StepCardView step={DELIVERY_STEPS[0]} isClone={true} />
+          </div>
+
+          {/* Left Arrow Button */}
+          <button
+            type="button"
+            className="carousel-btn carousel-btn--left"
+            aria-label="Previous step"
+            onClick={() => {
+              stepsCarousel.pauseTemporarily();
+              stepsCarousel.handlePrev();
+            }}
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
+
+          {/* Right Arrow Button */}
+          <button
+            type="button"
+            className="carousel-btn carousel-btn--right"
+            aria-label="Next step"
+            onClick={() => {
+              stepsCarousel.pauseTemporarily();
+              stepsCarousel.handleNext();
+            }}
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
         </div>
 
         {/* 3 Engagement Models */}
-        <div className="engagement-grid">
-          {ENGAGEMENT_MODELS.map((model: EngagementModel, idx: number) => (
-            <div key={idx} className="engagement-card">
-              <div className="engagement-top">
-                <span className="engagement-tag">{model.tag}</span>
-                <div
-                  className="engagement-icon"
-                  style={{ backgroundColor: model.tint }}
-                  aria-hidden="true"
-                />
-              </div>
+        <div className="engagement-wrap">
+          <div className="engagement-grid" ref={engagementRef}>
+            {/* Clone of last card placed before first card for seamless reverse scroll */}
+            <EngagementCardView
+              model={ENGAGEMENT_MODELS[ENGAGEMENT_MODELS.length - 1]}
+              isClone={true}
+            />
 
-              <h3 className="engagement-title">{model.title}</h3>
-              <p className="engagement-desc">{model.desc}</p>
+            {/* Real Engagement Models */}
+            {ENGAGEMENT_MODELS.map((model: EngagementModel, idx: number) => (
+              <EngagementCardView key={idx} model={model} index={idx} />
+            ))}
 
-              <div className="engagement-points">
-                {model.points.map((point: string, pIdx: number) => (
-                  <div key={pIdx} className="point-item">
-                    <span className="check-icon" aria-hidden="true">
-                      ✓
-                    </span>
-                    <span>{point}</span>
-                  </div>
-                ))}
-                <div className="point-divider-bottom" aria-hidden="true" />
-              </div>
+            {/* Clone of first card placed right next to last card for seamless forward scroll */}
+            <EngagementCardView model={ENGAGEMENT_MODELS[0]} isClone={true} />
+          </div>
 
-              <div className="engagement-footer">
-                <span className="fit-label">{model.fit}</span>
-                <Link href="#demo" className="btn-talk">
-                  Talk to us{" "}
-                  <span className="arrow" aria-hidden="true">
-                    →
-                  </span>
-                </Link>
-              </div>
-            </div>
-          ))}
+          {/* Left Arrow Button */}
+          <button
+            type="button"
+            className="carousel-btn carousel-btn--left"
+            aria-label="Previous engagement model"
+            onClick={() => {
+              engagementCarousel.pauseTemporarily();
+              engagementCarousel.handlePrev();
+            }}
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
+
+          {/* Right Arrow Button */}
+          <button
+            type="button"
+            className="carousel-btn carousel-btn--right"
+            aria-label="Next engagement model"
+            onClick={() => {
+              engagementCarousel.pauseTemporarily();
+              engagementCarousel.handleNext();
+            }}
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
         </div>
 
         {/* Consultation / Book Demo CTA Banner */}

@@ -701,18 +701,17 @@
 
   // Right column Preview Card
   .preview-card {
-    border: 1px solid rgba(241, 240, 236, 0.14);
-    border-radius: 14px;
-    overflow: hidden;
-    background: rgba(241, 240, 236, 0.04);
-    width: 336px;
-    flex-shrink: 0;
-    transition: all 0.25s ease;
+    display: none;
 
-    @media (max-width: 1240px) {
-      width: 100%;
-      max-width: 100%;
-      margin-top: 6px;
+    @include respond($bp-nav) {
+      display: block;
+      border: 1px solid rgba(241, 240, 236, 0.14);
+      border-radius: 14px;
+      overflow: hidden;
+      background: rgba(241, 240, 236, 0.04);
+      width: 336px;
+      flex-shrink: 0;
+      transition: all 0.25s ease;
     }
 
     .preview-image-wrapper {

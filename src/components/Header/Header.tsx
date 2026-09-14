@@ -253,12 +253,17 @@ export function Header() {
                     return (
                       <Link
                         key={prod.name}
-                        href="#ecosystem"
+                        href={`#${prod.id}`}
                         className={`product-card ${isSelected ? "is-selected" : ""}`}
                         onMouseEnter={() => setPreviewProductName(prod.name)}
                         onClick={() => {
                           setPreviewProductName(prod.name);
-                          if (isMobile) setActiveMenu(null);
+                          setActiveMenu(null);
+                          window.dispatchEvent(
+                            new CustomEvent("scroll-to-ecosystem-product", {
+                              detail: { id: prod.id },
+                            })
+                          );
                         }}
                       >
                         <span
@@ -285,15 +290,24 @@ export function Header() {
                 <div className="links-grid">
                   {currentMenuDef.items.map((item) => {
                     const isSelected = previewProductName === item.product;
+                    const matchedProd = ECOSYSTEM_PRODUCTS.find((p) => p.name === item.product);
+                    const targetHref = item.href || (matchedProd ? `#${matchedProd.id}` : "#ecosystem");
                     return (
                       <Link
                         key={item.name}
-                        href="#showcase"
+                        href={targetHref}
                         className={`link-card ${isSelected ? "is-selected" : ""}`}
                         onMouseEnter={() => setPreviewProductName(item.product)}
                         onClick={() => {
                           setPreviewProductName(item.product);
-                          if (isMobile) setActiveMenu(null);
+                          setActiveMenu(null);
+                          if (!item.href && matchedProd) {
+                            window.dispatchEvent(
+                              new CustomEvent("scroll-to-ecosystem-product", {
+                                detail: { id: matchedProd.id },
+                              })
+                            );
+                          }
                         }}
                       >
                         <span
@@ -320,7 +334,14 @@ export function Header() {
                 <Link
                   href="#ecosystem"
                   className="bottom-link"
-                  onClick={() => setActiveMenu(null)}
+                  onClick={() => {
+                    setActiveMenu(null);
+                    window.dispatchEvent(
+                      new CustomEvent("scroll-to-ecosystem-product", {
+                        detail: { index: 0 },
+                      })
+                    );
+                  }}
                 >
                   Browse the full ecosystem →
                 </Link>
@@ -355,9 +376,16 @@ export function Header() {
                     Launch demo <span aria-hidden="true">→</span>
                   </Link>
                   <Link
-                    href="#showcase"
+                    href={`#${currentPreviewProduct.id}`}
                     className="btn-details"
-                    onClick={() => setActiveMenu(null)}
+                    onClick={() => {
+                      setActiveMenu(null);
+                      window.dispatchEvent(
+                        new CustomEvent("scroll-to-ecosystem-product", {
+                          detail: { id: currentPreviewProduct.id },
+                        })
+                      );
+                    }}
                   >
                     View details
                   </Link>

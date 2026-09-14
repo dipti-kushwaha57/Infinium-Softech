@@ -1,0 +1,835 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+
+.banner {
+  position: relative;
+  background: $color-bg;
+  color: $color-ink;
+  width: 100%;
+  overflow-x: clip;
+
+  // On mobile / tablet, banner flows naturally
+  padding-top: 40px;
+  padding-bottom: 12px;
+  @include content-padding;
+
+  @include respond($bp-sm) {
+    padding-top: 48px;
+    padding-bottom: 16px;
+  }
+
+  @include respond($bp-md) {
+    padding-top: 64px;
+    padding-bottom: 20px;
+  }
+
+  // Desktop multi-viewport sticky scroll canvas (>= 1024px)
+  @include respond($bp-lg) {
+    height: 140vh;
+    padding: 0;
+    overflow: visible;
+  }
+
+  @media (min-width: 1440px) {
+    height: 135vh;
+  }
+
+  .banner-sticky-frame {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include respond($bp-lg) {
+      position: sticky;
+      top: 0;
+      height: calc(min(1240px, 90vw) * 0.49 + clamp(44px, 5.5vh, 60px) + 32px);
+      padding-top: min(6vh, 48px);
+      overflow: visible;
+    }
+  }
+
+  /* ──────────────────────────────────────────────
+     Ambient Glowing Backgrounds
+     ────────────────────────────────────────────── */
+  .banner-glow-layer {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .banner-glow-tr {
+    position: absolute;
+    right: -10%;
+    top: -16%;
+    width: 50vw;
+    height: 50vw;
+    max-width: 660px;
+    max-height: 660px;
+    background: radial-gradient(
+      closest-side,
+      rgba($color-accent-lime, 0.5),
+      rgba($color-accent-lime, 0.14) 54%,
+      rgba($color-accent-lime, 0) 76%
+    );
+    filter: blur(28px);
+    animation: im-glow-tr 28s ease-in-out infinite;
+
+    @include respond($bp-lg) {
+      width: 44vw;
+      height: 44vw;
+      background: radial-gradient(
+        closest-side,
+        rgba(200, 242, 78, 0.5),
+        rgba(200, 242, 78, 0.14) 54%,
+        rgba(200, 242, 78, 0) 76%
+      );
+    }
+  }
+
+  .banner-glow-bl {
+    position: absolute;
+    left: -12%;
+    bottom: -18%;
+    width: 50vw;
+    height: 50vw;
+    max-width: 700px;
+    max-height: 700px;
+    background: radial-gradient(
+      closest-side,
+      rgba(122, 214, 120, 0.44),
+      rgba($color-accent-lime, 0.12) 56%,
+      rgba($color-accent-lime, 0) 78%
+    );
+    filter: blur(32px);
+    animation: im-glow-bl 34s ease-in-out infinite;
+
+    @include respond($bp-lg) {
+      width: 46vw;
+      height: 46vw;
+      background: radial-gradient(
+        closest-side,
+        rgba(122, 214, 120, 0.44),
+        rgba(200, 242, 78, 0.12) 56%,
+        rgba(200, 242, 78, 0) 78%
+      );
+    }
+  }
+
+  .banner-glow-center {
+    position: absolute;
+    left: -12%;
+    right: -12%;
+    top: -4%;
+    height: 56%;
+    background: radial-gradient(
+      60% 70% at 50% 40%,
+      rgba($color-accent, 0.12),
+      rgba($color-accent, 0) 72%
+    );
+    filter: blur(6px);
+  }
+
+  /* ──────────────────────────────────────────────
+     Animated SVG Wave Ribbons
+     ────────────────────────────────────────────── */
+  .banner-waves-layer {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .banner-wave-track {
+    position: absolute;
+    width: 200%;
+    height: 56%;
+
+    &.wave-track-a {
+      left: 0;
+      top: 2%;
+      animation: im-wave-a 30s linear infinite;
+    }
+
+    &.wave-track-b {
+      left: 0;
+      top: 0;
+      height: 62%;
+      opacity: 0.75;
+      animation: im-wave-b 44s linear infinite;
+    }
+  }
+
+  .banner-wave-svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ──────────────────────────────────────────────
+     Banner Text Content (Fluid Typography Scale)
+     ────────────────────────────────────────────── */
+  .banner-content {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    max-width: 1200px;
+    margin-inline: auto;
+    padding: 0 4px;
+    text-align: center;
+    transform-origin: 50% 0%;
+    will-change: transform, opacity, filter;
+
+    @include respond($bp-md) {
+      padding: 0 24px;
+    }
+
+    @include respond($bp-lg) {
+      max-width: 1300px;
+      padding: 0 40px;
+    }
+  }
+
+  .banner-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid rgba($color-ink, 0.16);
+    border-radius: 100px;
+    padding: 4px 5px 4px 10px;
+    font-size: clamp(9px, 2.6vw, 11px);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $color-ink-soft;
+    background: rgba($color-bg, 0.8);
+    backdrop-filter: blur(8px);
+    max-width: 100%;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+
+    @include respond($bp-sm) {
+      gap: 12px;
+      padding: 6px 8px 6px 14px;
+      letter-spacing: 0.18em;
+    }
+
+    @include respond($bp-md) {
+      gap: 14px;
+      padding: 7px 8px 7px 16px;
+      letter-spacing: 0.22em;
+      background: rgba(241, 240, 236, 0.7);
+    }
+  }
+
+  .eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: $color-accent;
+    flex-shrink: 0;
+    animation: im-pulse 2.4s ease-in-out infinite;
+  }
+
+  .eyebrow-text {
+    font-weight: 500;
+  }
+
+  .eyebrow-pill {
+    background: $color-ink;
+    color: $color-bg;
+    border-radius: 100px;
+    padding: 3px 8px;
+    letter-spacing: 0.04em;
+    text-transform: none;
+    font-size: clamp(9px, 2.5vw, 11.5px);
+    font-weight: 500;
+    white-space: nowrap;
+
+    @include respond($bp-sm) {
+      padding: 4px 10px;
+      letter-spacing: 0.06em;
+    }
+
+    @include respond($bp-md) {
+      padding: 5px 12px;
+      font-size: 11.5px;
+      letter-spacing: 0.08em;
+    }
+  }
+
+  .banner-headline {
+    font-family: $font-display;
+    font-weight: 800;
+    font-size: var(--fs-display);
+    line-height: 0.94;
+    letter-spacing: -0.04em;
+    max-width: 22ch;
+    margin: min(20px, 2vh) auto 0;
+    text-wrap: balance;
+
+    @include respond($bp-md) {
+      margin-top: 24px;
+    }
+
+    @include respond($bp-lg) {
+      font-stretch: 110%;
+      font-size: clamp(48px, min(7.4vw, 11vh), 128px);
+      line-height: 0.9;
+      letter-spacing: -0.045em;
+      margin-top: min(26px, 2.4vh);
+    }
+  }
+
+  .accent {
+    color: $color-accent;
+  }
+
+  .banner-lede {
+    max-width: 640px;
+    margin: 16px auto 0;
+    font-size: var(--fs-lead);
+    line-height: 1.55;
+    color: $color-body;
+
+    @include respond($bp-md) {
+      margin-top: 20px;
+    }
+
+    @include respond($bp-lg) {
+      margin-top: 24px;
+      font-size: 17px;
+    }
+  }
+
+  .banner-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+
+    @include respond($bp-md) {
+      margin-top: 28px;
+    }
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: $color-accent;
+    color: #ffffff;
+    font-size: var(--fs-body);
+    font-weight: 500;
+    padding: 13px 24px;
+    border-radius: 2px;
+    white-space: nowrap;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+
+    @include respond($bp-sm) {
+      padding: 10px 23px;
+    }
+
+    @include respond($bp-lg) {
+      font-size: 14px;
+      padding: 15px 26px;
+    }
+
+    span {
+      opacity: 0.65;
+      transition: transform 0.2s ease;
+    }
+
+    &:hover {
+      opacity: 0.95;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba($color-accent, 0.35);
+
+      span {
+        transform: translateX(3px);
+      }
+    }
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border: 1px solid rgba($color-ink, 0.2);
+    color: $color-ink;
+    font-size: var(--fs-body);
+    font-weight: 500;
+    padding: 13px 24px;
+    border-radius: 2px;
+    white-space: nowrap;
+    background: transparent;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+
+    @include respond($bp-sm) {
+      padding: 10px 23px;
+    }
+
+    @include respond($bp-lg) {
+      font-size: 14px;
+      padding: 15px 26px;
+    }
+
+    &:hover {
+      background: rgba($color-ink, 0.05);
+      border-color: rgba($color-ink, 0.4);
+      transform: translateY(-1px);
+    }
+  }
+
+  /* ──────────────────────────────────────────────
+     Hero Deck & Platform Preview
+     ────────────────────────────────────────────── */
+  .banner-deck {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1240px;
+    margin: 36px auto 0;
+    padding: 0 4px;
+
+    @include respond($bp-sm) {
+      margin-top: 44px;
+      padding: 0 12px;
+    }
+
+    @include respond($bp-md) {
+      margin-top: 52px;
+      padding: 0 24px;
+    }
+
+    @include respond($bp-lg) {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      width: min(1240px, 90vw);
+      margin: 0;
+      padding: 0;
+      transform: translate3d(-50%, 100vh, 0) scale(0.86);
+      transform-origin: 50% 0%;
+      will-change: transform;
+    }
+  }
+
+  .deck-container {
+    position: relative;
+    width: 100%;
+  }
+
+  .deck-preview {
+    position: relative;
+    z-index: 1;
+    border-radius: 12px 12px 0 0;
+    overflow: hidden;
+    box-shadow: 0 -8px 80px rgba($color-ink, 0.24), 0 0 0 1px rgba($color-ink, 0.08);
+
+    @include respond($bp-md) {
+      border-radius: 14px 14px 0 0;
+      box-shadow: 0 -8px 90px rgba($color-ink, 0.28), 0 0 0 1px rgba($color-ink, 0.1);
+    }
+
+    .preview-img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  /* ──────────────────────────────────────────────
+     Cards Layout:
+     - On mobile / tablet (< 1024px): 3 cards are positioned half-inside and half-outside the bottom of the hero preview image
+     - On desktop (>= 1024px): floats over image sides with parallax
+     ────────────────────────────────────────────── */
+  .deck-cards-wrapper {
+    position: relative;
+    z-index: 3;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-top: 0;
+    transform: translateY(-50%);
+    margin-bottom: 0;
+    width: 100%;
+    padding: 0 8px;
+    box-sizing: border-box;
+
+    @include respond($bp-sm) {
+      gap: 12px;
+      padding: 0 16px;
+    }
+
+    @include respond($bp-md) {
+      gap: 18px;
+      padding: 0 24px;
+    }
+
+    @include respond($bp-lg) {
+      display: block;
+      position: static;
+      margin: 0;
+      padding: 0;
+      transform: none;
+    }
+  }
+
+  .stat-card {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    text-align: left;
+
+    @include respond($bp-lg) {
+      position: absolute;
+      z-index: 4;
+      transition: margin-top 0.15s ease-out;
+
+      &.card-appointgem {
+        left: -9%;
+        top: 34px;
+        width: 210px;
+        animation: im-float-a 8s ease-in-out infinite;
+      }
+
+      &.card-truckguru {
+        right: -8%;
+        top: 96px;
+        width: 196px;
+        z-index: 4;
+        animation: im-float-b 9.4s ease-in-out infinite;
+      }
+
+      &.card-welzokart {
+        left: 6%;
+        top: 210px;
+        width: 184px;
+        z-index: 4;
+        animation: im-float-b 10.2s ease-in-out infinite;
+      }
+    }
+  }
+
+  .card-glass {
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: 0 10px 28px rgba($color-ink, 0.12), 0 2px 6px rgba($color-ink, 0.04);
+    border-radius: 8px;
+    padding: 8px 7px;
+    text-align: left;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    @include respond($bp-sm) {
+      border-radius: 10px;
+      padding: 10px 12px;
+      box-shadow: 0 14px 34px rgba($color-ink, 0.14), 0 2px 8px rgba($color-ink, 0.05);
+    }
+
+    @include respond($bp-md) {
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: 0 24px 60px rgba($color-ink, 0.16), 0 4px 12px rgba($color-ink, 0.06);
+    }
+
+    @include respond($bp-lg) {
+      background: rgba(241, 240, 236, 0.72);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 24px 60px rgba(12, 12, 13, 0.16);
+      border-radius: 14px;
+      padding: 16px;
+    }
+  }
+
+  .card-head {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    @include respond($bp-sm) {
+      gap: 7px;
+    }
+
+    @include respond($bp-md) {
+      gap: 9px;
+    }
+  }
+
+  .card-mark {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: $font-display;
+    font-weight: 800;
+    font-size: 8px;
+    flex-shrink: 0;
+
+    &.mark-blue {
+      background: $tint-blue;
+    }
+
+    &.mark-amber {
+      background: $tint-amber;
+    }
+
+    &.mark-green {
+      background: $tint-green;
+      width: 16px;
+      height: 16px;
+      font-size: 7.5px;
+    }
+
+    @include respond($bp-sm) {
+      width: 22px;
+      height: 22px;
+      font-size: 9.5px;
+      border-radius: 6px;
+
+      &.mark-green {
+        width: 20px;
+        height: 20px;
+        font-size: 9px;
+      }
+    }
+
+    @include respond($bp-md) {
+      width: 26px;
+      height: 26px;
+      font-size: 10.5px;
+      border-radius: 7px;
+
+      &.mark-green {
+        width: 24px;
+        height: 24px;
+        font-size: 10px;
+      }
+    }
+  }
+
+  .card-title {
+    font-size: clamp(8.5px, 2.2vw, 11px);
+    font-weight: 600;
+    color: $color-ink;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @include respond($bp-md) {
+      font-size: var(--fs-xs);
+    }
+
+    @include respond($bp-lg) {
+      font-size: 12px;
+    }
+  }
+
+  .card-metric {
+    font-family: $font-display;
+    font-weight: 800;
+    font-size: clamp(13px, 3.6vw, 18px);
+    letter-spacing: -0.03em;
+    color: $color-ink;
+    margin-top: 3px;
+
+    @include respond($bp-sm) {
+      margin-top: 6px;
+      font-size: 18px;
+    }
+
+    @include respond($bp-md) {
+      margin-top: 10px;
+      font-size: clamp(1.35rem, 1.8vw + 0.5rem, 1.6rem);
+    }
+
+    @include respond($bp-lg) {
+      font-size: 24px;
+      margin-top: 12px;
+    }
+  }
+
+  .card-caption {
+    font-size: clamp(7.5px, 1.8vw, 9.5px);
+    color: #78787c;
+    margin-top: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.15;
+
+    @include respond($bp-sm) {
+      margin-top: 2px;
+    }
+
+    @include respond($bp-md) {
+      font-size: var(--fs-xs);
+      margin-top: 3px;
+    }
+
+    @include respond($bp-lg) {
+      font-size: 10.5px;
+      margin-top: 3px;
+    }
+  }
+
+  .card-spark-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 16px;
+    margin-top: 3px;
+
+    @include respond($bp-sm) {
+      gap: 3px;
+      height: 22px;
+      margin-top: 6px;
+    }
+
+    @include respond($bp-md) {
+      gap: 4px;
+      height: 32px;
+      margin-top: 12px;
+    }
+
+    .spark-bar {
+      flex: 1;
+      border-radius: 1px;
+      background: $tint-green;
+
+      @include respond($bp-lg) {
+        border-radius: 2px;
+      }
+    }
+  }
+}
+
+/* ──────────────────────────────────────────────
+   Keyframe Animations
+   ────────────────────────────────────────────── */
+@keyframes im-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.25;
+    transform: scale(0.85);
+  }
+}
+
+@keyframes im-wave-a {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes im-wave-b {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes im-glow-tr {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-7vw, 6vh, 0) scale(1.16);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes im-glow-bl {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1.06);
+  }
+  50% {
+    transform: translate3d(8vw, -5vh, 0) scale(0.9);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1.06);
+  }
+}
+
+@keyframes im-float-a {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -16px, 0);
+  }
+}
+
+@keyframes im-float-b {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, 14px, 0);
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .banner {
+    height: auto !important;
+
+    .banner-sticky-frame {
+      position: static !important;
+      height: auto !important;
+    }
+
+    .banner-deck {
+      position: static !important;
+      transform: none !important;
+    }
+
+    .banner-content {
+      transform: none !important;
+      opacity: 1 !important;
+      filter: none !important;
+    }
+
+    .banner-glow-tr,
+    .banner-glow-bl,
+    .wave-track-a,
+    .wave-track-b,
+    .eyebrow-dot,
+    .card-appointgem,
+    .card-truckguru,
+    .card-welzokart {
+      animation: none !important;
+    }
+  }
+}

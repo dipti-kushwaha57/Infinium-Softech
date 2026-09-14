@@ -1,0 +1,334 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+
+.contact-faq-section {
+  position: relative;
+  background-color: $color-bg;
+  @include section-padding;
+  padding-top: 0;
+  padding-bottom: clamp(70px, 9vw, 130px);
+}
+
+.contact-faq-container {
+  @include container;
+  border-top: 1px solid rgba(12, 12, 13, 0.14);
+  padding-top: clamp(48px, 6vw, 72px);
+}
+
+// ── Section Header ──
+.contact-faq-header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  @include respond($bp-lg) {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 36px;
+  }
+}
+
+.contact-faq-eyebrow {
+  font-size: 10.5px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: $color-muted;
+  font-weight: 600;
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    font-size: 12px;
+  }
+}
+
+.contact-faq-headline {
+  font-family: $font-display;
+  font-weight: 800;
+  font-stretch: 110%;
+  font-size: clamp(28px, 3.2vw, 54px);
+  line-height: 0.94;
+  letter-spacing: -0.045em;
+  color: $color-ink;
+  margin: 18px 0 0;
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    font-size: 42px;
+    line-height: 1.02;
+  }
+}
+
+.contact-faq-intro {
+  font-size: 16.5px;
+  line-height: 1.6;
+  color: $color-body;
+  margin: 0;
+  max-width: 480px;
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    font-size: 18px;
+    line-height: 1.55;
+    max-width: 650px;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+}
+
+// ==========================================================
+// DESKTOP VIEW: 3x2 Grid (>= 1024px)
+// ==========================================================
+.contact-faq-grid {
+  display: none;
+
+  @include respond($bp-lg) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border: 1px solid rgba(12, 12, 13, 0.16);
+    background: transparent;
+    margin-top: 48px;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .faq-card {
+    background: $color-bg;
+    padding: 34px 28px 32px;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgba(12, 12, 13, 0.14);
+    border-bottom: 1px solid rgba(12, 12, 13, 0.14);
+    transition: background-color 0.2s ease;
+
+    &:nth-child(3n) {
+      border-right: none;
+    }
+
+    &:nth-last-child(-n + 3) {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background: rgba(12, 12, 13, 0.02);
+    }
+
+    .faq-question {
+      font-family: $font-display;
+      font-weight: 700;
+      font-stretch: 106%;
+      font-size: 18.5px;
+      letter-spacing: -0.025em;
+      color: $color-ink;
+      margin: 0;
+      line-height: 1.25;
+    }
+
+    .faq-answer {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #5f5f64;
+      margin: 12px 0 0;
+    }
+  }
+}
+
+// ==========================================================
+// MOBILE & TABLET VIEW: Interactive Carousel (< 1024px)
+// ==========================================================
+.contact-faq-slider-area {
+  display: block;
+  margin-top: 36px;
+  width: 100%;
+
+  @include respond($bp-lg) {
+    display: none;
+  }
+}
+
+.contact-faq-slider-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 46px;
+  box-sizing: border-box;
+
+  @media (max-width: 480px) {
+    padding: 0 40px;
+  }
+
+  .slider-arrow-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(12, 12, 13, 0.18);
+    background: rgba(255, 255, 255, 0.95);
+    color: $color-ink;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 4px 14px rgba(12, 12, 13, 0.1);
+    transition: background-color 0.2s ease, border-color 0.2s ease,
+      color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      background: $color-ink;
+      color: #ffffff;
+      border-color: $color-ink;
+      transform: translateY(-50%) scale(1.06);
+      box-shadow: 0 6px 18px rgba(12, 12, 13, 0.18);
+    }
+
+    &:active {
+      transform: translateY(-50%) scale(0.95);
+    }
+
+    &.prev-btn {
+      left: 0;
+    }
+
+    &.next-btn {
+      right: 0;
+    }
+
+    @media (max-width: 480px) {
+      width: 36px;
+      height: 36px;
+    }
+  }
+
+  .faq-slider-card {
+    width: 100%;
+    min-height: 200px;
+    background: #ffffff;
+    border: 1px solid rgba(12, 12, 13, 0.14);
+    border-radius: 12px;
+    padding: 28px 24px 26px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 18px rgba(12, 12, 13, 0.04);
+    box-sizing: border-box;
+
+    @media (min-width: 768px) and (max-width: 1023px) {
+      padding: 34px 32px 30px;
+      border-radius: 14px;
+    }
+
+    &.slide-next {
+      animation: faqSlideInNext 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    &.slide-prev {
+      animation: faqSlideInPrev 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .card-top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .card-counter {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: $color-muted;
+      text-transform: uppercase;
+    }
+
+    .card-title {
+      font-family: $font-display;
+      font-weight: 700;
+      font-stretch: 106%;
+      font-size: 18.5px;
+      letter-spacing: -0.025em;
+      color: $color-ink;
+      margin: 0;
+      line-height: 1.25;
+
+      @media (min-width: 768px) and (max-width: 1023px) {
+        font-size: 21px;
+      }
+    }
+
+    .card-desc {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #5f5f64;
+      margin: 12px 0 0;
+
+      @media (min-width: 768px) and (max-width: 1023px) {
+        font-size: 15px;
+      }
+    }
+  }
+}
+
+@keyframes faqSlideInNext {
+  from {
+    opacity: 0;
+    transform: translate3d(24px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes faqSlideInPrev {
+  from {
+    opacity: 0;
+    transform: translate3d(-24px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.slider-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 22px;
+
+  .pagination-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 100px;
+    border: none;
+    background: rgba(12, 12, 13, 0.16);
+    cursor: pointer;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 0.25s ease;
+
+    .dot-fill {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      background-color: transparent;
+    }
+
+    &.is-active {
+      width: 26px;
+      background: $color-ink;
+    }
+
+    &:hover:not(.is-active) {
+      background: rgba(12, 12, 13, 0.32);
+    }
+  }
+}

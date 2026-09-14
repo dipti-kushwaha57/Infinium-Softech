@@ -1,4 +1,5 @@
 export interface EcosystemProduct {
+  id: string;
   n: string;
   name: string;
   mark: string;
@@ -17,6 +18,7 @@ export interface EcosystemProduct {
 
 export const ECOSYSTEM_PRODUCTS: EcosystemProduct[] = [
   {
+    id: "appointgem",
     n: "01",
     name: "AppointGem",
     mark: "AG",
@@ -33,6 +35,7 @@ export const ECOSYSTEM_PRODUCTS: EcosystemProduct[] = [
     shot: "/shots/welzokart.jpg",
   },
   {
+    id: "welzokart",
     n: "02",
     name: "WelzoKart",
     mark: "WK",
@@ -49,6 +52,7 @@ export const ECOSYSTEM_PRODUCTS: EcosystemProduct[] = [
     shot: "/shots/welzokart.jpg",
   },
   {
+    id: "mapmypay",
     n: "03",
     name: "MapMyPay",
     mark: "MP",
@@ -65,6 +69,7 @@ export const ECOSYSTEM_PRODUCTS: EcosystemProduct[] = [
     shot: "/shots/mapmypay.jpg",
   },
   {
+    id: "truck-guru",
     n: "04",
     name: "Truck Guru",
     mark: "TG",
@@ -81,6 +86,7 @@ export const ECOSYSTEM_PRODUCTS: EcosystemProduct[] = [
     shot: "/shots/truckguru.jpg",
   },
   {
+    id: "mindful-menu",
     n: "05",
     name: "MindFul Menu",
     mark: "MM",
@@ -97,6 +103,7 @@ export const ECOSYSTEM_PRODUCTS: EcosystemProduct[] = [
     shot: "/shots/welzokart.jpg",
   },
   {
+    id: "trekvano",
     n: "06",
     name: "Trekvano",
     mark: "TV",
@@ -113,6 +120,7 @@ export const ECOSYSTEM_PRODUCTS: EcosystemProduct[] = [
     shot: "/shots/trekvano.jpg",
   },
   {
+    id: "needly",
     n: "07",
     name: "Needly",
     mark: "ND",
@@ -129,6 +137,7 @@ export const ECOSYSTEM_PRODUCTS: EcosystemProduct[] = [
     shot: "/shots/welzokart.jpg",
   },
   {
+    id: "locale-e-clean",
     n: "08",
     name: "Locale E Clean",
     mark: "LE",
@@ -145,6 +154,7 @@ export const ECOSYSTEM_PRODUCTS: EcosystemProduct[] = [
     shot: "/shots/localeeclean.jpg",
   },
   {
+    id: "textgem",
     n: "09",
     name: "TextGem",
     mark: "TX",

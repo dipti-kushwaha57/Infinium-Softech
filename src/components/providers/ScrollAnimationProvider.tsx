@@ -43,20 +43,59 @@ export function ScrollAnimationProvider({ children }: { children: React.ReactNod
 
     lenisRef.current = lenis;
 
-    // 2. Synchronize Lenis scroll with GSAP ScrollTrigger
+    // 2. Global Staggered Viewport Reveal Engine (matching Figma Standalone syncReveals)
+    document.documentElement.classList.add("reveals-ready");
+
+    const syncReveals = () => {
+      const vh = window.innerHeight || 1;
+      const revealNodes = document.querySelectorAll<HTMLElement>("[data-reveal]");
+      
+      revealNodes.forEach((node, idx) => {
+        if (node.getAttribute("data-revealed") === "1") return;
+        const rect = node.getBoundingClientRect();
+        
+        if (node.getAttribute("data-rev-init") !== "1") {
+          node.setAttribute("data-rev-init", "1");
+          const stagger = ((idx % 6) * 0.05).toFixed(2);
+          node.style.transition = `opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${stagger}s, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) ${stagger}s`;
+          
+          if (rect.top > vh * 0.92) {
+            node.style.opacity = "0";
+            node.style.transform = "translateY(26px)";
+            return;
+          }
+        }
+        
+        if (rect.top < vh * 0.92) {
+          node.setAttribute("data-revealed", "1");
+          node.style.opacity = "1";
+          node.style.transform = "none";
+        }
+      });
+    };
+
+    // Initial check & safety checks
+    syncReveals();
+    const safetyTimer1 = setTimeout(syncReveals, 300);
+    const safetyTimer2 = setTimeout(syncReveals, 900);
+
+    // 3. Synchronize Lenis scroll with GSAP ScrollTrigger & Reveal engine
     const handleScroll = () => {
       ScrollTrigger.update();
+      syncReveals();
     };
     lenis.on("scroll", handleScroll);
+    window.addEventListener("scroll", syncReveals, { passive: true });
+    window.addEventListener("resize", syncReveals, { passive: true });
 
-    // 3. Connect GSAP ticker with Lenis rAF loop
+    // 4. Connect GSAP ticker with Lenis rAF loop
     const tickerCallback = (time: number) => {
       lenis.raf(time * 1000);
     };
     gsap.ticker.add(tickerCallback);
     gsap.ticker.lagSmoothing(0);
 
-    // 4. Smooth scroll on anchor link clicks
+    // 5. Smooth scroll on anchor link clicks
     const handleAnchorClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null;
       const anchor = target?.closest("a");
@@ -78,7 +117,11 @@ export function ScrollAnimationProvider({ children }: { children: React.ReactNod
     document.addEventListener("click", handleAnchorClick);
 
     return () => {
+      clearTimeout(safetyTimer1);
+      clearTimeout(safetyTimer2);
       document.removeEventListener("click", handleAnchorClick);
+      window.removeEventListener("scroll", syncReveals);
+      window.removeEventListener("resize", syncReveals);
       gsap.ticker.remove(tickerCallback);
       lenis.off("scroll", handleScroll);
       lenis.destroy();

@@ -27,6 +27,12 @@
       "description": "Learn about Infinium Softech's mission, team, and approach to building software that lasts.",
       "changeFrequency": "monthly",
       "priority": 0.7
+    },
+    "/contact": {
+      "title": "Contact Us",
+      "description": "Tell us what you run. We'll show you the fit across our ecosystem of products and software platforms.",
+      "changeFrequency": "monthly",
+      "priority": 0.8
     }
   }
 }

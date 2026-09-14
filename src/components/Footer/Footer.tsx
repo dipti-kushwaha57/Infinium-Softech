@@ -37,7 +37,7 @@ export function Footer() {
   return (
     <footer className="site-footer">
       <div className="top">
-        <div className="brand">
+        <div data-reveal="" className="brand">
           <Image src="/brand/logo-light.png" alt="Infinium Softech" width={154} height={35} />
           <p>
             Nine proprietary products. One unified platform. Built for operators across logistics,
@@ -49,6 +49,7 @@ export function Footer() {
           const isOpen = openColumn === col.title;
           return (
             <div
+              data-reveal=""
               key={col.title}
               className={`column ${isOpen ? "is-open" : ""}`}
             >
@@ -80,7 +81,7 @@ export function Footer() {
               <ul className="column-list">
                 {col.items.map((item) => (
                   <li key={item}>
-                    <Link href="#demo">{item}</Link>
+                    <Link href={item === "About Us" ? "/about" : "#demo"}>{item}</Link>
                   </li>
                 ))}
               </ul>
@@ -89,7 +90,7 @@ export function Footer() {
         })}
       </div>
 
-      <div className="bottom">
+      <div data-reveal="" className="bottom">
         <div>© {year} Infinium Softech. All rights reserved.</div>
         <div className="legal">
           {LEGAL_LINKS.map((label) => (

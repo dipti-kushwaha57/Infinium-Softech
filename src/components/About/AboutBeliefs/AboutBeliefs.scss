@@ -1,0 +1,266 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+
+.about-beliefs-section {
+  position: relative;
+  background: $color-bg;
+  @include section-padding;
+  padding-top: 0;
+}
+
+.about-beliefs-container {
+  @include container;
+}
+
+.about-beliefs-eyebrow {
+  font-size: 10.5px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: $color-muted;
+  font-weight: 600;
+}
+
+.about-beliefs-wrap {
+  position: relative;
+  width: 100%;
+  margin-top: 24px;
+
+  @include respond($bp-sm) {
+    margin-top: 28px;
+  }
+
+  @include respond($bp-lg) {
+    margin-top: 36px;
+  }
+}
+
+.about-beliefs-track {
+  position: relative;
+  width: 100%;
+
+  .carousel-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid rgba(12, 12, 13, 0.16);
+    background: rgba(255, 255, 255, 0.96);
+    color: $color-ink;
+    padding: 0;
+    cursor: pointer;
+    z-index: 10;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 14px rgba(12, 12, 13, 0.12);
+    transition: background-color 0.2s ease, border-color 0.2s ease,
+      color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+
+    @include respond($bp-sm) {
+      width: 42px;
+      height: 42px;
+    }
+
+    &:hover {
+      background: $color-ink;
+      color: #ffffff;
+      border-color: $color-ink;
+      transform: translateY(-50%) scale(1.08);
+      box-shadow: 0 6px 18px rgba(12, 12, 13, 0.2);
+    }
+
+    &:active {
+      transform: translateY(-50%) scale(0.94);
+    }
+
+    &--left {
+      left: 6px;
+
+      @include respond($bp-sm) {
+        left: 8px;
+      }
+    }
+
+    &--right {
+      right: 6px;
+
+      @include respond($bp-sm) {
+        right: 8px;
+      }
+    }
+
+    @include respond($bp-lg) {
+      display: none;
+    }
+  }
+}
+
+.carousel-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  margin-top: 18px;
+
+  @include respond($bp-lg) {
+    display: none;
+  }
+
+  .carousel-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 100px;
+    border: none;
+    background: rgba(12, 12, 13, 0.16);
+    cursor: pointer;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 0.25s ease;
+
+    .dot-fill {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+      background-color: transparent;
+    }
+
+    &.is-active {
+      width: 24px;
+      background: $color-ink;
+    }
+
+    &:hover:not(.is-active) {
+      background: rgba(12, 12, 13, 0.32);
+    }
+  }
+}
+
+.about-beliefs-grid {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  gap: 12px;
+  padding: 4px 9% 8px;
+  scroll-padding-inline: 9%;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media (max-width: 480px) {
+    padding-inline: 6%;
+    scroll-padding-inline: 6%;
+    gap: 10px;
+  }
+
+  @include respond($bp-sm) {
+    gap: 14px;
+    padding: 4px 12% 8px;
+    scroll-padding-inline: 12%;
+  }
+
+  @include respond($bp-lg) {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    background: transparent;
+    border: 1px solid rgba(12, 12, 13, 0.16);
+    overflow: hidden;
+    padding: 0;
+    scroll-snap-type: none;
+  }
+}
+
+.belief-card {
+  flex: 0 0 82%;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  background: #ffffff;
+  border: 1px solid rgba(12, 12, 13, 0.14);
+  border-radius: 12px;
+  padding: 24px 28px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: background-color 0.25s ease, transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+  @media (max-width: 480px) {
+    flex: 0 0 88%;
+    padding: 20px 22px 18px;
+  }
+
+  @include respond($bp-sm) {
+    flex: 0 0 76%;
+    padding: 24px 30px 22px;
+  }
+
+  &--clone {
+    @include respond($bp-lg) {
+      display: none !important;
+    }
+  }
+
+  @include respond($bp-lg) {
+    flex: initial;
+    scroll-snap-align: none;
+    background: transparent;
+    border: none;
+    border-right: 1px solid rgba(12, 12, 13, 0.16);
+    border-radius: 0;
+    padding: 38px 32px 34px;
+
+    &.belief-card--last {
+      border-right: none;
+    }
+  }
+
+  &:hover {
+    @include respond($bp-lg) {
+      background: rgba(12, 12, 13, 0.02);
+    }
+
+    @media (max-width: 1023px) {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(12, 12, 13, 0.05);
+    }
+  }
+
+  .belief-indicator {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+
+  .belief-title {
+    font-family: $font-display;
+    font-weight: 700;
+    font-stretch: 106%;
+    font-size: 20px;
+    letter-spacing: -0.025em;
+    color: $color-ink;
+    margin: 4px 0 0;
+  }
+
+  .belief-desc {
+    font-size: 14px;
+    line-height: 1.55;
+    color: $color-body;
+    margin: 0;
+
+    @media (max-width: 768px) {
+      font-size: 13px;
+      line-height: 1.5;
+    }
+  }
+}

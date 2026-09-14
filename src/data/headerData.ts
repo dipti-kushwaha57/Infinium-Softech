@@ -1,4 +1,5 @@
 export type ProductItem = {
+  id: string;
   n: string;
   name: string;
   mark: string;
@@ -14,6 +15,7 @@ export type GenericMenuItem = {
   desc: string;
   tint: string;
   product: string;
+  href?: string;
 };
 
 export type MenuDef = {
@@ -27,6 +29,7 @@ export type MenuDef = {
 
 export const ECOSYSTEM_PRODUCTS: ProductItem[] = [
   {
+    id: "appointgem",
     n: "01",
     name: "AppointGem",
     mark: "AG",
@@ -37,6 +40,7 @@ export const ECOSYSTEM_PRODUCTS: ProductItem[] = [
     wash: "rgba(31, 49, 232, 0.16)",
   },
   {
+    id: "welzokart",
     n: "02",
     name: "WelzoKart",
     mark: "WK",
@@ -47,6 +51,7 @@ export const ECOSYSTEM_PRODUCTS: ProductItem[] = [
     wash: "rgba(30, 158, 90, 0.16)",
   },
   {
+    id: "mapmypay",
     n: "03",
     name: "MapMyPay",
     mark: "MP",
@@ -57,6 +62,7 @@ export const ECOSYSTEM_PRODUCTS: ProductItem[] = [
     wash: "rgba(139, 63, 232, 0.16)",
   },
   {
+    id: "truck-guru",
     n: "04",
     name: "Truck Guru",
     mark: "TG",
@@ -67,6 +73,7 @@ export const ECOSYSTEM_PRODUCTS: ProductItem[] = [
     wash: "rgba(232, 162, 31, 0.16)",
   },
   {
+    id: "mindful-menu",
     n: "05",
     name: "MindFul Menu",
     mark: "MM",
@@ -77,6 +84,7 @@ export const ECOSYSTEM_PRODUCTS: ProductItem[] = [
     wash: "rgba(15, 143, 135, 0.16)",
   },
   {
+    id: "trekvano",
     n: "06",
     name: "Trekvano",
     mark: "TV",
@@ -87,6 +95,7 @@ export const ECOSYSTEM_PRODUCTS: ProductItem[] = [
     wash: "rgba(42, 168, 196, 0.16)",
   },
   {
+    id: "needly",
     n: "07",
     name: "Needly",
     mark: "ND",
@@ -97,6 +106,7 @@ export const ECOSYSTEM_PRODUCTS: ProductItem[] = [
     wash: "rgba(224, 69, 47, 0.16)",
   },
   {
+    id: "locale-e-clean",
     n: "08",
     name: "Locale E Clean",
     mark: "LE",
@@ -107,6 +117,7 @@ export const ECOSYSTEM_PRODUCTS: ProductItem[] = [
     wash: "rgba(67, 56, 202, 0.16)",
   },
   {
+    id: "textgem",
     n: "09",
     name: "TextGem",
     mark: "TX",
@@ -171,10 +182,10 @@ export const MENU_DEFS: Record<string, MenuDef> = {
     label: "Company",
     eyebrow: "The team behind the ecosystem",
     items: [
-      { name: "About Us", desc: "Why we build products, not projects", tint: "#1F31E8", product: "AppointGem" },
+      { name: "About Us", desc: "Why we build products, not projects", tint: "#1F31E8", product: "AppointGem", href: "/about" },
       { name: "Careers", desc: "Engineering, design and delivery roles", tint: "#1E9E5A", product: "WelzoKart" },
       { name: "Partners", desc: "Resellers and implementation partners", tint: "#E8A21F", product: "Truck Guru" },
-      { name: "Contact Us", desc: "Talk to sales or support", tint: "#8B3FE8", product: "MapMyPay" },
+      { name: "Contact Us", desc: "Talk to sales or support", tint: "#8B3FE8", product: "MapMyPay", href: "/contact" },
     ],
   },
   demo: {

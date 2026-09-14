@@ -1,0 +1,124 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+
+.about-operators-section {
+  position: relative;
+  background: $color-bg;
+  @include section-padding;
+  overflow: hidden;
+}
+
+.about-operators-container {
+  @include container;
+
+  .about-operators-eyebrow {
+    font-size: 10.5px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: $color-muted;
+    font-weight: 600;
+
+    @media (min-width: 768px) and (max-width: 1023px) {
+      font-size: 12px;
+    }
+  }
+
+  .about-operators-headline {
+    font-family: $font-display;
+    font-weight: 800;
+    font-stretch: 110%;
+    font-size: clamp(28px, 3.6vw, 64px);
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+    margin-top: 18px;
+    max-width: 20ch;
+    color: $color-ink;
+
+    @media (min-width: 768px) and (max-width: 1023px) {
+      font-size: 42px;
+      line-height: 1.02;
+      max-width: 100%;
+    }
+  }
+
+  .about-operators-desc {
+    font-size: 16.5px;
+    line-height: 1.6;
+    color: $color-body;
+    margin-top: 18px;
+    max-width: 600px;
+
+    @media (min-width: 768px) and (max-width: 1023px) {
+      font-size: 18px;
+      line-height: 1.55;
+      max-width: 650px;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 14px;
+      line-height: 1.5;
+      margin-top: 14px;
+    }
+  }
+}
+
+.about-operators-marquee-track {
+  margin-top: 32px;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+
+  @include respond($bp-md) {
+    margin-top: 48px;
+  }
+
+  @media (min-width: 1200px) {
+    margin-top: 56px;
+  }
+}
+
+.about-operators-marquee {
+  display: flex;
+  width: max-content;
+  gap: 12px;
+  animation: im-marquee 32s linear infinite;
+
+  &:hover {
+    animation-play-state: paused;
+  }
+}
+
+.industry-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid rgba(12, 12, 13, 0.12);
+  border-radius: 100px;
+  padding: 10px 20px 10px 12px;
+  white-space: nowrap;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(12, 12, 13, 0.03);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(12, 12, 13, 0.08);
+    border-color: rgba(12, 12, 13, 0.2);
+  }
+
+  .industry-dot {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .industry-name {
+    font-family: $font-display;
+    font-weight: 700;
+    font-stretch: 105%;
+    font-size: 15px;
+    letter-spacing: -0.015em;
+    color: $color-ink;
+  }
+}

@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import {
   CONTACT_SIZES,
   CONTACT_PRODUCTS,
   CONTACT_DESKS,
   CONTACT_STEPS,
+  ContactDesk,
 } from "@/data/contactData";
 import "./ContactForm.scss";
 
@@ -18,7 +19,108 @@ export function ContactForm() {
   const [message, setMessage] = useState("");
   const [isSent, setIsSent] = useState(false);
 
-  // Reach the right desk carousel state for small screens (< 768px)
+  // Big screen (>= 768px): 2-grid mouse scrollable & draggable carousel (no arrows, no dots)
+  const desktopScrollRef = useRef<HTMLDivElement>(null);
+  const [isDesktopDeskPaused, setIsDesktopDeskPaused] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const isMouseDownRef = useRef(false);
+  const startXRef = useRef(0);
+  const startScrollLeftRef = useRef(0);
+
+  // Auto-play timer for big screen carousel (4.5s)
+  useEffect(() => {
+    if (isDesktopDeskPaused || isDragging) return;
+    const timer = setInterval(() => {
+      const el = desktopScrollRef.current;
+      if (!el) return;
+      const maxScroll = el.scrollWidth - el.clientWidth;
+      if (maxScroll <= 5) return;
+      if (el.scrollLeft >= maxScroll - 10) {
+        el.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        el.scrollTo({ left: el.scrollLeft + el.clientWidth, behavior: "smooth" });
+      }
+    }, 4500);
+    return () => clearInterval(timer);
+  }, [isDesktopDeskPaused, isDragging]);
+
+  // Mouse wheel scroll handler
+  const wheelTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const handleDesktopWheel = (e: React.WheelEvent<HTMLDivElement>) => {
+    const el = desktopScrollRef.current;
+    if (!el) return;
+    setIsDesktopDeskPaused(true);
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+      el.scrollLeft += e.deltaY;
+    } else {
+      el.scrollLeft += e.deltaX;
+    }
+
+    if (wheelTimeoutRef.current) clearTimeout(wheelTimeoutRef.current);
+    wheelTimeoutRef.current = setTimeout(() => {
+      setIsDesktopDeskPaused(false);
+    }, 2500);
+  };
+
+  // Mouse drag handlers
+  const handleDesktopMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = desktopScrollRef.current;
+    if (!el) return;
+    isMouseDownRef.current = true;
+    startXRef.current = e.pageX - el.offsetLeft;
+    startScrollLeftRef.current = el.scrollLeft;
+    setIsDesktopDeskPaused(true);
+  };
+
+  const handleDesktopMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!isMouseDownRef.current) return;
+    const el = desktopScrollRef.current;
+    if (!el) return;
+    e.preventDefault();
+    setIsDragging(true);
+    const x = e.pageX - el.offsetLeft;
+    const walk = (x - startXRef.current) * 1.3;
+    el.scrollLeft = startScrollLeftRef.current - walk;
+  };
+
+  const handleDesktopMouseUp = () => {
+    isMouseDownRef.current = false;
+    setIsDragging(false);
+  };
+
+  const handleDesktopMouseLeave = () => {
+    isMouseDownRef.current = false;
+    setIsDragging(false);
+    setIsDesktopDeskPaused(false);
+  };
+
+  // Touch handlers for big screen touch devices
+  const desktopTouchStartXRef = useRef<number | null>(null);
+  const desktopTouchStartScrollLeftRef = useRef<number>(0);
+
+  const handleDesktopTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    const el = desktopScrollRef.current;
+    if (!el) return;
+    setIsDesktopDeskPaused(true);
+    desktopTouchStartXRef.current = e.touches[0].clientX;
+    desktopTouchStartScrollLeftRef.current = el.scrollLeft;
+  };
+
+  const handleDesktopTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (desktopTouchStartXRef.current === null) return;
+    const el = desktopScrollRef.current;
+    if (!el) return;
+    const diff = e.touches[0].clientX - desktopTouchStartXRef.current;
+    el.scrollLeft = desktopTouchStartScrollLeftRef.current - diff;
+  };
+
+  const handleDesktopTouchEnd = () => {
+    desktopTouchStartXRef.current = null;
+    setIsDesktopDeskPaused(false);
+  };
+
+  // Small screen (< 768px) carousel state
   const [deskActiveIndex, setDeskActiveIndex] = useState(0);
   const [deskDirection, setDeskDirection] = useState<"next" | "prev">("next");
   const totalDesks = CONTACT_DESKS.length;
@@ -78,6 +180,80 @@ export function ContactForm() {
     setSize("1–10");
     setProduct("Not sure yet");
     setMessage("");
+  };
+
+  const productChipsRef = useRef<HTMLDivElement>(null);
+  const [isChipsDragging, setIsChipsDragging] = useState(false);
+  const chipsMouseDownRef = useRef(false);
+  const chipsStartXRef = useRef(0);
+  const chipsStartScrollLeftRef = useRef(0);
+
+  const handleChipsWheel = (e: React.WheelEvent<HTMLDivElement>) => {
+    const el = productChipsRef.current;
+    if (!el) return;
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+      el.scrollLeft += e.deltaY;
+    } else {
+      el.scrollLeft += e.deltaX;
+    }
+  };
+
+  const handleChipsMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    const el = productChipsRef.current;
+    if (!el) return;
+    chipsMouseDownRef.current = true;
+    chipsStartXRef.current = e.pageX - el.offsetLeft;
+    chipsStartScrollLeftRef.current = el.scrollLeft;
+  };
+
+  const handleChipsMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!chipsMouseDownRef.current) return;
+    const el = productChipsRef.current;
+    if (!el) return;
+    e.preventDefault();
+    setIsChipsDragging(true);
+    const x = e.pageX - el.offsetLeft;
+    const walk = (x - chipsStartXRef.current) * 1.3;
+    el.scrollLeft = chipsStartScrollLeftRef.current - walk;
+  };
+
+  const handleChipsMouseUp = () => {
+    chipsMouseDownRef.current = false;
+    setTimeout(() => {
+      setIsChipsDragging(false);
+    }, 50);
+  };
+
+  const handleChipsMouseLeave = () => {
+    chipsMouseDownRef.current = false;
+    setIsChipsDragging(false);
+  };
+
+  const scrollChipsLeft = () => {
+    if (productChipsRef.current) {
+      productChipsRef.current.scrollBy({ left: -220, behavior: "smooth" });
+    }
+  };
+
+  const scrollChipsRight = () => {
+    if (productChipsRef.current) {
+      productChipsRef.current.scrollBy({ left: 220, behavior: "smooth" });
+    }
+  };
+
+  const handleProductSelect = (
+    prodName: string,
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    if (isChipsDragging) return;
+    setProduct(prodName);
+    if (e.currentTarget) {
+      e.currentTarget.scrollIntoView({
+        behavior: "smooth",
+        inline: "center",
+        block: "nearest",
+      });
+    }
   };
 
   const sentMessageNote =
@@ -152,10 +328,44 @@ export function ContactForm() {
                 </label>
               </div>
 
-              {/* Product Chips Selection */}
+              {/* Product Chips Selection (Horizontal scrollable track with mouse & touch support) */}
               <div className="form-products-group">
-                <span className="field-label">Which product are you looking at</span>
-                <div className="product-chips-wrap">
+                <div className="form-products-header">
+                  <span className="field-label">Which product are you looking at</span>
+                  <div className="chips-nav-controls">
+                    <button
+                      type="button"
+                      className="chips-scroll-btn"
+                      onClick={scrollChipsLeft}
+                      aria-label="Scroll products left"
+                    >
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                        <path d="M15 18l-6-6 6-6" />
+                      </svg>
+                    </button>
+                    <button
+                      type="button"
+                      className="chips-scroll-btn"
+                      onClick={scrollChipsRight}
+                      aria-label="Scroll products right"
+                    >
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                        <path d="M9 18l6-6-6-6" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <div
+                  ref={productChipsRef}
+                  className={`product-chips-wrap ${isChipsDragging ? "is-dragging" : ""}`}
+                  onWheel={handleChipsWheel}
+                  onMouseDown={handleChipsMouseDown}
+                  onMouseMove={handleChipsMouseMove}
+                  onMouseUp={handleChipsMouseUp}
+                  onMouseLeave={handleChipsMouseLeave}
+                  role="group"
+                  aria-label="Select product"
+                >
                   {CONTACT_PRODUCTS.map((prodName, idx) => {
                     const isSelected = product === prodName;
                     return (
@@ -163,7 +373,8 @@ export function ContactForm() {
                         key={idx}
                         type="button"
                         className={`chip-btn ${isSelected ? "is-selected" : ""}`}
-                        onClick={() => setProduct(prodName)}
+                        onClick={(e) => handleProductSelect(prodName, e)}
+                        aria-pressed={isSelected}
                       >
                         {prodName}
                       </button>
@@ -217,8 +428,21 @@ export function ContactForm() {
           <div data-reveal="" className="desks-card">
             <div className="desks-eyebrow">Reach the right desk</div>
 
-            {/* Desktop / Tablet Grid (>= 768px) */}
-            <div className="desks-grid" aria-label="Desks grid">
+            {/* Big Screen: 2-Grid Carousel (>= 768px, no arrows, no dots, mouse scroll & drag) */}
+            <div
+              ref={desktopScrollRef}
+              className={`desks-desktop-track ${isDragging ? "is-dragging" : ""}`}
+              onMouseEnter={() => setIsDesktopDeskPaused(true)}
+              onMouseLeave={handleDesktopMouseLeave}
+              onWheel={handleDesktopWheel}
+              onMouseDown={handleDesktopMouseDown}
+              onMouseMove={handleDesktopMouseMove}
+              onMouseUp={handleDesktopMouseUp}
+              onTouchStart={handleDesktopTouchStart}
+              onTouchMove={handleDesktopTouchMove}
+              onTouchEnd={handleDesktopTouchEnd}
+              aria-label="Reach the right desk carousel"
+            >
               {CONTACT_DESKS.map((desk, idx) => (
                 <div key={idx} className="desk-item">
                   <div

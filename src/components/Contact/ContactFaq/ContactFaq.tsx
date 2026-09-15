@@ -62,9 +62,15 @@ export function ContactFaq() {
     setIsPaused(false);
   };
 
+  const prevIndex = (activeIndex - 1 + totalCards) % totalCards;
+  const nextIndex = (activeIndex + 1) % totalCards;
+  const prevFaq = CONTACT_FAQS[prevIndex];
   const currentFaq = CONTACT_FAQS[activeIndex];
+  const nextFaq = CONTACT_FAQS[nextIndex];
   const formattedIndex = String(activeIndex + 1).padStart(2, "0");
   const formattedTotal = String(totalCards).padStart(2, "0");
+  const formattedPrevIndex = String(prevIndex + 1).padStart(2, "0");
+  const formattedNextIndex = String(nextIndex + 1).padStart(2, "0");
 
   return (
     <section className="contact-faq-section content-padding" aria-label="Before You Write FAQs">
@@ -85,17 +91,7 @@ export function ContactFaq() {
           </p>
         </div>
 
-        {/* DESKTOP VIEW: 3x2 FAQ Grid (Desktop >= 1024px) */}
-        <div className="contact-faq-grid" aria-label="Questions and answers grid">
-          {CONTACT_FAQS.map((faq, idx) => (
-            <div data-reveal="" key={idx} className="faq-card">
-              <h3 className="faq-question">{faq.q}</h3>
-              <p className="faq-answer">{faq.a}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* MOBILE & TABLET VIEW: Interactive Centered Slider with Middle Arrows (< 1024px) */}
+        {/* 3-Card Stage Carousel: Left Half Prev | Center Main | Right Half Next */}
         <div className="contact-faq-slider-area" aria-label="FAQ carousel slider">
           <div
             className="contact-faq-slider-wrapper"
@@ -105,7 +101,7 @@ export function ContactFaq() {
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
           >
-            {/* Left Arrow Button (Vertically centered) */}
+            {/* Left Arrow Button */}
             <button
               type="button"
               className="slider-arrow-btn prev-btn"
@@ -126,22 +122,59 @@ export function ContactFaq() {
               </svg>
             </button>
 
-            {/* Active Card */}
-            <div
-              key={activeIndex}
-              className={`faq-slider-card slide-${slideDirection}`}
-            >
-              <div className="card-top-bar">
-                <span className="card-counter">
-                  {formattedIndex} / {formattedTotal}
-                </span>
+            {/* 3-Card Stage Track */}
+            <div className="faq-stage-track">
+              {/* Previous Card (Half visible on left) */}
+              <div
+                className="faq-stage-card faq-stage-card--prev"
+                onClick={goToPrev}
+                role="button"
+                tabIndex={0}
+                aria-label={`Previous question: ${prevFaq.q}`}
+              >
+                <div className="card-top-bar">
+                  <span className="card-counter">
+                    {formattedPrevIndex} / {formattedTotal}
+                  </span>
+                </div>
+                <h3 className="card-title">{prevFaq.q}</h3>
+                <p className="card-desc">{prevFaq.a}</p>
               </div>
 
-              <h3 className="card-title">{currentFaq.q}</h3>
-              <p className="card-desc">{currentFaq.a}</p>
+              {/* Main Card (Middle) */}
+              <div
+                key={activeIndex}
+                className={`faq-stage-card faq-stage-card--active slide-${slideDirection}`}
+              >
+                <div className="card-top-bar">
+                  <span className="card-counter">
+                    {formattedIndex} / {formattedTotal}
+                  </span>
+                  <span className="card-tag">FAQ</span>
+                </div>
+                <h3 className="card-title">{currentFaq.q}</h3>
+                <p className="card-desc">{currentFaq.a}</p>
+              </div>
+
+              {/* Next Card (Half visible on right) */}
+              <div
+                className="faq-stage-card faq-stage-card--next"
+                onClick={goToNext}
+                role="button"
+                tabIndex={0}
+                aria-label={`Next question: ${nextFaq.q}`}
+              >
+                <div className="card-top-bar">
+                  <span className="card-counter">
+                    {formattedNextIndex} / {formattedTotal}
+                  </span>
+                </div>
+                <h3 className="card-title">{nextFaq.q}</h3>
+                <p className="card-desc">{nextFaq.a}</p>
+              </div>
             </div>
 
-            {/* Right Arrow Button (Vertically centered) */}
+            {/* Right Arrow Button */}
             <button
               type="button"
               className="slider-arrow-btn next-btn"

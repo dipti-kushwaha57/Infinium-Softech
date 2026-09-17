@@ -1,16 +1,18 @@
 @use "../../../../../styles/variables" as *;
+@use "../../../../../styles/mixins" as *;
 
 .appointgem-hero-section {
   position: relative;
-  padding: 56px 40px 0;
+  padding-top: 48px;
+  padding-bottom: 0;
   overflow: hidden;
 
-  @media (max-width: 1240px) {
-    padding-inline: 32px;
+  @include respond($bp-sm) {
+    padding-top: 56px;
   }
 
-  @media (max-width: 1024px) {
-    padding-inline: 24px;
+  @include respond($bp-md) {
+    padding-top: 72px;
   }
 }
 
@@ -30,8 +32,8 @@
 
 .appointgem-hero-container {
   position: relative;
-  max-width: 1440px;
-  margin: 0 auto;
+  z-index: 1;
+  @include container;
 }
 
 .appointgem-hero-crumbs {
@@ -72,7 +74,7 @@
   border-radius: 14px;
   background: #1f31e8;
   color: #fff;
-  font-family: var(--font-archivo), sans-serif;
+  font-family: $font-display;
   font-size: 20px;
   font-weight: 800;
   letter-spacing: -0.02em;
@@ -81,7 +83,7 @@
 
 .appointgem-hero-identity strong {
   display: block;
-  font-family: var(--font-archivo), sans-serif;
+  font-family: $font-display;
   font-size: 22px;
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -119,13 +121,23 @@
 
 .appointgem-hero-title {
   margin: 0;
-  font-family: var(--font-archivo), sans-serif;
+  font-family: $font-display;
   font-weight: 800;
   font-stretch: 110%;
-  font-size: clamp(36px, 5.2vw, 84px);
+  font-size: clamp(38px, 5.8vw, 96px);
   line-height: 0.94;
   letter-spacing: -0.045em;
   color: #0c0c0d;
+
+  @media (max-width: 480px) {
+    font-size: 38px;
+    line-height: 0.92;
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    font-size: 44px;
+    line-height: 1.02;
+  }
 }
 
 .appointgem-hero-title .highlight {
@@ -135,10 +147,15 @@
 
 .appointgem-hero-copy {
   margin: 0 0 8px;
-  color: #55555a;
+  color: $color-body;
   font-size: 16.5px;
   line-height: 1.6;
   max-width: 540px;
+
+  @media (max-width: 768px) {
+    font-size: 14.5px;
+    line-height: 1.55;
+  }
 }
 
 .appointgem-hero-actions {
@@ -242,7 +259,7 @@
   border-radius: 36px;
   background: #0c0c0d;
   box-shadow: 0 30px 60px -15px rgba(12, 12, 13, 0.45);
-  margin-top: 110px;
+  // margin-top: 110px;
   align-self: flex-end;
 }
 

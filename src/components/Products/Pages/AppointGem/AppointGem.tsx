@@ -22,11 +22,11 @@ export function AppointGem({ product }: { product: ProductItem }) {
         <AppointGemInterface />
         <AppointGemChallenges />
         <AppointGemSolution />
-        {/* <AppointGemWorkflow /> */}
-        {/* <AppointGemResults /> */}
-        {/* <AppointGemStack /> */}
-        {/* <AppointGemEcosystem /> */}
-        {/* <AppointGemCta /> */}
+        <AppointGemWorkflow />
+        <AppointGemResults />
+        <AppointGemStack />
+        <AppointGemEcosystem />
+        <AppointGemCta />
       </main>
     </div>
   );

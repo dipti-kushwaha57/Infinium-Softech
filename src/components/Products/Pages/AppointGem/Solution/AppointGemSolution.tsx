@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useCallback, useEffect, useState } from "react";
 import "./AppointGemSolution.scss";
 
 const SOLUTIONS = [
@@ -6,7 +8,7 @@ const SOLUTIONS = [
     title: "Multi-location calendars",
     desc: "Availability derived from live staff rosters per branch, with room and equipment capacity respected.",
     tint: "#1F31E8",
-  },
+  }, 
   {
     title: "Staff-level availability",
     desc: "Each practitioner carries their own working hours, leave and service list; the public widget only ever shows what is real.",
@@ -35,6 +37,29 @@ const SOLUTIONS = [
 ];
 
 export function AppointGemSolution() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [slideDirection, setSlideDirection] = useState<"next" | "prev">("next");
+  const totalSolutions = SOLUTIONS.length;
+
+  const goToNext = useCallback(() => {
+    setSlideDirection("next");
+    setActiveIndex((index) => (index + 1) % totalSolutions);
+  }, [totalSolutions]);
+
+  const goToPrev = useCallback(() => {
+    setSlideDirection("prev");
+    setActiveIndex((index) => (index - 1 + totalSolutions) % totalSolutions);
+  }, [totalSolutions]);
+
+  useEffect(() => {
+    const timer = setInterval(goToNext, 4000);
+    return () => clearInterval(timer);
+  }, [goToNext]);
+
+  const currentSolution = SOLUTIONS[activeIndex];
+  const formattedIndex = String(activeIndex + 1).padStart(2, "0");
+  const formattedTotal = String(totalSolutions).padStart(2, "0");
+
   return (
     <section id="solution" className="appointgem-solution-section" aria-labelledby="solution-title">
       <div className="appointgem-solution-container">
@@ -58,6 +83,72 @@ export function AppointGemSolution() {
               <p className="solution-card-desc">{item.desc}</p>
             </div>
           ))}
+        </div>
+
+        <div className="solution-mobile-slider-area">
+          <div className="solution-slider-wrapper">
+            <button
+              type="button"
+              className="slider-arrow-btn prev-btn"
+              onClick={goToPrev}
+              aria-label="Previous solution"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            </button>
+
+            <div className="slider-card-stage">
+              <div className={`single-solution-card slide-${slideDirection}`}>
+                <div className="card-accent-strip" style={{ backgroundColor: currentSolution.tint }} />
+                <div className="card-header-row">
+                  <div className="card-badge-wrap">
+                    <span className="solution-icon" style={{ backgroundColor: currentSolution.tint }} />
+                    <span className="card-badge">Core capability</span>
+                  </div>
+                  <div className="card-counter">
+                    <span className="current-num">{formattedIndex}</span>
+                    <span className="divider">/</span>
+                    <span className="total-num">{formattedTotal}</span>
+                  </div>
+                </div>
+                <h3 className="single-solution-title">{currentSolution.title}</h3>
+                <p className="single-solution-desc">{currentSolution.desc}</p>
+                <div className="card-bottom-row">
+                  <span className="card-chip">Included in AppointGem</span>
+                  <span className="card-indicator-dot" style={{ backgroundColor: currentSolution.tint }} />
+                </div>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              className="slider-arrow-btn next-btn"
+              onClick={goToNext}
+              aria-label="Next solution"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </button>
+          </div>
+
+          <div className="slider-pagination" aria-label="Solution navigation">
+            {SOLUTIONS.map((item, index) => (
+              <button
+                key={item.title}
+                type="button"
+                className={`pagination-dot ${activeIndex === index ? "is-active" : ""}`}
+                onClick={() => {
+                  setSlideDirection(index > activeIndex ? "next" : "prev");
+                  setActiveIndex(index);
+                }}
+                aria-label={`Go to solution ${index + 1}: ${item.title}`}
+              >
+                <span className="dot-fill" style={{ backgroundColor: activeIndex === index ? item.tint : undefined }} />
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </section>

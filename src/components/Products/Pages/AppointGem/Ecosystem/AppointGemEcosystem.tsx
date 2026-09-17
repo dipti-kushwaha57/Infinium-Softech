@@ -1,8 +1,20 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
+import { useAboutCarousel } from "@/components/About/useAboutCarousel";
 import "./AppointGemEcosystem.scss";
 
-const RELATED_PRODUCTS = [
+interface EcosystemProduct {
+  name: string;
+  mark: string;
+  tag: string;
+  tint: string;
+  desc: string;
+  href: string;
+}
+
+const RELATED_PRODUCTS: EcosystemProduct[] = [
   {
     name: "MapMyPay",
     mark: "MP",
@@ -29,7 +41,39 @@ const RELATED_PRODUCTS = [
   },
 ];
 
+function EcosystemCardView({
+  prod,
+  isClone = false,
+}: {
+  prod: EcosystemProduct;
+  isClone?: boolean;
+}) {
+  return (
+    <Link
+      href={prod.href}
+      data-reveal={isClone ? undefined : ""}
+      className={`ecosystem-card ${isClone ? "ecosystem-card--clone" : ""}`}
+      data-carousel-item
+      aria-hidden={isClone ? "true" : undefined}
+    >
+      <div className="card-identity">
+        <span className="card-badge" style={{ backgroundColor: prod.tint }}>
+          {prod.mark}
+        </span>
+        <div>
+          <h3 className="card-name">{prod.name}</h3>
+          <span className="card-tag">{prod.tag}</span>
+        </div>
+      </div>
+      <p className="card-desc">{prod.desc}</p>
+    </Link>
+  );
+}
+
 export function AppointGemEcosystem() {
+  const { scrollRef, activeIndex, scrollToIndex, handleNext, handlePrev } =
+    useAboutCarousel(RELATED_PRODUCTS.length, 1024);
+
   return (
     <section className="appointgem-ecosystem-section" aria-labelledby="ecosystem-title">
       <div className="appointgem-ecosystem-container">
@@ -42,26 +86,80 @@ export function AppointGemEcosystem() {
           </Link>
         </div>
 
-        <div className="ecosystem-grid">
-          {RELATED_PRODUCTS.map((prod) => (
-            <Link
-              key={prod.name}
-              href={prod.href}
-              data-reveal=""
-              className="ecosystem-card"
+        <div className="ecosystem-wrap">
+          <div className="ecosystem-track">
+            <div className="ecosystem-grid" ref={scrollRef}>
+              {/* Clone of last card */}
+              <EcosystemCardView
+                prod={RELATED_PRODUCTS[RELATED_PRODUCTS.length - 1]}
+                isClone={true}
+              />
+
+              {/* Real products */}
+              {RELATED_PRODUCTS.map((prod) => (
+                <EcosystemCardView key={prod.name} prod={prod} />
+              ))}
+
+              {/* Clone of first card */}
+              <EcosystemCardView prod={RELATED_PRODUCTS[0]} isClone={true} />
+            </div>
+
+            {/* Left/Right Arrow Buttons */}
+            <button
+              type="button"
+              className="carousel-btn carousel-btn--left"
+              aria-label="Previous ecosystem product"
+              onClick={handlePrev}
             >
-              <div className="card-identity">
-                <span className="card-badge" style={{ backgroundColor: prod.tint }}>
-                  {prod.mark}
-                </span>
-                <div>
-                  <h3 className="card-name">{prod.name}</h3>
-                  <span className="card-tag">{prod.tag}</span>
-                </div>
-              </div>
-              <p className="card-desc">{prod.desc}</p>
-            </Link>
-          ))}
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <polyline points="15 18 9 12 15 6" />
+              </svg>
+            </button>
+
+            <button
+              type="button"
+              className="carousel-btn carousel-btn--right"
+              aria-label="Next ecosystem product"
+              onClick={handleNext}
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </button>
+          </div>
+
+          {/* Dots */}
+          <div className="carousel-dots" aria-label="Ecosystem products navigation dots">
+            {RELATED_PRODUCTS.map((prod, idx) => (
+              <button
+                key={prod.name}
+                type="button"
+                className={`carousel-dot ${activeIndex === idx ? "is-active" : ""}`}
+                onClick={() => scrollToIndex(idx)}
+                aria-label={`Go to product ${idx + 1}`}
+              >
+                <span className="dot-fill" />
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </section>

@@ -1,7 +1,15 @@
+"use client";
+
 import React from "react";
+import { useAboutCarousel } from "@/components/About/useAboutCarousel";
 import "./AppointGemStack.scss";
 
-const TECH_STACK = [
+interface TechItem {
+  name: string;
+  role: string;
+}
+
+const TECH_STACK: TechItem[] = [
   { name: "React", role: "Web console" },
   { name: "Node.js", role: "Services" },
   { name: "PostgreSQL", role: "Bookings data" },
@@ -10,7 +18,30 @@ const TECH_STACK = [
   { name: "Figma", role: "Design system" },
 ];
 
+function TechItemBoxView({
+  item,
+  isClone = false,
+}: {
+  item: TechItem;
+  isClone?: boolean;
+}) {
+  return (
+    <div
+      data-reveal={isClone ? undefined : ""}
+      className={`tech-item-box ${isClone ? "tech-item-box--clone" : ""}`}
+      data-carousel-item
+      aria-hidden={isClone ? "true" : undefined}
+    >
+      <div className="tech-name">{item.name}</div>
+      <div className="tech-role">{item.role}</div>
+    </div>
+  );
+}
+
 export function AppointGemStack() {
+  const { scrollRef, activeIndex, scrollToIndex, handleNext, handlePrev } =
+    useAboutCarousel(TECH_STACK.length, 1024);
+
   return (
     <section id="stack" className="appointgem-stack-section" aria-labelledby="stack-title">
       <div className="appointgem-stack-container">
@@ -26,13 +57,80 @@ export function AppointGemStack() {
               </p>
             </div>
 
-            <div className="tech-items-grid">
-              {TECH_STACK.map((item) => (
-                <div key={item.name} data-reveal="" className="tech-item-box">
-                  <div className="tech-name">{item.name}</div>
-                  <div className="tech-role">{item.role}</div>
+            <div className="tech-wrap">
+              <div className="tech-track">
+                <div className="tech-items-grid" ref={scrollRef}>
+                  {/* Clone of last card */}
+                  <TechItemBoxView
+                    item={TECH_STACK[TECH_STACK.length - 1]}
+                    isClone={true}
+                  />
+
+                  {/* Real items */}
+                  {TECH_STACK.map((item) => (
+                    <TechItemBoxView key={item.name} item={item} />
+                  ))}
+
+                  {/* Clone of first card */}
+                  <TechItemBoxView item={TECH_STACK[0]} isClone={true} />
                 </div>
-              ))}
+
+                {/* Left/Right Buttons */}
+                <button
+                  type="button"
+                  className="carousel-btn carousel-btn--left"
+                  aria-label="Previous tech item"
+                  onClick={handlePrev}
+                >
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <polyline points="15 18 9 12 15 6" />
+                  </svg>
+                </button>
+
+                <button
+                  type="button"
+                  className="carousel-btn carousel-btn--right"
+                  aria-label="Next tech item"
+                  onClick={handleNext}
+                >
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <polyline points="9 18 15 12 9 6" />
+                  </svg>
+                </button>
+              </div>
+
+              {/* Dots */}
+              <div className="carousel-dots" aria-label="Tech stack navigation dots">
+                {TECH_STACK.map((item, idx) => (
+                  <button
+                    key={item.name}
+                    type="button"
+                    className={`carousel-dot ${activeIndex === idx ? "is-active" : ""}`}
+                    onClick={() => scrollToIndex(idx)}
+                    aria-label={`Go to tech item ${idx + 1}`}
+                  >
+                    <span className="dot-fill" />
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </div>

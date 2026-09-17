@@ -2,7 +2,7 @@
 @use "../../../../../styles/mixins" as *;
 
 .appointgem-ecosystem-section {
-  padding: 96px 0 0;
+  @include section-padding;
   background: $color-bg;
 
   .appointgem-ecosystem-container {
@@ -22,12 +22,22 @@
   .ecosystem-headline {
     font-family: $font-display;
     font-weight: 800;
-    font-stretch: 110%;
-    font-size: clamp(24px, 2.6vw, 42px);
+    font-stretch: 112%;
+    font-size: clamp(28px, 3.4vw, 56px);
     line-height: 0.98;
     letter-spacing: -0.045em;
     color: $color-ink;
     margin: 0;
+
+    @media (max-width: 480px) {
+      font-size: 28px;
+      line-height: 1.02;
+    }
+
+    @media (min-width: 768px) and (max-width: 1023px) {
+      font-size: 38px;
+      line-height: 1.02;
+    }
   }
 
   .ecosystem-link {
@@ -43,22 +53,159 @@
     }
   }
 
-  .ecosystem-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
+  .ecosystem-wrap {
+    position: relative;
+    width: 100%;
     margin-top: 28px;
+  }
 
-    @include respond($bp-sm) {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+  .ecosystem-track {
+    position: relative;
+    width: 100%;
+
+    .carousel-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid rgba(12, 12, 13, 0.18);
+      background: rgba(241, 240, 236, 0.95);
+      color: $color-ink;
+      padding: 0;
+      cursor: pointer;
+      z-index: 10;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+      transition: background-color 0.2s ease, border-color 0.2s ease,
+        color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+
+      @include respond($bp-sm) {
+        width: 42px;
+        height: 42px;
+      }
+
+      &:hover {
+        background: $color-ink;
+        color: #ffffff;
+        border-color: $color-ink;
+        transform: translateY(-50%) scale(1.08);
+      }
+
+      &:active {
+        transform: translateY(-50%) scale(0.94);
+      }
+
+      &--left {
+        left: 4px;
+
+        @include respond($bp-sm) {
+          left: 6px;
+        }
+      }
+
+      &--right {
+        right: 4px;
+
+        @include respond($bp-sm) {
+          right: 6px;
+        }
+      }
+
+      @include respond($bp-lg) {
+        display: none;
+      }
+    }
+  }
+
+  .carousel-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    margin-top: 18px;
+
+    @include respond($bp-lg) {
+      display: none;
     }
 
-    @include respond($bp-md) {
+    .carousel-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 100px;
+      border: none;
+      background: rgba(12, 12, 13, 0.18);
+      cursor: pointer;
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+      transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+        background-color 0.25s ease;
+
+      .dot-fill {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+        background-color: transparent;
+      }
+
+      &.is-active {
+        width: 24px;
+        background: $color-ink;
+      }
+
+      &:hover:not(.is-active) {
+        background: rgba(12, 12, 13, 0.35);
+      }
+    }
+  }
+
+  .ecosystem-grid {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 16px;
+    padding: 4px 6% 8px;
+    scroll-padding-inline: 6%;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    @media (max-width: 480px) {
+      padding-inline: 4%;
+      scroll-padding-inline: 4%;
+      gap: 12px;
+    }
+
+    @include respond($bp-sm) {
+      gap: 16px;
+      padding: 4px 8% 8px;
+      scroll-padding-inline: 8%;
+    }
+
+    @include respond($bp-lg) {
+      display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+      overflow-x: visible;
+      padding: 0;
+      scroll-snap-type: none;
     }
   }
 
   .ecosystem-card {
+    flex: 0 0 82%;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
     border: 1px solid rgba(12, 12, 13, 0.14);
     background: #ffffff;
     padding: 26px;
@@ -66,6 +213,27 @@
     display: block;
     color: $color-ink;
     transition: border-color 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease;
+
+    @media (max-width: 480px) {
+      flex: 0 0 88%;
+      padding: 22px 20px;
+    }
+
+    @media (min-width: 768px) and (max-width: 1023px) {
+      flex: 0 0 calc(50% - 8px);
+      scroll-snap-align: start;
+    }
+
+    &--clone {
+      @include respond($bp-lg) {
+        display: none !important;
+      }
+    }
+
+    @include respond($bp-lg) {
+      flex: initial;
+      scroll-snap-align: none;
+    }
 
     &:hover {
       border-color: rgba(12, 12, 13, 0.36);

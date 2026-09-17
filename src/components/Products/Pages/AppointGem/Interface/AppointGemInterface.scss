@@ -2,7 +2,7 @@
 @use "../../../../../styles/mixins" as *;
 
 .appointgem-interface-section {
-  padding: clamp(44px, 7vw, 96px) 0 0;
+  @include section-padding;
   scroll-margin-top: 140px;
   background: $color-bg;
 
@@ -30,20 +30,35 @@
   .interface-headline {
     font-family: $font-display;
     font-weight: 800;
-    font-stretch: 110%;
-    font-size: clamp(28px, 3.4vw, 56px);
-    line-height: 0.96;
+    font-stretch: 112%;
+    font-size: clamp(30px, 4vw, 68px);
+    line-height: 0.98;
     letter-spacing: -0.045em;
     color: $color-ink;
     margin: 18px 0 0;
+
+    @media (max-width: 480px) {
+      font-size: 32px;
+      line-height: 1.02;
+    }
+
+    @media (min-width: 768px) and (max-width: 1023px) {
+      font-size: 42px;
+      line-height: 1.02;
+    }
   }
 
   .interface-subtitle {
-    font-size: 16px;
+    font-size: 16.5px;
     line-height: 1.6;
     color: $color-body;
     max-width: 430px;
     margin: 0 0 8px;
+
+    @media (max-width: 768px) {
+      font-size: 14.5px;
+      line-height: 1.55;
+    }
   }
 
   .interface-body {
@@ -155,6 +170,10 @@
     width: 100%;
     scroll-snap-align: start;
     padding-bottom: 26px;
+
+    &:last-child {
+      padding-bottom: 0;
+    }
 
     @include respond($bp-lg) {
       position: sticky;

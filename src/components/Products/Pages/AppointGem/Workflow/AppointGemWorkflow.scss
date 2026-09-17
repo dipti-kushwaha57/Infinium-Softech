@@ -11,17 +11,17 @@
     @include container;
   }
 
-  .workflow-header {
+  .workflow-header-grid {
     display: flex;
     flex-direction: column;
     gap: 16px;
 
-    @include respond($bp-md) {
-      flex-direction: row;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 50px;
-    }
+    // @include respond($bp-md) {
+    //   flex-direction: row;
+    //   align-items: flex-end;
+    //   justify-content: space-between;
+    //   gap: 50px;
+    // }
   }
 
   .workflow-eyebrow {
@@ -72,7 +72,7 @@
     margin-top: 34px;
   }
 
-  .workflow-track {
+  .workflow-steps-track {
     position: relative;
     width: 100%;
 
@@ -114,18 +114,18 @@
       }
 
       &--left {
-        left: 4px;
+        left: 6px;
 
         @include respond($bp-sm) {
-          left: 6px;
+          left: 8px;
         }
       }
 
       &--right {
-        right: 4px;
+        right: 6px;
 
         @include respond($bp-sm) {
-          right: 6px;
+          right: 8px;
         }
       }
 
@@ -186,23 +186,23 @@
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     gap: 12px;
-    padding: 4px 6% 8px;
-    scroll-padding-inline: 6%;
+    padding: 4px 9% 8px;
+    scroll-padding-inline: 9%;
 
     &::-webkit-scrollbar {
       display: none;
     }
 
     @media (max-width: 480px) {
-      padding-inline: 4%;
-      scroll-padding-inline: 4%;
+      padding-inline: 6%;
+      scroll-padding-inline: 6%;
       gap: 10px;
     }
 
     @include respond($bp-sm) {
       gap: 14px;
-      padding: 4px 8% 8px;
-      scroll-padding-inline: 8%;
+      padding: 4px 12% 8px;
+      scroll-padding-inline: 12%;
     }
 
     @include respond($bp-lg) {
@@ -234,9 +234,9 @@
       padding: 24px 18px 20px;
     }
 
-    @media (min-width: 768px) and (max-width: 1023px) {
-      flex: 0 0 calc(50% - 7px);
-      scroll-snap-align: start;
+    @include respond($bp-sm) {
+      flex: 0 0 76%;
+      padding: 28px 24px 26px;
     }
 
     &--clone {
@@ -263,29 +263,12 @@
     }
   }
 
-  .step-num-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
   .step-num {
     font-family: $font-display;
     font-weight: 800;
     font-size: 13px;
     letter-spacing: 0.04em;
     color: $color-accent-lime;
-
-    .total-num {
-      color: rgba(241, 240, 236, 0.4);
-    }
-  }
-
-  .step-accent-pill {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: $color-accent-lime;
   }
 
   .step-title {
@@ -304,15 +287,49 @@
     line-height: 1.6;
     color: rgba(241, 240, 236, 0.72);
     margin: 10px 0 0;
-    flex-grow: 1;
   }
 
-  .step-foot {
-    font-size: 11.5px;
-    font-weight: 500;
-    color: rgba(241, 240, 236, 0.45);
-    margin-top: 22px;
-    padding-top: 14px;
+  .workflow-roles-bar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px 10px;
+    margin-top: 36px;
+    padding-top: 24px;
     border-top: 1px solid rgba(241, 240, 236, 0.12);
+
+    .roles-label {
+      font-size: 10.5px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(241, 240, 236, 0.5);
+      font-weight: 600;
+      margin-right: 6px;
+    }
+
+    .roles-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .role-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12.5px;
+      color: #f1f0ec;
+      background: rgba(241, 240, 236, 0.06);
+      border: 1px solid rgba(241, 240, 236, 0.12);
+      border-radius: 4px;
+      padding: 6px 12px;
+
+      .role-mark {
+        font-family: $font-display;
+        font-weight: 800;
+        font-size: 10px;
+        color: $color-accent-lime;
+      }
+    }
   }
 }

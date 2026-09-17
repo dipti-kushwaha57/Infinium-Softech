@@ -15,12 +15,12 @@
     flex-direction: column;
     gap: 16px;
 
-    @include respond($bp-md) {
-      flex-direction: row;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 50px;
-    }
+    // @include respond($bp-md) {
+    //   flex-direction: row;
+    //   align-items: flex-end;
+    //   justify-content: space-between;
+    //   gap: 50px;
+    // }
   }
 
   .results-headline {
@@ -74,8 +74,8 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      width: 38px;
-      height: 38px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       border: 1px solid rgba(12, 12, 13, 0.18);
       background: rgba(241, 240, 236, 0.95);
@@ -89,8 +89,8 @@
         color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 
       @include respond($bp-sm) {
-        width: 42px;
-        height: 42px;
+        width: 40px;
+        height: 40px;
       }
 
       &:hover {
@@ -105,19 +105,11 @@
       }
 
       &--left {
-        left: 4px;
-
-        @include respond($bp-sm) {
-          left: 6px;
-        }
+        left: 0px;
       }
 
       &--right {
-        right: 4px;
-
-        @include respond($bp-sm) {
-          right: 6px;
-        }
+        right: 0px;
       }
 
       @include respond($bp-lg) {
@@ -177,23 +169,23 @@
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     gap: 12px;
-    padding: 4px 6% 8px;
-    scroll-padding-inline: 6%;
+    padding: 4px 38px 8px;
+    scroll-padding-inline: 38px;
 
     &::-webkit-scrollbar {
       display: none;
     }
 
     @media (max-width: 480px) {
-      padding-inline: 4%;
-      scroll-padding-inline: 4%;
+      padding: 4px 30px 8px;
+      scroll-padding-inline: 30px;
       gap: 10px;
     }
 
     @include respond($bp-sm) {
       gap: 14px;
-      padding: 4px 8% 8px;
-      scroll-padding-inline: 8%;
+      padding: 4px 42px 8px;
+      scroll-padding-inline: 42px;
     }
 
     @include respond($bp-lg) {

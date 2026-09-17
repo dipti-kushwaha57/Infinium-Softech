@@ -15,7 +15,7 @@
     letter-spacing: 0.28em;
     text-transform: uppercase;
     color: $color-muted;
-    font-weight: 600; 
+    font-weight: 600;
   }
 
   .appointgem-overview-grid {
@@ -25,7 +25,7 @@
     align-items: start;
 
     @include respond($bp-md) {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      // grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       gap: 60px;
     }
 
@@ -137,6 +137,7 @@
 
       @media (max-width: 767px) {
         border-top: 1px solid rgba(241, 240, 236, 0.16);
+
         &:first-child {
           border-top: none;
         }

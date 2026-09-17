@@ -34,8 +34,12 @@
     align-items: center;
     min-width: 0;
 
-    @include respond($bp-lg) {
+    @include respond($bp-md) {
       grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+      gap: 32px;
+    }
+
+    @include respond($bp-lg) {
       gap: 56px;
     }
   }
@@ -123,7 +127,7 @@
       }
 
       &:hover {
-        background: $color-accent-lime;
+        flex: 0 0 84%;
         color: #0c0c0d;
         border-color: $color-accent-lime;
         transform: translateY(-50%) scale(1.08);
@@ -156,6 +160,7 @@
 
     @include respond($bp-lg) {
       display: none;
+          flex-basis: 88%;
     }
 
     .carousel-dot {
@@ -224,14 +229,18 @@
   }
 
   .tech-item-box {
-    flex: 0 0 calc(50% - 4px);
-    scroll-snap-align: start;
+    flex: 0 0 84%;
+    scroll-snap-align: center;
     scroll-snap-stop: always;
     background: $color-ink;
     border: 1px solid rgba(241, 240, 236, 0.18);
     border-radius: 4px;
     padding: 16px 12px;
     transition: background 0.2s ease;
+
+    @media (max-width: 480px) {
+      flex-basis: 88%;
+    }
 
     &--clone {
       @include respond($bp-lg) {

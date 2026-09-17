@@ -6,7 +6,7 @@ import { useAboutCarousel } from "@/components/About/useAboutCarousel";
 import "./AppointGemEcosystem.scss";
 
 interface EcosystemProduct {
-  name: string;
+  name: string; 
   mark: string;
   tag: string;
   tint: string;

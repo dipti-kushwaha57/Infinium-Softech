@@ -203,6 +203,9 @@
   display: flex;
   flex-direction: row;
   overflow-x: auto;
+  
+  // NATIVE SMOOTH SCROLL CONFIGURATION
+  scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
@@ -241,11 +244,14 @@
 
 .platform-card {
   flex: 0 0 82%;
+  
+  // FIX CRITICAL SMOOTH INTERPOLATION CONFLICTS HERE
   scroll-snap-align: center;
-  scroll-snap-stop: always;
+  scroll-snap-stop: always; // Tells browser not to skip cleanly during animation sweeps
+  
   background: #ffffff;
   border: 1px solid rgba(12, 12, 13, 0.12);
-  border-radius: 12px;
+  // border-radius: 12px;
   padding: 24px 32px 22px;
   display: flex;
   flex-direction: column;
@@ -293,9 +299,9 @@
     gap: 16px;
 
     .platform-badge {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
       color: #ffffff;
       display: flex;
       align-items: center;

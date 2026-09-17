@@ -81,7 +81,18 @@ export function Footer() {
               <ul className="column-list">
                 {col.items.map((item) => (
                   <li key={item}>
-                    <Link href={item === "About Us" ? "/about" : "#demo"}>{item}</Link>
+                    <Link
+                      href={
+                        item === "About Us"
+                          ? "/about"
+                          : item === "Contact Sales"
+                            ? "/contact"
+                            : "#demo"
+                      }
+                    >
+                      {item}
+                    </Link>
+                    
                   </li>
                 ))}
               </ul>

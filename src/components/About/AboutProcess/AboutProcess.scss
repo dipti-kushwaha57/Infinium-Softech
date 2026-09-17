@@ -271,6 +271,11 @@
     border: none;
     border-radius: 0;
     padding: 32px 24px 28px;
+
+    // The hidden leading clone occupies the first grid position.
+    &:nth-child(n + 3) {
+      border-left: 1px solid rgba(241, 240, 236, 0.14);
+    }
   }
 
   &:hover {

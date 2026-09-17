@@ -17,45 +17,6 @@
   }
 }
 
-.about-hero-orbs {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-
-  .orb-bl {
-    position: absolute;
-    left: -14vw;
-    bottom: -22vh;
-    width: 46vw;
-    height: 46vw;
-    border-radius: 50%;
-    background: radial-gradient(
-      circle,
-      rgba(200, 242, 78, 0.62) 0%,
-      rgba(200, 242, 78, 0) 68%
-    );
-    filter: blur(28px);
-    animation: im-glow-bl 22s ease-in-out infinite;
-  }
-
-  .orb-tr {
-    position: absolute;
-    right: -16vw;
-    top: -20vh;
-    width: 40vw;
-    height: 40vw;
-    border-radius: 50%;
-    background: radial-gradient(
-      circle,
-      rgba(200, 242, 78, 0.48) 0%,
-      rgba(200, 242, 78, 0) 66%
-    );
-    filter: blur(30px);
-    animation: im-glow-tr 26s ease-in-out infinite;
-  }
-}
-
 .about-hero-container {
   position: relative;
   z-index: 1;
@@ -74,7 +35,7 @@
   font-family: $font-display;
   font-weight: 800;
   font-stretch: 110%;
-  font-size: clamp(32px, 5.5vw, 84px);
+  font-size: clamp(38px, 5.8vw, 100px);
   line-height: 0.94;
   letter-spacing: -0.045em;
   margin-top: 18px;
@@ -82,8 +43,13 @@
   color: $color-ink;
 
   @media (max-width: 480px) {
-    font-size: clamp(28px, 8vw, 38px);
-    line-height: 1.0;
+    font-size: 38px;
+    line-height: 0.92;
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    font-size: 44px;
+    line-height: 1.02;
   }
 
   .highlight {

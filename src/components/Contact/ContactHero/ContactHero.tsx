@@ -6,9 +6,14 @@ export function ContactHero() {
   return (
     <section className="contact-hero-section content-padding" aria-label="Contact Us Hero">
       {/* Background Animated Glows */}
-      <div className="contact-hero-glows" aria-hidden="true">
-        <div className="glow-blob glow-blob--left" />
-        <div className="glow-blob glow-blob--right" />
+      <div className="hero-glow-layer" aria-hidden="true">
+        <div className="hero-glow-tr" />
+        <div className="hero-glow-bl" />
+        <div className="hero-glow-center" />
+        <div className="hero-orbs">
+          <div className="orb-bl" />
+          <div className="orb-tr" />
+        </div>
       </div>
 
       <div className="contact-hero-container">

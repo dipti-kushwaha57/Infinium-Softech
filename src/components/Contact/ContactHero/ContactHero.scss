@@ -10,63 +10,6 @@
   overflow: hidden;
 }
 
-.contact-hero-glows {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-
-  .glow-blob {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(30px);
-
-    &--left {
-      left: -14vw;
-      bottom: -26vh;
-      width: 44vw;
-      height: 44vw;
-      background: radial-gradient(
-        circle,
-        rgba(200, 242, 78, 0.45) 0%,
-        rgba(200, 242, 78, 0) 68%
-      );
-      animation: im-glow-bl 22s ease-in-out infinite;
-    }
-
-    &--right {
-      right: -16vw;
-      top: -24vh;
-      width: 38vw;
-      height: 38vw;
-      background: radial-gradient(
-        circle,
-        rgba(200, 242, 78, 0.35) 0%,
-        rgba(200, 242, 78, 0) 66%
-      );
-      animation: im-glow-tr 26s ease-in-out infinite;
-    }
-  }
-}
-
-@keyframes im-glow-bl {
-  0%, 100% {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  50% {
-    transform: translate3d(5vw, -4vh, 0) scale(1.12);
-  }
-}
-
-@keyframes im-glow-tr {
-  0%, 100% {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  50% {
-    transform: translate3d(-4vw, 5vh, 0) scale(1.08);
-  }
-}
-
 .contact-hero-container {
   @include container;
   position: relative;

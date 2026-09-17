@@ -95,6 +95,10 @@
         background: #ebeae6;
       }
 
+      &:nth-child(4n) {
+        box-shadow: inset 1px 0 rgba(12, 12, 13, 0.12);
+      }
+
       .capability-icon {
         width: 34px;
         height: 34px;

@@ -45,6 +45,10 @@
     letter-spacing: -0.04em;
     color: $color-ink;
     margin: 0;
+
+    @media (min-width: 1200px) {
+      white-space: nowrap;
+    }
   }
 }
 

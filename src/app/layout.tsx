@@ -3,9 +3,9 @@ import { Archivo, Instrument_Sans } from "next/font/google";
 import { GoogleTagManager } from "@next/third-parties/google";
 import "./globals.scss";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL, getOrganizationSchema } from "@/lib/seo";
+import { ScrollAnimationProvider } from "@/components/providers/ScrollAnimationProvider";
 import { Header } from "@/components/Header/Header";
 import { Footer } from "@/components/Footer/Footer";
-import { ScrollAnimationProvider } from "@/components/providers/ScrollAnimationProvider";
 
 const archivo = Archivo({
   variable: "--font-archivo",

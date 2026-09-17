@@ -130,6 +130,7 @@
       background-color: transparent;
     }
 
+
     &.is-active {
       width: 24px;
       background: $color-ink;
@@ -236,9 +237,9 @@
   }
 
   .belief-indicator {
-    width: 22px;
-    height: 22px;
-    border-radius: 6px;
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
     flex-shrink: 0;
   }
 
@@ -246,7 +247,7 @@
     font-family: $font-display;
     font-weight: 700;
     font-stretch: 106%;
-    font-size: 20px;
+    font-size: 19px;
     letter-spacing: -0.025em;
     color: $color-ink;
     margin: 4px 0 0;

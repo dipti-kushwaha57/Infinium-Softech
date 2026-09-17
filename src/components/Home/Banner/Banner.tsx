@@ -93,10 +93,14 @@ export function Banner() {
     <section ref={sectionRef} className="banner content-padding" aria-label="Hero Banner">
       <div ref={stickyRef} className="banner-sticky-frame">
         {/* Background Ambient Glows */}
-        <div className="banner-glow-layer" aria-hidden="true">
-          <div className="banner-glow-tr" />
-          <div className="banner-glow-bl" />
-          <div className="banner-glow-center" />
+        <div className="hero-glow-layer" aria-hidden="true">
+          <div className="hero-glow-tr" />
+          <div className="hero-glow-bl" />
+          <div className="hero-glow-center" />
+          <div className="hero-orbs">
+            <div className="orb-bl" />
+            <div className="orb-tr" />
+          </div>
         </div>
 
         {/* Background Animated SVG Waves */}

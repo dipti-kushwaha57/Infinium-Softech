@@ -33,6 +33,24 @@
       "description": "Tell us what you run. We'll show you the fit across our ecosystem of products and software platforms.",
       "changeFrequency": "monthly",
       "priority": 0.8
+    },
+    "/product": {
+      "title": "Product Catalogue",
+      "description": "Every product we build, in one place. Explore our nine proprietary platforms across industries.",
+      "changeFrequency": "weekly",
+      "priority": 0.9
+    },
+    "/products": {
+      "title": "Product Catalogue",
+      "description": "Every product we build, in one place. Explore our nine proprietary platforms across industries.",
+      "changeFrequency": "weekly",
+      "priority": 0.9
+    },
+    "/products/[slug]": {
+      "title": "Product Platform",
+      "description": "Explore an Infinium Softech product platform, its operating model, and the capabilities built for its industry.",
+      "changeFrequency": "monthly",
+      "priority": 0.7
     }
   }
 }

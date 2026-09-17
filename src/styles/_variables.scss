@@ -27,8 +27,8 @@ $tint-rose: #e0452f;
 $tint-indigo: #4338ca;
 
 // Typography — bound to next/font CSS variables set on <html> in layout.tsx
-$font-display: var(--font-archivo), system-ui, sans-serif;
 $font-body: var(--font-instrument-sans), system-ui, sans-serif;
+$font-display: $font-body;
 
 // Fluid Typography Scale (CSS Custom Properties)
 $fs-display: var(--fs-display);

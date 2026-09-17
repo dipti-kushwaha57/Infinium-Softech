@@ -1,0 +1,109 @@
+@use "../../../../../styles/variables" as *;
+@use "../../../../../styles/mixins" as *;
+
+.appointgem-results-section {
+  padding: 96px 0 0;
+  scroll-margin-top: 130px;
+  background: $color-bg;
+
+  .appointgem-results-container {
+    @include container;
+  }
+
+  .results-header {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    @include respond($bp-md) {
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 50px;
+    }
+  }
+
+  .results-headline {
+    font-family: $font-display;
+    font-weight: 800;
+    font-stretch: 110%;
+    font-size: clamp(28px, 3.4vw, 56px);
+    line-height: 0.96;
+    letter-spacing: -0.045em;
+    color: $color-ink;
+    margin: 18px 0 0;
+  }
+
+  .results-subtitle {
+    font-size: 16px;
+    line-height: 1.6;
+    color: $color-body;
+    max-width: 430px;
+    margin: 0 0 8px;
+  }
+
+  .results-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1px;
+    background: rgba(12, 12, 13, 0.12);
+    border: 1px solid rgba(12, 12, 13, 0.12);
+    margin-top: 34px;
+
+    @include respond($bp-sm) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @include respond($bp-md) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .result-card {
+    background: #f1f0ec;
+    padding: 30px 26px;
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: #ffffff;
+    }
+  }
+
+  .result-value-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+
+    .result-value {
+      font-family: $font-display;
+      font-weight: 800;
+      font-stretch: 108%;
+      font-size: clamp(26px, 2.8vw, 44px);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      color: $color-ink;
+    }
+
+    .result-delta {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #1e9e5a;
+    }
+  }
+
+  .result-card-title {
+    font-family: $font-display;
+    font-weight: 700;
+    font-size: 15.5px;
+    letter-spacing: -0.015em;
+    color: $color-ink;
+    margin-top: 16px;
+  }
+
+  .result-card-desc {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: $color-body;
+    margin-top: 8px;
+  }
+}

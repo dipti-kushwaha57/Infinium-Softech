@@ -5,9 +5,14 @@ export function AboutHero() {
   return (
     <section className="about-hero-section" aria-label="About Hero">
       {/* Background Animated Glow Orbs */}
-      <div className="about-hero-orbs" aria-hidden="true">
+      <div className="hero-glow-layer" aria-hidden="true">
+        <div className="hero-glow-tr" />
+        <div className="hero-glow-bl" />
+        <div className="hero-glow-center" />
+        <div className="hero-orbs">
         <div className="orb-bl" />
         <div className="orb-tr" />
+        </div>
       </div>
 
       <div className="about-hero-container">
@@ -16,7 +21,7 @@ export function AboutHero() {
         </div>
 
         <h1 data-reveal="" className="about-hero-headline">
-          We build products, <span className="highlight">not projects.</span>
+          We build products, <span className="highlight"> <br/> not projects.</span>
         </h1>
 
         <div className="about-hero-grid">

@@ -397,7 +397,7 @@ export function ContactForm() {
 
               {/* Form Actions */}
               <div className="form-footer">
-                <button type="submit" className="btn-submit">
+                <button type="submit" className="btn-primary">
                   Send enquiry
                   <span aria-hidden="true">→</span>
                 </button>
@@ -509,7 +509,7 @@ export function ContactForm() {
 
                 <button
                   type="button"
-                  className="carousel-arrow-btn next-btn"
+                  className="carousel-arrow-btn next-btn "
                   onClick={handleDeskNext}
                   aria-label="Next desk"
                 >

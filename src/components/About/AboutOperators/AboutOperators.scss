@@ -11,12 +11,23 @@
 .about-operators-container {
   @include container;
 
+  @include respond($bp-md) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
+    column-gap: 48px;
+    align-items: end;
+  }
+
   .about-operators-eyebrow {
     font-size: 10.5px;
     letter-spacing: 0.28em;
     text-transform: uppercase;
     color: $color-muted;
     font-weight: 600;
+
+    @include respond($bp-md) {
+      grid-column: 1 / -1;
+    }
 
     @media (min-width: 768px) and (max-width: 1023px) {
       font-size: 12px;
@@ -34,6 +45,10 @@
     max-width: 20ch;
     color: $color-ink;
 
+    @include respond($bp-md) {
+      margin-bottom: 0;
+    }
+
     @media (min-width: 768px) and (max-width: 1023px) {
       font-size: 42px;
       line-height: 1.02;
@@ -47,6 +62,11 @@
     color: $color-body;
     margin-top: 18px;
     max-width: 600px;
+
+    @include respond($bp-md) {
+      margin-top: 18px;
+      margin-bottom: 0;
+    }
 
     @media (min-width: 768px) and (max-width: 1023px) {
       font-size: 18px;

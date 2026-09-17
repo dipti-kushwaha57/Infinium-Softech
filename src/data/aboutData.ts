@@ -182,7 +182,7 @@ export const ABOUT_DELIVERY_STEPS: AboutDeliveryStep[] = [
     title: "Support & scale",
     desc: "SLA-backed support, quarterly reviews and new modules as you grow.",
     owner: "Account team",
-    tint: ABOUT_TINTS.ink,
+    tint: ABOUT_TINTS.blue,
   },
 ];
 

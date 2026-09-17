@@ -29,6 +29,7 @@ export function useAboutCarousel(
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeRealIndex, setActiveRealIndex] = useState(0);
   const isJumpingRef = useRef(false);
+  const scrollAnimationRef = useRef<number | null>(null);
 
   const getVisibleCards = useCallback(() => {
     const el = scrollRef.current;
@@ -109,14 +110,40 @@ export function useAboutCarousel(
       const clampedIndex = Math.max(0, Math.min(cards.length - 1, targetIndex));
       const targetCard = cards[clampedIndex];
       const targetScrollLeft = getCardTargetScrollLeft(el, targetCard);
+      const nextScrollLeft = Math.max(
+        0,
+        Math.min(el.scrollWidth - el.clientWidth, targetScrollLeft)
+      );
 
-      el.scrollTo({
-        left: Math.max(
-          0,
-          Math.min(el.scrollWidth - el.clientWidth, targetScrollLeft)
-        ),
-        behavior: smooth ? "smooth" : "instant",
-      });
+      if (scrollAnimationRef.current !== null) {
+        cancelAnimationFrame(scrollAnimationRef.current);
+        scrollAnimationRef.current = null;
+      }
+
+      if (!smooth) {
+        el.scrollTo({ left: nextScrollLeft, behavior: "instant" });
+        return;
+      }
+
+      const startScrollLeft = el.scrollLeft;
+      const distance = nextScrollLeft - startScrollLeft;
+      if (Math.abs(distance) < 1) return;
+
+      const duration = 600;
+      const startTime = performance.now();
+
+      const animateScroll = (time: number) => {
+        const progress = Math.min(1, (time - startTime) / duration);
+        el.scrollLeft = startScrollLeft + distance * progress;
+
+        if (progress < 1) {
+          scrollAnimationRef.current = requestAnimationFrame(animateScroll);
+        } else {
+          scrollAnimationRef.current = null;
+        }
+      };
+
+      scrollAnimationRef.current = requestAnimationFrame(animateScroll);
     },
     [getVisibleCards, getCardTargetScrollLeft]
   );
@@ -184,6 +211,10 @@ export function useAboutCarousel(
     return () => {
       el.removeEventListener("scroll", handleScroll);
       if (jumpTimeout) clearTimeout(jumpTimeout);
+      if (scrollAnimationRef.current !== null) {
+        cancelAnimationFrame(scrollAnimationRef.current);
+        scrollAnimationRef.current = null;
+      }
     };
   }, [itemCount, cloneCount, getVisibleCards, getActiveVisibleIndex, scrollToDomIndex]);
 

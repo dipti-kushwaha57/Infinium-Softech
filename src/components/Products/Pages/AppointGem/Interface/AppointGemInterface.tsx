@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 interface FeatureShot {
   id: string;
-  num: string;
+  num: string; 
   title: string;
   badge: string;
   image: string;

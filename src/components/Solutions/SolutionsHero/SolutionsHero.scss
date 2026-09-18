@@ -1,0 +1,585 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+
+.solutions-hero-section {
+  position: relative;
+  overflow: hidden;
+  background: $color-bg;
+  @include section-padding;
+  padding-top: 48px;
+  padding-bottom: 64px;
+
+  @include respond($bp-sm) {
+    padding-top: 56px;
+    padding-bottom: 72px;
+  }
+ 
+  @include respond($bp-md) {
+    padding-top: 72px;
+    padding-bottom: 88px;
+  }
+}
+
+
+/* =========================================================
+   Fresha-Style Large Rounded Ambient Glow Backdrop
+   ========================================================= */
+
+.hero-fresha-glow-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  width: 100%;
+  max-width: 1440px;
+  height: 100%;
+
+  pointer-events: none;
+  overflow: hidden;
+
+  z-index: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* ---------------------------------------------------------
+   Main Large Ambient Glow
+   --------------------------------------------------------- */
+
+.fresha-glow-pill {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: 90%;
+  height: 72%;
+
+  transform: translate(-50%, -50%);
+
+  /*
+    Large soft organic shape.
+    The multiple radial gradients blend together
+    instead of looking like separate circles.
+  */
+  border-radius: 48% 52% 55% 45% / 48% 45% 55% 52%;
+
+  background:
+    radial-gradient(ellipse at 22% 48%,
+      rgba(30, 158, 90, 0.22) 0%,
+      rgba(30, 158, 90, 0.13) 25%,
+      rgba(30, 158, 90, 0) 58%),
+    radial-gradient(ellipse at 75% 42%,
+      rgba(196, 242, 44, 0.20) 0%,
+      rgba(196, 242, 44, 0.11) 28%,
+      rgba(196, 242, 44, 0) 60%),
+    radial-gradient(ellipse at 52% 70%,
+      rgba(42, 168, 196, 0.12) 0%,
+      rgba(42, 168, 196, 0.06) 30%,
+      rgba(42, 168, 196, 0) 65%);
+
+  filter: blur(65px);
+
+  opacity: 0.95;
+
+  will-change: transform, opacity;
+
+  animation:
+    fresha-pill-pulse 14s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+}
+
+
+/* ---------------------------------------------------------
+   Left Ambient Glow
+   --------------------------------------------------------- */
+
+.fresha-glow-orb-left {
+  position: absolute;
+
+  top: 5%;
+  left: -5%;
+
+  width: 480px;
+  height: 480px;
+
+  border-radius: 50%;
+
+  background: radial-gradient(circle,
+      rgba(30, 158, 90, 0.20) 0%,
+      rgba(30, 158, 90, 0.13) 25%,
+      rgba(196, 242, 44, 0.08) 45%,
+      rgba(196, 242, 44, 0) 72%);
+
+  filter: blur(75px);
+
+  opacity: 0.65;
+
+  will-change: transform, opacity;
+
+  animation:
+    fresha-orb-float 18s ease-in-out infinite alternate;
+}
+
+
+/* ---------------------------------------------------------
+   Right Ambient Glow
+   --------------------------------------------------------- */
+
+.fresha-glow-orb-right {
+  position: absolute;
+
+  right: -5%;
+  bottom: 5%;
+
+  width: 520px;
+  height: 520px;
+
+  border-radius: 50%;
+
+  background: radial-gradient(circle,
+      rgba(16, 185, 129, 0.18) 0%,
+      rgba(16, 185, 129, 0.12) 25%,
+      rgba(42, 168, 196, 0.09) 45%,
+      rgba(42, 168, 196, 0) 72%);
+
+  filter: blur(80px);
+
+  opacity: 0.6;
+
+  will-change: transform, opacity;
+
+  animation:
+    fresha-orb-float-reverse 20s ease-in-out infinite alternate;
+}
+
+
+/* =========================================================
+   Glow Animations
+   ========================================================= */
+
+
+/* Main glow */
+@keyframes fresha-pill-pulse {
+  0% {
+    transform:
+      translate(-50%, -50%) scale(0.96) rotate(-1deg);
+
+    opacity: 0.78;
+  }
+
+  50% {
+    transform:
+      translate(-50%, -50%) scale(1.03) rotate(1deg);
+
+    opacity: 0.98;
+  }
+
+  100% {
+    transform:
+      translate(-50%, -50%) scale(0.99) rotate(-1deg);
+
+    opacity: 0.85;
+  }
+}
+
+
+/* Left glow */
+@keyframes fresha-orb-float {
+  0% {
+    transform:
+      translate(0, 0) scale(0.96);
+
+    opacity: 0.55;
+  }
+
+  50% {
+    transform:
+      translate(35px, -25px) scale(1.08);
+
+    opacity: 0.72;
+  }
+
+  100% {
+    transform:
+      translate(-20px, 20px) scale(1);
+
+    opacity: 0.62;
+  }
+}
+
+
+/* Right glow */
+@keyframes fresha-orb-float-reverse {
+  0% {
+    transform:
+      translate(0, 0) scale(0.96);
+
+    opacity: 0.52;
+  }
+
+  50% {
+    transform:
+      translate(-35px, 25px) scale(1.08);
+
+    opacity: 0.68;
+  }
+
+  100% {
+    transform:
+      translate(20px, -20px) scale(1);
+
+    opacity: 0.58;
+  }
+}
+
+
+/* =========================================================
+   Hero Content
+   ========================================================= */
+
+.solutions-hero-container {
+  position: relative;
+  z-index: 1;
+  @include container;
+}
+
+.solutions-hero-eyebrow {
+  font-size: 10.5px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: $color-muted;
+  font-weight: 600;
+}
+
+.solutions-hero-headline {
+  font-family: $font-display;
+  font-weight: 800;
+  font-stretch: 110%;
+  font-size: clamp(38px, 5.8vw, 96px);
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+  margin-top: 22px;
+  max-width: 19ch;
+  color: $color-ink;
+  text-wrap: pretty;
+
+  @media (max-width: 480px) {
+    font-size: 36px;
+    line-height: 0.94;
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    font-size: 46px;
+    line-height: 1;
+  }
+
+  .highlight {
+    color: $color-accent;
+  }
+}
+
+
+/* =========================================================
+   Hero Grid
+   ========================================================= */
+
+.solutions-hero-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 32px;
+
+  @include respond($bp-md) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 48px;
+    margin-top: 44px;
+  }
+}
+
+.solutions-hero-desc {
+  font-size: 17.5px;
+  line-height: 1.6;
+  color: $color-body;
+  margin: 0;
+  max-width: 580px;
+
+  @media (max-width: 768px) {
+    font-size: 15px;
+    line-height: 1.55;
+  }
+}
+
+
+/* =========================================================
+   Hero Actions
+   ========================================================= */
+
+.solutions-hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+
+  @media (max-width: 479px) {
+    width: 100%;
+
+    .btn-primary,
+    .btn-outline {
+      width: 100%;
+      justify-content: center;
+      text-align: center;
+    }
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    background: $color-accent;
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    padding: 14px 26px;
+
+    border-radius: 2px;
+
+    white-space: nowrap;
+
+    transition:
+      background 0.25s ease,
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+
+    @include respond($bp-lg) {
+      font-size: 14px;
+      padding: 15px 28px;
+    }
+
+    &:hover {
+      background: #1826b8;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(31, 49, 232, 0.25);
+    }
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    border: 1px solid rgba($color-ink, 0.16);
+
+    color: $color-ink;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    padding: 14px 23px;
+
+    border-radius: 2px;
+
+    white-space: nowrap;
+
+    background: transparent;
+
+    transition:
+      background 0.2s ease,
+      border-color 0.2s ease,
+      transform 0.2s ease;
+
+    @include respond($bp-lg) {
+      font-size: 14px;
+      padding: 15px 25px;
+    }
+
+    &:hover {
+      background: rgba($color-ink, 0.05);
+      border-color: rgba($color-ink, 0.35);
+      transform: translateY(-1px);
+    }
+  }
+}
+
+
+/* =========================================================
+   Quick Index Grid
+   ========================================================= */
+
+.solutions-hero-index {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 10px;
+
+  margin-top: 40px;
+
+  @include respond($bp-md) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  @include respond($bp-lg) {
+    grid-template-columns: repeat(6, 1fr);
+    margin-top: 56px;
+    gap: 12px;
+  }
+}
+
+.index-card {
+  background: rgba(#ffffff, 0.85);
+
+  backdrop-filter: blur(12px);
+
+  color: $color-ink;
+
+  padding: 14px 16px;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 10px;
+
+  border: 1px solid rgba(12, 12, 13, 0.12);
+
+  border-radius: 6px;
+
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+  text-decoration: none;
+
+  &:hover {
+    background: #ffffff;
+
+    border-color: rgba(30, 158, 90, 0.5);
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 8px 24px rgba(12, 12, 13, 0.08);
+
+    .index-title {
+      color: #1e9e5a;
+    }
+  }
+
+  .index-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .index-num {
+    display: block;
+
+    font-size: 9.5px;
+
+    letter-spacing: 0.18em;
+
+    color: $color-muted;
+
+    font-weight: 600;
+  }
+
+  .index-title {
+    display: block;
+
+    font-family: $font-display;
+
+    font-weight: 700;
+
+    font-size: 13.5px;
+
+    letter-spacing: -0.015em;
+
+    margin-top: 4px;
+
+    color: $color-ink;
+
+    transition: color 0.2s ease;
+  }
+
+  .index-dot {
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    margin-top: 3px;
+
+    flex: none;
+  }
+}
+
+
+/* =========================================================
+   Accessibility - Reduced Motion
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .fresha-glow-pill,
+  .fresha-glow-orb-left,
+  .fresha-glow-orb-right {
+    animation: none;
+  }
+}
+
+
+/* =========================================================
+   Mobile Glow
+   ========================================================= */
+
+@media (max-width: 767px) {
+  .hero-fresha-glow-wrapper {
+    height: 90%;
+  }
+
+  .fresha-glow-pill {
+    width: 125%;
+    height: 55%;
+
+    top: 25%;
+
+    filter: blur(50px);
+  }
+
+  .fresha-glow-orb-left {
+    width: 300px;
+    height: 300px;
+
+    left: -25%;
+    top: 8%;
+
+    filter: blur(60px);
+
+    opacity: 0.5;
+  }
+
+  .fresha-glow-orb-right {
+    width: 320px;
+    height: 320px;
+
+    right: -25%;
+    bottom: 8%;
+
+    filter: blur(65px);
+
+    opacity: 0.48;
+  }
+}

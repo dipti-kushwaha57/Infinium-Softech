@@ -51,6 +51,12 @@
       "description": "Explore an Infinium Softech product platform, its operating model, and the capabilities built for its industry.",
       "changeFrequency": "monthly",
       "priority": 0.7
+    },
+    "/solutions": {
+      "title": "Solutions — Mobile, Web, Custom, AI & Enterprise Software",
+      "description": "Six ways we build. One platform underneath. Mobile, web, custom software, AI, enterprise systems and cloud infrastructure.",
+      "changeFrequency": "weekly",
+      "priority": 0.9
     }
   }
 }

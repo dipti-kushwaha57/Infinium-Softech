@@ -155,12 +155,12 @@ export const MENU_DEFS: Record<string, MenuDef> = {
     label: "Solutions",
     eyebrow: "How we build and ship",
     items: [
-      { name: "Mobile Apps", desc: "Customer, rider, crew and field apps", tint: "#2AA8C4", product: "Trekvano" },
-      { name: "Web Applications", desc: "Dashboards on one component system", tint: "#1F31E8", product: "AppointGem" },
-      { name: "Custom Software", desc: "Workflows shaped to your operation", tint: "#1E9E5A", product: "WelzoKart" },
-      { name: "AI Solutions", desc: "Forecasting, routing and instructions", tint: "#0F8F87", product: "MindFul Menu" },
-      { name: "Enterprise Systems", desc: "SSO, roles, audit trails, compliance", tint: "#8B3FE8", product: "MapMyPay" },
-      { name: "Cloud Infrastructure", desc: "Multi-region AWS with autoscaling", tint: "#E8A21F", product: "Truck Guru" },
+      { name: "Mobile Apps", desc: "Customer, rider, crew and field apps", tint: "#2AA8C4", product: "Trekvano", href: "/solutions#mobile-applications" },
+      { name: "Web Applications", desc: "Dashboards on one component system", tint: "#1F31E8", product: "AppointGem", href: "/solutions#web-applications" },
+      { name: "Custom Software", desc: "Workflows shaped to your operation", tint: "#1E9E5A", product: "WelzoKart", href: "/solutions#custom-software" },
+      { name: "AI Solutions", desc: "Forecasting, routing and instructions", tint: "#0F8F87", product: "MindFul Menu", href: "/solutions#ai-solutions" },
+      { name: "Enterprise Systems", desc: "SSO, roles, audit trails, compliance", tint: "#8B3FE8", product: "MapMyPay", href: "/solutions#enterprise-systems" },
+      { name: "Cloud Infrastructure", desc: "Multi-region AWS with autoscaling", tint: "#E8A21F", product: "Truck Guru", href: "/solutions#cloud-infrastructure" },
     ],
   },
   technology: {

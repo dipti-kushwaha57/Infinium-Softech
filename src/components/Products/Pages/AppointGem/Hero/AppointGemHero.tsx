@@ -12,12 +12,21 @@ export function AppointGemHero({ product }: { product: ProductItem }) {
 
   useEffect(() => {
     let ticking = false;
+    const desktopQuery = window.matchMedia("(min-width: 1024px)");
 
     const updateScroll = () => {
       const section = sectionRef.current;
       const intro = introRef.current;
       const interfaceElement = interfaceRef.current;
       if (!section || !intro || !interfaceElement) return;
+
+      if (!desktopQuery.matches) {
+        interfaceElement.style.transform = "";
+        interfaceElement.style.zIndex = "";
+        intro.style.transform = "";
+        intro.style.opacity = "";
+        return;
+      }
 
       const viewportHeight = window.innerHeight || 1;
       const sectionTop = section.getBoundingClientRect().top + window.scrollY;
@@ -45,11 +54,13 @@ export function AppointGemHero({ product }: { product: ProductItem }) {
 
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
+    desktopQuery.addEventListener("change", onScroll);
     updateScroll();
 
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
+      desktopQuery.removeEventListener("change", onScroll);
     };
   }, []);
 

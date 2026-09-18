@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import "./Header.scss";
 
 import {
@@ -12,6 +13,7 @@ import {
 } from "@/data/headerData";
 
 export function Header() {
+  const router = useRouter();
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [previewProductName, setPreviewProductName] = useState<string>("AppointGem");
   const [isMobile, setIsMobile] = useState(false);
@@ -102,6 +104,38 @@ export function Header() {
     }
   };
 
+  const handleMenuDoubleClick = (key: string) => {
+    const routeByMenuKey: Record<string, string> = {
+      products: "/products",
+      solutions: "/solutions",
+    };
+    const route = routeByMenuKey[key];
+
+    if (route) {
+      setActiveMenu(null);
+      router.push(route);
+    }
+  };
+
+  const handleCategoryClick = (key: string) => {
+    const routeByMenuKey: Record<string, string> = {
+      products: "/products",
+      solutions: "/solutions",
+    };
+    const route = routeByMenuKey[key];
+
+    if (isMobile && route) {
+      if (activeMenu === key) {
+        router.push(route);
+      } else {
+        openMenu(key);
+      }
+      return;
+    }
+
+    openMenu(key);
+  };
+
   const currentMenuKey = activeMenu || "products";
   const currentMenuDef = activeMenu ? MENU_DEFS[activeMenu] : null;
   const currentPreviewProduct =
@@ -148,6 +182,7 @@ export function Header() {
                   aria-expanded={isOpen}
                   onMouseEnter={() => handleDesktopMouseEnter(key)}
                   onClick={() => toggleMenuKey(key)}
+                  onDoubleClick={() => handleMenuDoubleClick(key)}
                 >
                   {def.label}
                   <span className={`caret ${isOpen ? "is-open" : ""}`} aria-hidden="true">
@@ -236,7 +271,7 @@ export function Header() {
                         }}
                         type="button"
                         className={`category-chip ${isSelected ? "is-selected" : ""}`}
-                        onClick={() => openMenu(key)}
+                        onClick={() => handleCategoryClick(key)}
                       >
                         {def.label}
                       </button>
@@ -253,17 +288,12 @@ export function Header() {
                     return (
                       <Link
                         key={prod.name}
-                        href={`#${prod.id}`}
+                        href={`/products/${prod.id}`}
                         className={`product-card ${isSelected ? "is-selected" : ""}`}
                         onMouseEnter={() => setPreviewProductName(prod.name)}
                         onClick={() => {
                           setPreviewProductName(prod.name);
                           setActiveMenu(null);
-                          window.dispatchEvent(
-                            new CustomEvent("scroll-to-ecosystem-product", {
-                              detail: { id: prod.id },
-                            })
-                          );
                         }}
                       >
                         <span

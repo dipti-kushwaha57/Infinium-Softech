@@ -649,7 +649,7 @@ export function Ecosystem() {
                           </span>
                         </Link>
 
-                        <Link href="#inside-product" className="btn-card-secondary">
+                        <Link href={`/products/${prod.id}`} className="btn-card-secondary">
                           View Details
                         </Link>
                       </div>

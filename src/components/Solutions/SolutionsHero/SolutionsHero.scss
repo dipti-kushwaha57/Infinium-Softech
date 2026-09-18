@@ -5,7 +5,9 @@
   position: relative;
   overflow: hidden;
   background: $color-bg;
+
   @include section-padding;
+
   padding-top: 48px;
   padding-bottom: 64px;
 
@@ -13,230 +15,185 @@
     padding-top: 56px;
     padding-bottom: 72px;
   }
- 
+
   @include respond($bp-md) {
     padding-top: 72px;
     padding-bottom: 88px;
   }
 }
 
-
 /* =========================================================
-   Fresha-Style Large Rounded Ambient Glow Backdrop
+   Fresha-style animated spotlight
    ========================================================= */
 
-.hero-fresha-glow-wrapper {
+.animated-spotlight-container {
   position: absolute;
-  top: 50%;
-  left: 50%;
-
-  transform: translate(-50%, -50%);
-
-  width: 100%;
-  max-width: 1440px;
-  height: 100%;
-
+  inset: 0;
   pointer-events: none;
   overflow: hidden;
-
   z-index: 0;
+  isolation: isolate;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  &::after {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+        rgba(241, 240, 236, 0.1),
+        rgba(241, 240, 236, 0.72));
+    content: "";
+    z-index: 2;
+  }
 }
 
-
-/* ---------------------------------------------------------
-   Main Large Ambient Glow
-   --------------------------------------------------------- */
-
-.fresha-glow-pill {
+.animated-spotlight-core,
+.animated-spotlight-sheen {
   position: absolute;
+  width: min(1100px, 92vw);
+  height: min(720px, 72vw);
+  border-radius: 50%;
+  filter: blur(55px);
+  will-change: transform;
+}
 
-  top: 50%;
+.animated-spotlight-core {
+  top: -18%;
   left: 50%;
 
-  width: 90%;
-  height: 72%;
-
-  transform: translate(-50%, -50%);
-
-  /*
-    Large soft organic shape.
-    The multiple radial gradients blend together
-    instead of looking like separate circles.
-  */
-  border-radius: 48% 52% 55% 45% / 48% 45% 55% 52%;
-
   background:
-    radial-gradient(ellipse at 22% 48%,
-      rgba(30, 158, 90, 0.22) 0%,
-      rgba(30, 158, 90, 0.13) 25%,
-      rgba(30, 158, 90, 0) 58%),
-    radial-gradient(ellipse at 75% 42%,
-      rgba(196, 242, 44, 0.20) 0%,
-      rgba(196, 242, 44, 0.11) 28%,
-      rgba(196, 242, 44, 0) 60%),
-    radial-gradient(ellipse at 52% 70%,
-      rgba(42, 168, 196, 0.12) 0%,
-      rgba(42, 168, 196, 0.06) 30%,
-      rgba(42, 168, 196, 0) 65%);
+    radial-gradient(ellipse at 20% 48%,
+      rgba(30, 158, 90, 0.42) 0%,
+      rgba(30, 158, 90, 0.2) 27%,
+      transparent 64%),
+    radial-gradient(ellipse at 78% 38%,
+      rgba(196, 242, 44, 0.48) 0%,
+      rgba(196, 242, 44, 0.2) 30%,
+      transparent 66%),
+    radial-gradient(ellipse at 54% 78%,
+      rgba(42, 168, 196, 0.28) 0%,
+      transparent 62%);
 
-  filter: blur(65px);
-
-  opacity: 0.95;
-
-  will-change: transform, opacity;
-
-  animation:
-    fresha-pill-pulse 14s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+  transform: translateX(-50%) rotate(-8deg);
+  animation: spotlight-drift 18s ease-in-out infinite alternate;
 }
 
+.animated-spotlight-sheen {
+  right: -22%;
+  bottom: -32%;
 
-/* ---------------------------------------------------------
-   Left Ambient Glow
-   --------------------------------------------------------- */
+  width: min(900px, 80vw);
+  height: min(650px, 66vw);
 
-.fresha-glow-orb-left {
+  background:
+    radial-gradient(ellipse at center,
+      rgba(16, 185, 129, 0.26) 0%,
+      rgba(42, 168, 196, 0.14) 34%,
+      transparent 70%);
+
+  filter: blur(75px);
+  transform: rotate(18deg);
+  animation: spotlight-sheen 22s ease-in-out infinite alternate;
+}
+
+/* =========================================================
+   Two Round Vertical Glows
+   ========================================================= */
+
+.hero-round-glow {
   position: absolute;
 
-  top: 5%;
-  left: -5%;
-
-  width: 480px;
-  height: 480px;
+  width: 300px;
+  height: 300px;
 
   border-radius: 50%;
 
-  background: radial-gradient(circle,
-      rgba(30, 158, 90, 0.20) 0%,
-      rgba(30, 158, 90, 0.13) 25%,
-      rgba(196, 242, 44, 0.08) 45%,
-      rgba(196, 242, 44, 0) 72%);
+  pointer-events: none;
 
-  filter: blur(75px);
+  filter: blur(70px);
 
   opacity: 0.65;
 
-  will-change: transform, opacity;
+  z-index: 1;
 
-  animation:
-    fresha-orb-float 18s ease-in-out infinite alternate;
+  will-change: transform;
 }
 
+/* Top Round Glow */
 
-/* ---------------------------------------------------------
-   Right Ambient Glow
-   --------------------------------------------------------- */
-
-.fresha-glow-orb-right {
-  position: absolute;
-
-  right: -5%;
-  bottom: 5%;
-
-  width: 520px;
-  height: 520px;
-
-  border-radius: 50%;
+.hero-round-glow--top {
+  top: 40px;
+  right: 80px;
 
   background: radial-gradient(circle,
-      rgba(16, 185, 129, 0.18) 0%,
-      rgba(16, 185, 129, 0.12) 25%,
-      rgba(42, 168, 196, 0.09) 45%,
-      rgba(42, 168, 196, 0) 72%);
+      rgba(168, 85, 247, 0.65) 0%,
+      rgba(168, 85, 247, 0.35) 35%,
+      rgba(168, 85, 247, 0.08) 65%,
+      transparent 75%);
 
-  filter: blur(80px);
-
-  opacity: 0.6;
-
-  will-change: transform, opacity;
-
-  animation:
-    fresha-orb-float-reverse 20s ease-in-out infinite alternate;
+  animation: round-glow-top 10s ease-in-out infinite alternate;
 }
 
+/* Bottom Round Glow */
+
+.hero-round-glow--bottom {
+  top: 300px;
+  right: 80px;
+
+  background: radial-gradient(circle,
+      rgba(236, 72, 153, 0.6) 0%,
+      rgba(236, 72, 153, 0.3) 35%,
+      rgba(236, 72, 153, 0.08) 65%,
+      transparent 75%);
+
+  animation: round-glow-bottom 12s ease-in-out infinite alternate;
+}
 
 /* =========================================================
    Glow Animations
    ========================================================= */
 
-
-/* Main glow */
-@keyframes fresha-pill-pulse {
+@keyframes spotlight-drift {
   0% {
-    transform:
-      translate(-50%, -50%) scale(0.96) rotate(-1deg);
-
-    opacity: 0.78;
-  }
-
-  50% {
-    transform:
-      translate(-50%, -50%) scale(1.03) rotate(1deg);
-
-    opacity: 0.98;
+    transform: translateX(-50%) translateY(2%) rotate(-8deg) scale(0.96);
   }
 
   100% {
-    transform:
-      translate(-50%, -50%) scale(0.99) rotate(-1deg);
-
-    opacity: 0.85;
+    transform: translateX(-47%) translateY(8%) rotate(5deg) scale(1.06);
   }
 }
 
-
-/* Left glow */
-@keyframes fresha-orb-float {
+@keyframes spotlight-sheen {
   0% {
-    transform:
-      translate(0, 0) scale(0.96);
-
-    opacity: 0.55;
-  }
-
-  50% {
-    transform:
-      translate(35px, -25px) scale(1.08);
-
-    opacity: 0.72;
+    transform: translate(-4%, 5%) rotate(18deg) scale(0.94);
   }
 
   100% {
-    transform:
-      translate(-20px, 20px) scale(1);
-
-    opacity: 0.62;
+    transform: translate(5%, -5%) rotate(26deg) scale(1.08);
   }
 }
 
+/* Top Glow Animation */
 
-/* Right glow */
-@keyframes fresha-orb-float-reverse {
+@keyframes round-glow-top {
   0% {
-    transform:
-      translate(0, 0) scale(0.96);
-
-    opacity: 0.52;
-  }
-
-  50% {
-    transform:
-      translate(-35px, 25px) scale(1.08);
-
-    opacity: 0.68;
+    transform: translateY(0) scale(0.95);
   }
 
   100% {
-    transform:
-      translate(20px, -20px) scale(1);
-
-    opacity: 0.58;
+    transform: translateY(25px) scale(1.08);
   }
 }
 
+/* Bottom Glow Animation */
+
+@keyframes round-glow-bottom {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+
+  100% {
+    transform: translateY(-20px) scale(1.06);
+  }
+}
 
 /* =========================================================
    Hero Content
@@ -244,7 +201,8 @@
 
 .solutions-hero-container {
   position: relative;
-  z-index: 1;
+  z-index: 3;
+
   @include container;
 }
 
@@ -260,12 +218,17 @@
   font-family: $font-display;
   font-weight: 800;
   font-stretch: 110%;
+
   font-size: clamp(38px, 5.8vw, 96px);
+
   line-height: 0.92;
   letter-spacing: -0.045em;
+
   margin-top: 22px;
   max-width: 19ch;
+
   color: $color-ink;
+
   text-wrap: pretty;
 
   @media (max-width: 480px) {
@@ -283,7 +246,6 @@
   }
 }
 
-
 /* =========================================================
    Hero Grid
    ========================================================= */
@@ -291,14 +253,17 @@
 .solutions-hero-grid {
   display: flex;
   flex-direction: column;
+
   gap: 24px;
   margin-top: 32px;
 
   @include respond($bp-md) {
     display: flex;
     flex-direction: row;
+
     justify-content: space-between;
     align-items: flex-end;
+
     gap: 48px;
     margin-top: 44px;
   }
@@ -307,7 +272,9 @@
 .solutions-hero-desc {
   font-size: 17.5px;
   line-height: 1.6;
+
   color: $color-body;
+
   margin: 0;
   max-width: 580px;
 
@@ -317,7 +284,6 @@
   }
 }
 
-
 /* =========================================================
    Hero Actions
    ========================================================= */
@@ -325,6 +291,7 @@
 .solutions-hero-actions {
   display: flex;
   gap: 12px;
+
   flex-wrap: wrap;
   align-items: center;
 
@@ -343,6 +310,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+
     gap: 10px;
 
     background: $color-accent;
@@ -378,6 +346,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+
     gap: 10px;
 
     border: 1px solid rgba($color-ink, 0.16);
@@ -413,13 +382,13 @@
   }
 }
 
-
 /* =========================================================
    Quick Index Grid
    ========================================================= */
 
 .solutions-hero-index {
   display: grid;
+
   grid-template-columns: repeat(2, 1fr);
 
   gap: 10px;
@@ -433,7 +402,9 @@
 
   @include respond($bp-lg) {
     grid-template-columns: repeat(6, 1fr);
+
     margin-top: 56px;
+
     gap: 12px;
   }
 }
@@ -526,60 +497,62 @@
   }
 }
 
-
 /* =========================================================
    Accessibility - Reduced Motion
    ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
 
-  .fresha-glow-pill,
-  .fresha-glow-orb-left,
-  .fresha-glow-orb-right {
+  .animated-spotlight-core,
+  .animated-spotlight-sheen,
+  .hero-round-glow--top,
+  .hero-round-glow--bottom {
     animation: none;
   }
 }
-
 
 /* =========================================================
    Mobile Glow
    ========================================================= */
 
 @media (max-width: 767px) {
-  .hero-fresha-glow-wrapper {
-    height: 90%;
-  }
+  .animated-spotlight-core {
+    width: 145vw;
+    height: 115vw;
 
-  .fresha-glow-pill {
-    width: 125%;
-    height: 55%;
-
-    top: 25%;
+    top: 4%;
 
     filter: blur(50px);
   }
 
-  .fresha-glow-orb-left {
-    width: 300px;
-    height: 300px;
+  .animated-spotlight-sheen {
+    width: 125vw;
+    height: 100vw;
 
-    left: -25%;
-    top: 8%;
+    right: -52%;
+    bottom: -10%;
 
-    filter: blur(60px);
+    filter: blur(65px);
+  }
+
+  /* Mobile Round Glows */
+
+  .hero-round-glow {
+    width: 200px;
+    height: 200px;
+
+    filter: blur(55px);
 
     opacity: 0.5;
   }
 
-  .fresha-glow-orb-right {
-    width: 320px;
-    height: 320px;
+  .hero-round-glow--top {
+    top: 80px;
+    right: -50px;
+  }
 
-    right: -25%;
-    bottom: 8%;
-
-    filter: blur(65px);
-
-    opacity: 0.48;
+  .hero-round-glow--bottom {
+    top: 260px;
+    right: -50px;
   }
 }

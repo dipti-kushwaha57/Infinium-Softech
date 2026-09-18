@@ -1,0 +1,159 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+
+.about-hero-section {
+  position: relative;
+  overflow: hidden;
+  background: $color-bg;
+  @include section-padding;
+  padding-top: 48px;
+
+  @include respond($bp-sm) {
+    padding-top: 56px;
+  }
+
+  @include respond($bp-md) {
+    padding-top: 72px;
+  }
+}
+
+.about-hero-container {
+  position: relative;
+  z-index: 1;
+  @include container;
+}
+
+.about-hero-eyebrow {
+  font-size: 10.5px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: $color-muted;
+  font-weight: 600;
+}
+
+.about-hero-headline {
+  font-family: $font-display;
+  font-weight: 800;
+  font-stretch: 110%;
+  font-size: clamp(38px, 5.8vw, 100px);
+  line-height: 0.94;
+  letter-spacing: -0.045em;
+  margin-top: 18px;
+  max-width: 18ch;
+  color: $color-ink;
+
+  @media (max-width: 480px) {
+    font-size: 38px;
+    line-height: 0.92;
+  }
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    font-size: 44px;
+    line-height: 1.02;
+  }
+
+  .highlight {
+    color: $color-accent;
+  }
+}
+
+.about-hero-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 28px;
+  align-items: flex-start;
+
+  @include respond($bp-md) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 48px;
+    margin-top: 40px;
+  }
+}
+
+.about-hero-desc {
+  font-size: 16.5px;
+  line-height: 1.6;
+  color: $color-body;
+  margin: 0;
+  max-width: 560px;
+
+  @media (max-width: 768px) {
+    font-size: 14.5px;
+    line-height: 1.55;
+  }
+}
+
+.about-hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+
+  @media (max-width: 479px) {
+    width: 100%;
+
+    .btn-primary,
+    .btn-outline {
+      width: 100%;
+      justify-content: center;
+      text-align: center;
+    }
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: $color-accent;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 13px 24px;
+    border-radius: 2px;
+    white-space: nowrap;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+
+    @include respond($bp-lg) {
+      font-size: 14px;
+      padding: 15px 26px;
+    }
+
+    &:hover {
+      opacity: 0.95;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba($color-accent, 0.35);
+    }
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border: 1px solid rgba($color-ink, 0.2);
+    color: $color-ink;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 13px 24px;
+    border-radius: 2px;
+    white-space: nowrap;
+    background: transparent;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+
+    @include respond($bp-lg) {
+      font-size: 14px;
+      padding: 15px 26px;
+    }
+
+    &:hover {
+      background: rgba($color-ink, 0.05);
+      border-color: rgba($color-ink, 0.4);
+      transform: translateY(-1px);
+    }
+  }
+}

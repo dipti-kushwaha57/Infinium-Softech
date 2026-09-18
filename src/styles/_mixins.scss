@@ -1,14 +1,66 @@
-@use "variables" as *;
+@use "./variables" as *;
 
 @mixin container {
   width: 100%;
   max-width: $max-width;
   margin-inline: auto;
-  padding-inline: 1.5rem;
+  @include content-padding;
 }
 
 @mixin respond($bp) {
   @media (min-width: $bp) {
     @content;
+  }
+}
+
+// Unified content padding that decreases gracefully across screen sizes
+@mixin content-padding {
+  padding-inline: 40px;
+
+  @media (max-width: 1240px) {
+    padding-inline: 32px;
+  }
+
+  @media (max-width: 1024px) {
+    padding-inline: 24px;
+  }
+
+  @media (max-width: 768px) {
+    padding-inline: 20px;
+  }
+
+  @media (max-width: 480px) {
+    padding-inline: 16px;
+  }
+
+  @media (max-width: 360px) {
+    padding-inline: 12px;
+  }
+}
+
+// Section vertical padding that scales down gracefully by viewport
+@mixin section-padding {
+  padding-top: 45px;
+  padding-bottom: 45px;
+  padding-inline: 0;
+
+  @media (max-width: 1240px) {
+    padding-top: 45px;
+    padding-bottom: 45px;
+  }
+
+  @media (max-width: 1024px) {
+    padding-top: 45px;
+    padding-bottom: 45px;
+  }
+
+  @media (max-width: 768px) {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  @media (max-width: 480px) {
+    padding-top: 32px;
+    padding-bottom: 32px;
   }
 }

@@ -1,0 +1,1 @@
+export { InsideProduct } from "./InsideProduct";

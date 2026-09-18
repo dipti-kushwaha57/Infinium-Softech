@@ -1,0 +1,729 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+
+.contact-form-section {
+  position: relative;
+  background-color: $color-bg;
+  @include section-padding;
+  padding-top: 0;
+  padding-bottom: clamp(60px, 8vw, 110px);
+}
+
+.contact-form-container {
+  @include container;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 36px;
+  align-items: start;
+
+  @include respond($bp-lg) {
+    grid-template-columns: minmax(0, 5.5fr) minmax(0, 4.5fr);
+    gap: 40px;
+  }
+
+  @media (min-width: 1240px) {
+    grid-template-columns: minmax(0, 5.5fr) minmax(0, 4.5fr);
+    gap: 48px;
+  }
+}
+
+// ── Left Box: Form Card ──
+.contact-form-card {
+  border: 1px solid rgba(12, 12, 13, 0.16);
+  background: $color-bg;
+  padding: clamp(20px, 3.4vw, 44px);
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+
+  .form-title {
+    font-family: $font-display;
+    font-weight: 800;
+    font-stretch: 110%;
+    font-size: clamp(24px, 3vw, 32px);
+    letter-spacing: -0.035em;
+    color: $color-ink;
+    margin: 0;
+  }
+
+  .form-subtitle {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: #5f5f64;
+    margin: 10px 0 0;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 28px;
+    width: 100%;
+    box-sizing: border-box;
+
+    @include respond($bp-sm) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    box-sizing: border-box;
+
+    &--full {
+      margin-top: 24px;
+      width: 100%;
+    }
+  }
+
+  .field-label {
+    font-size: 10.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: $color-muted;
+    font-weight: 600;
+  }
+
+  .field-input,
+  .field-textarea {
+    width: 100%;
+    max-width: 100%;
+    font-family: $font-body;
+    font-size: 14.5px;
+    color: $color-ink;
+    background: transparent;
+    border: 1px solid rgba(12, 12, 13, 0.18);
+    border-radius: 2px;
+    padding: 13px 14px;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+
+    &::placeholder {
+      color: #9a9a9f;
+    }
+
+    &:focus {
+      border-color: $color-ink;
+      background-color: #ffffff;
+    }
+  }
+
+  .field-textarea {
+    resize: vertical;
+    min-height: 120px;
+    max-height: 380px;
+    min-width: 100%;
+    max-width: 100%;
+    line-height: 1.55;
+  }
+
+  .select-wrap {
+    position: relative;
+    width: 100%;
+
+    .field-select {
+      width: 100%;
+      font-family: $font-body;
+      font-size: 14.5px;
+      color: $color-ink;
+      background: transparent;
+      border: 1px solid rgba(12, 12, 13, 0.18);
+      border-radius: 2px;
+      padding: 13px 36px 13px 14px;
+      appearance: none;
+      cursor: pointer;
+      outline: none;
+      box-sizing: border-box;
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+
+      &:focus {
+        border-color: $color-ink;
+        background-color: #ffffff;
+      }
+    }
+
+    .select-caret {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      color: $color-muted;
+      font-size: 12px;
+    }
+  }
+
+  .form-products-group {
+    margin-top: 24px;
+    width: 100%;
+
+    .form-products-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .chips-nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+
+      .chips-scroll-btn {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        border: 1px solid rgba(12, 12, 13, 0.16);
+        background: transparent;
+        color: $color-ink;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        padding: 0;
+        transition: background-color 0.2s ease, border-color 0.2s ease,
+          color 0.2s ease, transform 0.15s ease;
+
+        &:hover {
+          background: $color-ink;
+          color: #ffffff;
+          border-color: $color-ink;
+          transform: scale(1.08);
+        }
+
+        &:active {
+          transform: scale(0.94);
+        }
+      }
+    }
+  }
+
+  .product-chips-wrap {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 8px;
+    margin-top: 12px;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 6px;
+    padding-right: 14px;
+    cursor: grab;
+    user-select: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    &.is-dragging {
+      cursor: grabbing;
+      scroll-behavior: auto;
+    }
+
+    .chip-btn {
+      cursor: pointer;
+      font-family: $font-body;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 9px 15px;
+      border-radius: 2px;
+      white-space: nowrap;
+      flex: 0 0 auto;
+      border: 1px solid rgba(12, 12, 13, 0.18);
+      background: transparent;
+      color: $color-ink-soft;
+      transition: background-color 0.2s ease, border-color 0.2s ease,
+        color 0.2s ease, transform 0.15s ease;
+
+      &:hover {
+        background: rgba(12, 12, 13, 0.06);
+        border-color: rgba(12, 12, 13, 0.35);
+      }
+
+      &.is-selected {
+        border-color: $color-ink;
+        background: $color-ink;
+        color: #ffffff;
+      }
+
+      @media (max-width: 767px) {
+        padding: 8.5px 13px;
+        font-size: 12.5px;
+      }
+    }
+  }
+
+  .form-footer {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin-top: 28px;
+
+    .btn-submit {
+      cursor: pointer;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: $color-accent-lime;
+      color: $color-ink;
+      font-family: $font-body;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 15px 28px;
+      border-radius: 2px;
+      white-space: nowrap;
+      transition: background-color 0.2s ease, color 0.2s ease,
+        transform 0.2s ease;
+
+      &:hover {
+        background: $color-ink;
+        color: $color-accent-lime;
+        transform: translateY(-1px);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
+
+    .form-note {
+      font-size: 13px;
+      color: #78787c;
+    }
+  }
+
+  // Success State
+  .form-success-state {
+    padding: 30px 10px;
+
+    .success-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: #1e9e5a;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: $font-display;
+      font-weight: 800;
+      font-size: 20px;
+    }
+
+    .success-title {
+      font-family: $font-display;
+      font-weight: 800;
+      font-stretch: 110%;
+      font-size: 30px;
+      letter-spacing: -0.035em;
+      color: $color-ink;
+      margin-top: 22px;
+    }
+
+    .success-note {
+      font-size: 15.5px;
+      line-height: 1.6;
+      color: #5f5f64;
+      margin-top: 12px;
+      max-width: 46ch;
+    }
+
+    .btn-reset {
+      cursor: pointer;
+      margin-top: 28px;
+      border: 1px solid rgba(12, 12, 13, 0.18);
+      background: transparent;
+      color: $color-ink;
+      font-family: $font-body;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 12px 22px;
+      border-radius: 2px;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background: rgba(12, 12, 13, 0.06);
+      }
+    }
+  }
+}
+
+// ── Right Sidebar ──
+.contact-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  @include respond($bp-lg) {
+    gap: 36px;
+  }
+}
+
+// Desks Box (2x2 grid with borders on desktop, interactive carousel on small size)
+.desks-card {
+  .desks-eyebrow {
+    font-size: 10.5px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: $color-muted;
+    font-weight: 600;
+
+    @media (min-width: 768px) and (max-width: 1023px) {
+      font-size: 12px;
+    }
+  }
+
+  // Big Screen (>= 768px): 2-Grid Mouse Scrollable & Draggable Track (No arrows, no dots)
+  .desks-desktop-track {
+    display: none;
+    border: 1px solid rgba(12, 12, 13, 0.16);
+    background: transparent;
+    margin-top: 18px;
+    border-radius: 4px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    position: relative;
+    cursor: grab;
+    user-select: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    &.is-dragging {
+      cursor: grabbing;
+      scroll-snap-type: none;
+      scroll-behavior: auto;
+    }
+
+    @media (min-width: 768px) {
+      display: flex;
+    }
+
+    .desk-item {
+      flex: 0 0 50%;
+      min-width: 50%;
+      max-width: 50%;
+      width: 50%;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      background: $color-bg;
+      padding: 24px 22px;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      min-height: 188px;
+      border-right: 1px solid rgba(12, 12, 13, 0.14);
+      transition: background-color 0.2s ease;
+
+      &:last-child {
+        border-right: none;
+      }
+
+      &:hover {
+        background: rgba(12, 12, 13, 0.02);
+      }
+
+      .desk-indicator {
+        width: 22px;
+        height: 22px;
+        border-radius: 6px;
+        flex-shrink: 0;
+      }
+
+      .desk-name {
+        font-family: $font-display;
+        font-weight: 700;
+        font-stretch: 106%;
+        font-size: 18px;
+        letter-spacing: -0.025em;
+        color: $color-ink;
+        margin: 14px 0 0;
+      }
+
+      .desk-desc {
+        font-size: 13.5px;
+        line-height: 1.55;
+        color: #5f5f64;
+        margin: 6px 0 0;
+        flex-grow: 1;
+      }
+
+      .desk-sla {
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: $color-muted;
+        font-weight: 600;
+        margin-top: 14px;
+      }
+    }
+  }
+
+  // Mobile Carousel (< 768px)
+  .desks-carousel {
+    display: block;
+    margin-top: 18px;
+
+    @media (min-width: 768px) {
+      display: none;
+    }
+
+    .desks-carousel-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .carousel-arrow-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 1px solid rgba(12, 12, 13, 0.14);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $color-ink;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.2s ease,
+        border-color 0.2s ease;
+
+      &:hover {
+        background: $color-ink;
+        color: #ffffff;
+        border-color: $color-ink;
+      }
+
+      &:active {
+        transform: translateY(-50%) scale(0.94);
+      }
+
+      &.prev-btn {
+        left: -10px;
+      }
+
+      &.next-btn {
+        right: -10px;
+      }
+    }
+
+    .desk-carousel-card {
+      width: 100%;
+      background: $color-bg;
+      border: 1px solid rgba(12, 12, 13, 0.16);
+      border-radius: 4px;
+      padding: 24px 22px;
+      display: flex;
+      flex-direction: column;
+      min-height: 195px;
+      animation: deskSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+
+      .desk-carousel-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .desk-indicator {
+        width: 22px;
+        height: 22px;
+        border-radius: 6px;
+        flex-shrink: 0;
+      }
+
+      .desk-counter {
+        font-family: $font-display;
+        font-weight: 700;
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        color: $color-muted;
+      }
+
+      .desk-name {
+        font-family: $font-display;
+        font-weight: 700;
+        font-stretch: 106%;
+        font-size: 17.5px;
+        letter-spacing: -0.025em;
+        color: $color-ink;
+        margin: 14px 0 0;
+      }
+
+      .desk-desc {
+        font-size: 13.5px;
+        line-height: 1.55;
+        color: #5f5f64;
+        margin: 6px 0 0;
+        flex-grow: 1;
+      }
+
+      .desk-sla {
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: $color-muted;
+        font-weight: 600;
+        margin-top: 14px;
+      }
+    }
+
+    // Dots
+    .desks-carousel-dots {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 14px;
+
+      .desks-dot {
+        cursor: pointer;
+        padding: 4px;
+        background: transparent;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .dot-fill {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: rgba(12, 12, 13, 0.2);
+          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        &.is-active .dot-fill {
+          width: 22px;
+          border-radius: 10px;
+          background: $color-ink;
+        }
+      }
+    }
+  }
+}
+
+@keyframes deskSlideIn {
+  from {
+    opacity: 0.4;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes deskSlideInNext {
+  from {
+    opacity: 0;
+    transform: translate3d(24px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes deskSlideInPrev {
+  from {
+    opacity: 0;
+    transform: translate3d(-24px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+// What happens next Box (Dark Card)
+.steps-card {
+  background: $color-ink;
+  color: #f1f0ec;
+  padding: 34px 28px;
+  border-radius: 4px;
+
+  .steps-eyebrow {
+    font-size: 10.5px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: #8a8a8e;
+    font-weight: 600;
+
+    @media (min-width: 768px) and (max-width: 1023px) {
+      font-size: 12px;
+    }
+  }
+
+  .steps-list {
+    margin-top: 18px;
+  }
+
+  .step-item {
+    display: grid;
+    grid-template-columns: 28px minmax(0, 1fr);
+    gap: 12px;
+    align-items: start;
+    border-top: 1px solid rgba(241, 240, 236, 0.12);
+    padding: 15px 0;
+
+    &:first-child {
+      border-top: none;
+      padding-top: 4px;
+    }
+
+    &:last-child {
+      padding-bottom: 0;
+    }
+
+    .step-num {
+      font-family: $font-display;
+      font-weight: 800;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      color: #7b7f8e;
+      padding-top: 3px;
+    }
+
+    .step-content {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .step-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #f1f0ec;
+    }
+
+    .step-desc {
+      font-size: 13px;
+      line-height: 1.55;
+      color: #8a8a8e;
+    }
+  }
+}

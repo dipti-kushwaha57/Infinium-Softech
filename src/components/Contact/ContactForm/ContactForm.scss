@@ -11,7 +11,7 @@
 
 .contact-form-container {
   @include container;
-  display: grid;
+  display: grid; 
   grid-template-columns: 1fr;
   gap: 36px;
   align-items: start;
@@ -270,31 +270,40 @@
     flex-wrap: wrap;
     margin-top: 28px;
 
-    .btn-submit {
+    .btn-primary {
       cursor: pointer;
       border: none;
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      background: $color-accent-lime;
-      color: $color-ink;
+      background: $color-accent;
+      color: #ffffff;
       font-family: $font-body;
       font-size: 14px;
-      font-weight: 600;
-      padding: 15px 28px;
+      font-weight: 500;
+      padding: 14px 26px;
       border-radius: 2px;
       white-space: nowrap;
       transition: background-color 0.2s ease, color 0.2s ease,
         transform 0.2s ease;
 
       &:hover {
-        background: $color-ink;
-        color: $color-accent-lime;
+        background: #1826b8;
+        color: #ffffff;
         transform: translateY(-1px);
       }
 
       &:active {
         transform: translateY(0);
+      }
+
+      span {
+        opacity: 0.65;
+        transition: transform 0.2s ease;
+      }
+
+      &:hover span {
+        transform: translateX(3px);
       }
     }
 

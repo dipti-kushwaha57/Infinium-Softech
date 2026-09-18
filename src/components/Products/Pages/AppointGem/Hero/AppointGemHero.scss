@@ -115,9 +115,18 @@
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
   gap: 48px;
-  align-items: flex-end;
+  align-items: start;
   margin-top: 32px;
   will-change: transform, opacity;
+}
+
+.appointgem-hero-right {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 28px;
+  align-self: stretch;
 }
 
 .appointgem-hero-title {
@@ -147,7 +156,8 @@
 }
 
 .appointgem-hero-copy {
-  margin: 0 0 8px;
+  margin: 0;
+  align-self: flex-start;
   color: $color-body;
   font-size: 16.5px;
   line-height: 1.6;
@@ -163,7 +173,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 36px;
+  margin-top: auto;
 }
 
 .appointgem-hero-primary,
@@ -249,7 +259,7 @@ hr {
 }
 
 .appointgem-hero-tablet-img {
-  display: block;
+  display: block; 
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -347,6 +357,10 @@ hr {
 
   .appointgem-hero-intro {
     grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .appointgem-hero-right {
     gap: 20px;
   }
 

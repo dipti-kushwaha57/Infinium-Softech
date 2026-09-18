@@ -40,6 +40,7 @@
     background: linear-gradient(180deg,
         rgba(241, 240, 236, 0.1),
         rgba(241, 240, 236, 0.72));
+        
     content: "";
     z-index: 2;
   }
@@ -453,7 +454,7 @@
   .index-content {
     display: flex;
     flex-direction: column;
-  }
+  } 
 
   .index-num {
     display: block;

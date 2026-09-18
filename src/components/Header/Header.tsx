@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import "./Header.scss";
 
 import {
@@ -14,6 +14,7 @@ import {
 
 export function Header() {
   const router = useRouter();
+  const pathname = usePathname();
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [previewProductName, setPreviewProductName] = useState<string>("AppointGem");
   const [isMobile, setIsMobile] = useState(false);
@@ -117,6 +118,22 @@ export function Header() {
     }
   };
 
+  const handleMenuClick = (key: string) => {
+    const routeByMenuKey: Record<string, string> = {
+      products: "/products",
+      solutions: "/solutions",
+    };
+    const route = routeByMenuKey[key];
+
+    if (!isMobile && route) {
+      setActiveMenu(null);
+      router.push(route);
+      return;
+    }
+
+    toggleMenuKey(key);
+  };
+
   const handleCategoryClick = (key: string) => {
     const routeByMenuKey: Record<string, string> = {
       products: "/products",
@@ -174,14 +191,17 @@ export function Header() {
             {MENU_KEYS.map((key) => {
               const def = MENU_DEFS[key];
               const isOpen = activeMenu === key;
+              const isRouteActive =
+                (key === "products" && pathname.startsWith("/products")) ||
+                (key === "solutions" && pathname === "/solutions");
               return (
                 <button
                   key={key}
                   type="button"
-                  className={`nav-menu-btn ${isOpen ? "is-active" : ""}`}
+                  className={`nav-menu-btn ${isOpen ? "is-active" : ""} ${isRouteActive ? "is-route-active" : ""}`}
                   aria-expanded={isOpen}
                   onMouseEnter={() => handleDesktopMouseEnter(key)}
-                  onClick={() => toggleMenuKey(key)}
+                  onClick={() => handleMenuClick(key)}
                   onDoubleClick={() => handleMenuDoubleClick(key)}
                 >
                   {def.label}

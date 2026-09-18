@@ -67,7 +67,7 @@ export function AppointGemSolution() {
           <div>
             <span data-reveal="" className="appointgem-eyebrow">Our solution</span>
             <h2 data-reveal="" id="solution-title" className="solution-headline">
-              What ships in AppointGem
+              What ships in <br className="mobile-title-break" />AppointGem
             </h2>
           </div>
           <p data-reveal="" className="solution-subtitle">

@@ -79,7 +79,7 @@ export function AppointGemEcosystem() {
       <div className="appointgem-ecosystem-container">
         <div className="ecosystem-header">
           <h2 data-reveal="" id="ecosystem-title" className="ecosystem-headline">
-            Other products in the ecosystem
+            Other products in <br className="mobile-title-break" />the ecosystem
           </h2>
           <Link href="/products" className="ecosystem-link">
             View all nine <span aria-hidden="true">→</span>

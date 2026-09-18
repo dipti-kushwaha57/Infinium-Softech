@@ -5,9 +5,17 @@
   position: relative;
   background-color: $color-bg;
   @include section-padding;
-  padding-top: clamp(80px, 9vw, 120px);
+  padding-top: 48px;
   padding-bottom: clamp(40px, 5vw, 70px);
   overflow: hidden;
+
+  @include respond($bp-sm) {
+    padding-top: 56px;
+  }
+
+  @include respond($bp-md) {
+    padding-top: 72px;
+  }
 }
 
 .contact-hero-container {

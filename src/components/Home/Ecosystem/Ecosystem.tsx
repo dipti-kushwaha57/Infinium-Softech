@@ -46,7 +46,7 @@ export function Ecosystem() {
         if (!inner) return;
 
         gsap.set(inner, {
-          scale: 1,
+          scale: 1, 
           opacity: 1,
           transformOrigin: "center center",
         });

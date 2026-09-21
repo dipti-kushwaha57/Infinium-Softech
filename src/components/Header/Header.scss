@@ -8,6 +8,7 @@
   width: 100%;
 }
 
+
 .site-header {
   position: relative;
   z-index: 1000;
@@ -83,7 +84,8 @@
 
   .nav-menu-btn {
     cursor: pointer;
-    border: none;
+    border: 0;
+    border-bottom: 2px solid transparent;
     background: transparent;
     color: $color-ink-soft;
     font-family: $font-body;
@@ -102,6 +104,11 @@
     &.is-active {
       background: rgba($color-ink, 0.06);
       color: $color-ink;
+    }
+
+    &.is-active,
+    &.is-route-active {
+      border-bottom-color: $color-ink;
     }
 
     .caret {

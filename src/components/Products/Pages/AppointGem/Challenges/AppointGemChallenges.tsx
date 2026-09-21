@@ -105,7 +105,7 @@ export function AppointGemChallenges() {
             <div>
               <span data-reveal="" className="challenges-eyebrow">Key challenges</span>
               <h2 data-reveal="" id="challenges-title" className="challenges-headline">
-                What broke before the platform
+                What broke before <br className="mobile-title-break" />the platform
               </h2>
             </div>
             <p data-reveal="" className="challenges-subtitle">

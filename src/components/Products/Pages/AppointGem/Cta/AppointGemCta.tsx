@@ -10,7 +10,7 @@ export function AppointGemCta() {
           <div className="cta-content">
             <span data-reveal="" className="cta-tag">Book consultation</span>
             <h2 data-reveal="" id="cta-title" className="cta-headline">
-              See AppointGem against your own calendar
+              See AppointGem <br className="mobile-title-break" />against your own calendar
             </h2>
             <p data-reveal="" className="cta-subtitle">
               Bring one week of real bookings. An implementation lead maps it into the product live and shows you where the gaps are.

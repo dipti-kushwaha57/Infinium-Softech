@@ -22,7 +22,7 @@ export function AppointGemHero({ product }: { product: ProductItem }) {
 
       if (!desktopQuery.matches) {
         interfaceElement.style.transform = "";
-        interfaceElement.style.zIndex = "";
+        interfaceElement.style.zIndex = ""; 
         intro.style.transform = "";
         intro.style.opacity = "";
         return;
@@ -98,20 +98,22 @@ export function AppointGemHero({ product }: { product: ProductItem }) {
             Bookings, staff and payments on <span className="highlight">one live calendar.</span>
           </h1>
 
-          <p data-reveal="" className="appointgem-hero-copy">
-            AppointGem is the business booking and management platform for appointment-led teams.
-            Multi-location calendars, staff-level availability, payments and reminder journeys run in one system,
-            so the front desk, the practitioner and accounts all work from the same record.
-          </p>
-        </div>
+          <div className="appointgem-hero-right">
+            <p data-reveal="" className="appointgem-hero-copy">
+              AppointGem is the business booking and management platform for appointment-led teams.
+              Multi-location calendars, staff-level availability, payments and reminder journeys run in one system,
+              so the front desk, the practitioner and accounts all work from the same record.
+            </p>
 
-        <div data-reveal="" className="appointgem-hero-actions">
-          <Link href="/contact" className="appointgem-hero-primary">
-            Book a walkthrough <span aria-hidden="true">→</span>
-          </Link>
-          <a href="#interface" className="appointgem-hero-secondary">
-            See the interface
-          </a>
+            <div data-reveal="" className="appointgem-hero-actions">
+              <Link href="/contact" className="appointgem-hero-primary">
+                Book a walkthrough <span aria-hidden="true">→</span>
+              </Link>
+              <a href="#interface" className="appointgem-hero-secondary">
+                See the interface
+              </a>
+            </div>
+          </div>
         </div>
         <div className="section-breakline">
           <hr />

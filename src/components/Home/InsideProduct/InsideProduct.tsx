@@ -81,14 +81,15 @@ export function InsideProduct() {
           <div data-reveal="" className="inside-product-eyebrow">Inside a product</div>
 
           <h2 data-reveal="" className="inside-product-headline">
-            Same platform core,
+            One Platform Core.
             <br />
-            nine ways to work.
+           Multiple Ways to Work.
           </h2>
 
           <p data-reveal="" className="inside-product-intro">
-            Pick a product to see who uses it, the modules it ships with, and how
-            a job moves through it end to end.
+            Explore each product to see who it serves, the capabilities it
+brings together, and how it streamlines workflows from end
+to end.
           </p>
         </div>
 

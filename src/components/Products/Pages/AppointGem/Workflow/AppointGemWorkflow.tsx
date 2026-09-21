@@ -72,7 +72,7 @@ export function AppointGemWorkflow() {
           <div>
             <span data-reveal="" className="workflow-eyebrow">Workflow</span>
             <h2 data-reveal="" id="workflow-title" className="workflow-headline">
-              How a booking moves
+              How a booking <br className="mobile-title-break" />moves
             </h2>
           </div>
           <p data-reveal="" className="workflow-subtitle">

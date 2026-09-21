@@ -46,7 +46,7 @@ export function Ecosystem() {
         if (!inner) return;
 
         gsap.set(inner, {
-          scale: 1,
+          scale: 1, 
           opacity: 1,
           transformOrigin: "center center",
         });
@@ -488,15 +488,16 @@ export function Ecosystem() {
           <div data-reveal="" className="ecosystem-eyebrow">The ecosystem</div>
 
           <h2 data-reveal="" className="ecosystem-headline">
-           Nine platforms. Nine 
+          Built Independently.
             <br />
-            industries. One spine.
+           Connected Seamlessly.
           </h2>
 
           <p data-reveal="" className="ecosystem-intro">
-            Each product ships as its own platform and inherits the same
-            identity, billing, analytics and automation layer. Adopt one,
-            connect the rest when the business is ready.
+            Each product works as a standalone platform while sharing
+a unified foundation for identity, billing, analytics, and
+automation. Choose the solutions you need today and
+expand your ecosystem as your business evolves
           </p>
         </div>
 

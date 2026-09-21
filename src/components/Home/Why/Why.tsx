@@ -64,15 +64,18 @@ export function Why() {
             <div data-reveal="" className="why-eyebrow">Why Infinium Softech</div>
 
             <h2 data-reveal="" className="why-headline">
-              Built like one company,
+              One Engineering Foundation.
               <br />
-              <span className="highlight">shipped like nine.</span>
+              <span className="highlight"> Multiple Powerful
+Products.</span>
             </h2>
           </div>
 
           <p data-reveal="" className="why-intro">
-            Shared cloud infrastructure, one security posture, and a single
-            engineering standard behind every product in the ecosystem.
+            Every product is built on shared cloud infrastructure, a
+unified security foundation, and consistent engineering
+standards — delivering reliability and scalability across the
+entire ecosystem.
           </p>
         </div>
 

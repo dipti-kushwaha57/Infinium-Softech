@@ -50,7 +50,7 @@ export function AppointGemStack() {
             <div className="stack-info">
               <span data-reveal="" className="stack-eyebrow">Technology</span>
               <h2 data-reveal="" id="stack-title" className="stack-headline">
-                The stack behind it
+                The stack behind <br className="mobile-title-break" />it
               </h2>
               <p data-reveal="" className="stack-desc">
                 Same toolchain as every other Infinium product, so a fix in the platform layer lands here too.

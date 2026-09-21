@@ -19,9 +19,6 @@ export function ProductCta() {
           <Link href="/contact" className="btn-primary-blue">
             Talk to us <span className="arrow">→</span>
           </Link>
-          <Link href="/about" className="btn-outline-dark">
-            How we work
-          </Link>
         </div>
       </div>
     </section>

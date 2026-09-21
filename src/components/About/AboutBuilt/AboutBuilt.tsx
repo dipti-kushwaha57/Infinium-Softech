@@ -1,4 +1,5 @@
 import "./AboutBuilt.scss";
+import Image from "next/image";
 
 export function AboutBuilt() {
   return (
@@ -11,9 +12,7 @@ export function AboutBuilt() {
           <h2 data-reveal="" className="about-built-headline">
             One company,<br />nine platforms.
           </h2>
-        </div>
-
-        <div data-reveal="" className="about-built-right">
+          
           <p className="about-built-paragraph">
             Most software firms sell hours. Every engagement starts over, and
             nothing built for one client makes the next one faster. We took the
@@ -27,6 +26,18 @@ export function AboutBuilt() {
             available to the rest the week after.
           </p>
         </div>
+
+        <div data-reveal="" className="about-built-right">
+          <Image
+            src="/solutions/mobile-app.png"
+            alt="Infinium Softech team building digital products"
+            width={640}
+            height={480}
+            sizes="(min-width: 1024px) 50vw, 100vw"
+          />
+        </div>
+
+       
       </div>
     </section>
   );

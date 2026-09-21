@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 interface FeatureShot {
   id: string;
-  num: string;
+  num: string; 
   title: string;
   badge: string;
   image: string;
@@ -142,7 +142,7 @@ export function AppointGemInterface() {
           <div>
             <span data-reveal="" className="appointgem-eyebrow">Interface</span>
             <h2 data-reveal="" id="interface-title" className="interface-headline">
-              Built for the front desk first
+              Built for the <br className="mobile-title-break" />front desk first
             </h2>
           </div>
           <p data-reveal="" className="interface-subtitle">

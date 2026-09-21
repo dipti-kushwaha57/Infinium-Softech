@@ -93,7 +93,7 @@ export function Banner() {
     <section ref={sectionRef} className="banner content-padding" aria-label="Hero Banner">
       <div ref={stickyRef} className="banner-sticky-frame">
         {/* Background Ambient Glows */}
-        <div className="hero-glow-layer" aria-hidden="true">
+        <div className="hero-glow-layer" aria-hidden="true"> 
           <div className="hero-glow-tr" />
           <div className="hero-glow-bl" />
           <div className="hero-glow-center" />
@@ -180,8 +180,8 @@ export function Banner() {
         <div ref={textRef} className="banner-content">
           <div className="banner-eyebrow">
             <span className="eyebrow-dot" aria-hidden="true" />
-            <span className="eyebrow-text">Product ecosystem</span>
-            <span className="eyebrow-pill">9 products. One platform.</span>
+            <span className="eyebrow-text">Powerful Products</span>
+            <span className="eyebrow-pill">One Unified Platform.</span>
           </div>
 
           <h1 className="banner-headline">

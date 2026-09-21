@@ -123,15 +123,16 @@ export function TechStack() {
             <div data-reveal="" className="stack-eyebrow">Technology</div>
 
             <h2 data-reveal="" className="stack-headline">
-              The stack behind
+             The Technology Behind
               <br />
-              <span className="highlight">all nine.</span>
+              <span className="highlight">Every Product.</span>
             </h2>
           </div>
 
           <p data-reveal="" className="stack-intro">
-            Web, mobile and cloud built from one toolchain, so a fix in the
-            platform layer lands across every product in the ecosystem.
+            Web, mobile, and cloud solutions are built on a shared
+technology foundation, so improvements at the platform level
+can benefit products across the entire ecosystem.
           </p>
         </div>
 

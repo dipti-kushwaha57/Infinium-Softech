@@ -85,7 +85,7 @@ export function AppointGemResults() {
           <div>
             <span data-reveal="" className="appointgem-eyebrow">Key results</span>
             <h2 data-reveal="" id="results-title" className="results-headline">
-              Measured across live accounts
+              Measured across <br className="mobile-title-break" />live accounts
             </h2>
           </div>
           <p data-reveal="" className="results-subtitle">

@@ -64,3 +64,26 @@
     padding-bottom: 32px;
   }
 }
+
+// Section Eyebrow Pill Badge (Light background -> Black pill with white text; Dark background -> Lemon pill with black text)
+@mixin section-eyebrow($theme: "light") {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 100px;
+  padding: 5px 14px;
+  font-size: 10.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 600;
+  width: fit-content;
+  white-space: nowrap;
+
+  @if $theme == "dark" {
+    background-color: #c8f24e;
+    color: #0c0c0d;
+  } @else {
+    background-color: #0c0c0d;
+    color: #ffffff;
+  }
+}
+

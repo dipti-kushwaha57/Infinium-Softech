@@ -6,11 +6,5 @@
 }
 
 .mobile-title-break {
-  display: none;
-}
-
-@media (max-width: 767px) {
-  .mobile-title-break {
-    display: block;
-  }
+  display: block;
 }

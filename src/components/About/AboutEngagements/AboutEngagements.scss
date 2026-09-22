@@ -47,11 +47,7 @@
   width: 100%;
 
   .about-engagements-eyebrow {
-    font-size: 10.5px;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: #8a8a8e;
-    font-weight: 600;
+    @include section-eyebrow("dark");
   }
 
   .about-engagements-headline {

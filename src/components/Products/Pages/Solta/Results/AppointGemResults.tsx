@@ -16,7 +16,7 @@ const RESULTS: ResultItem[] = [
     value: "18,412",
     delta: "▲ 16.4%",
     title: "Bookings per month",
-    desc: "Volume handled across live AppointGem accounts this month.",
+    desc: "Volume handled across live Slota accounts this month.",
   },
   {
     value: "86.4%",
@@ -89,7 +89,7 @@ export function AppointGemResults() {
             </h2>
           </div>
           <p data-reveal="" className="results-subtitle">
-            Current month across AppointGem deployments, compared with the same month last year.
+            Current month across Slota deployments, compared with the same month last year.
           </p>
         </div>
 

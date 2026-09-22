@@ -8,7 +8,7 @@ import "./Footer.scss";
 const FOOTER_COLUMNS = [
   {
     title: "Products",
-    items: ["AppointGem", "WelzoKart", "MapMyPay", "Truck Guru", "Trekvano", "TextGem"],
+    items: ["Slota", "WelzoKart", "MapMyPay", "Truck Guru", "Trekvano", "TextGem"],
   },
   {
     title: "Industries",

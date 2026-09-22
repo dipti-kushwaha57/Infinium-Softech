@@ -71,8 +71,8 @@ export const ABOUT_BELIEFS: AboutBelief[] = [
 export const ABOUT_PRODUCTS: AboutProduct[] = [
   {
     n: "01",
-    name: "AppointGem",
-    mark: "AG",
+    name: "Slota",
+    mark: "SL",
     tag: "Bookings",
     tint: ABOUT_TINTS.blue,
     desc: "Business booking and management platform for appointment-led teams.",

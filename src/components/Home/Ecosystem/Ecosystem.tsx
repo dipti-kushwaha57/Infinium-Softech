@@ -46,7 +46,7 @@ export function Ecosystem() {
         if (!inner) return;
 
         gsap.set(inner, {
-          scale: 1, 
+          scale: 1,
           opacity: 1,
           transformOrigin: "center center",
         });
@@ -281,7 +281,7 @@ export function Ecosystem() {
         ? section.getBoundingClientRect().top + window.scrollY
         : 0;
 
-      // Special handling for first card (AppointGem / 01)
+      // Special handling for first card (Slota / 01)
       if (index === 0) {
         const firstSt = stickyTriggersRef.current[0];
         const targetTop =
@@ -488,41 +488,22 @@ export function Ecosystem() {
           <div data-reveal="" className="ecosystem-eyebrow">The ecosystem</div>
 
           <h2 data-reveal="" className="ecosystem-headline">
-          Built Independently.
+            Built Independently.
             <br />
-           Connected Seamlessly.
+            Connected Seamlessly.
           </h2>
 
           <p data-reveal="" className="ecosystem-intro">
             Each product works as a standalone platform while sharing
-a unified foundation for identity, billing, analytics, and
-automation. Choose the solutions you need today and
-expand your ecosystem as your business evolves
+            a unified foundation for identity, billing, analytics, and
+            automation. Choose the solutions you need today and
+            expand your ecosystem as your business evolves
           </p>
         </div>
 
         {/* Section Main Content Grid */}
         <div className="ecosystem-body">
-          {/* Left Number Rail (Sticky on Desktop >= 1024px) */}
-          <nav
-            className="ecosystem-rail"
-            aria-label="Ecosystem navigation rail"
-          >
-            {ECOSYSTEM_PRODUCTS.map((prod, idx) => (
-              <button
-                key={prod.n}
-                type="button"
-                className={`rail-item ${
-                  activeRail === prod.n ? "is-active" : ""
-                }`}
-                onClick={() => scrollToCard(idx)}
-                aria-label={`Jump to ${prod.name}`}
-              >
-                <span className="rail-bar" aria-hidden="true" />
-                <span>{prod.n}</span>
-              </button>
-            ))}
-          </nav>
+
 
           {/* Cards Area with Mobile Navigation Arrows & Bottom Dots */}
           <div className="ecosystem-cards-wrapper">
@@ -679,7 +660,7 @@ expand your ecosystem as your business evolves
                     </div>
                   </div>
                 </div>
-              ))} 
+              ))}
             </div>
 
             {/* Mobile Right Arrow Button (Middle of Card) */}

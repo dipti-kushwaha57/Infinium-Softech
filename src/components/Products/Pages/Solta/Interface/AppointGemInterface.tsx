@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 interface FeatureShot {
   id: string;
-  num: string; 
+  num: string;
   title: string;
   badge: string;
   image: string;
@@ -89,7 +89,7 @@ export function AppointGemInterface() {
 
     const handleScroll = () => {
       if (window.innerWidth >= 1024) return;
-      
+
       const center = container.scrollLeft + container.offsetWidth / 2;
       let closestIndex = 0;
       let closestDistance = Infinity;
@@ -102,7 +102,7 @@ export function AppointGemInterface() {
           closestDistance = distance;
           closestIndex = index;
         }
-      }); 
+      });
 
       setActiveTab(closestIndex);
     };
@@ -136,7 +136,7 @@ export function AppointGemInterface() {
   };
 
   return (
-    <section ref={sectionRef} id="interface" className="appointgem-interface-section" aria-labelledby="interface-title">
+    <section ref={sectionRef} id="interface1" className="appointgem-interface-section" aria-labelledby="interface-title">
       <div className="appointgem-interface-container">
         <div className="interface-header">
           <div>

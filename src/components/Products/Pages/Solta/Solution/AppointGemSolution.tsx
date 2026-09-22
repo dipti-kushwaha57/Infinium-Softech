@@ -67,7 +67,7 @@ export function AppointGemSolution() {
           <div>
             <span data-reveal="" className="appointgem-eyebrow">Our solution</span>
             <h2 data-reveal="" id="solution-title" className="solution-headline">
-              What ships in <br className="mobile-title-break" />AppointGem
+              What ships in <br className="mobile-title-break" />Slota
             </h2>
           </div>
           <p data-reveal="" className="solution-subtitle">
@@ -115,7 +115,7 @@ export function AppointGemSolution() {
                 <h3 className="single-solution-title">{currentSolution.title}</h3>
                 <p className="single-solution-desc">{currentSolution.desc}</p>
                 <div className="card-bottom-row">
-                  <span className="card-chip">Included in AppointGem</span>
+                  <span className="card-chip">Included in Slota</span>
                   <span className="card-indicator-dot" style={{ backgroundColor: currentSolution.tint }} />
                 </div>
               </div>

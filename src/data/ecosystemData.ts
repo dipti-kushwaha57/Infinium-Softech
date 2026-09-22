@@ -18,10 +18,10 @@ export interface EcosystemProduct {
 
 export const ECOSYSTEM_PRODUCTS: EcosystemProduct[] = [
   {
-    id: "appointgem",
+    id: "slota",
     n: "01",
-    name: "AppointGem",
-    mark: "AG",
+    name: "Slota",
+    mark: "SL",
     tag: "Bookings",
     tint: "#1F31E8",
     wash: "rgba(31, 49, 232, 0.16)",

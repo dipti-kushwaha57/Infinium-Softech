@@ -8,14 +8,14 @@ const NAV_ITEMS = [
   { label: "Interface", href: "#interface1" },
   { label: "Key challenges", href: "#challenges" },
   { label: "Our solution", href: "#solution" },
-  { label: "Workflow", href: "#workflow" }, 
+  { label: "Workflow", href: "#workflow" },
   { label: "Key results", href: "#results" },
   { label: "Technology", href: "#stack" },
 ];
 
 export function AppointGemNav() {
   const [activeSection, setActiveSection] = useState("overview");
- 
+
   useEffect(() => {
     const handleScroll = () => {
       const sections = NAV_ITEMS.map((item) => item.href.substring(1));

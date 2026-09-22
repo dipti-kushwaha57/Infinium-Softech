@@ -16,7 +16,7 @@ export function Header() {
   const router = useRouter();
   const pathname = usePathname();
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
-  const [previewProductName, setPreviewProductName] = useState<string>("AppointGem");
+  const [previewProductName, setPreviewProductName] = useState<string>("Slota");
   const [isMobile, setIsMobile] = useState(false);
 
   const headerRef = useRef<HTMLDivElement>(null);
@@ -188,6 +188,14 @@ export function Header() {
 
           {/* Desktop Nav Tabs */}
           <div className="nav-desktop">
+            <Link
+              href="/about"
+              className={`nav-menu-btn ${pathname === "/about" ? "is-route-active" : ""}`}
+              onClick={() => setActiveMenu(null)}
+            >
+              About
+            </Link>
+
             {MENU_KEYS.map((key) => {
               const def = MENU_DEFS[key];
               const isOpen = activeMenu === key;
@@ -211,16 +219,24 @@ export function Header() {
                 </button>
               );
             })}
+
+            <Link
+              href="/contact"
+              className={`nav-menu-btn ${pathname === "/contact" ? "is-route-active" : ""}`}
+              onClick={() => setActiveMenu(null)}
+            >
+              Contact Us
+            </Link>
           </div>
 
           {/* Responsive Toggle & Action Button */}
           <div className="actions">
             <Link
-              href="#demo"
+              href="/contact"
               className="cta"
               onClick={() => setActiveMenu(null)}
             >
-              Book a demo <span aria-hidden="true">→</span>
+              Book a Demo <span aria-hidden="true">→</span>
             </Link>
 
             {/* Mobile/Compact Trigger Button */}
@@ -268,7 +284,7 @@ export function Header() {
             }
           }}
         >
-          <div className="mega-menu-inner">
+          <div className={`mega-menu-inner ${currentMenuDef?.key === "technology" ? "is-tech-menu" : ""}`}>
             {/* Left Content Column */}
             <div className="mega-left-col">
               {/* Category Eyebrow Header */}
@@ -280,6 +296,14 @@ export function Header() {
               {/* Mobile / Tablet Horizontal Category Chip Tabs */}
               <div className="mobile-category-chips-wrapper">
                 <div className="mobile-category-chips">
+                  <Link
+                    href="/about"
+                    className={`category-chip ${pathname === "/about" ? "is-selected" : ""}`}
+                    onClick={() => setActiveMenu(null)}
+                  >
+                    About
+                  </Link>
+
                   {MENU_KEYS.map((key) => {
                     const def = MENU_DEFS[key];
                     const isSelected = currentMenuKey === key;
@@ -297,6 +321,14 @@ export function Header() {
                       </button>
                     );
                   })}
+
+                  <Link
+                    href="/contact"
+                    className={`category-chip ${pathname === "/contact" ? "is-selected" : ""}`}
+                    onClick={() => setActiveMenu(null)}
+                  >
+                    Contact Us
+                  </Link>
                 </div>
               </div>
 
@@ -337,7 +369,7 @@ export function Header() {
 
               {/* Generic Menu Links Layout (Industries, Solutions, Technology, Company, Demo) */}
               {!currentMenuDef.isProducts && currentMenuDef.items && (
-                <div className="links-grid">
+                <div className={`links-grid ${currentMenuDef.key === "technology" ? "tech-links-grid" : ""}`}>
                   {currentMenuDef.items.map((item) => {
                     const isSelected = previewProductName === item.product;
                     const matchedProd = ECOSYSTEM_PRODUCTS.find((p) => p.name === item.product);
@@ -398,50 +430,52 @@ export function Header() {
               </div>
             </div>
 
-            {/* Right Preview Card */}
-            <div className="preview-card">
-              <div
-                className="preview-image-wrapper"
-                style={{ backgroundColor: currentPreviewProduct.wash }}
-              >
-                <Image
-                  src={currentPreviewProduct.shot}
-                  alt={currentPreviewProduct.name}
-                  width={480}
-                  height={300}
-                  className="preview-img"
-                  loading="eager"
-                />
-              </div>
-              <div className="preview-content">
-                <div className="preview-tag">{currentPreviewProduct.tag}</div>
-                <div className="preview-title">{currentPreviewProduct.name}</div>
-                <div className="preview-desc">{currentPreviewProduct.desc}</div>
-                <div className="preview-actions">
-                  <Link
-                    href="#demo"
-                    className="btn-launch"
-                    onClick={() => setActiveMenu(null)}
-                  >
-                    Launch demo <span aria-hidden="true">→</span>
-                  </Link>
-                  <Link
-                    href={`#${currentPreviewProduct.id}`}
-                    className="btn-details"
-                    onClick={() => {
-                      setActiveMenu(null);
-                      window.dispatchEvent(
-                        new CustomEvent("scroll-to-ecosystem-product", {
-                          detail: { id: currentPreviewProduct.id },
-                        })
-                      );
-                    }}
-                  >
-                    View details
-                  </Link>
+            {/* Right Preview Card (Hidden for Technology Menu) */}
+            {currentMenuDef.key !== "technology" && (
+              <div className="preview-card">
+                <div
+                  className="preview-image-wrapper"
+                  style={{ backgroundColor: currentPreviewProduct.wash }}
+                >
+                  <Image
+                    src={currentPreviewProduct.shot}
+                    alt={currentPreviewProduct.name}
+                    width={480}
+                    height={300}
+                    className="preview-img"
+                    loading="eager"
+                  />
+                </div>
+                <div className="preview-content">
+                  <div className="preview-tag">{currentPreviewProduct.tag}</div>
+                  <div className="preview-title">{currentPreviewProduct.name}</div>
+                  <div className="preview-desc">{currentPreviewProduct.desc}</div>
+                  <div className="preview-actions">
+                    <Link
+                      href="#demo"
+                      className="btn-launch"
+                      onClick={() => setActiveMenu(null)}
+                    >
+                      Launch demo <span aria-hidden="true">→</span>
+                    </Link>
+                    <Link
+                      href={`#${currentPreviewProduct.id}`}
+                      className="btn-details"
+                      onClick={() => {
+                        setActiveMenu(null);
+                        window.dispatchEvent(
+                          new CustomEvent("scroll-to-ecosystem-product", {
+                            detail: { id: currentPreviewProduct.id },
+                          })
+                        );
+                      }}
+                    >
+                      View details
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       )}

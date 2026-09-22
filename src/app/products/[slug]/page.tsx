@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { AppointGem } from "@/components/Products/Pages/AppointGem/AppointGem";
+import { AppointGem } from "@/components/Products/Pages/Solta/AppointGem";
 import { PRODUCT_ITEMS } from "@/data/productsData";
 
 type ProductPageProps = {
@@ -36,7 +36,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
     notFound();
   }
 
-  if (product.id === "appointgem") {
+  if (product.id === "slota") {
     return <AppointGem product={product} />;
   }
 

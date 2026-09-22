@@ -204,9 +204,8 @@ function StepCardView({
 }) {
   return (
     <div
-      className={`step-card ${
-        isClone ? "step-card--clone" : `step-card--${index + 1}`
-      }`}
+      className={`step-card ${isClone ? "step-card--clone" : `step-card--${index + 1}`
+        }`}
       data-card
       aria-hidden={isClone ? "true" : undefined}
     >
@@ -239,9 +238,8 @@ function EngagementCardView({
 }) {
   return (
     <div
-      className={`engagement-card ${
-        isClone ? "engagement-card--clone" : `engagement-card--${index + 1}`
-      }`}
+      className={`engagement-card ${isClone ? "engagement-card--clone" : `engagement-card--${index + 1}`
+        }`}
       data-card
       aria-hidden={isClone ? "true" : undefined}
     >
@@ -271,7 +269,7 @@ function EngagementCardView({
 
       <div className="engagement-footer">
         <span className="fit-label">{model.fit}</span>
-        <Link href="#demo" className="btn-talk">
+        <Link href="contact" className="btn-talk">
           Talk to us{" "}
           <span className="arrow" aria-hidden="true">
             →
@@ -478,7 +476,7 @@ export function Delivery() {
                   </span>
                 </Link>
 
-                <Link href="#demo" className="btn-secondary-consult">
+                <Link href="/contact" className="btn-secondary-consult">
                   Talk to sales
                 </Link>
               </div>

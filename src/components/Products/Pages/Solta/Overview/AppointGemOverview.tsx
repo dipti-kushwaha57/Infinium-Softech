@@ -9,7 +9,7 @@ const USE_CASES = [
 ];
 
 const META_ITEMS = [
-  { label: "Product", value: "AppointGem" },
+  { label: "Product", value: "Slota" },
   { label: "Category", value: "Bookings & management" },
   { label: "Platform", value: "Web + staff mobile" },
   { label: "Integration", value: "REST + webhooks" },
@@ -44,7 +44,7 @@ export function AppointGemOverview() {
 
           <div className="overview-right">
             <p data-reveal="" className="overview-lead-p">
-              Appointment businesses lose revenue in the gap between what the calendar says and what staff are actually able to serve. AppointGem closes that gap: availability is derived from live staff rosters per branch, payment state is attached to the booking, and every reminder, reschedule and invoice is written back to the same customer record.
+              Appointment businesses lose revenue in the gap between what the calendar says and what staff are actually able to serve. Slota closes that gap: availability is derived from live staff rosters per branch, payment state is attached to the booking, and every reminder, reschedule and invoice is written back to the same customer record.
             </p>
             <p data-reveal="" className="overview-body-p">
               It ships as its own platform and inherits the shared Infinium layer for sign-in, roles, billing, reporting and cloud, so a clinic chain and a single studio run the same product at different scale.

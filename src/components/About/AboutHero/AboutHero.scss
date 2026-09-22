@@ -24,11 +24,7 @@
 }
 
 .about-hero-eyebrow {
-  font-size: 10.5px;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: $color-muted;
-  font-weight: 600;
+  @include section-eyebrow("light");
 }
 
 .about-hero-headline {

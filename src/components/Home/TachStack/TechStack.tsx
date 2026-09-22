@@ -143,8 +143,6 @@ can benefit products across the entire ecosystem.
               {/* Left Layer Info */}
               <div className="layer-meta">
                 <div className="layer-kicker-row">
-                  <span className="layer-n">{layer.n}</span>
-                  <span className="layer-line" aria-hidden="true" />
                   <span className="layer-kicker">{layer.kicker}</span>
                 </div>
 

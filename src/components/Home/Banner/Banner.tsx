@@ -93,7 +93,7 @@ export function Banner() {
     <section ref={sectionRef} className="banner content-padding" aria-label="Hero Banner">
       <div ref={stickyRef} className="banner-sticky-frame">
         {/* Background Ambient Glows */}
-        <div className="hero-glow-layer" aria-hidden="true"> 
+        <div className="hero-glow-layer" aria-hidden="true">
           <div className="hero-glow-tr" />
           <div className="hero-glow-bl" />
           <div className="hero-glow-center" />

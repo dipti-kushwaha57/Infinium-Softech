@@ -37,7 +37,7 @@ export const CONTACT_SIZES = [
 ];
 
 export const CONTACT_PRODUCTS = [
-  "AppointGem",
+  "Slota",
   "WelzoKart",
   "MapMyPay",
   "Truck Guru",

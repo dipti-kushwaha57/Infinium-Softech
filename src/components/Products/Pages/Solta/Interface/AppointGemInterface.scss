@@ -10,17 +10,21 @@
     @include container;
   }
 
+  .appointgem-eyebrow {
+    @include section-eyebrow("light");
+  }
+
   .interface-header { 
     display: flex;
     flex-direction: column;
     gap: 16px;
 
-    // @include respond($bp-md) {
-    //   flex-direction: row;
-    //   align-items: flex-end;
-    //   justify-content: space-between;
-    //   gap: 50px;
-    // }
+    @include respond($bp-md) {
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 50px;
+    }
 
     @media (max-width: 480px) {
       gap: 12px;

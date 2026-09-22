@@ -80,13 +80,13 @@ export function AppointGemHero({ product }: { product: ProductItem }) {
         <div data-reveal="" className="appointgem-hero-crumbs">
           <Link href="/products">Products</Link>
           <span>/</span>
-          <span className="current">AppointGem</span>
+          <span className="current">Slota</span>
         </div>
 
         <div data-reveal="" className="appointgem-hero-identity">
-          <span className="appointgem-hero-mark">{product.mark || "AG"}</span>
+          <span className="appointgem-hero-mark">{product.mark || "SL"}</span>
           <div>
-            <strong>AppointGem</strong>
+            <strong>Slota</strong>
             <span className="sub">
               <i className="appointgem-hero-pulse-dot" /> Bookings · Live in production
             </span>
@@ -95,12 +95,12 @@ export function AppointGemHero({ product }: { product: ProductItem }) {
 
         <div ref={introRef} className="appointgem-hero-intro">
           <h1 data-reveal="" id="appointgem-title" className="appointgem-hero-title">
-            Bookings, staff and payments on <span className="highlight">one live calendar.</span>
+            Bookings, staff and payments on <br className="mobile-title-break" /> <span className="highlight">one live calendar.</span>
           </h1>
 
           <div className="appointgem-hero-right">
             <p data-reveal="" className="appointgem-hero-copy">
-              AppointGem is the business booking and management platform for appointment-led teams.
+              Slota is the business booking and management platform for appointment-led teams.
               Multi-location calendars, staff-level availability, payments and reminder journeys run in one system,
               so the front desk, the practitioner and accounts all work from the same record.
             </p>
@@ -119,22 +119,22 @@ export function AppointGemHero({ product }: { product: ProductItem }) {
           <hr />
         </div>
         <div ref={interfaceRef} id="interface" className="appointgem-hero-interface">
-          <div className="appointgem-hero-tablet" aria-label="AppointGem Tablet Companies View">
+          <div className="appointgem-hero-tablet" aria-label="Slota Tablet Companies View">
             <div className="appointgem-hero-tablet-screen">
               <img
                 src="/shots/tablet-appointgem.webp"
-                alt="AppointGem Tablet Companies Screen"
+                alt="Slota Tablet Companies Screen"
                 className="appointgem-hero-tablet-img"
               />
             </div>
           </div>
 
-          <div className="appointgem-hero-mobile" aria-label="AppointGem Mobile Companies View">
+          <div className="appointgem-hero-mobile" aria-label="Slota Mobile Companies View">
             <span className="notch" />
             <div className="appointgem-hero-mobile-screen">
               <img
                 src="/shots/mobile-appotingem.webp"
-                alt="AppointGem Mobile Companies Screen"
+                alt="Slota Mobile Companies Screen"
                 className="appointgem-hero-mobile-img"
               />
             </div>

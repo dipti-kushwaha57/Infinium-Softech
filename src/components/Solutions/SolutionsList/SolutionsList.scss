@@ -79,11 +79,7 @@
   }
 
   .eyebrow-label {
-    font-size: 10px;
-    letter-spacing: 0.26em;
-    text-transform: uppercase;
-    color: $color-muted;
-    font-weight: 600;
+    @include section-eyebrow("light");
   }
 }
 

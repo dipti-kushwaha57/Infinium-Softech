@@ -14,17 +14,24 @@
   }
 
   .solution-header {
-    max-width: 760px;
-    margin: 0;
-    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    @include respond($bp-md) {
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 50px;
+    }
+
+    @media (max-width: 480px) {
+      gap: 12px;
+    }
   }
 
   .appointgem-eyebrow {
-    font-size: 10.5px;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: $color-muted;
-    font-weight: 600;
+    @include section-eyebrow("light");
   }
 
   .solution-headline {

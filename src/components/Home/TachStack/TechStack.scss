@@ -45,15 +45,7 @@
   }
 
   .stack-eyebrow {
-    font-size: 10.5px;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: #8a8a8e;
-    font-weight: 600;
-
-    @media (min-width: 768px) and (max-width: 1023px) {
-      font-size: 12px;
-    }
+    @include section-eyebrow("dark");
   }
 
   .stack-headline {
@@ -126,27 +118,8 @@
       align-items: center;
       gap: 12px;
 
-      .layer-n {
-        font-family: $font-display;
-        font-weight: 800;
-        font-size: 12px;
-        letter-spacing: 0.1em;
-        color: #6e7280;
-      }
-
-      .layer-line {
-        width: 26px;
-        height: 1px;
-        background: rgba(241, 240, 236, 0.24);
-        display: inline-block;
-      }
-
       .layer-kicker {
-        font-size: 10px;
-        letter-spacing: 0.24em;
-        text-transform: uppercase;
-        color: #8a8a8e;
-        font-weight: 600;
+        @include section-eyebrow("dark");
       }
     }
 

@@ -26,15 +26,7 @@
 
 .about-built-left {
   .about-built-eyebrow {
-    font-size: 10.5px;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: $color-muted;
-    font-weight: 600;
-
-    @media (min-width: 768px) and (max-width: 1023px) {
-      font-size: 12px;
-    }
+    @include section-eyebrow("light");
   }
 
   .about-built-headline {

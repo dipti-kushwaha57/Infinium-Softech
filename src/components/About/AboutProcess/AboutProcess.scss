@@ -14,15 +14,7 @@
 }
 
 .about-process-eyebrow {
-  font-size: 10.5px;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: #8a8a8e;
-  font-weight: 600;
-
-  @media (min-width: 768px) and (max-width: 1023px) {
-    font-size: 12px;
-  }
+  @include section-eyebrow("dark");
 }
 
 .about-process-header {

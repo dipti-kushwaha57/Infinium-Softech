@@ -1,36 +1,41 @@
 @use "../../../../../styles/variables" as *;
 @use "../../../../../styles/mixins" as *;
 
-.appointgem-results-section {
+.appointgem-workflow-section {
+  background: $color-ink;
+  color: #f1f0ec;
   @include section-padding;
   scroll-margin-top: 130px;
-  background: $color-bg;
 
-  .appointgem-results-container {
+  .appointgem-workflow-container {
     @include container;
   }
 
-  .results-header {
+  .workflow-header-grid {
     display: flex;
     flex-direction: column;
     gap: 16px;
 
-    // @include respond($bp-md) {
-    //   flex-direction: row;
-    //   align-items: flex-end;
-    //   justify-content: space-between;
-    //   gap: 50px;
-    // }
+    @include respond($bp-md) {
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 50px;
+    }
   }
 
-  .results-headline {
+  .workflow-eyebrow {
+    @include section-eyebrow("dark");
+  }
+
+  .workflow-headline {
     font-family: $font-display;
     font-weight: 800;
     font-stretch: 112%;
     font-size: clamp(30px, 4vw, 68px);
     line-height: 0.98;
     letter-spacing: -0.045em;
-    color: $color-ink;
+    color: #f1f0ec;
     margin: 18px 0 0;
 
     @media (max-width: 480px) {
@@ -44,11 +49,11 @@
     }
   }
 
-  .results-subtitle {
+  .workflow-subtitle {
     font-size: 16.5px;
     line-height: 1.6;
-    color: $color-body;
-    max-width: 430px;
+    color: rgba(241, 240, 236, 0.72);
+    max-width: 440px;
     margin: 0 0 8px;
 
     @media (max-width: 768px) {
@@ -57,13 +62,13 @@
     }
   }
 
-  .results-wrap {
+  .workflow-steps-wrap {
     position: relative;
     width: 100%;
     margin-top: 34px;
   }
 
-  .results-track {
+  .workflow-steps-track {
     position: relative;
     width: 100%;
 
@@ -74,29 +79,29 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      width: 36px;
-      height: 36px;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
-      border: 1px solid rgba(12, 12, 13, 0.18);
-      background: rgba(241, 240, 236, 0.95);
-      color: $color-ink;
+      border: 1px solid rgba(241, 240, 236, 0.22);
+      background: rgba(20, 20, 22, 0.95);
+      color: #f1f0ec;
       padding: 0;
       cursor: pointer;
       z-index: 10;
       backdrop-filter: blur(8px);
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.36);
       transition: background-color 0.2s ease, border-color 0.2s ease,
         color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 
       @include respond($bp-sm) {
-        width: 40px;
-        height: 40px;
+        width: 42px;
+        height: 42px;
       }
 
       &:hover {
-        background: $color-ink;
-        color: #ffffff;
-        border-color: $color-ink;
+        background: $color-accent-lime;
+        color: #0c0c0d;
+        border-color: $color-accent-lime;
         transform: translateY(-50%) scale(1.08);
       }
 
@@ -105,11 +110,19 @@
       }
 
       &--left {
-        left: 0px;
+        left: 6px;
+
+        @include respond($bp-sm) {
+          left: 8px;
+        }
       }
 
       &--right {
-        right: 0px;
+        right: 6px;
+
+        @include respond($bp-sm) {
+          right: 8px;
+        }
       }
 
       @include respond($bp-lg) {
@@ -134,7 +147,7 @@
       height: 8px;
       border-radius: 100px;
       border: none;
-      background: rgba(12, 12, 13, 0.18);
+      background: rgba(241, 240, 236, 0.2);
       cursor: pointer;
       padding: 0;
       position: relative;
@@ -152,16 +165,16 @@
 
       &.is-active {
         width: 24px;
-        background: $color-ink;
+        background: $color-accent-lime;
       }
 
       &:hover:not(.is-active) {
-        background: rgba(12, 12, 13, 0.35);
+        background: rgba(241, 240, 236, 0.4);
       }
     }
   }
 
-  .results-grid {
+  .workflow-steps-grid {
     display: flex;
     flex-direction: row;
     overflow-x: auto;
@@ -169,55 +182,57 @@
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     gap: 12px;
-    padding: 4px 38px 8px;
-    scroll-padding-inline: 38px;
+    padding: 4px 9% 8px;
+    scroll-padding-inline: 9%;
 
     &::-webkit-scrollbar {
       display: none;
     }
 
     @media (max-width: 480px) {
-      padding: 4px 30px 8px;
-      scroll-padding-inline: 30px;
+      padding-inline: 6%;
+      scroll-padding-inline: 6%;
       gap: 10px;
     }
 
     @include respond($bp-sm) {
       gap: 14px;
-      padding: 4px 42px 8px;
-      scroll-padding-inline: 42px;
+      padding: 4px 12% 8px;
+      scroll-padding-inline: 12%;
     }
 
     @include respond($bp-lg) {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 1px;
-      background: rgba(12, 12, 13, 0.12);
-      border: 1px solid rgba(12, 12, 13, 0.12);
+      background: rgba(241, 240, 236, 0.18);
+      border: 1px solid rgba(241, 240, 236, 0.18);
       overflow-x: visible;
       padding: 0;
       scroll-snap-type: none;
     }
   }
 
-  .result-card {
-    flex: 0 0 84%;
+  .workflow-step-card {
+    flex: 0 0 82%;
     scroll-snap-align: center;
     scroll-snap-stop: always;
-    background: #f1f0ec;
-    border: 1px solid rgba(12, 12, 13, 0.12);
+    background: $color-ink;
+    border: 1px solid rgba(241, 240, 236, 0.18);
     border-radius: 4px;
-    padding: 30px 26px;
-    transition: background 0.2s ease;
+    padding: 28px 22px 26px;
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.25s ease;
 
     @media (max-width: 480px) {
       flex: 0 0 88%;
-      padding: 24px 20px;
+      padding: 24px 18px 20px;
     }
 
-    @media (min-width: 768px) and (max-width: 1023px) {
-      flex: 0 0 calc(50% - 7px);
-      scroll-snap-align: start;
+    @include respond($bp-sm) {
+      flex: 0 0 76%;
+      padding: 28px 24px 26px;
     }
 
     &--clone {
@@ -229,54 +244,88 @@
     @include respond($bp-lg) {
       flex: initial;
       scroll-snap-align: none;
+      background: $color-ink;
       border: none;
       border-radius: 0;
+      padding: 28px 22px 26px;
 
       &:nth-child(n + 3) {
-        border-left: 1px solid rgba(12, 12, 13, 0.12);
+        border-left: 1px solid rgba(241, 240, 236, 0.18);
       }
     }
 
     &:hover {
-      background: #ffffff;
+      background: rgba(241, 240, 236, 0.05);
     }
   }
 
-  .result-value-row {
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
-
-    .result-value {
-      font-family: $font-display;
-      font-weight: 800;
-      font-stretch: 108%;
-      font-size: clamp(26px, 2.8vw, 44px);
-      line-height: 1;
-      letter-spacing: -0.04em;
-      color: $color-ink;
-    }
-
-    .result-delta {
-      font-size: 12.5px;
-      font-weight: 600;
-      color: #1e9e5a;
-    }
+  .step-num {
+    font-family: $font-display;
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: $color-accent-lime;
   }
 
-  .result-card-title {
+  .step-title {
     font-family: $font-display;
     font-weight: 700;
-    font-size: 15.5px;
-    letter-spacing: -0.015em;
-    color: $color-ink;
-    margin-top: 16px;
+    font-stretch: 108%;
+    font-size: 19px;
+    line-height: 1.18;
+    letter-spacing: -0.025em;
+    color: #f1f0ec;
+    margin: 20px 0 0;
   }
 
-  .result-card-desc {
+  .step-desc {
     font-size: 13.5px;
     line-height: 1.6;
-    color: $color-body;
-    margin-top: 8px;
+    color: rgba(241, 240, 236, 0.72);
+    margin: 10px 0 0;
+  }
+
+  .workflow-roles-bar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px 10px;
+    margin-top: 36px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(241, 240, 236, 0.12);
+
+    .roles-label {
+      font-size: 10.5px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(241, 240, 236, 0.5);
+      font-weight: 600;
+      margin-right: 6px;
+    }
+
+    .roles-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .role-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12.5px;
+      color: #f1f0ec;
+      background: rgba(241, 240, 236, 0.06);
+      border: 1px solid rgba(241, 240, 236, 0.12);
+      border-radius: 4px;
+      padding: 6px 12px;
+
+      .role-mark {
+        font-family: $font-display;
+        font-weight: 800;
+        font-size: 10px;
+        color: $color-accent-lime;
+      }
+    }
   }
 }

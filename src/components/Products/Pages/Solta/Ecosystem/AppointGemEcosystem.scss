@@ -9,6 +9,10 @@
     @include container;
   }
 
+  .appointgem-eyebrow {
+    @include section-eyebrow("light");
+  }
+
   .ecosystem-header { 
     display: flex;
     align-items: flex-end;

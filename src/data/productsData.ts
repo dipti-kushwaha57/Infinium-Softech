@@ -78,10 +78,10 @@ export const PRODUCT_STATS: ProductStat[] = [
 
 export const PRODUCT_ITEMS: ProductItem[] = [
   {
-    id: "appointgem",
+    id: "slota",
     n: "01",
-    name: "AppointGem",
-    mark: "AG",
+    name: "Slota",
+    mark: "SL",
     tag: "Bookings",
     tint: "#1F31E8",
     wash: "#EEF0FE",

@@ -49,22 +49,22 @@ export const ABOUT_BELIEFS: AboutBelief[] = [
   {
     name: "Products, not projects",
     tint: ABOUT_TINTS.blue,
-    desc: "We own what we ship. Every platform stays in active development long after it goes live, funded by the product rather than the next contract.",
+    desc: "We build, launch, and continuously improve products designed to solve real business challenges.",
   },
   {
-    name: "One standard, everywhere",
+    name: "One Foundation. Consistent Standards.",
     tint: ABOUT_TINTS.green,
-    desc: "Shared cloud infrastructure, a single security posture and one engineering standard across all nine products. No product runs on its own rules.",
+    desc: "Shared technology, security, and engineering standards create consistency across our growing product ecosystem.",
   },
   {
-    name: "Built for operators",
+    name: "Built Around Real Work",
     tint: ABOUT_TINTS.amber,
-    desc: "The people using these tools run dispatch desks, clinics, kitchens and fleets. What they do every day sets what gets built.",
+    desc: "Real workflows and customer feedback shape products that solve practical challenges across diverse industries.",
   },
   {
-    name: "Delivery is the product",
+    name: "From Build to Business",
     tint: ABOUT_TINTS.violet,
-    desc: "Migration, training and rollout are led by the team that builds the software, not handed to a separate services arm.",
+    desc: "We support implementation, migration, training, and rollout to help businesses achieve meaningful product adoption.",
   },
 ];
 

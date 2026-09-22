@@ -10,8 +10,8 @@ export function AboutHero() {
         <div className="hero-glow-bl" />
         <div className="hero-glow-center" />
         <div className="hero-orbs">
-        <div className="orb-bl" />
-        <div className="orb-tr" />
+          <div className="orb-bl" />
+          <div className="orb-tr" />
         </div>
       </div>
 
@@ -21,14 +21,12 @@ export function AboutHero() {
         </div>
 
         <h1 data-reveal="" className="about-hero-headline">
-          We build products, <span className="highlight"> <br/> not projects.</span>
+          We build products, <span className="highlight"> <br /> not projects.</span>
         </h1>
 
         <div className="about-hero-grid">
           <p data-reveal="" className="about-hero-desc">
-            Infinium Softech runs nine proprietary platforms on one shared core.
-            The same identity, billing, notifications, analytics and security
-            layer sits behind every one of them.
+            Infinium Softech creates proprietary digital products on a shared technology foundation. From identity and billing to notifications, analytics, and security, our common infrastructure enables every product to evolve faster, scale reliably, and deliver a consistent experience.
           </p>
 
           <div data-reveal="" className="about-hero-actions">

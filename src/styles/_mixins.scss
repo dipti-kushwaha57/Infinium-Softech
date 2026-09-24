@@ -69,14 +69,18 @@
 @mixin section-eyebrow($theme: "light") {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  text-align: center;
   border-radius: 100px;
-  padding: 5px 14px;
+  padding: 6px 14px 5px;
   font-size: 10.5px;
   letter-spacing: 0.22em;
+  text-indent: 0.22em;
   text-transform: uppercase;
   font-weight: 600;
   width: fit-content;
   white-space: nowrap;
+  line-height: 1;
 
   @if $theme == "dark" {
     background-color: #c8f24e;

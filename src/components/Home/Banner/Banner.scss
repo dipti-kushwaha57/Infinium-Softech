@@ -189,12 +189,16 @@
   .banner-eyebrow {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 1;
     gap: 6px;
     border: 1px solid rgba($color-ink, 0.16);
     border-radius: 100px;
     padding: 4px 5px 4px 10px;
     font-size: clamp(9px, 2.6vw, 11px);
     letter-spacing: 0.08em;
+    text-indent: 0.08em;
     text-transform: uppercase;
     color: $color-ink-soft;
     background: rgba($color-bg, 0.8);
@@ -207,12 +211,14 @@
       gap: 12px;
       padding: 6px 8px 6px 14px;
       letter-spacing: 0.18em;
+      text-indent: 0.18em;
     }
 
     @include respond($bp-md) {
       gap: 14px;
       padding: 7px 8px 7px 16px;
       letter-spacing: 0.22em;
+      text-indent: 0.22em;
       background: rgba(241, 240, 236, 0.7);
     }
   }
@@ -227,15 +233,26 @@
   }
 
   .eyebrow-text {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 1;
     font-weight: 500;
   }
 
   .eyebrow-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 1;
     background: $color-ink;
     color: $color-bg;
     border-radius: 100px;
-    padding: 3px 8px;
+    padding: 4px 8px 3px;
     letter-spacing: 0.04em;
+    text-indent: 0.04em;
     text-transform: none;
     font-size: clamp(9px, 2.5vw, 11.5px);
     font-weight: 500;
@@ -244,12 +261,14 @@
     @include respond($bp-sm) {
       padding: 4px 10px;
       letter-spacing: 0.06em;
+      text-indent: 0.06em;
     }
 
     @include respond($bp-md) {
       padding: 5px 12px;
       font-size: 11.5px;
       letter-spacing: 0.08em;
+      text-indent: 0.08em;
     }
   }
 

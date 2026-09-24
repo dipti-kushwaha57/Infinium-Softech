@@ -19,19 +19,17 @@ export function Operators() {
         <div className="operators-header">
           <div className="operators-title-wrap">
             <span data-reveal="" className="operators-eyebrow">
-              Trusted by operators
+              Industry Solutions
             </span>
             <h2 data-reveal="" className="operators-headline">
-              Running real operations
+              Technology for
               <br />
-              in nine industries.
+              Every Industry
             </h2>
           </div>
 
           <p data-reveal="" className="operators-intro">
-            Powering real-world operations with reliable, scalable technology
-            built to simplify workflows, improve efficiency, and help businesses
-            grow.
+            Flexible, scalable solutions designed to simplify operations, improve efficiency, and solve real-world challenges across diverse industries.
           </p>
         </div>
       </div>

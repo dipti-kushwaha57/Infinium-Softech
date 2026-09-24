@@ -383,8 +383,14 @@
 // Desks Box (2x2 grid with borders on desktop, interactive carousel on small size)
 .desks-card {
   .desks-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 1;
     font-size: 10.5px;
     letter-spacing: 0.28em;
+    text-indent: 0.28em;
     text-transform: uppercase;
     color: $color-muted;
     font-weight: 600;
@@ -676,8 +682,14 @@
   border-radius: 4px;
 
   .steps-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 1;
     font-size: 10.5px;
     letter-spacing: 0.28em;
+    text-indent: 0.28em;
     text-transform: uppercase;
     color: #8a8a8e;
     font-weight: 600;

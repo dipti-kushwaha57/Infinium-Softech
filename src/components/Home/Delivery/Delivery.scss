@@ -650,14 +650,20 @@
     }
 
     .consultation-badge {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      line-height: 1;
       border: 1px solid rgba(241, 240, 236, 0.24);
       padding: 7px 14px;
       font-size: 10.5px;
       letter-spacing: 0.26em;
+      text-indent: 0.26em;
       text-transform: uppercase;
       color: #b6b6ba;
       font-weight: 600;
+      border-radius: 100px;
     }
 
     .consultation-title {

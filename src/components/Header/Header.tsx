@@ -190,8 +190,11 @@ export function Header() {
           <div className="nav-desktop">
             <Link
               href="/about"
-              className={`nav-menu-btn ${pathname === "/about" ? "is-route-active" : ""}`}
+              className={`nav-menu-btn ${!activeMenu && pathname === "/about" ? "is-route-active" : ""}`}
               onClick={() => setActiveMenu(null)}
+              onMouseEnter={() => {
+                if (!isMobile) setActiveMenu(null);
+              }}
             >
               About
             </Link>
@@ -200,8 +203,9 @@ export function Header() {
               const def = MENU_DEFS[key];
               const isOpen = activeMenu === key;
               const isRouteActive =
-                (key === "products" && pathname.startsWith("/products")) ||
-                (key === "solutions" && pathname === "/solutions");
+                !activeMenu &&
+                ((key === "products" && pathname.startsWith("/products")) ||
+                  (key === "solutions" && pathname === "/solutions"));
               return (
                 <button
                   key={key}
@@ -222,8 +226,11 @@ export function Header() {
 
             <Link
               href="/contact"
-              className={`nav-menu-btn ${pathname === "/contact" ? "is-route-active" : ""}`}
+              className={`nav-menu-btn ${!activeMenu && pathname === "/contact" ? "is-route-active" : ""}`}
               onClick={() => setActiveMenu(null)}
+              onMouseEnter={() => {
+                if (!isMobile) setActiveMenu(null);
+              }}
             >
               Contact Us
             </Link>

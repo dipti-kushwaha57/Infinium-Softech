@@ -18,10 +18,25 @@ export function Header() {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [previewProductName, setPreviewProductName] = useState<string>("Slota");
   const [isMobile, setIsMobile] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const headerRef = useRef<HTMLDivElement>(null);
   const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const chipRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+
+  // Detect scroll to decrease header size
+  useEffect(() => {
+    function handleScroll() {
+      if (window.scrollY > 30) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    }
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Detect screen size for responsive mode
   useEffect(() => {
@@ -180,7 +195,7 @@ export function Header() {
         }
       }}
     >
-      <header className="site-header">
+      <header className={`site-header ${isScrolled ? "is-scrolled" : ""}`}>
         <nav className="nav content-padding" aria-label="Main Navigation">
           <Link
             href="/"

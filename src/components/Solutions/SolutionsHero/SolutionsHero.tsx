@@ -48,7 +48,7 @@ export function SolutionsHero() {
         </div>
 
         {/* Quick Index Grid */}
-        <div className="solutions-hero-index">
+        {/* <div className="solutions-hero-index">
           {HERO_INDEX_ITEMS.map((item) => (
             <Link
               key={item.num}
@@ -58,17 +58,18 @@ export function SolutionsHero() {
             >
               <div className="index-content">
                 <span className="index-num">{item.num}</span>
-                <span className="index-title">{item.title}</span>
+                <div className="index-title-row">
+                  <span
+                    className="index-dot"
+                    style={{ backgroundColor: item.color }}
+                    aria-hidden="true"
+                  />
+                  <span className="index-title">{item.title}</span>
+                </div>
               </div>
-
-              <span
-                className="index-dot"
-                style={{ backgroundColor: item.color }}
-                aria-hidden="true"
-              />
             </Link>
           ))}
-        </div>
+        </div> */}
       </div>
     </section>
   );

@@ -1,11 +1,38 @@
 import Link from "next/link";
 import Image from "next/image";
 import "./SolutionsList.scss";
-import { SOLUTIONS_LIST_DATA } from "@/data/solutions/solutionsData";
+import {
+  SOLUTIONS_LIST_DATA,
+  HERO_INDEX_ITEMS,
+} from "@/data/solutions/solutionsData";
 
 export function SolutionsList() {
   return (
     <div className="solutions-list-wrapper">
+      {/* Sticky Category Index Navigation Bar */}
+      <section className="solutions-sticky-bar-section">
+        <div className="solutions-sticky-container">
+          <div className="solutions-hero-index solutions-sticky-index">
+            {HERO_INDEX_ITEMS.map((item) => (
+              <Link key={item.num} href={item.href} className="index-card">
+                <div className="index-content">
+                  {/* <span className="index-num">{item.num}</span> */}
+                  <div className="index-title-row">
+                    <span
+                      className="index-dot"
+                      style={{ backgroundColor: item.color }}
+                      aria-hidden="true"
+                    />
+                    <span className="index-title">{item.title}</span>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Solutions Item Sections */}
       {SOLUTIONS_LIST_DATA.map((item, idx) => {
         const isWhite = idx % 2 === 1;
         return (

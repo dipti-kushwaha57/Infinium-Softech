@@ -134,8 +134,8 @@
   font-family: $font-display;
   font-weight: 800;
   font-stretch: 110%;
-  font-size: clamp(38px, 5.8vw, 96px);
-  line-height: 0.94;
+  font-size: clamp(42px, 5vw, 96px);
+  line-height: 0.9;
   letter-spacing: -0.045em;
   color: #0c0c0d;
 
@@ -145,8 +145,12 @@
   }
 
   @media (min-width: 768px) and (max-width: 1023px) {
-    font-size: 44px;
-    line-height: 1.02;
+    font-size: 52px;
+    line-height: 0.94;
+  }
+
+  @media (min-width: 1280px) {
+    font-size: clamp(58px, 4.5vw, 96px);
   }
 }
 

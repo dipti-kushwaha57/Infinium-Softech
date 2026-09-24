@@ -8,7 +8,7 @@ import {
   CONTACT_STEPS,
   ContactDesk,
 } from "@/data/contactData";
-import "./ContactForm.scss"; 
+import "./ContactForm.scss";  
 
 export function ContactForm() {
   const [name, setName] = useState("");

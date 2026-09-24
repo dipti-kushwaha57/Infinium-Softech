@@ -41,26 +41,39 @@
     padding: 14px 18px;
     white-space: nowrap;
     border-bottom: 2px solid transparent;
-    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
     border-radius: 4px 4px 0 0;
+    background: transparent;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 
-    &:hover {
-      color: $color-ink;
-      background: rgba(12, 12, 13, 0.03);
-      border-bottom-color: rgba($color-accent, 0.4);
+    // Hover ONLY on real mouse devices (no sticky hover on touch)
+    // and lighter than the active style so they never look the same
+    @media (hover: hover) and (pointer: fine) {
+      &:hover:not(.active) {
+        color: $color-accent;
+        background: rgba($color-accent, 0.05);
+      }
     }
 
+    // Keyboard focus only
+    &:focus-visible {
+      outline: 2px solid $color-accent;
+      outline-offset: -2px;
+    }
+
+    // Only ONE item can have this style
     &.active {
       color: $color-accent;
       font-weight: 600;
       border-bottom-color: $color-accent;
-      background: rgba($color-accent, 0.05);
+      background: rgba($color-accent, 0.08);
     }
   }
 
   @media (max-width: 768px) {
-    top: 60px;
-    margin-top: 16px;
+    top: 56px;
+    margin-top: 0;
 
     .appointgem-subnav-item {
       font-size: 13px;
@@ -69,8 +82,8 @@
   }
 
   @media (max-width: 480px) {
-    top: 56px;
-    margin-top: 12px;
+    top: 52px;
+    margin-top: 0;
 
     .appointgem-subnav-container {
       gap: 2px;
@@ -80,5 +93,10 @@
       font-size: 12px;
       padding: 10px 12px;
     }
+  }
+
+  @media (max-width: 380px) {
+    top: 48px;
+    margin-top: 0;
   }
 }

@@ -3,30 +3,45 @@
 
 .site-footer {
   position: relative;
+
+  width: 100%;
+
   background-color: $color-ink;
   color: $color-bg;
+
   padding-top: clamp(60px, 7vw, 100px);
   padding-bottom: 36px;
-  width: 100%;
+
+  // ==========================================
+  // TOP
+  // ==========================================
 
   .top {
     @include container;
+
     display: grid;
     grid-template-columns: 1fr;
     gap: 0;
 
-    // Desktop (>= 1024px): 5 columns in one row, always expanded (no toggle)
     @media (min-width: 1024px) {
       grid-template-columns: 1.5fr repeat(4, minmax(0, 1fr));
+
       gap: 40px clamp(20px, 2.5vw, 48px);
+
       align-items: start;
     }
   }
 
+  // ==========================================
+  // BRAND
+  // ==========================================
+
   .brand {
     grid-column: 1 / -1;
+
     margin-bottom: 24px;
     padding-bottom: 24px;
+
     border-bottom: 1px solid $color-border-on-dark;
 
     @media (min-width: 768px) and (max-width: 1023px) {
@@ -36,14 +51,16 @@
 
     @media (min-width: 1024px) {
       grid-column: auto;
-      border-bottom: none;
+
       margin-bottom: 0;
       padding-bottom: 0;
+
+      border-bottom: none;
     }
 
     img {
-      height: 34px;
       width: auto;
+      height: 34px;
 
       @media (max-width: 480px) {
         height: 30px;
@@ -51,11 +68,14 @@
     }
 
     p {
+      max-width: 440px;
+
+      margin-top: 18px;
+
       font-size: 14.5px;
       line-height: 1.6;
+
       color: $color-on-dark-muted;
-      margin-top: 18px;
-      max-width: 440px;
 
       @media (min-width: 768px) and (max-width: 1023px) {
         max-width: 540px;
@@ -66,81 +86,176 @@
       }
 
       @media (max-width: 768px) {
+        max-width: 100%;
+
+        margin-top: 14px;
+
         font-size: 14px;
         line-height: 1.55;
-        margin-top: 14px;
       }
     }
   }
 
+  // ==========================================
+  // COLUMN
+  // ==========================================
+
   .column {
     min-width: 0;
-    border-bottom: 1px solid $color-border-on-dark;
+
+    // ----------------------------------------
+    // MOBILE / TABLET
+    // ----------------------------------------
+
+    @media (max-width: 1023px) {
+      /*
+       * ONE SINGLE BOX
+       *
+       * This box contains:
+       * 1. Header / title
+       * 2. UL / links
+       *
+       * LI does NOT have any box.
+       */
+
+      border: 1px solid rgba(255, 255, 255, 0.12);
+
+      border-radius: 10px;
+
+      background: rgba(255, 255, 255, 0.035);
+
+      margin-bottom: 10px;
+
+      overflow: hidden;
+
+      transition:
+        border-color 0.25s ease,
+        background-color 0.25s ease;
+
+      &.is-open {
+        border-color: rgba(255, 255, 255, 0.18);
+
+        background: rgba(255, 255, 255, 0.045);
+      }
+    }
+
+    // ----------------------------------------
+    // DESKTOP
+    // ----------------------------------------
 
     @media (min-width: 1024px) {
-      border-bottom: none;
+      border: none;
+
+      border-radius: 0;
+
+      background: transparent;
+
+      margin-bottom: 0;
     }
+
+    // ========================================
+    // HEADER
+    // ========================================
 
     .column-header-btn {
       width: 100%;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 8px;
-      padding: 12px 16px;
+
       display: flex;
+
       align-items: center;
+
       justify-content: space-between;
-      cursor: pointer;
+
+      padding: 16px 16px;
+
+      background: transparent;
+
+      border: none;
+
+      color: inherit;
+
       text-align: left;
-      color: #ffffff;
+
+      cursor: pointer;
+
       box-sizing: border-box;
-      margin-top: 14px;
-      margin-bottom: 14px;
-      transition: background-color 0.2s ease, border-color 0.2s ease;
+
+      transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+
+      @media (max-width: 480px) {
+        padding: 15px 15px;
+      }
+
+      @media (min-width: 768px) and (max-width: 1023px) {
+        padding: 17px 18px;
+      }
 
       @media (min-width: 1024px) {
+        display: block;
+
+        padding: 0 0 20px 0;
+
         cursor: default;
+
         pointer-events: none;
-        background: transparent;
-        border: none;
-        border-radius: 0;
-        padding: 0;
-        margin-top: 0;
-        margin-bottom: 18px;
-        width: auto;
       }
 
       &:hover {
-        background: rgba(255, 255, 255, 0.07);
-        border-color: rgba(255, 255, 255, 0.2);
-
-        @media (min-width: 1024px) {
-          background: transparent;
-          border-color: transparent;
+        @media (max-width: 1023px) {
+          background: rgba(255, 255, 255, 0.025);
         }
       }
+
+      // --------------------------------------
+      // TITLE
+      // --------------------------------------
 
       .column-title {
         display: inline-block;
-        font-size: 12px;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        color: rgba(255, 255, 255, 0.9);
+
+        font-size: 12.5px;
+
         font-weight: 700;
+
+        letter-spacing: 0.14em;
+
         line-height: 1;
 
+        text-transform: uppercase;
+
+        color: rgba(255, 255, 255, 0.9);
+
         @media (min-width: 1024px) {
-          font-size: 12.5px;
+          font-size: 13px;
+
           letter-spacing: 0.16em;
+        }
+
+        @media (max-width: 480px) {
+          font-size: 12px;
         }
       }
 
+      // --------------------------------------
+      // ARROW
+      // --------------------------------------
+
       .toggle-icon {
         display: flex;
+
         align-items: center;
+
         justify-content: center;
+
+        flex-shrink: 0;
+
         color: rgba(255, 255, 255, 0.6);
-        transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
+
+        transition:
+          transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+          color 0.2s ease;
 
         svg {
           width: 14px;
@@ -153,13 +268,15 @@
       }
     }
 
+    // ========================================
+    // OPEN STATE
+    // ========================================
+
     &.is-open {
       .column-header-btn {
-        background: rgba(255, 255, 255, 0.08);
-        border-color: rgba(255, 255, 255, 0.24);
-
         .toggle-icon {
           transform: rotate(180deg);
+
           color: #ffffff;
         }
 
@@ -173,40 +290,106 @@
       }
     }
 
+    // ========================================
+    // UL
+    // ========================================
+
     .column-list {
       display: none;
+
       flex-direction: column;
-      gap: 10px;
+
       list-style: none;
-      padding: 0 0 20px 0;
+
+      padding: 0 16px 17px 16px;
+
       margin: 0;
 
-      @media (min-width: 1024px) {
-        display: flex !important;
-        padding: 0;
-        gap: 11px;
+      gap: 9px;
+
+      /*
+       * IMPORTANT:
+       * NO border
+       * NO background
+       * NO radius
+       *
+       * The BOX belongs to .column,
+       * not .column-list and not li.
+       */
+
+      @media (min-width: 768px) and (max-width: 1023px) {
+        padding: 0 18px 18px 18px;
+
+        gap: 10px;
       }
 
       @media (max-width: 480px) {
-        gap: 10px;
-        padding-bottom: 20px;
+        padding: 10px 15px 10px 15px;
+
+        gap: 8px;
       }
 
+      // ======================================
+      // DESKTOP
+      // ======================================
+
+      @media (min-width: 1024px) {
+        display: flex !important;
+
+        padding: 0;
+
+        gap: 11px;
+      }
+
+      // ======================================
+      // LI
+      // ======================================
+
       li {
+        /*
+         * LI IS COMPLETELY NORMAL
+         */
+
         position: relative;
+
         display: flex;
+
         align-items: center;
+
+        margin: 0;
+
+        padding: 0;
+
+        border: none;
+
+        background: transparent;
+
+        border-radius: 0;
+
+        // ====================================
+        // LINK
+        // ====================================
 
         a {
           position: relative;
-          font-size: 14px;
-          color: $color-on-dark-link;
-          line-height: 1.45;
+
           display: inline-flex;
+
           align-items: center;
-          gap: 6px;
+
+          color: $color-on-dark-link;
+
+          font-size: 14px;
+
           font-weight: 450;
-          transition: color 0.2s ease, transform 0.2s ease;
+
+          line-height: 1.45;
+
+          text-decoration: none;
+
+          transition:
+            color 0.2s ease,
+            transform 0.2s ease;
 
           @media (max-width: 768px) {
             font-size: 13.5px;
@@ -216,24 +399,42 @@
             font-size: 14.5px;
           }
 
+          // Desktop dot
           &::before {
             content: "";
+
             display: inline-block;
+
             width: 4px;
             height: 4px;
+
+            margin-right: 6px;
+
             border-radius: 50%;
+
             background-color: $color-accent;
+
             opacity: 0;
+
             transform: scale(0);
-            transition: opacity 0.2s ease, transform 0.2s ease;
+
+            transition:
+              opacity 0.2s ease,
+              transform 0.2s ease;
+
+            @media (max-width: 1023px) {
+              display: none;
+            }
           }
 
           &:hover {
             color: #ffffff;
+
             transform: translateX(4px);
 
             &::before {
               opacity: 1;
+
               transform: scale(1);
             }
           }
@@ -242,29 +443,50 @@
     }
   }
 
+  // ==========================================
+  // BOTTOM
+  // ==========================================
+
   .bottom {
     @include container;
+
     margin-top: clamp(48px, 6vw, 72px);
-    border-top: 1px solid $color-border-on-dark;
+
     padding-top: 26px;
+
+    border-top: 1px solid $color-border-on-dark;
+
     display: flex;
+
     flex-direction: column;
+
     gap: 16px;
+
     font-size: 13.5px;
+
     color: $color-muted;
 
     @media (min-width: 768px) {
       flex-direction: row;
+
       align-items: center;
+
       justify-content: space-between;
+
       font-size: 12.5px;
     }
   }
 
+  // ==========================================
+  // LEGAL
+  // ==========================================
+
   .legal {
     display: flex;
-    gap: 24px;
+
     flex-wrap: wrap;
+
+    gap: 24px;
 
     @media (max-width: 480px) {
       gap: 18px;
@@ -272,7 +494,11 @@
 
     a {
       font-size: 13.5px;
+
       color: $color-muted;
+
+      text-decoration: none;
+
       transition: color 0.15s ease;
 
       @media (min-width: 768px) {

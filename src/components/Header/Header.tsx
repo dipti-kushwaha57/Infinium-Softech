@@ -47,7 +47,8 @@ export function Header() {
   // Close menu on click outside or escape key
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
-      if (e.key === "Escape ") {
+      // FIX: was "Escape " (with a space), so it never matched
+      if (e.key === "Escape") {
         setActiveMenu(null);
       }
     }
@@ -309,9 +310,12 @@ export function Header() {
               {/* Mobile / Tablet Horizontal Category Chip Tabs */}
               <div className="mobile-category-chips-wrapper">
                 <div className="mobile-category-chips">
+                  {/* FIX: About/Contact chips are never "selected" (filled).
+                      Only the open menu chip is filled, so two chips can't be highlighted together. */}
                   <Link
                     href="/about"
-                    className={`category-chip ${pathname === "/about" ? "is-selected" : ""}`}
+                    className="category-chip"
+                    aria-current={pathname === "/about" ? "page" : undefined}
                     onClick={() => setActiveMenu(null)}
                   >
                     About
@@ -328,6 +332,7 @@ export function Header() {
                         }}
                         type="button"
                         className={`category-chip ${isSelected ? "is-selected" : ""}`}
+                        aria-pressed={isSelected}
                         onClick={() => handleCategoryClick(key)}
                       >
                         {def.label}
@@ -337,7 +342,8 @@ export function Header() {
 
                   <Link
                     href="/contact"
-                    className={`category-chip ${pathname === "/contact" ? "is-selected" : ""}`}
+                    className="category-chip"
+                    aria-current={pathname === "/contact" ? "page" : undefined}
                     onClick={() => setActiveMenu(null)}
                   >
                     Contact Us

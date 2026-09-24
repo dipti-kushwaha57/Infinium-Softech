@@ -8,59 +8,123 @@ import "./Footer.scss";
 const FOOTER_COLUMNS = [
   {
     title: "Products",
-    items: ["Slota", "WelzoKart", "MapMyPay", "Truck Guru", "Trekvano", "TextGem"],
+    items: [
+      "Slota",
+      "WelzoKart",
+      "MapMyPay",
+      "Truck Guru",
+      "Trekvano",
+      "TextGem",
+    ],
   },
   {
     title: "Industries",
-    items: ["Logistics", "Healthcare", "Commerce", "Education", "Home services", "Communication"],
+    items: [
+      "Logistics",
+      "Healthcare",
+      "Commerce",
+      "Education",
+      "Home services",
+      "Communication",
+    ],
   },
   {
     title: "Resources",
-    items: ["Customer Stories", "Documentation", "Help Center", "Release Notes", "Webinars", "Status"],
+    items: [
+      "Customer Stories",
+      "Documentation",
+      "Help Center",
+      "Release Notes",
+      "Webinars",
+      "Status",
+    ],
   },
   {
     title: "Company",
-    items: ["About Us", "Careers", "Partners", "Contact Sales", "Support"],
+    items: [
+      "About Us",
+      "Careers",
+      "Partners",
+      "Contact Sales",
+      "Support",
+    ],
   },
 ];
 
-const LEGAL_LINKS = ["Privacy Policy", "Terms of Service", "Security"];
+const LEGAL_LINKS = [
+  "Privacy Policy",
+  "Terms of Service",
+  "Security",
+];
 
 export function Footer() {
   const year = new Date().getFullYear();
+
   const [openColumn, setOpenColumn] = useState<string | null>(null);
 
   const toggleColumn = (title: string) => {
-    setOpenColumn((prev) => (prev === title ? null : title));
+    setOpenColumn((prev) =>
+      prev === title ? null : title
+    );
+  };
+
+  const getLink = (item: string) => {
+    if (item === "About Us") {
+      return "/about";
+    }
+
+    if (item === "Contact Sales") {
+      return "/contact";
+    }
+
+    return "#demo";
   };
 
   return (
     <footer className="site-footer">
       <div className="top">
+
+        {/* Brand */}
         <div data-reveal="" className="brand">
-          <Image src="/brand/logo-light.png" alt="Infinium Softech" width={154} height={35} />
+          <Image
+            src="/brand/logo-light.png"
+            alt="Infinium Softech"
+            width={154}
+            height={35}
+          />
+
           <p>
-            Nine proprietary products. One unified platform. Built for operators across logistics,
-            healthcare, commerce, education and services.
+            Nine proprietary products. One unified platform. Built for
+            operators across logistics, healthcare, commerce, education
+            and services.
           </p>
         </div>
 
+        {/* Footer Columns */}
         {FOOTER_COLUMNS.map((col) => {
           const isOpen = openColumn === col.title;
+
           return (
             <div
               data-reveal=""
               key={col.title}
               className={`column ${isOpen ? "is-open" : ""}`}
             >
+              {/* Column Header */}
               <button
                 type="button"
                 className="column-header-btn"
                 onClick={() => toggleColumn(col.title)}
                 aria-expanded={isOpen}
               >
-                <span className="column-title">{col.title}</span>
-                <span className="toggle-icon" aria-hidden="true">
+                <span className="column-title">
+                  {col.title}
+                </span>
+
+                <span
+                  className="toggle-icon"
+                  aria-hidden="true"
+                >
                   <svg
                     width="12"
                     height="12"
@@ -78,21 +142,14 @@ export function Footer() {
                   </svg>
                 </span>
               </button>
+
+              {/* Dropdown Links */}
               <ul className="column-list">
                 {col.items.map((item) => (
                   <li key={item}>
-                    <Link
-                      href={
-                        item === "About Us"
-                          ? "/about"
-                          : item === "Contact Sales"
-                            ? "/contact"
-                            : "#demo"
-                      }
-                    >
+                    <Link href={getLink(item)}>
                       {item}
                     </Link>
-
                   </li>
                 ))}
               </ul>
@@ -101,8 +158,12 @@ export function Footer() {
         })}
       </div>
 
+      {/* Bottom */}
       <div data-reveal="" className="bottom">
-        <div>© {year} Infinium Softech. All rights reserved.</div>
+        <div>
+          © {year} Infinium Softech. All rights reserved.
+        </div>
+
         <div className="legal">
           {LEGAL_LINKS.map((label) => (
             <Link key={label} href="#demo">

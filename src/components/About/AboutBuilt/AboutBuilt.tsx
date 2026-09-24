@@ -13,11 +13,10 @@ export function AboutBuilt() {
             We Build Once.<br />We Build Better.
           </h2>
 
-          <p className="about-built-paragraph">
+          <p data-reveal="" className="about-built-paragraph">
             Infinium Softech is built around a product-first approach. Instead of creating one-off solutions that start from scratch every time, we build and own digital products designed to solve real business challenges across industries.
           </p>
-          <br />
-          <p className="about-built-paragraph">
+          <p data-reveal="" className="about-built-paragraph">
             Our products share a common technology foundation for identity, billing, notifications, analytics, reporting, integrations, and security. This shared foundation allows improvements made at the core to benefit products across the ecosystem — making every product more capable, scalable, and connected over time.
           </p>
         </div>

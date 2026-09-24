@@ -39,7 +39,7 @@ export function AppointGemNav() {
     const id = href.substring(1);
     const element = document.getElementById(id);
     if (element) {
-      const yOffset = -140;
+      const yOffset = -110;
       const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
       window.scrollTo({ top: y, behavior: "smooth" });
       setActiveSection(id);

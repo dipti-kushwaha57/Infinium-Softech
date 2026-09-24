@@ -141,7 +141,7 @@
 
     @include respond($bp-lg) {
       display: none;
-          flex-basis: 88%;
+      flex-basis: 88%;
     }
 
     .carousel-dot {
@@ -242,7 +242,7 @@
     }
 
     &:hover {
-      background: rgba(241, 240, 236, 0.05);
+      background: rgba(241, 240, 236, 0);
     }
   }
 

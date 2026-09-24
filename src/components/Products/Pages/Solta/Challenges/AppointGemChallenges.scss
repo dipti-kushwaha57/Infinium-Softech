@@ -71,7 +71,7 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: 0px;
-    background: rgba(241, 240, 236, 0.14);
+    background: rgba(241, 240, 236, 0);
     margin-top: 40px;
 
     @media (max-width: 480px) {
@@ -112,7 +112,9 @@
 
     svg {
       display: block;
-      margin: auto;
+      width: 18px;
+      height: 18px;
+      margin: 0;
       flex-shrink: 0;
     }
 

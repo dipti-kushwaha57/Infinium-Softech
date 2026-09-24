@@ -3,8 +3,25 @@
 
 .appointgem-interface-section {
   @include section-padding;
-  scroll-margin-top: 140px;
+  padding-top: 15px;
+  scroll-margin-top: 110px;
   background: $color-bg;
+
+  @media (max-width: 1240px) {
+    padding-top: 15px;
+  }
+
+  @media (max-width: 1024px) {
+    padding-top: 15px;
+  }
+
+  @media (max-width: 768px) {
+    padding-top: 12px;
+  }
+
+  @media (max-width: 480px) {
+    padding-top: 10px;
+  }
 
   .appointgem-interface-container {
     @include container;
@@ -92,7 +109,7 @@
   }
 
   .interface-carousel-button {
-    display: flex;
+    display: inline-flex;
     position: absolute;
     top: 50%;
     z-index: 5;
@@ -113,7 +130,9 @@
 
     svg {
       display: block;
-      margin: auto;
+      width: 18px;
+      height: 18px;
+      margin: 0;
       flex-shrink: 0;
     }
 

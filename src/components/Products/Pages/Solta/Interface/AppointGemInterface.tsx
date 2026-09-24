@@ -61,6 +61,41 @@ export function AppointGemInterface() {
         (card): card is HTMLDivElement => card !== null,
       );
 
+      if (!cards.length) return;
+
+      cards.forEach((card) => {
+        const inner = card.querySelector<HTMLElement>(".interface-card-inner");
+        if (inner) {
+          gsap.set(inner, {
+            scale: 1,
+            opacity: 1,
+            transformOrigin: "center center",
+          });
+        }
+      });
+
+      cards.forEach((card, index) => {
+        const inner = card.querySelector<HTMLElement>(".interface-card-inner");
+        const nextCard = cards[index + 1];
+        if (!inner || !nextCard) return;
+
+        gsap.fromTo(
+          inner,
+          { scale: 1, opacity: 1, visibility: "visible" },
+          {
+            scale: 0.95,
+            opacity: 0.75,
+            ease: "none",
+            scrollTrigger: {
+              trigger: nextCard,
+              start: "top 80%",
+              end: "top 96px",
+              scrub: true,
+            },
+          }
+        );
+      });
+
       const triggers = cards.map((card, index) => {
         const nextCard = cards[index + 1];
         return ScrollTrigger.create({
@@ -76,6 +111,13 @@ export function AppointGemInterface() {
       ScrollTrigger.refresh();
 
       return () => {
+        cards.forEach((card) => {
+          const inner = card.querySelector<HTMLElement>(".interface-card-inner");
+          if (inner) {
+            gsap.killTweensOf(inner);
+            gsap.set(inner, { clearProps: "transform,opacity,visibility" });
+          }
+        });
         triggers.forEach((trigger) => trigger.kill());
       };
     });
@@ -182,12 +224,8 @@ export function AppointGemInterface() {
                   className="interface-card"
                 >
                   <div className="interface-card-inner">
-                    <div className="card-top-bar">
-                      <span className="card-number">{shot.num}</span>
-                      <h3 className="card-title">{shot.title}</h3>
-                    </div>
-
-                    <div className="card-mockup-frame">
+                    <div className="interface-card-visual">
+                      <div className="visual-glow" aria-hidden="true" />
                       <div className="shot-img-wrapper">
                         <Image
                           src={shot.image}

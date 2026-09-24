@@ -31,7 +31,7 @@
     @include section-eyebrow("light");
   }
 
-  .interface-header { 
+  .interface-header {
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -183,96 +183,117 @@
 
   .interface-card {
     position: relative;
+    scroll-margin-top: 100px;
     flex: 0 0 100%;
     width: 100%;
+    max-width: 100%;
     scroll-snap-align: start;
-    padding-bottom: 26px;
+    scroll-snap-stop: always;
+    box-sizing: border-box;
+    padding-bottom: 0;
+
+    @include respond($bp-lg) {
+      flex: initial;
+      width: 100%;
+      max-width: none;
+      scroll-snap-align: none;
+      position: sticky;
+      top: 96px;
+      padding-bottom: 26px;
+    }
 
     &:last-child {
       padding-bottom: 0;
-    }
-
-    @include respond($bp-lg) {
-      position: sticky;
-      top: 96px;
-      flex: initial;
-    }
-
-    .interface-card-inner {
-      border: 1px solid rgba(12, 12, 13, 0.14);
-      background: #ffffff;
-      border-radius: 8px;
-      padding: 20px;
-      box-shadow: 0 20px 50px rgba(12, 12, 13, 0.05);
-    }
-
-    @include respond($bp-md) {
-      .interface-card-inner {
-        padding: 24px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .interface-card-inner {
-        padding: 16px;
-      }
     }
 
     .card-top-bar {
       display: flex;
       align-items: baseline;
       gap: 12px;
-      margin-bottom: 18px;
+      margin-bottom: 14px;
 
-      .card-number {
-        font-family: $font-display;
+      .shot-num {
+        font-family: Archivo, sans-serif;
         font-weight: 800;
-        font-size: 13px;
-        color: $color-accent;
+        font-size: 11px;
+        color: #1f31e8;
       }
 
-      .card-title {
-        font-family: $font-body;
-        font-size: 15px;
-        font-weight: 600;
-        color: $color-ink;
-        margin: 0;
+      .shot-title {
+        font-size: 13.5px;
+        color: #3a3a3e;
       }
     }
-  }
 
-  /* Mockup Frame & Real Image Slot */
-  .card-mockup-frame {
-    border: 1px solid rgba(12, 12, 13, 0.12);
-    border-radius: 8px;
-    background: #eef0fe;
-    padding: 12px;
-    overflow: hidden;
-
-    @include respond($bp-md) {
+    .interface-card-inner {
+      background: #eef0fe;
+      border: 1px solid rgba(12, 12, 13, 0.14);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(12, 12, 13, 0.12);
+      position: relative;
       padding: 18px;
-    }
-
-    @media (max-width: 480px) {
-      padding: 8px;
-    }
-  }
-
-  .shot-img-wrapper {
-    position: relative;
-    width: 100%;
-    border-radius: 6px;
-    overflow: hidden;
-    box-shadow: 0 16px 40px rgba(12, 12, 13, 0.12);
-    background: #ffffff;
-    border: 1px solid rgba(12, 12, 13, 0.08);
-
-    .interface-shot-image {
-      display: block;
+      transform-origin: 50% 0%;
       width: 100%;
-      height: auto;
-      max-width: 100%;
-      border-radius: 6px;
+
+      @include respond($bp-md) {
+        border-radius: 24px;
+        padding: 24px;
+      }
+    }
+
+    .interface-card-visual {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      overflow: hidden;
+
+      .visual-glow {
+        position: absolute;
+        right: -14%;
+        top: -24%;
+        width: 70%;
+        height: 80%;
+        background: radial-gradient(closest-side,
+            rgba(255, 255, 255, 0.85),
+            rgba(255, 255, 255, 0) 70%);
+        pointer-events: none;
+      }
+
+      .shot-img-wrapper {
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        overflow: hidden;
+        background: #ffffff;
+        border: 1px solid rgba(12, 12, 13, 0.08);
+        box-shadow: 0 16px 40px rgba(12, 12, 13, 0.12);
+
+        @include respond($bp-lg) {
+          box-shadow: 0 26px 60px rgba(12, 12, 13, 0.18);
+        }
+      }
+
+      .interface-shot-image {
+        display: block;
+        width: 100%;
+        height: min(calc(100vh - 235px), 600px);
+        min-height: 240px;
+        max-width: 100%;
+        object-fit: contain;
+        transition: transform 0.4s ease;
+      }
+
+      &:hover .interface-shot-image {
+        transform: scale(1.015);
+      }
     }
   }
 }

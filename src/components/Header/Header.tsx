@@ -110,6 +110,7 @@ export function Header() {
     const routeByMenuKey: Record<string, string> = {
       products: "/products",
       solutions: "/solutions",
+      technology: "/technology",
     };
     const route = routeByMenuKey[key];
 
@@ -123,6 +124,7 @@ export function Header() {
     const routeByMenuKey: Record<string, string> = {
       products: "/products",
       solutions: "/solutions",
+      technology: "/technology",
     };
     const route = routeByMenuKey[key];
 
@@ -144,6 +146,7 @@ export function Header() {
     const routeByMenuKey: Record<string, string> = {
       products: "/products",
       solutions: "/solutions",
+      technology: "/technology",
     };
     const route = routeByMenuKey[key];
 
@@ -212,7 +215,8 @@ export function Header() {
               const isRouteActive =
                 !activeMenu &&
                 ((key === "products" && pathname.startsWith("/products")) ||
-                  (key === "solutions" && pathname === "/solutions"));
+                  (key === "solutions" && pathname === "/solutions") ||
+                  (key === "technology" && pathname === "/technology"));
               return (
                 <button
                   key={key}

@@ -57,6 +57,12 @@
       "description": "Six ways we build. One platform underneath. Mobile, web, custom software, AI, enterprise systems and cloud infrastructure.",
       "changeFrequency": "weekly",
       "priority": 0.9
+    },
+    "/technology": {
+      "title": "Technology — Modern Frontend, Backend, Mobile, Cloud & Database Stack",
+      "description": "Explore Infinium Softech's technology stack including React, Angular, Next.js, Node.js, Java, Swift, Android, AWS, Docker and databases.",
+      "changeFrequency": "weekly",
+      "priority": 0.9
     }
   }
 }

@@ -8,7 +8,7 @@ const SOLUTIONS = [
     title: "Multi-location calendars",
     desc: "Availability derived from live staff rosters per branch, with room and equipment capacity respected.",
     tint: "#1F31E8",
-  }, 
+  },
   {
     title: "Staff-level availability",
     desc: "Each practitioner carries their own working hours, leave and service list; the public widget only ever shows what is real.",
@@ -23,7 +23,7 @@ const SOLUTIONS = [
     title: "Reminder journeys",
     desc: "Automated SMS, WhatsApp and email sequences with confirm and reschedule links, logged per booking.",
     tint: "#8B3FE8",
-  }, 
+  },
   {
     title: "One customer record",
     desc: "Visit history, notes, payments and communications on a single profile shared across branches.",
@@ -93,7 +93,7 @@ export function AppointGemSolution() {
               onClick={goToPrev}
               aria-label="Previous solution"
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M15 18l-6-6 6-6" />
               </svg>
             </button>
@@ -104,7 +104,7 @@ export function AppointGemSolution() {
                 <div className="card-header-row">
                   <div className="card-badge-wrap">
                     <span className="solution-icon" style={{ backgroundColor: currentSolution.tint }} />
-                    <span className="card-badge">Core capability</span>
+
                   </div>
                   <div className="card-counter">
                     <span className="current-num">{formattedIndex}</span>
@@ -115,8 +115,6 @@ export function AppointGemSolution() {
                 <h3 className="single-solution-title">{currentSolution.title}</h3>
                 <p className="single-solution-desc">{currentSolution.desc}</p>
                 <div className="card-bottom-row">
-                  <span className="card-chip">Included in Slota</span>
-                  <span className="card-indicator-dot" style={{ backgroundColor: currentSolution.tint }} />
                 </div>
               </div>
             </div>
@@ -127,7 +125,7 @@ export function AppointGemSolution() {
               onClick={goToNext}
               aria-label="Next solution"
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M9 18l6-6-6-6" />
               </svg>
             </button>

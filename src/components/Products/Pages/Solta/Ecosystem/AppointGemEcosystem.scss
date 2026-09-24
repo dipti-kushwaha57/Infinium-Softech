@@ -2,7 +2,7 @@
 @use "../../../../../styles/mixins" as *;
 
 .appointgem-ecosystem-section {
-  padding: 96px 0 0;
+  padding: 50px 0 0;
   background: $color-bg;
 
   .appointgem-ecosystem-container {
@@ -13,7 +13,7 @@
     @include section-eyebrow("light");
   }
 
-  .ecosystem-header { 
+  .ecosystem-header {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
@@ -27,11 +27,11 @@
     font-family: $font-display;
     font-weight: 800;
     font-stretch: 110%;
-    font-size: clamp(24px, 2.6vw, 42px);
+    font-size: clamp(30px, 4vw, 68px);
     line-height: 0.98;
     letter-spacing: -0.045em;
     color: $color-ink;
-    margin: 0;
+    margin: 12px 0 0;
   }
 
   .ecosystem-link {
@@ -108,11 +108,19 @@
       background: rgba(255, 255, 255, 0.96);
       color: $color-ink;
       padding: 0;
+      margin: 0;
+      line-height: 1;
       cursor: pointer;
       z-index: 10;
       box-shadow: 0 4px 14px rgba(12, 12, 13, 0.12);
       transition: background-color 0.2s ease, border-color 0.2s ease,
         color 0.2s ease, transform 0.2s ease;
+
+      svg {
+        display: block;
+        margin: auto;
+        flex-shrink: 0;
+      }
 
       &:hover {
         background: $color-ink;

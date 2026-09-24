@@ -22,7 +22,7 @@ export function AppointGemHero({ product }: { product: ProductItem }) {
 
       if (!desktopQuery.matches) {
         interfaceElement.style.transform = "";
-        interfaceElement.style.zIndex = ""; 
+        interfaceElement.style.zIndex = "";
         intro.style.transform = "";
         intro.style.opacity = "";
         return;

@@ -50,7 +50,7 @@ export function AppointGemNav() {
     <nav className="appointgem-subnav-sticky" aria-label="AppointGem Page Navigation">
       <div className="appointgem-subnav-container">
         {NAV_ITEMS.map((item) => {
-          const id = item.href.substring(0);
+          const id = item.href.substring(1);
           const isActive = activeSection === id;
           return (
             <a

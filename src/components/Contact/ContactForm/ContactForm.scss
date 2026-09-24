@@ -514,12 +514,12 @@
       top: 50%;
       transform: translateY(-50%);
       z-index: 10;
-      width: 36px;
-      height: 36px;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
       background: #ffffff;
       border: 1px solid rgba(12, 12, 13, 0.14);
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -539,11 +539,11 @@
       }
 
       &.prev-btn {
-        left: -10px;
+        left: -8px;
       }
 
       &.next-btn {
-        right: -10px;
+        right: -8px;
       }
     }
 

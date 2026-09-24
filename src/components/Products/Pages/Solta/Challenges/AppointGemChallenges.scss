@@ -32,7 +32,7 @@
     flex-direction: column;
     gap: 16px;
 
-    @include respond($bp-md) {
+    @include respond($bp-lg) {
       flex-direction: row;
       align-items: flex-end;
       justify-content: space-between;
@@ -51,36 +51,20 @@
   .challenges-headline {
     font-family: $font-display;
     font-weight: 800;
-    font-stretch: 112%;
+    font-stretch: 110%;
     font-size: clamp(30px, 4vw, 68px);
     line-height: 0.98;
     letter-spacing: -0.045em;
     color: #f1f0ec;
-    margin: 18px 0 0;
-
-    @media (max-width: 480px) {
-      font-size: 32px;
-      line-height: 1.02;
-    }
-
-    @media (min-width: 768px) and (max-width: 1023px) {
-      font-size: 42px;
-      line-height: 1.02;
-    }
+    margin: 12px 0 0;
   }
 
   .challenges-subtitle {
-    font-size: 16.5px;
+    font-size: clamp(14px, 1.25vw, 16.5px);
     line-height: 1.6;
     color: #a9a9ae;
-    max-width: 420px;
-    margin: 0 0 8px;
-
-    @media (max-width: 768px) {
-      font-size: 14.5px;
-      line-height: 1.55;
-      margin-bottom: 0;
-    }
+    max-width: 560px;
+    margin: 12px 0 0;
   }
 
   .challenges-grid {
@@ -116,12 +100,21 @@
     height: 36px;
     align-items: center;
     justify-content: center;
+    padding: 0;
+    margin: 0;
+    line-height: 1;
     border: 1px solid rgba(241, 240, 236, 0.28);
     border-radius: 50%;
     background: rgba(12, 12, 13, 0.92);
     color: #f1f0ec;
     cursor: pointer;
     transform: translateY(-50%);
+
+    svg {
+      display: block;
+      margin: auto;
+      flex-shrink: 0;
+    }
 
     @media (max-width: 1023px) {
       display: inline-flex;

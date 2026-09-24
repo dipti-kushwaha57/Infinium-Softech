@@ -92,7 +92,7 @@ export function Footer() {
                     >
                       {item}
                     </Link>
-                    
+
                   </li>
                 ))}
               </ul>

@@ -14,7 +14,7 @@ const META_ITEMS = [
   { label: "Platform", value: "Web + staff mobile" },
   { label: "Integration", value: "REST + webhooks" },
   { label: "Typical go-live", value: "4–6 weeks" },
-]; 
+];
 
 const MODULES = [
   "Calendars",

@@ -17,67 +17,52 @@
   .interface-header { 
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 12px;
 
-    @include respond($bp-md) {
+    @include respond($bp-lg) {
       flex-direction: row;
       align-items: flex-end;
       justify-content: space-between;
-      gap: 50px;
+      gap: 24px;
     }
 
     @media (max-width: 480px) {
-      gap: 12px;
+      gap: 10px;
     }
   }
 
   .interface-headline {
     font-family: $font-display;
     font-weight: 800;
-    font-stretch: 112%;
+    font-stretch: 110%;
     font-size: clamp(30px, 4vw, 68px);
     line-height: 0.98;
     letter-spacing: -0.045em;
     color: $color-ink;
-    margin: 18px 0 0;
-
-    @media (max-width: 480px) {
-      font-size: 32px;
-      line-height: 1.02;
-    }
-
-    @media (min-width: 768px) and (max-width: 1023px) {
-      font-size: 42px;
-      line-height: 1.02;
-    }
+    margin: 12px 0 0;
   }
 
   .interface-subtitle {
-    font-size: 16.5px;
+    font-size: clamp(14px, 1.25vw, 16.5px);
     line-height: 1.6;
     color: $color-body;
-    max-width: 430px;
-    margin: 0 0 8px;
-
-    @media (max-width: 768px) {
-      font-size: 14.5px;
-      line-height: 1.55;
-    }
+    max-width: 560px;
+    margin: 12px 0 0;
   }
 
   .interface-body {
     display: grid;
     grid-template-columns: 1fr;
     gap: 16px;
-    margin-top: 36px;
+    margin-top: 24px;
 
     @include respond($bp-lg) {
       grid-template-columns: minmax(0, 1fr);
-      margin-top: 56px;
+      margin-top: 28px;
     }
 
     @media (max-width: 480px) {
-      margin-top: 28px;
+      margin-top: 18px;
     }
   }
 
@@ -115,6 +100,9 @@
     height: 38px;
     align-items: center;
     justify-content: center;
+    padding: 0;
+    margin: 0;
+    line-height: 1;
     border: 1px solid rgba(12, 12, 13, 0.16);
     border-radius: 50%;
     background: #ffffff;
@@ -122,6 +110,12 @@
     cursor: pointer;
     box-shadow: 0 6px 18px rgba(12, 12, 13, 0.14);
     transform: translateY(-50%);
+
+    svg {
+      display: block;
+      margin: auto;
+      flex-shrink: 0;
+    }
 
     &.prev {
       left: 8px;

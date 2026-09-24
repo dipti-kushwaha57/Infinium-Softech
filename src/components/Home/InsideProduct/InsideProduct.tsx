@@ -127,8 +127,8 @@ export function InsideProduct() {
               aria-label="Previous capability card"
             >
               <svg
-                width="20"
-                height="20"
+                width="16"
+                height="16"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -175,17 +175,6 @@ export function InsideProduct() {
                 <p className="capability-desc">{currentCap.desc}</p>
 
                 {/* Bottom Details Row */}
-                <div className="card-bottom-row">
-                  <div className="card-chips">
-                    <span className="card-chip">9 Ecosystem Products</span>
-                  </div>
-
-                  <div
-                    className="card-indicator-dot"
-                    style={{ backgroundColor: currentCap.tint }}
-                    aria-hidden="true"
-                  />
-                </div>
               </div>
             </div>
 
@@ -197,8 +186,8 @@ export function InsideProduct() {
               aria-label="Next capability card"
             >
               <svg
-                width="20"
-                height="20"
+                width="16"
+                height="16"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"

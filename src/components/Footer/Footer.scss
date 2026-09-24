@@ -83,41 +83,46 @@
 
     .column-header-btn {
       width: 100%;
-      background: transparent;
-      border: none;
-      padding: 18px 0;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      padding: 12px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       cursor: pointer;
       text-align: left;
-      color: inherit;
-
-      @media (min-width: 768px) and (max-width: 1023px) {
-        padding: 20px 0;
-      }
+      color: #ffffff;
+      box-sizing: border-box;
+      margin-top: 14px;
+      margin-bottom: 14px;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
 
       @media (min-width: 1024px) {
         cursor: default;
         pointer-events: none;
-        padding: 0 0 20px 0;
-        display: block;
+        padding: 12px 16px;
+        margin-top: 0;
+        margin-bottom: 18px;
+      }
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.07);
+        border-color: rgba(255, 255, 255, 0.2);
       }
 
       .column-title {
-        font-size: 12.5px;
+        display: inline-block;
+        font-size: 12px;
         letter-spacing: 0.14em;
         text-transform: uppercase;
-        color: $color-muted;
+        color: rgba(255, 255, 255, 0.9);
         font-weight: 700;
+        line-height: 1;
 
         @media (min-width: 1024px) {
-          font-size: 13px;
+          font-size: 12.5px;
           letter-spacing: 0.16em;
-        }
-
-        @media (max-width: 480px) {
-          font-size: 13px;
         }
       }
 
@@ -125,7 +130,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        color: $color-muted;
+        color: rgba(255, 255, 255, 0.6);
         transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
 
         svg {
@@ -140,9 +145,18 @@
     }
 
     &.is-open {
-      .column-header-btn .toggle-icon {
-        transform: rotate(180deg);
-        color: #ffffff;
+      .column-header-btn {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.24);
+
+        .toggle-icon {
+          transform: rotate(180deg);
+          color: #ffffff;
+        }
+
+        .column-title {
+          color: #ffffff;
+        }
       }
 
       .column-list {

@@ -97,7 +97,7 @@
   margin-top: 4px;
   color: #55555a;
   font-size: 11px;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
   font-weight: 500;
 }
@@ -141,7 +141,7 @@
 
   @media (max-width: 480px) {
     font-size: 38px;
-    line-height: 0.92;
+    line-height: 1.02;
   }
 
   @media (min-width: 768px) and (max-width: 1023px) {
@@ -263,7 +263,7 @@ hr {
 }
 
 .appointgem-hero-tablet-img {
-  display: block; 
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;

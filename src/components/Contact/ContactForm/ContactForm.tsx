@@ -475,8 +475,8 @@ export function ContactForm() {
                   aria-label="Previous desk"
                 >
                   <svg
-                    width="18"
-                    height="18"
+                    width="14"
+                    height="14"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -509,13 +509,13 @@ export function ContactForm() {
 
                 <button
                   type="button"
-                  className="carousel-arrow-btn next-btn "
+                  className="carousel-arrow-btn next-btn"
                   onClick={handleDeskNext}
                   aria-label="Next desk"
                 >
                   <svg
-                    width="18"
-                    height="18"
+                    width="14"
+                    height="14"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"

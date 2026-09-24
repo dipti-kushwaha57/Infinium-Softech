@@ -134,6 +134,11 @@ export function Header() {
     toggleMenuKey(key);
   };
 
+  // Close menu on route change
+  useEffect(() => {
+    setActiveMenu(null);
+  }, [pathname]);
+
   const handleCategoryClick = (key: string) => {
     const routeByMenuKey: Record<string, string> = {
       products: "/products",
@@ -143,6 +148,7 @@ export function Header() {
 
     if (isMobile && route) {
       if (activeMenu === key) {
+        setActiveMenu(null);
         router.push(route);
       } else {
         openMenu(key);

@@ -271,11 +271,13 @@ export function Ecosystem() {
     return () => clearTimeout(timer);
   }, []);
 
-  const scrollToCard = (index: number) => {
+  const scrollToCard = (index: number, scrollWindow: boolean = true) => {
     if (index < 0 || index >= ECOSYSTEM_PRODUCTS.length) return;
     setActiveRail(ECOSYSTEM_PRODUCTS[index].n);
 
     if (window.innerWidth >= 1024) {
+      if (!scrollWindow) return;
+
       const section = sectionRef.current;
       const sectionDocTop = section
         ? section.getBoundingClientRect().top + window.scrollY
@@ -321,14 +323,16 @@ export function Ecosystem() {
         behavior: "smooth",
       });
     } else {
-      // Mobile & Tablet: scroll window to section and scroll container to card
-      const section = sectionRef.current;
-      if (section) {
-        const sectionTop = section.getBoundingClientRect().top + window.scrollY - 70;
-        window.scrollTo({
-          top: Math.max(0, sectionTop),
-          behavior: "smooth",
-        });
+      // Mobile & Tablet: scroll window to section only if requested (e.g. from header nav/hash link)
+      if (scrollWindow) {
+        const section = sectionRef.current;
+        if (section) {
+          const sectionTop = section.getBoundingClientRect().top + window.scrollY - 90;
+          window.scrollTo({
+            top: Math.max(0, sectionTop),
+            behavior: "smooth",
+          });
+        }
       }
 
       const container = cardsContainerRef.current;
@@ -360,7 +364,7 @@ export function Ecosystem() {
         );
       }
       if (targetIdx !== -1) {
-        scrollToCard(targetIdx);
+        scrollToCard(targetIdx, true);
       }
     };
 
@@ -374,7 +378,7 @@ export function Ecosystem() {
           p.n === hash
       );
       if (targetIdx !== -1) {
-        scrollToCard(targetIdx);
+        scrollToCard(targetIdx, true);
       }
     };
 
@@ -418,7 +422,7 @@ export function Ecosystem() {
         }
       }, 420);
     } else {
-      scrollToCard(currentIdx - 1);
+      scrollToCard(currentIdx - 1, false);
     }
   };
 
@@ -449,7 +453,7 @@ export function Ecosystem() {
         }
       }, 420);
     } else {
-      scrollToCard(currentIdx + 1);
+      scrollToCard(currentIdx + 1, false);
     }
   };
 
@@ -691,7 +695,7 @@ export function Ecosystem() {
                   key={prod.n}
                   type="button"
                   className={`ecosystem-dot ${activeRail === prod.n ? "is-active" : ""}`}
-                  onClick={() => scrollToCard(idx)}
+                  onClick={() => scrollToCard(idx, false)}
                   aria-label={`Go to slide ${idx + 1}: ${prod.name}`}
                 >
                   <span

@@ -35,11 +35,11 @@
     font-family: $font-display;
     font-weight: 800;
     font-stretch: 110%;
-    font-size: clamp(28px, 3.6vw, 64px);
+    font-size: clamp(30px, 4vw, 68px);
     line-height: 0.98;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.045em;
     color: $color-ink;
-    margin: 0;
+    margin: 12px 0 0;
 
     @media (min-width: 1200px) {
       white-space: nowrap;
@@ -48,11 +48,15 @@
 }
 
 .operators-intro {
-  font-size: 16.5px;
+  font-size: clamp(14px, 1.25vw, 16.5px);
   line-height: 1.6;
   color: $color-body;
-  margin: 0;
+  margin: 12px 0 0;
   max-width: 560px;
+
+  @media (max-width: 480px) {
+    margin: 10px 0 0;
+  }
 }
 
 

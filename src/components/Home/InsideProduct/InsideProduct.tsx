@@ -83,13 +83,13 @@ export function InsideProduct() {
           <h2 data-reveal="" className="inside-product-headline">
             One Platform Core.
             <br />
-           Multiple Ways to Work.
+            Multiple Ways to Work.
           </h2>
 
           <p data-reveal="" className="inside-product-intro">
             Explore each product to see who it serves, the capabilities it
-brings together, and how it streamlines workflows from end
-to end.
+            brings together, and how it streamlines workflows from end
+            to end.
           </p>
         </div>
 
@@ -161,7 +161,6 @@ to end.
                       style={{ backgroundColor: currentCap.tint }}
                       aria-hidden="true"
                     />
-                    <span className="card-badge">Core Capability</span>
                   </div>
 
                   <div className="card-counter">

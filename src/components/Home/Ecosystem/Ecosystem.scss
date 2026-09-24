@@ -55,12 +55,12 @@
   .ecosystem-headline {
     font-family: $font-display;
     font-weight: 800;
-    font-stretch: 112%;
+    font-stretch: 110%;
     font-size: clamp(30px, 4vw, 68px);
-    line-height: 1.02;
+    line-height: 0.98;
     letter-spacing: -0.045em;
     color: $color-ink;
-    margin: 18px 0 0;
+    margin: 12px 0 0;
 
     @include respond($bp-lg) {
       grid-column: 1;
@@ -72,11 +72,15 @@
   }
 
   .ecosystem-intro {
-    font-size: 16.5px;
+    font-size: clamp(14px, 1.25vw, 16.5px);
     line-height: 1.6;
     color: $color-body;
-    margin: 24px 0 0;
+    margin: 12px 0 0;
     max-width: 560px;
+
+    @media (max-width: 480px) {
+      margin: 10px 0 0;
+    }
 
     @include respond($bp-lg) {
       grid-column: 2;
@@ -295,7 +299,7 @@
     align-items: center;
     justify-content: center;
     gap: 7px;
-    margin-top: 20px;
+    margin-top: 10px;
 
     @include respond($bp-lg) {
       display: none;
@@ -348,7 +352,7 @@
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     gap: 0;
-    padding-bottom: 12px;
+    padding-bottom: 4px;
 
     &::-webkit-scrollbar {
       display: none;

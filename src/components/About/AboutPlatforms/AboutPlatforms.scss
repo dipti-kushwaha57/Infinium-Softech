@@ -152,7 +152,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 7px;
+  gap: 8px;
   margin-top: 24px;
 
   @include respond($bp-lg) {
@@ -164,29 +164,27 @@
     height: 8px;
     border-radius: 100px;
     border: none;
-    background: rgba(12, 12, 13, 0.16);
+    background: transparent;
     cursor: pointer;
     padding: 0;
     position: relative;
     overflow: hidden;
-    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-      background-color 0.25s ease;
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 
     .dot-fill {
       display: block;
       width: 100%;
       height: 100%;
       border-radius: inherit;
-      background-color: transparent;
+      transition: background-color 0.25s ease, opacity 0.25s ease;
     }
 
     &.is-active {
       width: 26px;
-      background: $color-ink;
     }
 
     &:hover:not(.is-active) {
-      background: rgba(12, 12, 13, 0.32);
+      opacity: 0.8;
     }
   }
 }
@@ -195,7 +193,7 @@
   display: flex;
   flex-direction: row;
   overflow-x: auto;
-  
+
   // NATIVE SMOOTH SCROLL CONFIGURATION
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
@@ -236,11 +234,11 @@
 
 .platform-card {
   flex: 0 0 82%;
-  
+
   // FIX CRITICAL SMOOTH INTERPOLATION CONFLICTS HERE
   scroll-snap-align: center;
   scroll-snap-stop: always; // Tells browser not to skip cleanly during animation sweeps
-  
+
   background: #ffffff;
   border: 1px solid rgba(12, 12, 13, 0.12);
   // border-radius: 12px;

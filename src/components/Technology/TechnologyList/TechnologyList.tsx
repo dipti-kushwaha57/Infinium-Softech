@@ -11,7 +11,7 @@ import {
 } from "@/data/technology/technologyData";
 
 const SECTION_IDS = TECHNOLOGY_HERO_INDEX_ITEMS.map((item) =>
-  item.href.substring(1)
+  item.href.substring(1) 
 );
 
 const SCROLL_OFFSET = 125;
@@ -36,56 +36,58 @@ export function TechnologyList() {
     }
   }, []);
 
-  useEffect(() => {
-    const observerOptions: IntersectionObserverInit = {
-      root: null,
-      rootMargin: "-20% 0px -50% 0px",
-      threshold: 0.05,
-    };
+  const updateActiveFromScroll = useCallback(() => {
+    const scrollY = window.scrollY;
+    const scrollPosition = scrollY + ACTIVATION_OFFSET;
+    const atBottom =
+      window.innerHeight + Math.ceil(scrollY) >=
+      document.documentElement.scrollHeight - 30;
 
-    const handleIntersect: IntersectionObserverCallback = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const id = entry.target.id;
-          if (SECTION_IDS.includes(id)) {
-            setActiveSection(id);
-            scrollActiveTabIntoView(id);
-          }
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(handleIntersect, observerOptions);
-
-    SECTION_IDS.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-
-    const handleScrollBottom = () => {
-      const atBottom =
-        window.innerHeight + Math.ceil(window.scrollY) >=
-        document.documentElement.scrollHeight - 30;
-      if (atBottom && window.scrollY > 0) {
-        const lastId = SECTION_IDS[SECTION_IDS.length - 1];
+    if (atBottom && scrollY > 0) {
+      const lastId = SECTION_IDS[SECTION_IDS.length - 1];
+      if (document.getElementById(lastId)) {
         setActiveSection(lastId);
         scrollActiveTabIntoView(lastId);
+        return;
       }
-    };
+    }
 
-    window.addEventListener("scroll", handleScrollBottom, { passive: true });
+    let current = SECTION_IDS[0];
+
+    for (let i = SECTION_IDS.length - 1; i >= 0; i -= 1) {
+      const element = document.getElementById(SECTION_IDS[i]);
+      if (!element) continue;
+
+      const sectionTop = element.getBoundingClientRect().top + scrollY;
+      if (sectionTop <= scrollPosition) {
+        current = SECTION_IDS[i];
+        break;
+      }
+    }
+
+    setActiveSection(current);
+    scrollActiveTabIntoView(current);
+  }, [scrollActiveTabIntoView]);
+
+  useEffect(() => {
+    window.addEventListener("scroll", updateActiveFromScroll, { passive: true });
+    window.addEventListener("resize", updateActiveFromScroll);
+    const initialUpdateFrame = window.requestAnimationFrame(updateActiveFromScroll);
 
     return () => {
-      observer.disconnect();
-      window.removeEventListener("scroll", handleScrollBottom);
+      window.removeEventListener("scroll", updateActiveFromScroll);
+      window.removeEventListener("resize", updateActiveFromScroll);
+      window.cancelAnimationFrame(initialUpdateFrame);
     };
-  }, [scrollActiveTabIntoView]);
+  }, [updateActiveFromScroll]);
 
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string
   ) => {
     e.preventDefault();
+    e.currentTarget.blur();
+
     const id = href.substring(1);
     const element = document.getElementById(id);
     if (!element) return;
@@ -94,7 +96,7 @@ export function TechnologyList() {
     scrollActiveTabIntoView(id);
 
     const targetY =
-      element.getBoundingClientRect().top + window.scrollY - 120;
+      element.getBoundingClientRect().top + window.scrollY - SCROLL_OFFSET;
     window.scrollTo({ top: targetY, behavior: "smooth" });
   };
 

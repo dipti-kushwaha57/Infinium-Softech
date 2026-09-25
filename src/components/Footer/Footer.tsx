@@ -144,15 +144,17 @@ export function Footer() {
               </button>
 
               {/* Dropdown Links */}
-              <ul className="column-list">
-                {col.items.map((item) => (
-                  <li key={item}>
-                    <Link href={getLink(item)}>
-                      {item}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+              <div className="column-list-wrapper">
+                <ul className="column-list">
+                  {col.items.map((item) => (
+                    <li key={item}>
+                      <Link href={getLink(item)}>
+                        {item}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           );
         })}

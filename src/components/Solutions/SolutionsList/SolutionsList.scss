@@ -8,7 +8,7 @@
 /* Sticky Category Index Navigation Bar */
 .solutions-sticky-bar-section {
   position: sticky;
-  top: 65px;
+  top: var(--site-header-height, 75px);
   z-index: 30;
   background: rgba(#f1f0ec, 0.95);
   backdrop-filter: blur(14px);
@@ -18,17 +18,14 @@
   transition: top 0.3s ease;
 
   @media (max-width: 1024px) {
-    top: 56px;
     padding: 6px 0;
   }
 
   @media (max-width: 640px) {
-    top: 52px;
     padding: 4px 0;
   }
 
   @media (max-width: 380px) {
-    top: 48px;
     padding: 4px 0;
   }
 }
@@ -102,15 +99,16 @@
     border-radius: 10px;
   }
 
-  &:hover {
-    background: #ffffff;
-    border-color: rgba(12, 12, 13, 0.2);
-    border-bottom-color: var(--item-accent-color, #1f31e8);
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(12, 12, 13, 0.08);
+  @media (hover: hover) and (pointer: fine) {
+    &:hover:not(.active) {
+      background: #ffffff;
+      border-color: rgba(12, 12, 13, 0.2);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(12, 12, 13, 0.06);
 
-    .index-title {
-      color: var(--item-accent-color, #1f31e8);
+      .index-title {
+        color: var(--item-accent-color, #1f31e8);
+      }
     }
   }
 

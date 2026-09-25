@@ -38,6 +38,24 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const headerWrapper = headerRef.current;
+    if (!headerWrapper) return;
+
+    const updateHeaderHeight = () => {
+      document.documentElement.style.setProperty(
+        "--site-header-height",
+        `${headerWrapper.getBoundingClientRect().height}px`
+      );
+    };
+
+    updateHeaderHeight();
+    const resizeObserver = new ResizeObserver(updateHeaderHeight);
+    resizeObserver.observe(headerWrapper);
+
+    return () => resizeObserver.disconnect();
+  }, []);
+
   // Detect screen size for responsive mode
   useEffect(() => {
     function checkSize() {

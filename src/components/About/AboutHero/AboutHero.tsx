@@ -20,22 +20,24 @@ export function AboutHero() {
           About us
         </div>
 
-        <h1 data-reveal="" className="about-hero-headline">
-          We build products, <span className="highlight"> <br /> not projects.</span>
-        </h1>
-
         <div className="about-hero-grid">
-          <p data-reveal="" className="about-hero-desc">
-            Infinium Softech creates proprietary digital products on a shared technology foundation. From identity and billing to notifications, analytics, and security, our common infrastructure enables every product to evolve faster, scale reliably, and deliver a consistent experience.
-          </p>
+          <h1 data-reveal="" className="about-hero-headline">
+            We build products, <span className="highlight"> <br /> not projects.</span>
+          </h1>
 
-          <div data-reveal="" className="about-hero-actions">
-            <Link href="#ecosystem" className="btn-primary">
-              See the nine platforms
-            </Link>
-            <Link href="#process" className="btn-outline">
-              How we deliver
-            </Link>
+          <div className="about-hero-side">
+            <p data-reveal="" className="about-hero-desc">
+              Infinium Softech creates proprietary digital products on a shared technology foundation. From identity and billing to notifications, analytics, and security, our common infrastructure enables every product to evolve faster, scale reliably, and deliver a consistent experience.
+            </p>
+
+            <div data-reveal="" className="about-hero-actions">
+              <Link href="#ecosystem" className="btn-primary">
+                See the nine platforms
+              </Link>
+              <Link href="#process" className="btn-outline">
+                How we deliver
+              </Link>
+            </div>
           </div>
         </div>
       </div>

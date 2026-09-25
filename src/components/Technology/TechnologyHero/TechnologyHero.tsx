@@ -24,24 +24,26 @@ export function TechnologyHero() {
           Technology Stack
         </div>
 
-        <h1 data-reveal="" className="technology-hero-headline">
-          Our Technologies. Your <br />
-          <span className="highlight">Innovation Stack Starts Here.</span>
-        </h1>
-
         <div className="technology-hero-grid">
-          <p data-reveal="" className="technology-hero-desc">
-            Explore our cutting-edge frontend, backend, mobile, database, CMS, cloud, and design technologies designed to deliver scalable, reliable, and future-ready solutions.
-          </p>
+          <h1 data-reveal="" className="technology-hero-headline">
+            Our Technologies. Your <br />
+            <span className="highlight">Innovation Stack Starts Here.</span>
+          </h1>
 
-          <div data-reveal="" className="technology-hero-actions">
-            <Link href="#frontend" className="btn-primary">
-              Explore All Stack
-            </Link>
+          <div className="technology-hero-side">
+            <p data-reveal="" className="technology-hero-desc">
+              Explore our cutting-edge frontend, backend, mobile, database, CMS, cloud, and design technologies designed to deliver scalable, reliable, and future-ready solutions.
+            </p>
 
-            <Link href="/contact" className="btn-outline">
-              Let’s Build Together
-            </Link>
+            <div data-reveal="" className="technology-hero-actions">
+              <Link href="#frontend" className="btn-primary">
+                Explore All Stack
+              </Link>
+
+              <Link href="/contact" className="btn-outline">
+                Let’s Build Together
+              </Link>
+            </div>
           </div>
         </div>
 

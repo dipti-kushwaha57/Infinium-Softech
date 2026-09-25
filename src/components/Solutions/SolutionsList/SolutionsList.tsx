@@ -79,6 +79,8 @@ export function SolutionsList() {
     href: string
   ) => {
     e.preventDefault();
+    e.currentTarget.blur();
+
     const id = href.substring(1);
     const element = document.getElementById(id);
     if (!element) return;

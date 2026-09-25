@@ -12,6 +12,21 @@
   padding-top: clamp(60px, 7vw, 100px);
   padding-bottom: 36px;
 
+  -webkit-tap-highlight-color: transparent;
+
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+
+    &:focus,
+    &:focus-visible,
+    &:active {
+      outline: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+  }
+
   // ==========================================
   // TOP
   // ==========================================
@@ -120,11 +135,11 @@
 
       border: 1px solid rgba(255, 255, 255, 0.12);
 
-      border-radius: 10px;
+      border-radius: 8px;
 
       background: rgba(255, 255, 255, 0.035);
 
-      margin-bottom: 10px;
+      margin-bottom: 8px;
 
       overflow: hidden;
 
@@ -166,7 +181,7 @@
 
       justify-content: space-between;
 
-      padding: 16px 16px;
+      padding: 11px 14px;
 
       background: transparent;
 
@@ -185,11 +200,11 @@
         color 0.2s ease;
 
       @media (max-width: 480px) {
-        padding: 15px 15px;
+        padding: 10px 12px;
       }
 
       @media (min-width: 768px) and (max-width: 1023px) {
-        padding: 17px 18px;
+        padding: 11px 14px;
       }
 
       @media (min-width: 1024px) {
@@ -269,6 +284,23 @@
     }
 
     // ========================================
+    // SMOOTH DROPDOWN WRAPPER
+    // ========================================
+
+    .column-list-wrapper {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+
+      @media (min-width: 1024px) {
+        display: block !important;
+        grid-template-rows: none !important;
+        overflow: visible !important;
+      }
+    }
+
+    // ========================================
     // OPEN STATE
     // ========================================
 
@@ -285,8 +317,12 @@
         }
       }
 
-      .column-list {
-        display: flex;
+      .column-list-wrapper {
+        grid-template-rows: 1fr;
+
+        .column-list {
+          opacity: 1;
+        }
       }
     }
 
@@ -295,38 +331,36 @@
     // ========================================
 
     .column-list {
-      display: none;
+      display: flex;
 
       flex-direction: column;
 
       list-style: none;
 
-      padding: 0 16px 17px 16px;
+      padding: 2px 14px 12px 14px;
 
       margin: 0;
 
-      gap: 9px;
+      gap: 8px;
 
-      /*
-       * IMPORTANT:
-       * NO border
-       * NO background
-       * NO radius
-       *
-       * The BOX belongs to .column,
-       * not .column-list and not li.
-       */
+      min-height: 0;
+
+      overflow: hidden;
+
+      opacity: 0;
+
+      transition: opacity 0.25s ease;
 
       @media (min-width: 768px) and (max-width: 1023px) {
-        padding: 0 18px 18px 18px;
+        padding: 2px 14px 12px 14px;
 
-        gap: 10px;
+        gap: 8px;
       }
 
       @media (max-width: 480px) {
-        padding: 10px 15px 10px 15px;
+        padding: 2px 12px 10px 12px;
 
-        gap: 8px;
+        gap: 7px;
       }
 
       // ======================================
@@ -335,6 +369,10 @@
 
       @media (min-width: 1024px) {
         display: flex !important;
+
+        opacity: 1 !important;
+
+        overflow: visible !important;
 
         padding: 0;
 

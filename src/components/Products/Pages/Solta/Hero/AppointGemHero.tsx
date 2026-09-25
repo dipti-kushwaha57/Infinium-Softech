@@ -11,57 +11,10 @@ export function AppointGemHero({ product }: { product: ProductItem }) {
   const interfaceRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    let ticking = false;
-    const desktopQuery = window.matchMedia("(min-width: 1024px)");
-
-    const updateScroll = () => {
-      const section = sectionRef.current;
-      const intro = introRef.current;
-      const interfaceElement = interfaceRef.current;
-      if (!section || !intro || !interfaceElement) return;
-
-      if (!desktopQuery.matches) {
-        interfaceElement.style.transform = "";
-        interfaceElement.style.zIndex = "";
-        intro.style.transform = "";
-        intro.style.opacity = "";
-        return;
-      }
-
-      const viewportHeight = window.innerHeight || 1;
-      const sectionTop = section.getBoundingClientRect().top + window.scrollY;
-      const progress = Math.max(
-        0,
-        Math.min(1, (window.scrollY - sectionTop) / (viewportHeight * 1.2)),
-      );
-      const lift = progress * Math.min(150, intro.offsetHeight * 0.55);
-
-      interfaceElement.style.transform = `translate3d(0, ${-lift.toFixed(1)}px, 0) scale(${(1 + progress * 0.025).toFixed(4)})`;
-      interfaceElement.style.zIndex = progress > 0 ? "3" : "";
-      intro.style.transform = `translate3d(0, ${(-progress * 28).toFixed(1)}px, 0)`;
-      intro.style.opacity = String(1 - progress * 0.18);
-    };
-
-    const onScroll = () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          updateScroll();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    desktopQuery.addEventListener("change", onScroll);
-    updateScroll();
-
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-      desktopQuery.removeEventListener("change", onScroll);
-    };
+    if (typeof window !== "undefined") {
+      window.history.scrollRestoration = "manual";
+      window.scrollTo(0, 0);
+    }
   }, []);
 
   return (

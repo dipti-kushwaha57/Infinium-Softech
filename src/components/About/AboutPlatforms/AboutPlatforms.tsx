@@ -152,8 +152,7 @@ export function AboutPlatforms() {
                 <span
                   className="dot-fill"
                   style={{
-                    backgroundColor:
-                      activeIndex === idx ? product.tint : undefined,
+                    backgroundColor: activeIndex === idx ? product.tint : "#0C0C0D",
                   }}
                 />
               </button>

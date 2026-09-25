@@ -24,26 +24,28 @@ export function SolutionsHero() {
           Solutions
         </div>
 
-        <h1 data-reveal="" className="solutions-hero-headline">
-          Six ways we build. <br />
-          <span className="highlight">One platform underneath.</span>
-        </h1>
-
         <div className="solutions-hero-grid">
-          <p data-reveal="" className="solutions-hero-desc">
-            Mobile, web, custom software, AI, enterprise systems and cloud.
-            Every engagement is delivered by the team that builds and runs
-            nine live products on the same shared core.
-          </p>
+          <h1 data-reveal="" className="solutions-hero-headline">
+            Six ways we build. <br />
+            <span className="highlight">One platform underneath.</span>
+          </h1>
 
-          <div data-reveal="" className="solutions-hero-actions">
-            <Link href="#mobile-applications" className="btn-primary">
-              Explore the six
-            </Link>
+          <div className="solutions-hero-side">
+            <p data-reveal="" className="solutions-hero-desc">
+              Mobile, web, custom software, AI, enterprise systems and cloud.
+              Every engagement is delivered by the team that builds and runs
+              nine live products on the same shared core.
+            </p>
 
-            <Link href="/contact" className="btn-outline">
-              Talk to sales
-            </Link>
+            <div data-reveal="" className="solutions-hero-actions">
+              <Link href="#mobile-applications" className="btn-primary">
+                Explore the six
+              </Link>
+
+              <Link href="/contact" className="btn-outline">
+                Talk to sales
+              </Link>
+            </div>
           </div>
         </div>
 

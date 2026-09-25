@@ -181,69 +181,36 @@
 }
 
 .technology-hero-headline {
-  font-family: $font-display;
-  font-weight: 800;
-  font-stretch: 110%;
-
-  font-size: clamp(38px, 5.8vw, 96px);
-
-  line-height: 0.92;
-  letter-spacing: -0.045em;
-
-  margin-top: 22px;
+  @include hero-headline;
+  margin-top: 0;
   max-width: 19ch;
-
-  color: $color-ink;
-
   text-wrap: pretty;
-
-  @media (max-width: 480px) {
-    font-size: 36px;
-    line-height: 0.94;
-  }
-
-  @media (min-width: 768px) and (max-width: 1023px) {
-    font-size: 46px;
-    line-height: 1;
-  }
-
-  .highlight {
-    color: $color-accent;
-  }
 }
 
 .technology-hero-grid {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: 48px;
+  align-items: flex-start;
+  margin-top: 24px;
 
-  gap: 24px;
-  margin-top: 32px;
-
-  @include respond($bp-md) {
-    display: flex;
-    flex-direction: row;
-
-    justify-content: space-between;
-    align-items: flex-end;
-
-    gap: 48px;
-    margin-top: 44px;
+  @media (max-width: 992px) {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 }
 
+.technology-hero-side {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: flex-start;
+}
+
 .technology-hero-desc {
-  font-size: 17.5px;
-  line-height: 1.6;
-
-  color: $color-body;
-
+  @include hero-desc;
   margin: 0;
   max-width: 580px;
-
-  @media (max-width: 768px) {
-    font-size: 15px;
-    line-height: 1.55;
-  }
 }
 
 .technology-hero-actions {
@@ -265,78 +232,11 @@
   }
 
   .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    gap: 10px;
-
-    background: $color-accent;
-    color: #ffffff;
-
-    font-size: 14px;
-    font-weight: 500;
-
-    padding: 14px 26px;
-
-    border-radius: 2px;
-
-    white-space: nowrap;
-
-    transition:
-      background 0.25s ease,
-      transform 0.2s ease,
-      box-shadow 0.2s ease;
-
-    @include respond($bp-lg) {
-      font-size: 14px;
-      padding: 15px 28px;
-    }
-
-    &:hover {
-      background: #1826b8;
-      transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(31, 49, 232, 0.25);
-    }
+    @include btn-hero-primary;
   }
 
   .btn-outline {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    gap: 10px;
-
-    border: 1px solid rgba($color-ink, 0.16);
-
-    color: $color-ink;
-
-    font-size: 14px;
-    font-weight: 500;
-
-    padding: 14px 23px;
-
-    border-radius: 2px;
-
-    white-space: nowrap;
-
-    background: transparent;
-
-    transition:
-      background 0.2s ease,
-      border-color 0.2s ease,
-      transform 0.2s ease;
-
-    @include respond($bp-lg) {
-      font-size: 14px;
-      padding: 15px 25px;
-    }
-
-    &:hover {
-      background: rgba($color-ink, 0.05);
-      border-color: rgba($color-ink, 0.35);
-      transform: translateY(-1px);
-    }
+    @include btn-hero-outline;
   }
 }
 

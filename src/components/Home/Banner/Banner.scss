@@ -424,7 +424,7 @@
       position: absolute;
       left: 50%;
       top: 0;
-      width: min(1240px, 90vw);
+      width: min(1280px, 92vw);
       margin: 0;
       padding: 0;
       transform: translate3d(-50%, 100vh, 0) scale(0.86);
@@ -450,6 +450,11 @@
       box-shadow: 0 -8px 90px rgba($color-ink, 0.28), 0 0 0 1px rgba($color-ink, 0.1);
     }
 
+    @include respond($bp-lg) {
+      width: 84%;
+      margin: 0 auto;
+    }
+
     .preview-img {
       display: block;
       width: 100%;
@@ -460,7 +465,7 @@
   /* ──────────────────────────────────────────────
      Cards Layout:
      - On mobile / tablet (< 1024px): 3 cards are positioned half-inside and half-outside the bottom of the hero preview image
-     - On desktop (>= 1024px): floats over image sides with parallax
+     - On desktop (>= 1024px): floats half inside image, half outside image, aligned within container bounds
      ────────────────────────────────────────────── */
   .deck-cards-wrapper {
     position: relative;
@@ -506,24 +511,30 @@
       transition: margin-top 0.15s ease-out;
 
       &.card-appointgem {
-        left: -9%;
-        top: 34px;
-        width: 210px;
+        left: 0;
+        top: 28px;
+        width: 16%;
+        min-width: 165px;
+        max-width: 215px;
         animation: im-float-a 8s ease-in-out infinite;
       }
 
       &.card-truckguru {
-        right: -8%;
-        top: 96px;
-        width: 196px;
+        right: 0;
+        top: 90px;
+        width: 15%;
+        min-width: 155px;
+        max-width: 200px;
         z-index: 4;
         animation: im-float-b 9.4s ease-in-out infinite;
       }
 
       &.card-welzokart {
-        left: 6%;
-        top: 210px;
-        width: 184px;
+        left: 4.5%;
+        top: 195px;
+        width: 14.5%;
+        min-width: 150px;
+        max-width: 190px;
         z-index: 4;
         animation: im-float-b 10.2s ease-in-out infinite;
       }
@@ -562,8 +573,8 @@
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(255, 255, 255, 0.8);
       box-shadow: 0 24px 60px rgba(12, 12, 13, 0.16);
-      border-radius: 14px;
-      padding: 16px;
+      border-radius: 12px;
+      padding: clamp(10px, 1vw, 16px);
     }
   }
 

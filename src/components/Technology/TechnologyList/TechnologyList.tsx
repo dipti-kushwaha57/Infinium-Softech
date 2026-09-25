@@ -1,3 +1,6 @@
+"use client";
+
+import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import "./TechnologyList.scss";
@@ -7,30 +10,130 @@ import {
   TECHNOLOGY_HERO_INDEX_ITEMS,
 } from "@/data/technology/technologyData";
 
+const SECTION_IDS = TECHNOLOGY_HERO_INDEX_ITEMS.map((item) =>
+  item.href.substring(1)
+);
+
+const SCROLL_OFFSET = 125;
+const ACTIVATION_OFFSET = 160;
+
 export function TechnologyList() {
   const categoryKeys = Object.keys(CATEGORY_HEADERS);
+  const [activeSection, setActiveSection] = useState<string>(SECTION_IDS[0]);
+  const navContainerRef = useRef<HTMLDivElement | null>(null);
+
+  const scrollActiveTabIntoView = useCallback((sectionId: string) => {
+    if (!navContainerRef.current) return;
+    const activeCard = navContainerRef.current.querySelector(
+      `[data-nav-id="${sectionId}"]`
+    ) as HTMLElement;
+    if (activeCard) {
+      activeCard.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "center",
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    const observerOptions: IntersectionObserverInit = {
+      root: null,
+      rootMargin: "-20% 0px -50% 0px",
+      threshold: 0.05,
+    };
+
+    const handleIntersect: IntersectionObserverCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          if (SECTION_IDS.includes(id)) {
+            setActiveSection(id);
+            scrollActiveTabIntoView(id);
+          }
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(handleIntersect, observerOptions);
+
+    SECTION_IDS.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    const handleScrollBottom = () => {
+      const atBottom =
+        window.innerHeight + Math.ceil(window.scrollY) >=
+        document.documentElement.scrollHeight - 30;
+      if (atBottom && window.scrollY > 0) {
+        const lastId = SECTION_IDS[SECTION_IDS.length - 1];
+        setActiveSection(lastId);
+        scrollActiveTabIntoView(lastId);
+      }
+    };
+
+    window.addEventListener("scroll", handleScrollBottom, { passive: true });
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", handleScrollBottom);
+    };
+  }, [scrollActiveTabIntoView]);
+
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
+    e.preventDefault();
+    const id = href.substring(1);
+    const element = document.getElementById(id);
+    if (!element) return;
+
+    setActiveSection(id);
+    scrollActiveTabIntoView(id);
+
+    const targetY =
+      element.getBoundingClientRect().top + window.scrollY - 120;
+    window.scrollTo({ top: targetY, behavior: "smooth" });
+  };
 
   return (
     <div id="tech-list" className="technology-list-wrapper">
       {/* Sticky Index Navigation Bar */}
       <section className="tech-sticky-bar-section">
         <div className="tech-sticky-container">
-          <div className="solutions-hero-index tech-sticky-index">
-            {TECHNOLOGY_HERO_INDEX_ITEMS.map((item) => (
-              <Link key={item.num} href={item.href} className="index-card">
-                <div className="index-content">
-                  {/* <span className="index-num">{item.num}</span> */}
-                  <div className="index-title-row">
-                    <span
-                      className="index-dot"
-                      style={{ backgroundColor: item.color }}
-                      aria-hidden="true"
-                    />
-                    <span className="index-title">{item.title}</span>
+          <div
+            className="solutions-hero-index tech-sticky-index"
+            ref={navContainerRef}
+          >
+            {TECHNOLOGY_HERO_INDEX_ITEMS.map((item) => {
+              const sectionId = item.href.substring(1);
+              const isActive = activeSection === sectionId;
+              return (
+                <a
+                  key={item.num}
+                  href={item.href}
+                  data-nav-id={sectionId}
+                  onClick={(e) => handleNavClick(e, item.href)}
+                  className={`index-card ${isActive ? "active" : ""}`}
+                  style={
+                    { "--item-accent-color": item.color } as React.CSSProperties
+                  }
+                >
+                  <div className="index-content">
+                    <div className="index-title-row">
+                      <span
+                        className="index-dot"
+                        style={{ backgroundColor: item.color }}
+                        aria-hidden="true"
+                      />
+                      <span className="index-title">{item.title}</span>
+                    </div>
                   </div>
-                </div>
-              </Link>
-            ))}
+                </a>
+              );
+            })}
           </div>
         </div>
       </section>

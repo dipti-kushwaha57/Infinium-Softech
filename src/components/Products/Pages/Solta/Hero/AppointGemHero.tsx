@@ -115,9 +115,7 @@ export function AppointGemHero({ product }: { product: ProductItem }) {
             </div>
           </div>
         </div>
-        <div className="section-breakline">
-          <hr />
-        </div>
+
         <div ref={interfaceRef} id="interface" className="appointgem-hero-interface">
           <div className="appointgem-hero-tablet" aria-label="Slota Tablet Companies View">
             <div className="appointgem-hero-tablet-screen">

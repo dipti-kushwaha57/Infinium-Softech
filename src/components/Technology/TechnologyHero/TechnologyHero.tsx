@@ -9,14 +9,15 @@ export function TechnologyHero() {
       className="technology-hero-section"
       aria-label="Technology Hero"
     >
-      {/* Animated Background Glow */}
-      <div className="animated-spotlight-container" aria-hidden="true">
-        <div className="animated-spotlight-core" />
-        <div className="animated-spotlight-sheen" />
-
-        {/* Two Vertical Round Glows */}
-        <div className="hero-round-glow hero-round-glow--top" />
-        <div className="hero-round-glow hero-round-glow--bottom" />
+      {/* Background Animated Glow Orbs */}
+      <div className="hero-glow-layer" aria-hidden="true">
+        <div className="hero-glow-tr" />
+        <div className="hero-glow-bl" />
+        <div className="hero-glow-center" />
+        <div className="hero-orbs">
+          <div className="orb-bl" />
+          <div className="orb-tr" />
+        </div>
       </div>
 
       <div className="technology-hero-container">

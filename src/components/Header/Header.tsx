@@ -468,7 +468,7 @@ export function Header() {
 
               {/* Bottom bar of Mega Menu */}
               <div className="mega-bottom-bar">
-                <span className="bottom-count">9 products across 9 industries</span>
+                {/* <span className="bottom-count">9 products across 9 industries</span> */}
                 <Link
                   href="#ecosystem"
                   className="bottom-link"
@@ -481,7 +481,7 @@ export function Header() {
                     );
                   }}
                 >
-                  Browse the full ecosystem →
+                  {/* Browse the full ecosystem → */}
                 </Link>
               </div>
             </div>

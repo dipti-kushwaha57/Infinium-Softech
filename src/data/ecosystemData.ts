@@ -49,7 +49,7 @@ export const ECOSYSTEM_PRODUCTS: EcosystemProduct[] = [
     metricDelta: "▲ 24.8%",
     appLabel: "Orders today",
     appValue: "3,180",
-    shot: "/shots/welzokart.jpg",
+    shot: "/shots/Welzokart 2.jpg",
   },
   {
     id: "mapmypay",

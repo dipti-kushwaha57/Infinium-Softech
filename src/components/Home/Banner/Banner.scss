@@ -1,26 +1,12 @@
 @use "../../../styles/variables" as *;
 @use "../../../styles/mixins" as *;
 
-// This value is set at runtime by Banner.tsx (it measures the section's
-// own natural distance from the top of the viewport — i.e. whatever is
-// pinned above it, no selector-guessing required) — the 0px here is only
-// a fallback for the very first paint before JS runs.
-:root {
-  --banner-header-h: 0px;
-}
-
 .banner {
   position: relative;
   background: $color-bg;
   color: $color-ink;
   width: 100%;
   overflow-x: clip;
-
-  // FIX #1: contain this section's z-index stack so cards/deck (z-index 2-4)
-  // can NEVER paint above external elements like a sticky/fixed <Header>,
-  // regardless of DOM order or whether the header sets its own z-index.
-  isolation: isolate;
-  z-index: 0;
 
   // On mobile / tablet, banner flows naturally
   padding-top: 40px;
@@ -59,19 +45,10 @@
 
     @include respond($bp-lg) {
       position: sticky;
-      // FIX (1024–1420px overlap): was `top: 0`, which sticks the frame to
-      // the literal top of the viewport — i.e. BEHIND/UNDER a sticky or
-      // fixed header. That's what let the deck + cards render through the
-      // header at every desktop width, not just near 1440px. Locking to
-      // the header's height instead keeps the frame's stuck position
-      // correctly below the header at all times.
-      top: calc(var(--banner-header-h, 0px) + 4px);
+      top: 0;
       height: calc(min(1240px, 90vw) * 0.49 + clamp(44px, 5.5vh, 60px) + 32px);
       padding-top: min(6vh, 48px);
-      // was `overflow: visible` — this is what let cards/deck bleed past
-      // the sticky frame's own box. `clip` still allows position: sticky
-      // to work correctly on this element itself.
-      overflow: clip;
+      overflow: visible;
     }
   }
 
@@ -458,6 +435,7 @@
 
   .deck-container {
     position: relative;
+    width: 100%;
   }
 
   .deck-preview {
@@ -527,20 +505,15 @@
       z-index: 4;
       transition: margin-top 0.15s ease-out;
 
-      // FIX #1c: clamp the horizontal escape so cards never push further
-      // outside the deck than they can safely go once the deck hits its
-      // 1240px cap (this is exactly what was happening in the
-      // 1240–1440px viewport band, since `min(1240px, 90vw)` stops
-      // growing there while the % offsets kept trying to expand).
       &.card-appointgem {
-        left: clamp(-70px, -9%, -40px);
+        left: -9%;
         top: 34px;
         width: 210px;
         animation: im-float-a 8s ease-in-out infinite;
       }
 
       &.card-truckguru {
-        right: clamp(-60px, -8%, -35px);
+        right: -8%;
         top: 96px;
         width: 196px;
         z-index: 4;
@@ -562,6 +535,7 @@
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     border: 1px solid rgba(255, 255, 255, 0.9);
+    // box-shadow: 0 10px 28px rgba($color-ink, 0.12), 0 2px 6px rgba($color-ink, 0.04);
     border-radius: 8px;
     padding: 8px 7px;
     text-align: left;
@@ -584,27 +558,12 @@
 
     @include respond($bp-lg) {
       background: rgba(241, 240, 236, 0.72);
-      // FIX #2: force this card onto its own stable compositing layer so
-      // backdrop-filter keeps sampling correctly while the ancestor
-      // (.banner-deck / .banner-content) is being transformed every
-      // scroll frame by the JS. Without this, some browsers intermittently
-      // drop the blur and just paint the flat near-white rgba fill,
-      // which is the "white card" bug.
-      transform: translateZ(0);
-      will-change: backdrop-filter;
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(255, 255, 255, 0.8);
       box-shadow: 0 24px 60px rgba(12, 12, 13, 0.16);
       border-radius: 14px;
       padding: 16px;
-
-      // Fallback for browsers/engines that silently don't support
-      // backdrop-filter at all — give them a slightly tinted, more opaque
-      // card instead of a flat near-white block so it still reads as a card.
-      @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-        background: rgba(255, 255, 255, 0.94);
-      }
     }
   }
 

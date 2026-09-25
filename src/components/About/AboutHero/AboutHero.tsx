@@ -22,7 +22,8 @@ export function AboutHero() {
 
         <div className="about-hero-grid">
           <h1 data-reveal="" className="about-hero-headline">
-            We build products, <span className="highlight"> <br /> not projects.</span>
+            We build products, <br />
+            <span className="highlight">not projects.</span>
           </h1>
 
           <div className="about-hero-side">

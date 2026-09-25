@@ -11,7 +11,7 @@ import {
 } from "@/data/technology/technologyData";
 
 const SECTION_IDS = TECHNOLOGY_HERO_INDEX_ITEMS.map((item) =>
-  item.href.substring(1) 
+  item.href.substring(1)
 );
 
 const SCROLL_OFFSET = 125;

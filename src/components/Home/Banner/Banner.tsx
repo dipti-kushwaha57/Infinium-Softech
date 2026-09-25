@@ -13,49 +13,6 @@ export function Banner() {
   const textRef = useRef<HTMLDivElement>(null);
   const deckRef = useRef<HTMLDivElement>(null);
 
-  // FIX: don't try to find/guess the header element at all — instead,
-  // measure how far THIS section naturally sits from the top of the
-  // viewport before any scrolling happens. That distance is, by
-  // definition, exactly the space occupied by whatever is pinned above it
-  // (header, announcement bar, etc.), with zero selector-guessing
-  // involved. This is what gets written to --banner-header-h, which the
-  // sticky frame in Banner.scss reads to lock in place below that point.
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    const measure = () => {
-      // Only trust this measurement while the page is still at (or very
-      // near) the top — once the user has scrolled, the section's
-      // getBoundingClientRect().top no longer reflects its natural
-      // resting offset, since position: sticky may already be engaged.
-      const scrollY = window.scrollY || window.pageYOffset || 0;
-      if (scrollY > 2) return;
-
-      const rect = section.getBoundingClientRect();
-      const naturalOffset = Math.round(rect.top + scrollY);
-      document.documentElement.style.setProperty(
-        "--banner-header-h",
-        `${Math.max(0, naturalOffset)}px`
-      );
-    };
-
-    measure();
-    // Re-measure on resize/orientation change in case a responsive
-    // header changes height at different widths.
-    window.addEventListener("resize", measure);
-    window.addEventListener("orientationchange", measure);
-    // Fonts/images loading in above the section can shift its position
-    // slightly after first paint — re-check shortly after mount too.
-    const t = setTimeout(measure, 300);
-
-    return () => {
-      window.removeEventListener("resize", measure);
-      window.removeEventListener("orientationchange", measure);
-      clearTimeout(t);
-    };
-  }, []);
-
   useEffect(() => {
     let ticking = false;
 
@@ -95,11 +52,7 @@ export function Banner() {
       const padTop = parseFloat(getComputedStyle(sticky).paddingTop) || 0;
       const textH = text.offsetHeight || 0;
       const startTop = padTop + textH + 20;
-      // FIX: floor raised from 36 to 44px so the deck (and the cards
-      // floating above its top edge) always keep a bit of breathing room
-      // below the sticky frame's own top edge, which itself now already
-      // sits below the real header via --banner-header-h.
-      const endTop = Math.min(60, Math.max(44, vh * 0.065));
+      const endTop = Math.min(60, Math.max(36, vh * 0.065));
       const top = startTop + (endTop - startTop) * e;
       const scale = 0.88 + e * 0.12;
 
@@ -274,7 +227,7 @@ export function Banner() {
               />
             </div>
 
-            {/* Cards Container: On desktop floats over image sides with parallax; on mobile/tablet displays as full cards below image */}
+            {/* Cards Container: On desktop floats over image with parallax; on mobile/tablet displays as full cards below image */}
             <div className="deck-cards-wrapper">
               {/* Card 1: AppointGem */}
               <div

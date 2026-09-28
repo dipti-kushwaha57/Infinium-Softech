@@ -201,7 +201,7 @@ export function ProductCatalogue({
                 </div>
 
                 <div className="card-actions">
-                  <Link href="/contact" className="btn-primary">
+                  <Link href="/book-a-demo" className="btn-primary">
                     Book a demo <span className="arrow">→</span>
                   </Link>
                   <Link href={`/products/${p.id}`} className="btn-secondary">

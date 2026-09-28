@@ -200,7 +200,7 @@ export function Banner() {
               </p>
 
               <div className="banner-actions">
-                <Link href="#demo" className="btn-primary">
+                <Link href="/book-a-demo" className="btn-primary">
                   Book Live Demo <span aria-hidden="true">→</span>
                 </Link>
                 <Link href="#ecosystem" className="btn-secondary">

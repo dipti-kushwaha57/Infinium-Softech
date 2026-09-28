@@ -628,7 +628,7 @@ export function Ecosystem() {
 
                       {/* Action CTAs */}
                       <div className="card-actions">
-                        <Link href="#demo" className="btn-card-primary">
+                        <Link href="/book-a-demo" className="btn-card-primary">
                           Launch demo{" "}
                           <span className="btn-arrow" aria-hidden="true">
                             →

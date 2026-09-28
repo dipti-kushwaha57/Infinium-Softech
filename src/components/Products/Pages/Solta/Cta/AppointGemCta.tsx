@@ -18,7 +18,7 @@ export function AppointGemCta() {
           </div>
 
           <div data-reveal="" className="cta-actions">
-            <Link href="/contact" className="cta-btn-primary">
+            <Link href="/book-a-demo" className="cta-btn-primary">
               Book a demo <span aria-hidden="true">→</span>
             </Link>
             <Link href="/products" className="cta-btn-secondary">

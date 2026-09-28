@@ -508,7 +508,7 @@ export function Header() {
                   <div className="preview-desc">{currentPreviewProduct.desc}</div>
                   <div className="preview-actions">
                     <Link
-                      href="#demo"
+                      href="/book-a-demo"
                       className="btn-launch"
                       onClick={() => setActiveMenu(null)}
                     >

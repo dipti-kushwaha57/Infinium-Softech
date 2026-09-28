@@ -469,7 +469,7 @@ export function Delivery() {
               </p>
 
               <div className="consultation-actions">
-                <Link href="#demo" className="btn-primary-consult">
+                <Link href="/book-a-demo" className="btn-primary-consult">
                   Book Live Demo{" "}
                   <span className="btn-arrow" aria-hidden="true">
                     →

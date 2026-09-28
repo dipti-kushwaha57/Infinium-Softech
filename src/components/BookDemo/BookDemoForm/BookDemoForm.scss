@@ -269,13 +269,31 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
+    width: 100%;
 
     .option-chips-row {
       display: flex;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       gap: 8px;
+      width: 100%;
+      box-sizing: border-box;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 6px;
+      padding-right: 14px;
+      cursor: grab;
+      user-select: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
 
       .option-chip-btn {
+        flex: 0 0 auto;
         cursor: pointer;
         font-family: $font-body;
         font-size: 13px;
@@ -299,6 +317,12 @@
           background: $color-accent;
           color: #ffffff;
           font-weight: 600;
+        }
+
+        @media (max-width: 767px) {
+          padding: 8.5px 14px;
+          font-size: 12.5px;
+          min-width: 70px;
         }
       }
     }
@@ -427,17 +451,11 @@
   }
 }
 
-// Desks Box (2x2 grid with borders on desktop, interactive carousel on small size)
+// Desks Box ("What you'll see": 4 stacked rows in 1 column)
 .desks-card {
   .desks-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    line-height: 1;
     font-size: 10.5px;
     letter-spacing: 0.28em;
-    text-indent: 0.28em;
     text-transform: uppercase;
     color: $color-muted;
     font-weight: 600;
@@ -447,256 +465,57 @@
     }
   }
 
-  // Big Screen (>= 768px): 2-Grid Mouse Scrollable & Draggable Track (No arrows, no dots)
-  .desks-desktop-track {
-    display: none;
-    border: 1px solid rgba(12, 12, 13, 0.16);
-    background: transparent;
+  .desks-list {
+    display: flex;
+    flex-direction: column;
     margin-top: 18px;
-    border-radius: 4px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    position: relative;
-    cursor: grab;
-    user-select: none;
-
-    &::-webkit-scrollbar {
-      display: none;
-    }
-
-    &.is-dragging {
-      cursor: grabbing;
-      scroll-snap-type: none;
-      scroll-behavior: auto;
-    }
-
-    @media (min-width: 768px) {
-      display: flex;
-    }
-
-    .desk-item {
-      flex: 0 0 50%;
-      min-width: 50%;
-      max-width: 50%;
-      width: 50%;
-      scroll-snap-align: start;
-      scroll-snap-stop: always;
-      background: $color-bg;
-      padding: 24px 22px;
-      display: flex;
-      flex-direction: column;
-      box-sizing: border-box;
-      min-height: 188px;
-      border-right: 1px solid rgba(12, 12, 13, 0.14);
-      transition: background-color 0.2s ease;
-
-      &:last-child {
-        border-right: none;
-      }
-
-      &:hover {
-        background: rgba(12, 12, 13, 0.02);
-      }
-
-      .desk-indicator {
-        width: 22px;
-        height: 22px;
-        border-radius: 6px;
-        flex-shrink: 0;
-      }
-
-      .desk-name {
-        font-family: $font-display;
-        font-weight: 700;
-        font-stretch: 106%;
-        font-size: 18px;
-        letter-spacing: -0.025em;
-        color: $color-ink;
-        margin: 14px 0 0;
-      }
-
-      .desk-desc {
-        font-size: 13.5px;
-        line-height: 1.55;
-        color: #5f5f64;
-        margin: 6px 0 0;
-        flex-grow: 1;
-      }
-
-      .desk-sla {
-        font-size: 11px;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        color: $color-muted;
-        font-weight: 600;
-        margin-top: 14px;
-      }
-    }
   }
 
-  // Mobile Carousel (< 768px)
-  .desks-carousel {
-    display: block;
-    margin-top: 18px;
+  .desk-row-item {
+    display: grid;
+    grid-template-columns: 26px minmax(0, 1fr);
+    gap: 14px;
+    align-items: start;
+    border-top: 1px solid rgba(12, 12, 13, 0.12);
+    padding: 16px 0;
 
-    @media (min-width: 768px) {
-      display: none;
+    &:first-child {
+      border-top: none;
+      padding-top: 4px;
     }
 
-    .desks-carousel-wrapper {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
+    &:last-child {
+      padding-bottom: 0;
     }
 
-    .carousel-arrow-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 10;
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: #ffffff;
-      border: 1px solid rgba(12, 12, 13, 0.14);
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    .desk-indicator-dot {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .desk-row-content {
       display: flex;
-      align-items: center;
-      justify-content: center;
+      flex-direction: column;
+    }
+
+    .desk-row-title {
+      font-family: $font-display;
+      font-weight: 700;
+      font-size: 16.5px;
+      letter-spacing: -0.02em;
       color: $color-ink;
-      cursor: pointer;
-      transition: background-color 0.2s ease, transform 0.2s ease,
-        border-color 0.2s ease;
-
-      &:hover {
-        background: $color-ink;
-        color: #ffffff;
-        border-color: $color-ink;
-      }
-
-      &:active {
-        transform: translateY(-50%) scale(0.94);
-      }
-
-      &.prev-btn {
-        left: -8px;
-      }
-
-      &.next-btn {
-        right: -8px;
-      }
+      margin: 0;
     }
 
-    .desk-carousel-card {
-      width: 100%;
-      background: $color-bg;
-      border: 1px solid rgba(12, 12, 13, 0.16);
-      border-radius: 4px;
-      padding: 24px 22px;
-      display: flex;
-      flex-direction: column;
-      min-height: 195px;
-      animation: deskSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-
-      .desk-carousel-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-
-      .desk-indicator {
-        width: 22px;
-        height: 22px;
-        border-radius: 6px;
-        flex-shrink: 0;
-      }
-
-      .desk-counter {
-        font-family: $font-display;
-        font-weight: 700;
-        font-size: 11px;
-        letter-spacing: 0.1em;
-        color: $color-muted;
-      }
-
-      .desk-name {
-        font-family: $font-display;
-        font-weight: 700;
-        font-stretch: 106%;
-        font-size: 17.5px;
-        letter-spacing: -0.025em;
-        color: $color-ink;
-        margin: 14px 0 0;
-      }
-
-      .desk-desc {
-        font-size: 13.5px;
-        line-height: 1.55;
-        color: #5f5f64;
-        margin: 6px 0 0;
-        flex-grow: 1;
-      }
-
-      .desk-sla {
-        font-size: 11px;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        color: $color-muted;
-        font-weight: 600;
-        margin-top: 14px;
-      }
+    .desk-row-desc {
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: #5f5f64;
+      margin: 5px 0 0;
     }
-
-    // Dots
-    .desks-carousel-dots {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 14px;
-
-      .desks-dot {
-        cursor: pointer;
-        padding: 4px;
-        background: transparent;
-        border: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        .dot-fill {
-          width: 8px;
-          height: 8px;
-          border-radius: 50%;
-          background: rgba(12, 12, 13, 0.2);
-          transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        &.is-active .dot-fill {
-          width: 22px;
-          border-radius: 10px;
-          background: $color-ink;
-        }
-      }
-    }
-  }
-}
-
-@keyframes deskSlideIn {
-  from {
-    opacity: 0.4;
-    transform: scale(0.98);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1);
   }
 }
 

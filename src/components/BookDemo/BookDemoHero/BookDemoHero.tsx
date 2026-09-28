@@ -4,7 +4,7 @@ import "./BookDemoHero.scss";
 
 export function BookDemoHero() {
   return (
-    <section className="contact-hero-section content-padding" aria-label="Book a Demo Hero">
+    <section className="product-hero-section content-padding" aria-label="Book a Demo Hero">
       {/* Background Animated Glows */}
       <div className="hero-glow-layer" aria-hidden="true">
         <div className="hero-glow-tr" />
@@ -16,38 +16,36 @@ export function BookDemoHero() {
         </div>
       </div>
 
-      <div className="contact-hero-container">
-        <div data-reveal="" className="contact-hero-eyebrow">
+      <div className="product-hero-container">
+        {/* Eyebrow Badge */}
+        <div data-reveal="" className="product-hero-eyebrow">
           Book a demo
         </div>
 
-        <div className="contact-hero-grid">
-          <h1 data-reveal="" className="contact-hero-headline">
-            See it running
-            <br />
-            <span className="highlight">on your own numbers.</span>
+        {/* Title & Description Grid */}
+        <div className="product-hero-header">
+          <h1 data-reveal="" className="product-hero-title">
+            See it running <span className="highlight">on your own numbers.</span>
           </h1>
+          <p data-reveal="" className="product-hero-desc">
+            Thirty minutes with a product specialist, on a workspace configured
+            with your branches, roles and volumes. Not a slide deck.
+          </p>
+        </div>
 
-          <div className="contact-hero-side">
-            <p data-reveal="" className="contact-hero-intro">
-              Thirty minutes with a product specialist, on a workspace configured
-              with your branches, roles and volumes. Not a slide deck.
-            </p>
-
-            <div data-reveal="" className="hero-stats-row">
-              <div className="hero-stat-item">
-                <div className="stat-number">30 min</div>
-                <div className="stat-label">Live walkthrough</div>
-              </div>
-              <div className="hero-stat-item">
-                <div className="stat-number">1 day</div>
-                <div className="stat-label">Typical reply time</div>
-              </div>
-              <div className="hero-stat-item">
-                <div className="stat-number">9</div>
-                <div className="stat-label">Products, one platform</div>
-              </div>
-            </div>
+        {/* Stats Grid matching Product Hero */}
+        <div className="product-hero-stats">
+          <div data-reveal="" className="stat-card">
+            <div className="stat-value">30 min</div>
+            <div className="stat-label">Live walkthrough</div>
+          </div>
+          <div data-reveal="" className="stat-card">
+            <div className="stat-value">1 day</div>
+            <div className="stat-label">Typical reply time</div>
+          </div>
+          <div data-reveal="" className="stat-card">
+            <div className="stat-value">9</div>
+            <div className="stat-label">Products, one platform</div>
           </div>
         </div>
       </div>

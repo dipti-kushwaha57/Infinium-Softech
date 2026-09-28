@@ -283,7 +283,7 @@ export function Header() {
           {/* Responsive Toggle & Action Button */}
           <div className="actions">
             <Link
-              href="/contact"
+              href="/book-a-demo"
               className="cta"
               onClick={() => setActiveMenu(null)}
             >

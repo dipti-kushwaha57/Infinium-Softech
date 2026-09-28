@@ -77,7 +77,7 @@ export function Footer() {
       return "/contact";
     }
 
-    return "#demo";
+    return "/book-a-demo";
   };
 
   return (
@@ -168,7 +168,7 @@ export function Footer() {
 
         <div className="legal">
           {LEGAL_LINKS.map((label) => (
-            <Link key={label} href="#demo">
+            <Link key={label} href="/book-a-demo">
               {label}
             </Link>
           ))}

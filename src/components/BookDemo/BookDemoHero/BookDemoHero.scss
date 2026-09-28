@@ -1,0 +1,90 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+
+.contact-hero-section {
+  position: relative;
+  background-color: $color-bg;
+  @include section-padding;
+  padding-top: 48px;
+  padding-bottom: clamp(40px, 5vw, 70px);
+  overflow: hidden;
+
+  @include respond($bp-sm) {
+    padding-top: 56px;
+  }
+
+  @include respond($bp-md) {
+    padding-top: 72px;
+  }
+}
+
+.contact-hero-container {
+  @include container;
+  position: relative;
+  z-index: 1;
+}
+
+.contact-hero-eyebrow {
+  @include section-eyebrow("light");
+}
+
+.contact-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: 48px;
+  align-items: flex-start;
+  margin-top: 24px;
+
+  @media (max-width: 992px) {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+.contact-hero-side {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.contact-hero-headline {
+  @include hero-headline;
+  margin: 0;
+  max-width: 24ch;
+}
+
+.contact-hero-intro {
+  @include hero-desc;
+  margin: 0;
+  max-width: 620px;
+}
+
+.hero-stats-row {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+
+  .hero-stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    .stat-number {
+      font-family: $font-display;
+      font-weight: 800;
+      font-stretch: 110%;
+      font-size: clamp(24px, 2.5vw, 30px);
+      letter-spacing: -0.03em;
+      color: $color-ink;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 12.5px;
+      color: $color-muted;
+    }
+  }
+}

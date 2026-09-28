@@ -34,6 +34,12 @@
       "changeFrequency": "monthly",
       "priority": 0.8
     },
+    "/book-a-demo": {
+      "title": "Book a Demo — Live Product Walkthrough",
+      "description": "See Infinium Softech platforms running on your own numbers. 30-minute live walkthrough with a product specialist.",
+      "changeFrequency": "monthly",
+      "priority": 0.8
+    },
     "/product": {
       "title": "Product Catalogue",
       "description": "Every product we build, in one place. Explore our nine proprietary platforms across industries.",

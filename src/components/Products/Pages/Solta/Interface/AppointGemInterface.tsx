@@ -23,7 +23,7 @@ const FEATURE_SHOTS: FeatureShot[] = [
     num: "01",
     title: "Day view — every slot tied to a named practitioner and room.",
     badge: "Live Calendar Grid",
-    image: "/shots/dayView.webp",
+    image: "/shots/slota-ui1.png",
     alt: "AppointGem Day View Interface",
   },
   {
@@ -31,17 +31,17 @@ const FEATURE_SHOTS: FeatureShot[] = [
     num: "02",
     title: "Booking detail — deposit, balance and reminder history in one panel.",
     badge: "Unified Booking Rail",
-    image: "/shots/BookingDetail.webp",
+    image: "/shots/slota-ui2.png",
     alt: "AppointGem Booking Detail Interface",
   },
-  {
-    id: "shot-3",
-    num: "03",
-    title: "Reporting — utilisation and revenue per practitioner and branch.",
-    badge: "Real-Time Analytics",
-    image: "/shots/Reporting.webp",
-    alt: "AppointGem Reporting & Analytics Interface",
-  },
+  // {
+  //   id: "shot-3",
+  //   num: "03",
+  //   title: "Reporting — utilisation and revenue per practitioner and branch.",
+  //   badge: "Real-Time Analytics",
+  //   image: "/shots/Reporting.webp",
+  //   alt: "AppointGem Reporting & Analytics Interface",
+  // },
 ];
 
 export function AppointGemInterface() {

@@ -8,6 +8,7 @@ import {
   DeliveryStep,
   EngagementModel,
 } from "@/data/deliverData";
+import { ABOUT_ENGAGEMENTS } from "@/data/aboutData";
 import "./Delivery.scss";
 
 function useCarousel(ref: RefObject<HTMLDivElement | null>, itemCount: number) {
@@ -480,6 +481,23 @@ export function Delivery() {
                   Talk to sales
                 </Link>
               </div>
+            </div>
+
+            {/* Right Side Engagement List */}
+            <div className="consultation-right">
+              {ABOUT_ENGAGEMENTS.map((engagement, idx) => (
+                <div key={idx} className="engagement-item">
+                  <span
+                    className="engagement-dot"
+                    style={{ backgroundColor: engagement.tint }}
+                    aria-hidden="true"
+                  />
+                  <div className="engagement-content">
+                    <span className="engagement-title">{engagement.title}</span>
+                    <span className="engagement-fit">{engagement.fit}</span>
+                  </div>
+                </div>
+              ))}
             </div>
 
             {/* Visual Animated Wave Band */}

@@ -185,15 +185,11 @@ export function SolutionsList() {
                         src={item.image}
                         alt={item.imageAlt}
                         width={640}
-                        height={420}
+                        height={480}
                         className="strivedge-portfolio-img"
                         priority={item.num === "01"}
                       />
                     </div>
-                  </div>
-                  <div className="mockup-footer">
-                    <span className="status-label">{item.statusLabel}</span>
-                    <span className="products-tag">{item.productsTag}</span>
                   </div>
                 </div>
               </div>

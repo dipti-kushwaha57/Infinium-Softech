@@ -23,7 +23,7 @@ export function AboutBuilt() {
 
         <div data-reveal="" className="about-built-right">
           <Image
-            src="/solutions/mobile-app.png"
+            src="/brand/about.png"
             alt="Infinium Softech team building digital products"
             width={640}
             height={480}

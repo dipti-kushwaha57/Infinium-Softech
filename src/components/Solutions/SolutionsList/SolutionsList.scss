@@ -186,14 +186,14 @@
 }
 
 .solution-item-section {
-  padding-top: 36px;
-  padding-bottom: 36px;
+  padding-top: 48px;
+  padding-bottom: 48px;
   scroll-margin-top: 130px;
   transition: background 0.3s ease, color 0.3s ease;
 
   @include respond($bp-md) {
-    padding-top: 56px;
-    padding-bottom: 56px;
+    padding-top: 68px;
+    padding-bottom: 68px;
     scroll-margin-top: 140px;
   }
 
@@ -371,7 +371,8 @@
 .mockup-content {
   position: relative;
   width: 100%;
-  aspect-ratio: 16/10;
+  aspect-ratio: 16 / 11.5;
+  border-radius: 8px;
   overflow: hidden;
   display: flex;
   align-items: center;

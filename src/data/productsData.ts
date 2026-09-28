@@ -108,7 +108,7 @@ export const PRODUCT_ITEMS: ProductItem[] = [
     metricLabel: "Orders / month",
     metric: "92,640",
     metricDelta: "▲ 24.8%",
-    shot: "/shots/welzokart.jpg",
+    shot: "/shots/Welzokart 2.jpg",
     apps: "Web, customer, rider",
     api: "REST + POS sync",
     golive: "8–10 weeks",

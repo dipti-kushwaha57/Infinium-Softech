@@ -225,7 +225,7 @@ can benefit products across the entire ecosystem.
             </svg>
           </button>
 
-          <div ref={notesContainerRef} className="stack-notes-grid">
+          {/* <div ref={notesContainerRef} className="stack-notes-grid">
             {STACK_NOTES.map((note, idx) => (
               <div data-reveal="" key={idx} className="note-card">
                 <div className="note-check" aria-hidden="true">
@@ -234,7 +234,7 @@ can benefit products across the entire ecosystem.
                 <p className="note-text">{note}</p>
               </div>
             ))}
-          </div>
+          </div> */}
 
           {/* Mobile Navigation Right Arrow Button */}
           <button
@@ -258,7 +258,7 @@ can benefit products across the entire ecosystem.
           </button>
 
           {/* Mobile Dots Pagination Indicator */}
-          <div
+          {/* <div
             className="stack-notes-dots"
             aria-label="Architecture commitments pagination"
           >
@@ -273,7 +273,7 @@ can benefit products across the entire ecosystem.
                 aria-label={`Go to slide ${idx + 1}`}
               />
             ))}
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

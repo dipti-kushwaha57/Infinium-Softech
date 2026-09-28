@@ -217,6 +217,7 @@
     }
 
     @media (min-width: 768px) and (max-width: 1279px) {
+
       &.step-card--1,
       &.step-card--2,
       &.step-card--3 {
@@ -600,11 +601,9 @@
       top: -40%;
       width: 60%;
       height: 180%;
-      background: radial-gradient(
-        closest-side,
-        rgba(31, 49, 232, 0.42),
-        rgba(31, 49, 232, 0) 70%
-      );
+      background: radial-gradient(closest-side,
+          rgba(31, 49, 232, 0.42),
+          rgba(31, 49, 232, 0) 70%);
       filter: blur(10px);
       pointer-events: none;
       z-index: 0;
@@ -633,20 +632,7 @@
     }
 
     .consultation-badge {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      line-height: 1;
-      border: 1px solid rgba(241, 240, 236, 0.24);
-      padding: 7px 14px;
-      font-size: 10.5px;
-      letter-spacing: 0.26em;
-      text-indent: 0.26em;
-      text-transform: uppercase;
-      color: #b6b6ba;
-      font-weight: 600;
-      border-radius: 100px;
+      @include section-eyebrow("dark");
     }
 
     .consultation-title {
@@ -750,7 +736,69 @@
       }
     }
 
-    // Animated Wave Sway Visual (Background on <= 991px, Right Column on >= 992px)
+    // Right side engagement items (from About page Work with us)
+    .consultation-right {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      width: 100%;
+      border-top: 1px solid rgba(241, 240, 236, 0.14);
+      padding-top: 20px;
+      margin-top: 28px;
+      position: relative;
+      z-index: 2;
+
+      @media (min-width: 992px) {
+        border-top: none;
+        padding-top: 0;
+        margin-top: 0;
+      }
+
+      .engagement-item {
+        border-top: 1px solid rgba(241, 240, 236, 0.14);
+        padding: 16px 0;
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        gap: 14px;
+        align-items: start;
+
+        &:first-child {
+          border-top: none;
+        }
+
+        .engagement-dot {
+          width: 24px;
+          height: 24px;
+          border-radius: 7px;
+          margin-top: 2px;
+          flex-shrink: 0;
+        }
+
+        .engagement-content {
+          display: flex;
+          flex-direction: column;
+          min-width: 0;
+
+          .engagement-title {
+            font-family: $font-display;
+            font-weight: 700;
+            font-stretch: 106%;
+            font-size: 16.5px;
+            letter-spacing: -0.02em;
+            color: #f1f0ec;
+          }
+
+          .engagement-fit {
+            font-size: 13px;
+            line-height: 1.5;
+            color: #8a8a8e;
+            margin-top: 4px;
+          }
+        }
+      }
+    }
+
+    // Animated Wave Sway Visual (Maintained as background)
     .consultation-wave-wrap {
       position: absolute;
       inset: 0;
@@ -760,18 +808,7 @@
       overflow: hidden;
       pointer-events: none;
       opacity: 0.35;
-      z-index: 1;
-
-      @media (min-width: 992px) {
-        position: relative;
-        inset: auto;
-        width: auto;
-        height: auto;
-        min-height: 280px;
-        align-self: stretch;
-        opacity: 1;
-        z-index: 1;
-      }
+      z-index: 0;
 
       .wave-inner {
         position: absolute;
@@ -790,10 +827,12 @@
 
 // Keyframe Animation for CTA Wave Ribbon
 @keyframes delivery-wave-sway {
+
   0%,
   100% {
     transform: translateY(0) rotate(0deg);
   }
+
   50% {
     transform: translateY(-12px) rotate(1.5deg);
   }

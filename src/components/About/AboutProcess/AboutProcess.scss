@@ -21,7 +21,6 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin-top: 18px;
 
   @include respond($bp-lg) {
     display: flex;
@@ -38,7 +37,8 @@
     font-size: clamp(30px, 3.8vw, 66px);
     line-height: 0.96;
     letter-spacing: -0.045em;
-    margin: 0;
+    margin-top: 18px;
+    margin-bottom: 0;
     color: #f1f0ec;
 
     @media (min-width: 768px) and (max-width: 1023px) {

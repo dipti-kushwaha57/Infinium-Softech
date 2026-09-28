@@ -70,7 +70,7 @@ export function Operators() {
         </div>
 
         {/* Row B - Scrolling Right */}
-        <div className="marquee-row-wrapper">
+        {/* <div className="marquee-row-wrapper">
           <div className="marquee-track marquee-right">
             {[0, 1, 2, 3].map((copyIdx) => (
               <div
@@ -100,7 +100,7 @@ export function Operators() {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

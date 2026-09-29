@@ -62,11 +62,6 @@
     color: $color-ink;
     margin: 12px 0 0;
 
-    @media (min-width: 2400px) {
-      white-space: nowrap;
-      br { display: none; }
-    }
-
     @include respond($bp-lg) {
       grid-column: 1;
     }

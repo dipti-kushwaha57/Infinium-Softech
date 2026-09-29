@@ -58,11 +58,6 @@
     color: #f1f0ec;
     margin: 12px 0 0;
 
-    @media (min-width: 2400px) {
-      white-space: nowrap;
-      br { display: none; }
-    }
-
     .highlight {
       color: #c8f24e;
     }

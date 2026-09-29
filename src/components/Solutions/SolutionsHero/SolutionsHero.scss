@@ -40,8 +40,8 @@
 .solutions-hero-headline {
   @include hero-headline;
   margin-top: 0;
-  max-width: 19ch;
-  text-wrap: pretty;
+  max-width: none;
+  text-wrap: balance;
 }
 
 /* =========================================================

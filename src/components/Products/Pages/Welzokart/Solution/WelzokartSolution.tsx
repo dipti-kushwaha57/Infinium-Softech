@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useCallback, useEffect, useState } from "react";
-import "./AppointGemSolution.scss";
+import "./WelzokartSolution.scss";
 
 const SOLUTIONS = [
   {
@@ -36,7 +36,7 @@ const SOLUTIONS = [
   },
 ];
 
-export function AppointGemSolution() {
+export function WelzokartSolution() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [slideDirection, setSlideDirection] = useState<"next" | "prev">("next");
   const totalSolutions = SOLUTIONS.length;

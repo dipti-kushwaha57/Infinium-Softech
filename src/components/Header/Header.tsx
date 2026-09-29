@@ -408,7 +408,17 @@ export function Header() {
                           className="badge-mark"
                           style={{ backgroundColor: prod.tint }}
                         >
-                          {prod.mark}
+                          {prod.logo ? (
+                            <Image
+                              src={prod.logo}
+                              alt={prod.name}
+                              width={22}
+                              height={22}
+                              className="badge-logo-img"
+                            />
+                          ) : (
+                            prod.mark
+                          )}
                         </span>
                         <div className="card-info">
                           <div className="card-header-row">

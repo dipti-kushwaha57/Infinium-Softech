@@ -48,10 +48,10 @@ const FOOTER_COLUMNS = [
     items: [
       "Slota",
       "WelzoKart",
-      "MapMyPay",
-      "Truck Guru",
+      "NurseWorth",
+      "LoadGo",
       "Trekvano",
-      "TextGem",
+      "Textora",
     ],
   },
   {

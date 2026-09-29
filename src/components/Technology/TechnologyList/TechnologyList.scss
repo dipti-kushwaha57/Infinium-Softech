@@ -298,8 +298,9 @@
     box-shadow 0.3s ease,
     transform 0.25s ease;
 
+  /* CHANGED: text 70% / image 30% */
   @include respond($bp-md) {
-    grid-template-columns: 1.1fr 0.9fr;
+    grid-template-columns: 7fr 3fr;
     gap: 48px;
     padding: 36px 40px;
   }
@@ -313,9 +314,10 @@
     background: $color-bg;
   }
 
+  /* CHANGED: reversed row -> image 30% / text 70% */
   &.reverse {
     @include respond($bp-md) {
-      grid-template-columns: 0.9fr 1.1fr;
+      grid-template-columns: 3fr 7fr;
 
       .technology-visual-col {
         order: -1;
@@ -333,6 +335,7 @@
 .technology-text-col {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .tech-badge-pill {
@@ -368,12 +371,13 @@
   }
 }
 
+/* CHANGED: paragraph uses the full 70% column (removed 520px max-width) */
 .technology-desc {
   font-size: 15.5px;
   line-height: 1.6;
   color: $color-body;
   margin-top: 14px;
-  max-width: 520px;
+  max-width: 100%;
 
   @media (max-width: 768px) {
     font-size: 14px;
@@ -434,6 +438,7 @@
 
 .technology-visual-col {
   width: 100%;
+  min-width: 0;
 }
 
 .mockup-card {

@@ -6,15 +6,15 @@ import "./BookDemoForm.scss";
 const DEMO_SIZES = ["1–10", "11–50", "51–200", "201–1,000", "1,000+"];
 
 const DEMO_PRODUCTS = [
-  "AppointGem",
+  "Slota",
   "WelzoKart",
-  "MapMyPay",
-  "Truck Guru",
-  "MindFul Menu",
+  "NurseWorth",
+  "LoadGo",
+  "Dishly",
   "Trekvano",
   "Needly",
-  "Locale E Clean",
-  "TextGem",
+  "PureSpace",
+  "Textora",
   "Not sure yet",
 ];
 

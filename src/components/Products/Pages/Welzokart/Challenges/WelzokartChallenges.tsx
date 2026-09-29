@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import "./AppointGemChallenges.scss";
+import "./WelzokartChallenges.scss";
 
 const CHALLENGES = [
   {
     num: "01",
-    title: "Availability nobody trusted",
+    title: "Availability nobody trusted111",
     desc: "Slots were offered from a shared sheet that never reflected leave, rosters or room capacity.",
   },
   {
@@ -36,7 +36,7 @@ const CHALLENGES = [
   },
 ];
 
-export function AppointGemChallenges() {
+export function WelzokartChallenges() {
   const challengesGridRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [visibleCards, setVisibleCards] = useState(1);

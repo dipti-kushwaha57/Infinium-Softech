@@ -52,9 +52,9 @@ export const ECOSYSTEM_PRODUCTS: EcosystemProduct[] = [
     shot: "/shots/Welzokart 2.jpg",
   },
   {
-    id: "mapmypay",
+    id: "NurseWorth",
     n: "03",
-    name: "MapMyPay",
+    name: "NurseWorth",
     mark: "MP",
     tag: "Healthcare",
     tint: "#8B3FE8",
@@ -71,7 +71,7 @@ export const ECOSYSTEM_PRODUCTS: EcosystemProduct[] = [
   {
     id: "truck-guru",
     n: "04",
-    name: "Truck Guru",
+    name: "LoadGo",
     mark: "TG",
     tag: "Logistics",
     tint: "#E8A21F",
@@ -88,7 +88,7 @@ export const ECOSYSTEM_PRODUCTS: EcosystemProduct[] = [
   {
     id: "mindful-menu",
     n: "05",
-    name: "MindFul Menu",
+    name: "Dishly",
     mark: "MM",
     tag: "Kitchen AI",
     tint: "#0F8F87",
@@ -139,7 +139,7 @@ export const ECOSYSTEM_PRODUCTS: EcosystemProduct[] = [
   {
     id: "locale-e-clean",
     n: "08",
-    name: "Locale E Clean",
+    name: "PureSpace",
     mark: "LE",
     tag: "Home services",
     tint: "#4338CA",
@@ -154,9 +154,9 @@ export const ECOSYSTEM_PRODUCTS: EcosystemProduct[] = [
     shot: "/shots/localeeclean.jpg",
   },
   {
-    id: "textgem",
+    id: "Textora",
     n: "09",
-    name: "TextGem",
+    name: "Textora",
     mark: "TX",
     tag: "Communication",
     tint: "#0C0C0D",

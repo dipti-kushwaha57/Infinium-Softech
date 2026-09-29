@@ -217,10 +217,10 @@ export function TechnologyList() {
                             />
                           </div>
                         </div>
-                        <div className="mockup-footer">
+                        {/* <div className="mockup-footer">
                           <span className="status-label">Enterprise Ready</span>
                           <span className="products-tag">{item.title}</span>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   </div>

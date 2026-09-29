@@ -237,15 +237,15 @@ export function Banner() {
               >
                 <div className="card-glass">
                   <div className="card-head">
-                    <div className="card-mark mark-blue">AG</div>
-                    <div className="card-title">AppointGem</div>
+                    <div className="card-mark mark-blue">sl</div>
+                    <div className="card-title">Slota</div>
                   </div>
                   <div className="card-metric">18,412</div>
                   <div className="card-caption">bookings this month</div>
                 </div>
               </div>
 
-              {/* Card 2: Truck Guru */}
+              {/* Card 2: LoadGo */}
               <div
                 data-parallax="0.07"
                 className="stat-card card-truckguru"
@@ -254,7 +254,7 @@ export function Banner() {
                 <div className="card-glass">
                   <div className="card-head">
                     <div className="card-mark mark-amber">TG</div>
-                    <div className="card-title">Truck Guru</div>
+                    <div className="card-title">LoadGo</div>
                   </div>
                   <div className="card-metric">482</div>
                   <div className="card-caption">trucks on road now</div>

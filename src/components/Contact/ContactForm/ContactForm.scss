@@ -11,7 +11,7 @@
 
 .contact-form-container {
   @include container;
-  display: grid; 
+  display: grid;
   grid-template-columns: 1fr;
   gap: 36px;
   align-items: start;
@@ -259,7 +259,7 @@
 
       @media (max-width: 767px) {
         padding: 8.5px 13px;
-        font-size: 12.5px; 
+        font-size: 12.5px;
       }
     }
   }
@@ -647,6 +647,7 @@
     opacity: 0.4;
     transform: scale(0.98);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -658,6 +659,7 @@
     opacity: 0;
     transform: translate3d(24px, 0, 0);
   }
+
   to {
     opacity: 1;
     transform: translate3d(0, 0, 0);
@@ -669,6 +671,7 @@
     opacity: 0;
     transform: translate3d(-24px, 0, 0);
   }
+
   to {
     opacity: 1;
     transform: translate3d(0, 0, 0);

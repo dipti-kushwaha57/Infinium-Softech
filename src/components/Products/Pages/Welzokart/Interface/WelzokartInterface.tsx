@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import "./AppointGemInterface.scss";
+import "./WelzokartInterface.scss";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -23,7 +23,7 @@ const FEATURE_SHOTS: FeatureShot[] = [
     num: "01",
     title: "Day view — every slot tied to a named practitioner and room.",
     badge: "Live Calendar Grid",
-    image: "/shots/slota-ui1.png",
+    image: "/shots/Welzokart_ui-1.jpg",
     alt: "Slota Day View Interface",
   },
   {
@@ -31,20 +31,20 @@ const FEATURE_SHOTS: FeatureShot[] = [
     num: "02",
     title: "Booking detail — deposit, balance and reminder history in one panel.",
     badge: "Unified Booking Rail",
-    image: "/shots/slota-ui2.png",
+    image: "/shots/Welzokart_ui-2.jpg",
     alt: "Slota Booking Detail Interface",
   },
-  // {
-  //   id: "shot-3",
-  //   num: "03",
-  //   title: "Reporting — utilisation and revenue per practitioner and branch.",
-  //   badge: "Real-Time Analytics",
-  //   image: "/shots/Reporting.webp",
-  //   alt: "AppointGem Reporting & Analytics Interface",
-  // },
+  {
+    id: "shot-3",
+    num: "03",
+    title: "Reporting — utilisation and revenue per practitioner and branch.",
+    badge: "Real-Time Analytics",
+    image: "/shots/Welzokart_ui-3.jpg",
+    alt: "AppointGem Reporting & Analytics Interface",
+  },
 ];
 
-export function AppointGemInterface() {
+export function WelzokartInterface() {
   const sectionRef = useRef<HTMLElement>(null);
   const cardsContainerRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);

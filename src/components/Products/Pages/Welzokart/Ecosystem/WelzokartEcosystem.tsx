@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { useAboutCarousel } from "@/components/About/useAboutCarousel";
-import "./AppointGemEcosystem.scss";
+import "./WelzokartEcosystem.scss";
 
 interface EcosystemProduct {
   name: string;
@@ -70,7 +70,7 @@ function EcosystemCardView({
   );
 }
 
-export function AppointGemEcosystem() {
+export function WelzokartEcosystem() {
   const { scrollRef, activeIndex, scrollToIndex, handleNext, handlePrev } =
     useAboutCarousel(RELATED_PRODUCTS.length, 1024);
 

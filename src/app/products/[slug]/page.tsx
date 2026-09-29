@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { AppointGem } from "@/components/Products/Pages/Solta/AppointGem";
+import { Welzokart } from "@/components/Products/Pages/Welzokart/Welzokart";
+
+
 import { PRODUCT_ITEMS } from "@/data/productsData";
 
 type ProductPageProps = {
@@ -39,6 +42,11 @@ export default async function ProductPage({ params }: ProductPageProps) {
   if (product.id === "slota") {
     return <AppointGem product={product} />;
   }
+
+  if (product.id === "welzokart") {
+    return <Welzokart product={product} />;
+  }
+
 
   return (
     <main className="main">

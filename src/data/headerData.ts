@@ -8,6 +8,7 @@ export type ProductItem = {
   desc: string;
   shot: string;
   wash: string;
+  logo?: string;
 };
 
 export type GenericMenuItem = {
@@ -38,6 +39,7 @@ export const ECOSYSTEM_PRODUCTS: ProductItem[] = [
     desc: "Business booking and management platform for appointment-led teams.",
     shot: "/shots/welzokart.jpg",
     wash: "rgba(31, 49, 232, 0.16)",
+    logo: "/logos/slota-logo.png",
   },
   {
     id: "welzokart",
@@ -49,11 +51,12 @@ export const ECOSYSTEM_PRODUCTS: ProductItem[] = [
     desc: "Quick commerce marketplace combining grocery and restaurant delivery.",
     shot: "/shots/welzokart.jpg",
     wash: "rgba(30, 158, 90, 0.16)",
+    logo: "/logos/welzokart-logo.png",
   },
   {
-    id: "mapmypay",
+    id: "NurseWorth",
     n: "03",
-    name: "MapMyPay",
+    name: "NurseWorth",
     mark: "MP",
     tag: "HEALTHCARE",
     tint: "#8B3FE8",
@@ -64,7 +67,7 @@ export const ECOSYSTEM_PRODUCTS: ProductItem[] = [
   {
     id: "truck-guru",
     n: "04",
-    name: "Truck Guru",
+    name: "LoadGo",
     mark: "TG",
     tag: "LOGISTICS",
     tint: "#E8A21F",
@@ -75,7 +78,7 @@ export const ECOSYSTEM_PRODUCTS: ProductItem[] = [
   {
     id: "mindful-menu",
     n: "05",
-    name: "MindFul Menu",
+    name: "Dishly",
     mark: "MM",
     tag: "KITCHEN AI",
     tint: "#0F8F87",
@@ -108,7 +111,7 @@ export const ECOSYSTEM_PRODUCTS: ProductItem[] = [
   {
     id: "locale-e-clean",
     n: "08",
-    name: "Locale E Clean",
+    name: "PureSpace",
     mark: "LE",
     tag: "HOME SERVICES",
     tint: "#4338CA",
@@ -117,9 +120,9 @@ export const ECOSYSTEM_PRODUCTS: ProductItem[] = [
     wash: "rgba(67, 56, 202, 0.16)",
   },
   {
-    id: "textgem",
+    id: "Textora",
     n: "09",
-    name: "TextGem",
+    name: "Textora",
     mark: "TX",
     tag: "COMMUNICATION",
     tint: "#0C0C0D",
@@ -145,9 +148,9 @@ export const MENU_DEFS: Record<string, MenuDef> = {
       { name: "Mobile Apps", desc: "Customer, rider, crew and field apps", tint: "#2AA8C4", product: "Trekvano", href: "/solutions#mobile-applications" },
       { name: "Web Applications", desc: "Dashboards on one component system", tint: "#1F31E8", product: "Slota", href: "/solutions#web-applications" },
       { name: "Custom Software", desc: "Workflows shaped to your operation", tint: "#1E9E5A", product: "WelzoKart", href: "/solutions#custom-software" },
-      { name: "AI Solutions", desc: "Forecasting, routing and instructions", tint: "#0F8F87", product: "MindFul Menu", href: "/solutions#ai-solutions" },
-      { name: "Enterprise Systems", desc: "SSO, roles, audit trails, compliance", tint: "#8B3FE8", product: "MapMyPay", href: "/solutions#enterprise-systems" },
-      { name: "Cloud Infrastructure", desc: "Multi-region AWS with autoscaling", tint: "#E8A21F", product: "Truck Guru", href: "/solutions#cloud-infrastructure" },
+      { name: "AI Solutions", desc: "Forecasting, routing and instructions", tint: "#0F8F87", product: "Dishly", href: "/solutions#ai-solutions" },
+      { name: "Enterprise Systems", desc: "SSO, roles, audit trails, compliance", tint: "#8B3FE8", product: "NurseWorth", href: "/solutions#enterprise-systems" },
+      { name: "Cloud Infrastructure", desc: "Multi-region AWS with autoscaling", tint: "#E8A21F", product: "LoadGo", href: "/solutions#cloud-infrastructure" },
     ],
   },
   technology: {
@@ -156,13 +159,14 @@ export const MENU_DEFS: Record<string, MenuDef> = {
     eyebrow: "One toolchain across all nine products",
     items: [
       { name: "React", desc: "Component system for every dashboard", tint: "#1F31E8", product: "Slota" },
-      { name: "Next.js", desc: "Marketing and portal surfaces", tint: "#0C0C0D", product: "TextGem" },
+      { name: "Next.js", desc: "Marketing and portal surfaces", tint: "#0C0C0D", product: "Textora" },
       { name: "React Native", desc: "Shared iOS and Android codebase", tint: "#2AA8C4", product: "Trekvano" },
       { name: "Node.js", desc: "Realtime services and APIs", tint: "#1E9E5A", product: "WelzoKart" },
       { name: "Laravel", desc: "Billing, admin and back office", tint: "#E0452F", product: "Needly" },
-      { name: "AWS", desc: "Infrastructure as code, staged rollouts", tint: "#E8A21F", product: "Truck Guru" },
-      { name: "Security & Scalability", desc: "Encryption, RBAC, load testing", tint: "#8B3FE8", product: "MapMyPay" },
+      { name: "AWS", desc: "Infrastructure as code, staged rollouts", tint: "#E8A21F", product: "LoadGo" },
       { name: "AI/ML", desc: "Intelligent automation and data-driven insights", tint: "#8B3FE8", product: "" },
+      { name: "View More", desc: "Discover more tools behind our products", tint: "#8B3FE8", product: "NurseWorth" },
+
     ],
   },
 };

@@ -87,7 +87,7 @@ export const ABOUT_PRODUCTS: AboutProduct[] = [
   },
   {
     n: "03",
-    name: "MapMyPay",
+    name: "NurseWorth",
     mark: "MP",
     tag: "Healthcare",
     tint: ABOUT_TINTS.violet,
@@ -95,7 +95,7 @@ export const ABOUT_PRODUCTS: AboutProduct[] = [
   },
   {
     n: "04",
-    name: "Truck Guru",
+    name: "LoadGo",
     mark: "TG",
     tag: "Logistics",
     tint: ABOUT_TINTS.amber,
@@ -103,7 +103,7 @@ export const ABOUT_PRODUCTS: AboutProduct[] = [
   },
   {
     n: "05",
-    name: "MindFul Menu",
+    name: "Dishly",
     mark: "MM",
     tag: "Kitchen AI",
     tint: ABOUT_TINTS.teal,
@@ -127,7 +127,7 @@ export const ABOUT_PRODUCTS: AboutProduct[] = [
   },
   {
     n: "08",
-    name: "Locale E Clean",
+    name: "PureSpace",
     mark: "LE",
     tag: "Home services",
     tint: ABOUT_TINTS.indigo,
@@ -135,7 +135,7 @@ export const ABOUT_PRODUCTS: AboutProduct[] = [
   },
   {
     n: "09",
-    name: "TextGem",
+    name: "Textora",
     mark: "TX",
     tag: "Communication",
     tint: ABOUT_TINTS.ink,

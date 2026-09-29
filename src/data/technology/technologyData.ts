@@ -174,7 +174,7 @@ export const INDIVIDUAL_TECH_ITEMS: IndividualTechItem[] = [
     title: "Next.js",
     description:
       "Next.js is a powerful React-based framework designed for building fast, scalable, and SEO-friendly web applications. It supports server-side rendering, static site generation, automatic routing, image optimization, and API routes out of the box. With Next.js, we simplify complex development tasks and deliver high-performance websites that rank well and load quickly.",
-    image: "/technology/nextjs.png",
+    image: "/technology/nextjs.svg",
     color: "#2AA8C4",
   },
   {

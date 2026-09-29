@@ -81,6 +81,39 @@ export function TechnologyList() {
     };
   }, [updateActiveFromScroll]);
 
+  // Handle hash scrolling when arriving with a hash or when hash changes
+  useEffect(() => {
+    const handleHashScroll = () => {
+      const hash = window.location.hash;
+      if (!hash) return;
+      const id = hash.substring(1);
+      const element = document.getElementById(id);
+      if (element) {
+        if (id.startsWith("tech-")) {
+          const techId = id.replace("tech-", "");
+          const techItem = INDIVIDUAL_TECH_ITEMS.find((t) => t.id === techId);
+          if (techItem) {
+            setActiveSection(techItem.category);
+            scrollActiveTabIntoView(techItem.category);
+          }
+        } else if (SECTION_IDS.includes(id)) {
+          setActiveSection(id);
+          scrollActiveTabIntoView(id);
+        }
+
+        setTimeout(() => {
+          const targetY =
+            element.getBoundingClientRect().top + window.scrollY - SCROLL_OFFSET;
+          window.scrollTo({ top: targetY, behavior: "smooth" });
+        }, 120);
+      }
+    };
+
+    handleHashScroll();
+    window.addEventListener("hashchange", handleHashScroll);
+    return () => window.removeEventListener("hashchange", handleHashScroll);
+  }, [scrollActiveTabIntoView]);
+
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string

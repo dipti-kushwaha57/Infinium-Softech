@@ -449,7 +449,19 @@ export function Header() {
                         onClick={() => {
                           setPreviewProductName(item.product);
                           setActiveMenu(null);
-                          if (!item.href && matchedProd) {
+                          if (item.href) {
+                            if (item.href.includes("#")) {
+                              const [hrefPath, hashId] = item.href.split("#");
+                              if (pathname === hrefPath || (hrefPath === "" && hashId)) {
+                                const el = document.getElementById(hashId);
+                                if (el) {
+                                  const targetY =
+                                    el.getBoundingClientRect().top + window.scrollY - 130;
+                                  window.scrollTo({ top: targetY, behavior: "smooth" });
+                                }
+                              }
+                            }
+                          } else if (matchedProd) {
                             window.dispatchEvent(
                               new CustomEvent("scroll-to-ecosystem-product", {
                                 detail: { id: matchedProd.id },
@@ -467,9 +479,21 @@ export function Header() {
                           <span className="link-title">{item.name}</span>
                           <span className="link-desc">{item.desc}</span>
                         </div>
-                        <span className="link-arrow" aria-hidden="true">
-                          →
-                        </span>
+                        {item.icon ? (
+                          <span className="link-tech-icon-wrap" aria-hidden="true">
+                            <Image
+                              src={item.icon}
+                              alt={item.name}
+                              width={22}
+                              height={22}
+                              className="link-tech-icon-img"
+                            />
+                          </span>
+                        ) : (
+                          <span className="link-arrow" aria-hidden="true">
+                            →
+                          </span>
+                        )}
                       </Link>
                     );
                   })}

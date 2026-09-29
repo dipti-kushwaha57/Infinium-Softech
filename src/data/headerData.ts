@@ -17,6 +17,7 @@ export type GenericMenuItem = {
   tint: string;
   product: string;
   href?: string;
+  icon?: string;
 };
 
 export type MenuDef = {
@@ -158,15 +159,14 @@ export const MENU_DEFS: Record<string, MenuDef> = {
     label: "Technology",
     eyebrow: "One toolchain across all nine products",
     items: [
-      { name: "React", desc: "Component system for every dashboard", tint: "#1F31E8", product: "Slota" },
-      { name: "Next.js", desc: "Marketing and portal surfaces", tint: "#0C0C0D", product: "Textora" },
-      { name: "React Native", desc: "Shared iOS and Android codebase", tint: "#2AA8C4", product: "Trekvano" },
-      { name: "Node.js", desc: "Realtime services and APIs", tint: "#1E9E5A", product: "WelzoKart" },
-      { name: "Laravel", desc: "Billing, admin and back office", tint: "#E0452F", product: "Needly" },
-      { name: "AWS", desc: "Infrastructure as code, staged rollouts", tint: "#E8A21F", product: "LoadGo" },
-      { name: "AI/ML", desc: "Intelligent automation and data-driven insights", tint: "#8B3FE8", product: "" },
-      { name: "View More", desc: "Discover more tools behind our products", tint: "#8B3FE8", product: "NurseWorth" },
-
+      { name: "React", desc: "Component system for every dashboard", tint: "#1F31E8", product: "Slota", href: "/technology#tech-reactjs", icon: "/technology/reactjs.png" },
+      { name: "Next.js", desc: "Marketing and portal surfaces", tint: "#0C0C0D", product: "Textora", href: "/technology#tech-nextjs", icon: "/technology/nextjs.svg" },
+      { name: "React Native", desc: "Shared iOS and Android codebase", tint: "#2AA8C4", product: "Trekvano", href: "/technology#tech-react-native", icon: "/technology/React-Native.png" },
+      { name: "Node.js", desc: "Realtime services and APIs", tint: "#1E9E5A", product: "WelzoKart", href: "/technology#tech-nodejs", icon: "/technology/nodejs.png" },
+      { name: "Laravel", desc: "Billing, admin and back office", tint: "#E0452F", product: "Needly", href: "/technology#tech-php", icon: "/technology/Laravel.png" },
+      { name: "AWS", desc: "Infrastructure as code, staged rollouts", tint: "#E8A21F", product: "LoadGo", href: "/technology#tech-aws", icon: "/technology/AWS.png" },
+      { name: "AI/ML", desc: "Intelligent automation and data-driven insights", tint: "#8B3FE8", product: "", href: "/technology#tech-python", icon: "/technology/ai-ml.svg" },
+      { name: "View More", desc: "Discover more tools behind our products", tint: "#8B3FE8", product: "NurseWorth", href: "/technology#frontend" },
     ],
   },
 };

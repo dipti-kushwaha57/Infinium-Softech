@@ -74,6 +74,31 @@ export function SolutionsList() {
     };
   }, [scrollActiveTabIntoView]);
 
+  // Handle hash scrolling when arriving with a hash or when hash changes
+  useEffect(() => {
+    const handleHashScroll = () => {
+      const hash = window.location.hash;
+      if (!hash) return;
+      const id = hash.substring(1);
+      const element = document.getElementById(id);
+      if (element) {
+        if (SECTION_IDS.includes(id)) {
+          setActiveSection(id);
+          scrollActiveTabIntoView(id);
+        }
+        setTimeout(() => {
+          const targetY =
+            element.getBoundingClientRect().top + window.scrollY - 120;
+          window.scrollTo({ top: targetY, behavior: "smooth" });
+        }, 120);
+      }
+    };
+
+    handleHashScroll();
+    window.addEventListener("hashchange", handleHashScroll);
+    return () => window.removeEventListener("hashchange", handleHashScroll);
+  }, [scrollActiveTabIntoView]);
+
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string

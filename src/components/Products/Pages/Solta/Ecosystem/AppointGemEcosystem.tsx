@@ -32,7 +32,7 @@ function EcosystemCardView({
           className="card-img"
         />
       </div>
-      
+
       <div className="card-body">
         <div className="card-identity">
           <span className="card-badge" style={{ backgroundColor: prod.tint }}>

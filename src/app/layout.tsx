@@ -6,6 +6,7 @@ import { SITE_DESCRIPTION, SITE_NAME, SITE_URL, getOrganizationSchema } from "@/
 import { ScrollAnimationProvider } from "@/components/providers/ScrollAnimationProvider";
 import { Header } from "@/components/Header/Header";
 import { Footer } from "@/components/Footer/Footer";
+// import { SiteLoader } from "@/components/SiteLoader/SiteLoader";
 
 const archivo = Archivo({
   variable: "--font-archivo",

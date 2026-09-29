@@ -33,11 +33,16 @@
     font-family: $font-display;
     font-weight: 800;
     font-stretch: 110%;
-    font-size: clamp(30px, 4vw, 68px);
+    font-size: var(--fs-h2);
     line-height: 0.98;
     letter-spacing: -0.045em;
     color: $color-ink;
     margin: 12px 0 0;
+
+    @media (min-width: 2400px) {
+      white-space: nowrap;
+      br { display: none; }
+    }
   }
 
   .delivery-intro {

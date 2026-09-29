@@ -60,7 +60,7 @@ export function AboutPlatforms() {
               What we&apos;ve built
             </div>
             <h2 data-reveal="" className="about-platforms-headline">
-              Nine platforms,<br />nine industries.
+              Built for platforms,<br />designed for industries.
             </h2>
           </div>
           <p data-reveal="" className="about-platforms-intro">

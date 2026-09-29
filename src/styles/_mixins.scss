@@ -5,6 +5,10 @@
   max-width: $max-width;
   margin-inline: auto;
   @include content-padding;
+
+  @media (min-width: 2400px) {
+    max-width: 1800px;
+  }
 }
 
 @mixin respond($bp) {

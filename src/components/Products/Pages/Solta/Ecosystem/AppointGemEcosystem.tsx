@@ -5,41 +5,8 @@ import Link from "next/link";
 import { useAboutCarousel } from "@/components/About/useAboutCarousel";
 import "./AppointGemEcosystem.scss";
 
-interface EcosystemProduct {
-  name: string;
-  mark: string;
-  tag: string;
-  tint: string;
-  desc: string;
-  href: string;
-}
-
-const RELATED_PRODUCTS: EcosystemProduct[] = [
-  {
-    name: "NurseWorth",
-    mark: "MP",
-    tag: "Healthcare",
-    tint: "#8B3FE8",
-    desc: "Healthcare and nursing recruitment platform with shift-based payouts.",
-    href: "/products#NurseWorth",
-  },
-  {
-    name: "PureSpace",
-    mark: "LE",
-    tag: "Home services",
-    tint: "#4338CA",
-    desc: "Cleaning and home service booking platform with route-optimised crews.",
-    href: "/products#locale-e-clean",
-  },
-  {
-    name: "Textora",
-    mark: "TX",
-    tag: "Communication",
-    tint: "#0C0C0D",
-    desc: "Bulk SMS and business communication platform with delivery analytics.",
-    href: "/products#Textora",
-  },
-];
+import { ECOSYSTEM_PRODUCTS, EcosystemProduct } from "@/data/ecosystemData";
+import Image from "next/image";
 
 function EcosystemCardView({
   prod,
@@ -50,27 +17,49 @@ function EcosystemCardView({
 }) {
   return (
     <Link
-      href={prod.href}
+      href={`/products/${prod.id}`}
       data-reveal={isClone ? undefined : ""}
       className={`ecosystem-card ${isClone ? "ecosystem-card--clone" : ""}`}
       data-carousel-item
       aria-hidden={isClone ? "true" : undefined}
     >
-      <div className="card-identity">
-        <span className="card-badge" style={{ backgroundColor: prod.tint }}>
-          {prod.mark}
-        </span>
-        <div>
-          <h3 className="card-name">{prod.name}</h3>
-          <span className="card-tag">{prod.tag}</span>
+      <div className="card-image-box">
+        <Image
+          src={prod.shot}
+          alt={prod.name}
+          width={600}
+          height={400}
+          className="card-img"
+        />
+      </div>
+      
+      <div className="card-body">
+        <div className="card-identity">
+          <span className="card-badge" style={{ backgroundColor: prod.tint }}>
+            {prod.mark}
+          </span>
+          <h3 className="card-name" style={{ color: prod.tint }}>{prod.name}</h3>
+        </div>
+        <p className="card-desc">{prod.desc}</p>
+      </div>
+
+      <div className="card-footer">
+        <div className="footer-status">
+          <span className="status-dot" style={{ backgroundColor: "#1E9E5A" }} /> Live on iOS / Android
+        </div>
+        <div className="footer-link" style={{ color: prod.tint }}>
+          Explore <span className="arrow" aria-hidden="true">&rsaquo;</span>
         </div>
       </div>
-      <p className="card-desc">{prod.desc}</p>
     </Link>
   );
 }
 
 export function AppointGemEcosystem() {
+  const RELATED_PRODUCTS = ECOSYSTEM_PRODUCTS.filter((p) =>
+    ["NurseWorth", "PureSpace", "Textora"].includes(p.name)
+  );
+
   const { scrollRef, activeIndex, scrollToIndex, handleNext, handlePrev } =
     useAboutCarousel(RELATED_PRODUCTS.length, 1024);
 

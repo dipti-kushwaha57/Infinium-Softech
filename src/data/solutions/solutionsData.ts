@@ -42,7 +42,7 @@ export const SOLUTIONS_LIST_DATA: SolutionItem[] = [
   {
     id: "mobile-applications",
     num: "01",
-    category: "Mobile",
+    category: "Mobile Applications",
     title: "Apps the crew keeps open all shift.",
     description:
       "Native-feel iOS and Android apps for customer, rider, crew and field roles. They share the component system and APIs of the web products, so one release ships to both.",
@@ -66,7 +66,7 @@ export const SOLUTIONS_LIST_DATA: SolutionItem[] = [
   {
     id: "web-applications",
     num: "02",
-    category: "Web",
+    category: "Web Development",
     title: "Dashboards on one component system.",
     description:
       "Operations consoles, admin panels and customer portals drawn from a single design system. A pattern proven in one product arrives in the next without a redesign.",
@@ -89,7 +89,7 @@ export const SOLUTIONS_LIST_DATA: SolutionItem[] = [
   {
     id: "custom-software",
     num: "03",
-    category: "Custom",
+    category: "Custom Software",
     title: "Workflows shaped to your operation.",
     description:
       "When the process is the differentiator, we model it directly: your states, approvals and exceptions, with the platform layer handling identity, billing and reporting underneath.",
@@ -113,7 +113,7 @@ export const SOLUTIONS_LIST_DATA: SolutionItem[] = [
   {
     id: "ai-solutions",
     num: "04",
-    category: "Intelligence",
+    category: "AI & Automation",
     title: "Models where they change the outcome.",
     description:
       "Forecasting, routing and instruction models sit inside the workflow rather than beside it. Every prediction is written back to the record it affects, with a human able to override.",
@@ -137,7 +137,7 @@ export const SOLUTIONS_LIST_DATA: SolutionItem[] = [
   {
     id: "enterprise-systems",
     num: "05",
-    category: "Enterprise",
+    category: "Enterprise Solutions",
     title: "SSO, roles, audit trails, compliance.",
     description:
       "The platform layer every product inherits: single sign-on, granular roles, full audit history and encryption in transit and at rest, configured per entity and per branch.",
@@ -161,7 +161,7 @@ export const SOLUTIONS_LIST_DATA: SolutionItem[] = [
   {
     id: "cloud-infrastructure",
     num: "06",
-    category: "Cloud",
+    category: "Cloud Infrastructure",
     title: "Multi-region AWS with autoscaling.",
     description:
       "Every product runs on the same infrastructure: managed backups, blue-green deploys and observability wired in from the first commit. Scale becomes a configuration change.",

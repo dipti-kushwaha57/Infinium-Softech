@@ -9,13 +9,15 @@ export function AboutOperators() {
     <section className="about-operators-section" aria-label="Who We Build For">
       <div className="about-operators-container">
         <div data-reveal="" className="about-operators-eyebrow">
-          INDUSTRIES WE SERVE
+          Industry Solutions
+
         </div>
         <h2 data-reveal="" className="about-operators-headline">
-          Built Around Your Industry. <br /> Designed for Your Workflow.
+          Technology for <br />
+          Every Industry
         </h2>
         <p data-reveal="" className="about-operators-desc">
-          We create purpose-built digital products that help businesses across industries simplify operations, improve efficiency, and grow with confidence.
+          Flexible, scalable solutions designed to simplify operations, improve efficiency, and solve real-world challenges across diverse industries.
         </p>
       </div>
 

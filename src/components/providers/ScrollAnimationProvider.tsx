@@ -62,14 +62,16 @@ export function ScrollAnimationProvider({ children }: { children: React.ReactNod
           const stagger = ((idx % 6) * 0.05).toFixed(2);
           node.style.transition = `opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${stagger}s, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) ${stagger}s`;
           
-          if (rect.top > vh * 0.92) {
+          // Only abort if it HASN'T safely entered the screen based on both rules
+          if (rect.top > vh * 0.92 && rect.bottom > vh) {
             node.style.opacity = "0";
             node.style.transform = "translateY(26px)";
             return;
           }
         }
         
-        if (rect.top < vh * 0.92) {
+        // Reveal if it crosses the traditional 92% boundary, OR if it's completely visible (fixes short elements at the bottom of the page)
+        if (rect.top < vh * 0.92 || rect.bottom <= vh + 50) {
           node.setAttribute("data-revealed", "1");
           node.style.opacity = "1";
           node.style.transform = "none";
@@ -135,13 +137,21 @@ export function ScrollAnimationProvider({ children }: { children: React.ReactNod
   }, []);
 
   useEffect(() => {
-    if (syncRevealsRef.current) {
-      syncRevealsRef.current();
-      setTimeout(syncRevealsRef.current, 100);
-      setTimeout(syncRevealsRef.current, 500);
-    }
-    ScrollTrigger.refresh();
-    setTimeout(() => ScrollTrigger.refresh(), 200);
+    const forceRecalculation = () => {
+      if (lenisRef.current) {
+        lenisRef.current.resize();
+      }
+      if (syncRevealsRef.current) {
+        syncRevealsRef.current();
+      }
+      ScrollTrigger.refresh();
+    };
+
+    // Run immediately and staggered to catch concurrent React DOM paints & image loads
+    forceRecalculation();
+    setTimeout(forceRecalculation, 150);
+    setTimeout(forceRecalculation, 500);
+    setTimeout(forceRecalculation, 1200);
   }, [pathname]);
 
   const getLenis = useCallback(() => lenisRef.current, []);

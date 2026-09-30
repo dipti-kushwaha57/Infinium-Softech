@@ -21,6 +21,7 @@ export interface ProductItem {
   metric: string;
   metricDelta: string;
   shot?: string;
+  logo?: string;
   apps: string;
   api: string;
   golive: string;
@@ -91,6 +92,7 @@ export const PRODUCT_ITEMS: ProductItem[] = [
     metric: "18,412",
     metricDelta: "▲ 16.4%",
     shot: "/shots/welzokart.jpg",
+    logo: "/logos/slota-logo.png",
     apps: "Web, staff mobile",
     api: "REST + webhooks",
     golive: "4–6 weeks",
@@ -109,6 +111,7 @@ export const PRODUCT_ITEMS: ProductItem[] = [
     metric: "92,640",
     metricDelta: "▲ 24.8%",
     shot: "/shots/Welzokart 2.jpg",
+    logo: "/logos/welzokart-logo.png",
     apps: "Web, customer, rider",
     api: "REST + POS sync",
     golive: "8–10 weeks",

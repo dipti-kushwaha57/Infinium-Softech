@@ -37,7 +37,11 @@ export function WelzokartHero({ product }: { product: ProductItem }) {
         </div>
 
         <div data-reveal="" className="appointgem-hero-identity">
-          <span className="appointgem-hero-mark">{product.mark || "WK"}</span>
+          {product.logo ? (
+            <img src={product.logo} alt={`${product.name} Logo`} className="appointgem-hero-logo" />
+          ) : (
+            <span className="appointgem-hero-mark">{product.mark || "WK"}</span>
+          )}
           <div>
             <strong>Welzokart</strong>
             <span className="sub">

@@ -265,6 +265,15 @@
     font-size: 12px;
   }
 
+  .brand-logo {
+    display: block;
+    height: 34px;
+    width: auto;
+    max-width: 80px;
+    object-fit: contain;
+    border-radius: 8px;
+  }
+
   .product-name {
     display: block;
     font-family: var(--font-archivo, "Archivo", sans-serif);

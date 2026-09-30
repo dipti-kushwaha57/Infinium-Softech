@@ -37,7 +37,11 @@ export function AppointGemHero({ product }: { product: ProductItem }) {
         </div>
 
         <div data-reveal="" className="appointgem-hero-identity">
-          <span className="appointgem-hero-mark">{product.mark || "SL"}</span>
+          {product.logo ? (
+            <img src={product.logo} alt={`${product.name} Logo`} className="appointgem-hero-logo" />
+          ) : (
+            <span className="appointgem-hero-mark">{product.mark || "SL"}</span>
+          )}
           <div>
             <strong>Slota</strong>
             <span className="sub">

@@ -81,6 +81,14 @@
   box-shadow: 0 8px 20px -6px rgba(31, 49, 232, 0.4);
 }
 
+.appointgem-hero-logo {
+  display: block;
+  height: 54px;
+  width: auto;
+  max-width: 200px;
+  object-fit: contain;
+}
+
 .appointgem-hero-identity strong {
   display: block;
   font-family: $font-display;
@@ -373,6 +381,10 @@ hr {
     width: 46px;
     height: 46px;
     font-size: 17px;
+  }
+
+  .appointgem-hero-logo {
+    height: 46px;
   }
 
   .appointgem-hero-intro {

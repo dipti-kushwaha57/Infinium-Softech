@@ -155,12 +155,22 @@ export function ProductCatalogue({
                 >
                   <div className="card-top-header">
                     <div className="brand-badge-group">
-                      <span
-                        className="brand-mark"
-                        style={{ backgroundColor: p.tint }}
-                      >
-                        {p.mark}
-                      </span>
+                      {p.logo ? (
+                        <Image
+                          src={p.logo}
+                          alt={`${p.name} Logo`}
+                          width={34}
+                          height={34}
+                          className="brand-logo"
+                        />
+                      ) : (
+                        <span
+                          className="brand-mark"
+                          style={{ backgroundColor: p.tint }}
+                        >
+                          {p.mark}
+                        </span>
+                      )}
                       <div>
                         <span className="product-name">{p.name}</span>
                         <span className="product-tag-text">{p.tag}</span>

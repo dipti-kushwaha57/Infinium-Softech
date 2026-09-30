@@ -18,8 +18,7 @@
   transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.3s ease;
 
   .nav {
-    max-width: $max-width;
-    margin: 0 auto;
+    @include container;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -27,7 +26,6 @@
     padding-top: 18px;
     padding-bottom: 18px;
     transition: padding 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    @include content-padding;
 
     @media (max-width: 1024px) {
       padding-top: 14px;
@@ -380,11 +378,9 @@
   }
 
   .mega-menu-inner {
-    max-width: $max-width;
-    margin: 0 auto;
+    @include container;
     padding-top: 26px;
     padding-bottom: 30px;
-    @include content-padding;
     display: grid;
     grid-template-columns: minmax(0, 1fr) 336px;
     gap: 40px;

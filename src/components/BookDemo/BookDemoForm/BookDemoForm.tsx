@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
+import { sendDemoEmail } from "@/actions/sendEmail";
 import "./BookDemoForm.scss";
 
 const DEMO_SIZES = ["1–10", "11–50", "51–200", "201–1,000", "1,000+"];
@@ -72,11 +73,30 @@ export function BookDemoForm() {
   const [time, setTime] = useState("Afternoon");
   const [message, setMessage] = useState("");
   const [isSent, setIsSent] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim() || !email.trim()) return;
-    setIsSent(true);
+    
+    setIsSubmitting(true);
+    const result = await sendDemoEmail({
+      name,
+      email,
+      company,
+      size,
+      product,
+      day,
+      time,
+      message,
+    });
+    setIsSubmitting(false);
+
+    if (result.success) {
+      setIsSent(true);
+    } else {
+      alert("Something went wrong. Please try again.");
+    }
   };
 
   const handleReset = () => {
@@ -336,9 +356,9 @@ export function BookDemoForm() {
 
               {/* Form Actions */}
               <div className="form-footer">
-                <button type="submit" className="btn-primary">
-                  Request this slot
-                  <span aria-hidden="true">→</span>
+                <button type="submit" className="btn-primary" disabled={isSubmitting}>
+                  {isSubmitting ? "Requesting..." : "Request this slot"}
+                  {!isSubmitting && <span aria-hidden="true">→</span>}
                 </button>
                 <span className="form-note">No cost, no obligation.</span>
               </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { sendContactEmail } from "@/actions/sendEmail";
 import {
   CONTACT_SERVICES,
   CONTACT_APP_STAGES,
@@ -19,6 +20,7 @@ export function ContactForm() {
   const [startTime, setStartTime] = useState("");
   const [message, setMessage] = useState("");
   const [isSent, setIsSent] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Big screen (>= 768px): 2-grid mouse scrollable & draggable carousel (no arrows, no dots)
   const desktopScrollRef = useRef<HTMLDivElement>(null);
@@ -167,10 +169,27 @@ export function ContactForm() {
 
   const currentDesk = CONTACT_DESKS[deskActiveIndex];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim() || !email.trim() || !mobile.trim()) return;
-    setIsSent(true);
+    
+    setIsSubmitting(true);
+    const result = await sendContactEmail({
+      name,
+      email,
+      mobile,
+      service,
+      stage,
+      startTime,
+      message,
+    });
+    setIsSubmitting(false);
+
+    if (result.success) {
+      setIsSent(true);
+    } else {
+      alert("Something went wrong. Please try again.");
+    }
   };
 
   const handleReset = () => {
@@ -318,9 +337,9 @@ export function ContactForm() {
 
               {/* Form Actions */}
               <div className="form-footer">
-                <button type="submit" className="btn-primary">
-                  Send enquiry
-                  <span aria-hidden="true">→</span>
+                <button type="submit" className="btn-primary" disabled={isSubmitting}>
+                  {isSubmitting ? "Sending..." : "Send enquiry"}
+                  {!isSubmitting && <span aria-hidden="true">→</span>}
                 </button>
                 <span className="form-note">We reply within one working day.</span>
               </div>

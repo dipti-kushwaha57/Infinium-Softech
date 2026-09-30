@@ -7,15 +7,16 @@ import "./AppointGemStack.scss";
 interface TechItem {
   name: string;
   role: string;
+  logo: string;
 }
 
 const TECH_STACK: TechItem[] = [
-  { name: "React", role: "Web console" },
-  { name: "Node.js", role: "Services" },
-  { name: "PostgreSQL", role: "Bookings data" },
-  { name: "Flutter", role: "Staff mobile" },
-  { name: "AWS", role: "Multi-region cloud" },
-  { name: "Figma", role: "Design system" },
+  { name: "React", role: "Web console", logo: "/technology/reactjs.png" },
+  { name: "Node.js", role: "Services", logo: "/technology/nodejs.png" },
+  { name: "PostgreSQL", role: "Bookings data", logo: "/technology/Postgre-SQL.png" },
+  { name: "Flutter", role: "Staff mobile", logo: "/technology/Flutter.png" },
+  { name: "AWS", role: "Multi-region cloud", logo: "/technology/AWS.png" },
+  { name: "Figma", role: "Design system", logo: "/technology/Figma.png" },
 ];
 
 function TechItemBoxView({
@@ -32,8 +33,15 @@ function TechItemBoxView({
       data-carousel-item
       aria-hidden={isClone ? "true" : undefined}
     >
-      <div className="tech-name">{item.name}</div>
-      <div className="tech-role">{item.role}</div>
+      <div className="tech-content">
+        <div className="tech-name">{item.name}</div>
+        <div className="tech-role">{item.role}</div>
+      </div>
+      {item.logo && (
+        <div className="tech-logo">
+          <img src={item.logo} alt={`${item.name} logo`} />
+        </div>
+      )}
     </div>
   );
 }

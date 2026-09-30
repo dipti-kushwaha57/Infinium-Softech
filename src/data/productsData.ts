@@ -91,7 +91,7 @@ export const PRODUCT_ITEMS: ProductItem[] = [
     metricLabel: "Bookings / month",
     metric: "18,412",
     metricDelta: "▲ 16.4%",
-    shot: "/shots/welzokart.jpg",
+    shot: "/shots/slota.png",
     logo: "/logos/slota-logo.png",
     apps: "Web, staff mobile",
     api: "REST + webhooks",

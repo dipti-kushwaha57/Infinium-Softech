@@ -14,6 +14,7 @@ export interface EcosystemProduct {
   appLabel: string;
   appValue: string;
   shot: string;
+  logo?: string;
 }
 
 export const ECOSYSTEM_PRODUCTS: EcosystemProduct[] = [
@@ -32,7 +33,8 @@ export const ECOSYSTEM_PRODUCTS: EcosystemProduct[] = [
     metricDelta: "▲ 16.4%",
     appLabel: "Today",
     appValue: "42 slots",
-    shot: "/shots/welzokart.jpg",
+    shot: "/shots/slota.png",
+    logo: "/logos/slota-logo.png",
   },
   {
     id: "welzokart",
@@ -50,6 +52,7 @@ export const ECOSYSTEM_PRODUCTS: EcosystemProduct[] = [
     appLabel: "Orders today",
     appValue: "3,180",
     shot: "/shots/Welzokart 2.jpg",
+    logo: "/logos/welzokart-logo.png",
   },
   {
     id: "NurseWorth",

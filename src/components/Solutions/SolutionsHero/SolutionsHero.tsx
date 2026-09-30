@@ -27,8 +27,8 @@ export function SolutionsHero() {
 
         <div className="solutions-hero-grid">
           <h1 data-reveal="" className="solutions-hero-headline">
-            Six ways we build. <br />
-            <span className="highlight">One team behind every one.</span>
+            Different products.<br />
+            <span className="highlight">One Team Behind All.</span>
           </h1>
 
           <div className="solutions-hero-side">

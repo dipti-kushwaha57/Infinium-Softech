@@ -27,8 +27,8 @@ export function TechnologyHero() {
 
         <div className="technology-hero-grid">
           <h1 data-reveal="" className="technology-hero-headline">
-            Our Technologies. Your <br />
-            <span className="highlight">Innovation Stack Starts Here.</span>
+            Our Tech Stack. Your<br />
+            <span className="highlight"> Digital Advantage.</span>
           </h1>
 
           <div className="technology-hero-side">

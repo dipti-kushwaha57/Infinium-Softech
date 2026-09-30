@@ -563,14 +563,24 @@ export function Ecosystem() {
                       {/* Header Row: Category Badge & Giant Number */}
                       <div className="card-header-row">
                         <div className="card-tag-pill">
-                          <span
-                            className="tag-mark"
-                            style={{
-                              backgroundColor: prod.tint,
-                            }}
-                          >
-                            {prod.mark}
-                          </span>
+                          {prod.logo ? (
+                            <Image
+                              src={prod.logo}
+                              alt={`${prod.name} Logo`}
+                              width={48}
+                              height={22}
+                              className="tag-logo"
+                            />
+                          ) : (
+                            <span
+                              className="tag-mark"
+                              style={{
+                                backgroundColor: prod.tint,
+                              }}
+                            >
+                              {prod.mark}
+                            </span>
+                          )}
 
                           <span className="tag-label">{prod.tag}</span>
                         </div>

@@ -509,6 +509,15 @@
       flex-shrink: 0;
     }
 
+    .tag-logo {
+      display: block;
+      height: 22px;
+      width: auto;
+      max-width: 65px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
     .tag-label {
       display: inline-flex;
       align-items: center;

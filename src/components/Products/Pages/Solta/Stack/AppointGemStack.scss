@@ -220,6 +220,11 @@
     border-radius: 4px;
     padding: 16px 12px;
     transition: background 0.2s ease;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
 
     @media (max-width: 480px) {
       flex-basis: 88%;
@@ -245,6 +250,26 @@
 
     &:hover {
       background: rgba(241, 240, 236, 0);
+    }
+  }
+
+  .tech-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tech-logo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 0;
+    height: 38px;
+
+    img {
+      max-height: 100%;
+      width: auto;
+      max-width: 140px;
+      object-fit: contain;
     }
   }
 

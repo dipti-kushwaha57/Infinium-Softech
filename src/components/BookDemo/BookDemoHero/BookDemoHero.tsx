@@ -33,8 +33,8 @@ export function BookDemoHero() {
           </p>
         </div>
 
-        {/* Stats Grid matching Product Hero */}
-        <div className="product-hero-stats">
+        {/* Stats Grid */}
+        <div className="book-demo-stats">
           <div data-reveal="" className="stat-card">
             <div className="stat-value">30 min</div>
             <div className="stat-label">Live walkthrough</div>

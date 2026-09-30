@@ -5,6 +5,7 @@ import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ParallaxProvider } from "react-scroll-parallax";
+import { usePathname } from "next/navigation";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -28,6 +29,8 @@ export const useSmoothScroll = () => useContext(ScrollAnimationContext);
 
 export function ScrollAnimationProvider({ children }: { children: React.ReactNode }) {
   const lenisRef = useRef<Lenis | null>(null);
+  const pathname = usePathname();
+  const syncRevealsRef = useRef<(() => void) | null>(null);
 
   useEffect(() => {
     // 1. Initialize Lenis Smooth Scrolling
@@ -73,6 +76,8 @@ export function ScrollAnimationProvider({ children }: { children: React.ReactNod
         }
       });
     };
+
+    syncRevealsRef.current = syncReveals;
 
     // Initial check & safety checks
     syncReveals();
@@ -128,6 +133,16 @@ export function ScrollAnimationProvider({ children }: { children: React.ReactNod
       lenisRef.current = null;
     };
   }, []);
+
+  useEffect(() => {
+    if (syncRevealsRef.current) {
+      syncRevealsRef.current();
+      setTimeout(syncRevealsRef.current, 100);
+      setTimeout(syncRevealsRef.current, 500);
+    }
+    ScrollTrigger.refresh();
+    setTimeout(() => ScrollTrigger.refresh(), 200);
+  }, [pathname]);
 
   const getLenis = useCallback(() => lenisRef.current, []);
 

@@ -31,17 +31,17 @@ const FEATURE_SHOTS: FeatureShot[] = [
     num: "02",
     title: "Booking detail — deposit, balance and reminder history in one panel.",
     badge: "Unified Booking Rail",
-    image: "/shots/slota-ui2.png",
+    image: "/shots/slota-ui-2.png",
     alt: "Slota Booking Detail Interface",
   },
-  // {
-  //   id: "shot-3",
-  //   num: "03",
-  //   title: "Reporting — utilisation and revenue per practitioner and branch.",
-  //   badge: "Real-Time Analytics",
-  //   image: "/shots/Reporting.webp",
-  //   alt: "AppointGem Reporting & Analytics Interface",
-  // },
+  {
+    id: "shot-3",
+    num: "03",
+    title: "Reporting — utilisation and revenue per practitioner and branch.",
+    badge: "Real-Time Analytics",
+    image: "/shots/slota-ui-1.png",
+    alt: "AppointGem Reporting & Analytics Interface",
+  },
 ];
 
 export function AppointGemInterface() {

@@ -13,31 +13,31 @@ interface WorkflowStep {
 const WORKFLOW_STEPS: WorkflowStep[] = [
   {
     num: "01",
-    title: "Customer picks a slot",
-    desc: "Web widget or app shows only genuinely open times per practitioner.",
+    title: "Customer Explores Products",
+    desc: "Users browse grocery categories, search for products, and select the items they need.",
   },
   {
     num: "02",
-    title: "Booking is confirmed",
-    desc: "Deposit or full payment taken, reminders scheduled automatically.",
+    title: "Order Is Placed",
+    desc: "Selected products are added to the cart and the customer completes the checkout process.",
   },
   {
     num: "03",
-    title: "Visit is served",
-    desc: "Front desk checks the customer in, practitioner closes the appointment.",
+    title: "Order Is Assigned",
+    desc: "The order is processed and assigned to an appropriate delivery partner for fulfillment.",
   },
   {
     num: "04",
-    title: "Invoice and follow-up",
-    desc: "Invoice raised against the visit, next appointment offered.",
+    title: "Order Is Delivered",
+    desc: "The delivery partner navigates to the customer while real-time updates keep the customer informed until delivery is completed.",
   },
 ];
 
 const ACCOUNT_ROLES = [
-  { mark: "FD", name: "Front desk" },
-  { mark: "PR", name: "Practitioner" },
-  { mark: "MG", name: "Branch manager" },
-  { mark: "AC", name: "Accounts" },
+  { mark: "CU", name: "Customer" },
+  { mark: "AD", name: "Admin" },
+  { mark: "DP", name: "Delivery Partner" },
+  { mark: "OP", name: "Operations" },
 ];
 
 function WorkflowCardView({
@@ -72,11 +72,11 @@ export function WelzokartWorkflow() {
           <div>
             <span data-reveal="" className="workflow-eyebrow">Workflow</span>
             <h2 data-reveal="" id="workflow-title" className="workflow-headline">
-              How a booking <br className="mobile-title-break" />moves
+              From Product Discovery<br className="mobile-title-break" />to Doorstep Delivery
             </h2>
           </div>
           <p data-reveal="" className="workflow-subtitle">
-            Four states, four owners. Each hand-off writes to the same record, so the invoice and the follow-up carry the full history of the visit.
+            WelzoKart connects customers, orders, subscriptions, and delivery partners through a simple end-to-end workflow.
           </p>
         </div>
 

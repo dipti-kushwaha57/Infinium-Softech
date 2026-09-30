@@ -45,21 +45,19 @@ export function WelzokartHero({ product }: { product: ProductItem }) {
           <div>
             <strong>Welzokart</strong>
             <span className="sub">
-              <i className="appointgem-hero-pulse-dot" /> Bookings · Live in production
+              <i className="appointgem-hero-pulse-dot" /> Smart Grocery Delivery Platform
             </span>
           </div>
         </div>
 
         <div ref={introRef} className="appointgem-hero-intro">
           <h1 data-reveal="" id="appointgem-title" className="appointgem-hero-title">
-            Bookings, staff and payments on <br className="mobile-title-break" /> <span className="highlight">one live calendar.</span>
+            WelzoKart Smart<br className="mobile-title-break" /> <span className="highlight">Grocery Delivery App</span>
           </h1>
 
           <div className="appointgem-hero-right">
             <p data-reveal="" className="appointgem-hero-copy">
-              Welzokart is the business booking and management platform for appointment-led teams.
-              Multi-location calendars, staff-level availability, payments and reminder journeys run in one system,
-              so the front desk, the practitioner and accounts all work from the same record.
+              WelzoKart is a modern grocery delivery application designed to simplify everyday shopping through a fast, intuitive, and user-friendly experience. The platform allows users to explore fresh products, daily essentials, and household items with seamless navigation, quick search, and smooth checkout.
             </p>
 
             <div data-reveal="" className="appointgem-hero-actions">

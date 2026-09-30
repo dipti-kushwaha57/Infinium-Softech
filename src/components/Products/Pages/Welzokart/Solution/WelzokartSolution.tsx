@@ -5,33 +5,33 @@ import "./WelzokartSolution.scss";
 
 const SOLUTIONS = [
   {
-    title: "Multi-location calendars",
-    desc: "Availability derived from live staff rosters per branch, with room and equipment capacity respected.",
+    title: "Intuitive Grocery Shopping",
+    desc: "A clean and user-friendly shopping experience makes it easy to browse products, select essentials, and place orders quickly.",
     tint: "#1F31E8",
   },
   {
-    title: "Staff-level availability",
-    desc: "Each practitioner carries their own working hours, leave and service list; the public widget only ever shows what is real.",
+    title: "Smart Product Categorization",
+    desc: "Structured product categories and search functionality help customers discover the right products with less effort.",
     tint: "#1E9E5A",
   },
   {
-    title: "Payments in the booking",
-    desc: "Deposits, part payments and balances attach to the appointment, with invoices raised against the visit.",
+    title: "Flexible Milk Subscriptions",
+    desc: "Customers can manage recurring milk deliveries with flexible quantities and delivery schedules based on their daily requirements.",
     tint: "#E8A21F",
   },
   {
-    title: "Reminder journeys",
-    desc: "Automated SMS, WhatsApp and email sequences with confirm and reschedule links, logged per booking.",
+    title: "Real-Time Order Tracking",
+    desc: "Live order status and instant notifications keep customers informed throughout the delivery journey.",
     tint: "#8B3FE8",
   },
   {
-    title: "One customer record",
-    desc: "Visit history, notes, payments and communications on a single profile shared across branches.",
+    title: "Efficient Delivery Operations",
+    desc: "Orders can be assigned to delivery partners while navigation and status updates support organized fulfillment.",
     tint: "#0F8F87",
   },
   {
-    title: "Utilisation reporting",
-    desc: "Revenue and utilisation per practitioner, service and branch, exportable or scheduled.",
+    title: "Secure Payment Handling",
+    desc: "Flexible payment options support a convenient checkout experience and reliable order processing.",
     tint: "#2AA8C4",
   },
 ];
@@ -67,11 +67,11 @@ export function WelzokartSolution() {
           <div>
             <span data-reveal="" className="appointgem-eyebrow">Our solution</span>
             <h2 data-reveal="" id="solution-title" className="solution-headline">
-              What ships in <br className="mobile-title-break" />Slota
+              What ships in <br className="mobile-title-break" />WelzoKart
             </h2>
           </div>
           <p data-reveal="" className="solution-subtitle">
-            Six capabilities, all included. Nothing on this list is a paid add-on or a custom build.
+            WelzoKart brings the complete grocery ordering and delivery journey into one connected platform, combining customer shopping, subscriptions, payments, delivery operations, and real-time communication.
           </p>
         </div>
 

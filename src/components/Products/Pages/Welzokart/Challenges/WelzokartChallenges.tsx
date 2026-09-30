@@ -6,33 +6,33 @@ import "./WelzokartChallenges.scss";
 const CHALLENGES = [
   {
     num: "01",
-    title: "Availability nobody trusted111",
-    desc: "Slots were offered from a shared sheet that never reflected leave, rosters or room capacity.",
+    title: "Finding Products Quickly",
+    desc: "Customers need a simple way to discover groceries and everyday essentials without navigating through a complicated shopping experience.",
   },
   {
     num: "02",
-    title: "Payments off to the side",
-    desc: "Deposits sat in a separate payment app, so the front desk could not tell what was already paid.",
+    title: "Managing a Large Product Range",
+    desc: "Fresh products, groceries, and household essentials need clear categorization so customers can easily browse available items.",
   },
   {
     num: "03",
-    title: "Reminders done by hand",
-    desc: "Staff called each customer the evening before, and missed the ones they ran out of time for.",
+    title: "Making Checkout Effortless",
+    desc: "The ordering journey needs to remain simple and efficient so customers can complete purchases without unnecessary steps.",
   },
   {
     num: "04",
-    title: "No branch-level view",
-    desc: "Multi-location owners could not compare utilisation or revenue without rebuilding a report each month.",
+    title: "Managing Recurring Milk Deliveries",
+    desc: "Daily milk requirements need a flexible subscription experience instead of requiring customers to place the same order repeatedly.",
   },
   {
     num: "05",
-    title: "Records split per tool",
-    desc: "History lived across a diary, a billing tool and WhatsApp, so follow-ups repeated questions.",
+    title: "Keeping Customers Informed",
+    desc: "Customers need timely updates about order progress, delivery status, and subscription changes throughout the fulfillment process.",
   },
   {
     num: "06",
-    title: "Rescheduling chaos",
-    desc: "A single move meant three manual edits, and the invoice still pointed at the original slot.",
+    title: "Coordinating Delivery Operations",
+    desc: "Delivery partners need an efficient way to receive orders, manage delivery status, navigate routes, and complete orders accurately.",
   },
 ];
 
@@ -105,11 +105,11 @@ export function WelzokartChallenges() {
             <div>
               <span data-reveal="" className="challenges-eyebrow">Key challenges</span>
               <h2 data-reveal="" id="challenges-title" className="challenges-headline">
-                What broke before <br className="mobile-title-break" />the platform
+                What Everyday Grocery Shopping Needed to Solve
               </h2>
             </div>
             <p data-reveal="" className="challenges-subtitle">
-              Drawn from onboarding clinics, studios and diagnostics chains that ran on shared spreadsheets and a phone line.
+              WelzoKart focuses on reducing the friction commonly associated with grocery ordering while supporting recurring milk deliveries, delivery operations, and real-time customer communication.
             </p>
           </div>
 

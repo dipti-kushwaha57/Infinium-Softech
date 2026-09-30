@@ -2,18 +2,18 @@ import React from "react";
 import "./WelzokartOverview.scss";
 
 const USE_CASES = [
-  "Clinics",
-  "Salons & spas",
-  "Diagnostics",
-  "Professional services",
+  "Grocery Shopping",
+  "Daily Essentials",
+  "Milk Subscriptions",
+  "On-Demand Delivery",
 ];
 
 const META_ITEMS = [
   { label: "Product", value: "Welzokart" },
-  { label: "Category", value: "Bookings & management" },
-  { label: "Platform", value: "Web + staff mobile" },
-  { label: "Integration", value: "REST + webhooks" },
-  { label: "Typical go-live", value: "4–6 weeks" },
+  { label: "Category", value: "E-commerce & Grocery Delivery" },
+  { label: "Platform", value: "Mobile Application" },
+  { label: "Solution", value: "On-Demand Grocery Delivery App" },
+  { label: "Country", value: "India" },
 ];
 
 const MODULES = [
@@ -33,7 +33,7 @@ export function WelzokartOverview() {
           <div className="overview-left">
             <span data-reveal="" className="appointgem-eyebrow">Overview</span>
             <h2 data-reveal="" id="overview-title" className="overview-headline">
-              One calendar the <br className="mobile-title-break" />whole business trusts
+              A Smarter Way to Shop <br className="mobile-title-break" />for Everyday Essentials
             </h2>
             <div data-reveal="" className="use-cases-row">
               {USE_CASES.map((item) => (
@@ -44,7 +44,7 @@ export function WelzokartOverview() {
 
           <div className="overview-right">
             <p data-reveal="" className="overview-lead-p">
-              Appointment businesses lose revenue in the gap between what the calendar says and what staff are actually able to serve. Slota closes that gap: availability is derived from live staff rosters per branch, payment state is attached to the booking, and every reminder, reschedule and invoice is written back to the same customer record.
+              WelzoKart brings grocery shopping, fresh milk delivery, and everyday household essentials together in one convenient platform. From discovering products to completing checkout and tracking delivery, every part of the experience is designed around simplicity, speed, and reliability.
             </p>
             <p data-reveal="" className="overview-body-p">
               It ships as its own platform and inherits the shared Infinium layer for sign-in, roles, billing, reporting and cloud, so a clinic chain and a single studio run the same product at different scale.

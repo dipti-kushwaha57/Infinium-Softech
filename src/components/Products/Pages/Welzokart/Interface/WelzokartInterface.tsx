@@ -184,11 +184,11 @@ export function WelzokartInterface() {
           <div>
             <span data-reveal="" className="appointgem-eyebrow">Interface</span>
             <h2 data-reveal="" id="interface-title" className="interface-headline">
-              Built for the <br className="mobile-title-break" />front desk first
+              Designed Around the<br className="mobile-title-break" />Way People Shop
             </h2>
           </div>
           <p data-reveal="" className="interface-subtitle">
-            Day view, practitioner rail and payment state on one screen. Real-time availability, clear booking states and instant actions for seamless operations.
+            WelzoKart combines a clean visual interface with simple navigation to make grocery discovery and ordering effortless. Clear product categories, intuitive search, smooth checkout, and real-time order information help users move from product discovery to delivery without unnecessary complexity.
           </p>
         </div>
 

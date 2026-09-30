@@ -123,7 +123,7 @@ export function TechStack() {
             <div data-reveal="" className="stack-eyebrow">Technology</div>
 
             <h2 data-reveal="" className="stack-headline">
-             The Technology Behind
+              The Technology Behind
               <br />
               <span className="highlight">Every Product.</span>
             </h2>
@@ -131,8 +131,8 @@ export function TechStack() {
 
           <p data-reveal="" className="stack-intro">
             Web, mobile, and cloud solutions are built on a shared
-technology foundation, so improvements at the platform level
-can benefit products across the entire ecosystem.
+            technology foundation, so improvements at the platform level
+            can benefit products across the entire ecosystem.
           </p>
         </div>
 
@@ -205,7 +205,7 @@ can benefit products across the entire ecosystem.
           }}
         >
           {/* Mobile Navigation Left Arrow Button */}
-          <button
+          {/* <button
             type="button"
             className="stack-notes-arrow prev-btn"
             onClick={handlePrev}
@@ -223,7 +223,7 @@ can benefit products across the entire ecosystem.
             >
               <path d="M15 18l-6-6 6-6" />
             </svg>
-          </button>
+          </button> */}
 
           {/* <div ref={notesContainerRef} className="stack-notes-grid">
             {STACK_NOTES.map((note, idx) => (
@@ -237,7 +237,7 @@ can benefit products across the entire ecosystem.
           </div> */}
 
           {/* Mobile Navigation Right Arrow Button */}
-          <button
+          {/* <button
             type="button"
             className="stack-notes-arrow next-btn"
             onClick={handleNext}
@@ -255,7 +255,7 @@ can benefit products across the entire ecosystem.
             >
               <path d="M9 18l6-6-6-6" />
             </svg>
-          </button>
+          </button> */}
 
           {/* Mobile Dots Pagination Indicator */}
           {/* <div

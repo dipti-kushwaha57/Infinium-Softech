@@ -148,6 +148,10 @@
       border-bottom-color: $color-ink;
     }
 
+    &.is-route-active {
+      background: transparent;
+    }
+
     &:hover {
       background: transparent;
       color: $color-ink;

@@ -278,9 +278,12 @@
     font-size: var(--fs-display);
     line-height: 0.94;
     letter-spacing: -0.04em;
-    max-width: 22ch;
+    max-width: 26ch;
     margin: min(20px, 2vh) auto 0;
-    text-wrap: balance;
+    
+    @media (max-width: 420px) {
+      font-size: clamp(24px, 7.8vw, 36px);
+    }
 
     @include respond($bp-md) {
       margin-top: 24px;

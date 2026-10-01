@@ -141,6 +141,16 @@ export const MENU_DEFS: Record<string, MenuDef> = {
     isProducts: true,
     productItems: ECOSYSTEM_PRODUCTS,
   },
+  about: {
+    key: "about",
+    label: "About Us",
+    eyebrow: "Company",
+  },
+  contact: {
+    key: "contact",
+    label: "Contact Us",
+    eyebrow: "Get in touch",
+  },
   solutions: {
     key: "solutions",
     label: "Solutions",

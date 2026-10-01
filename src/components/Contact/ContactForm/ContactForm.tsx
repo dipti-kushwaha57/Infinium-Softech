@@ -12,6 +12,7 @@ import {
 import "./ContactForm.scss";
 
 export function ContactForm() {
+  const sectionRef = useRef<HTMLElement>(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [mobile, setMobile] = useState("");
@@ -21,6 +22,13 @@ export function ContactForm() {
   const [message, setMessage] = useState("");
   const [isSent, setIsSent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (isSent && sectionRef.current) {
+      const y = sectionRef.current.getBoundingClientRect().top + window.scrollY - 100;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  }, [isSent]);
 
   // Big screen (>= 768px): 2-grid mouse scrollable & draggable carousel (no arrows, no dots)
   const desktopScrollRef = useRef<HTMLDivElement>(null);
@@ -208,7 +216,7 @@ export function ContactForm() {
     : "Our team will read this and get back to you. Expect a reply within one working day, usually with two or three questions and a time for a walkthrough.";
 
   return (
-    <section id="form" className="contact-form-section content-padding" aria-label="Send Brief & Contacts">
+    <section ref={sectionRef} id="form" className="contact-form-section content-padding" aria-label="Send Brief & Contacts">
       <div className="contact-form-container">
         {/* Left Column: Interactive Form Box */}
         <div data-reveal="" className="contact-form-card">

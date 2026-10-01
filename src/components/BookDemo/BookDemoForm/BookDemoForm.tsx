@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { sendDemoEmail } from "@/actions/sendEmail";
 import "./BookDemoForm.scss";
 
@@ -64,6 +64,7 @@ const DEMO_STEPS = [
 ];
 
 export function BookDemoForm() {
+  const sectionRef = useRef<HTMLElement>(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [company, setCompany] = useState("");
@@ -74,6 +75,13 @@ export function BookDemoForm() {
   const [message, setMessage] = useState("");
   const [isSent, setIsSent] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (isSent && sectionRef.current) {
+      const y = sectionRef.current.getBoundingClientRect().top + window.scrollY - 100;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  }, [isSent]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -186,7 +194,7 @@ export function BookDemoForm() {
   };
 
   return (
-    <section id="form" className="contact-form-section content-padding" aria-label="Book a Demo Request Form">
+    <section ref={sectionRef} id="form" className="contact-form-section content-padding" aria-label="Book a Demo Request Form">
       <div className="contact-form-container">
         {/* Left Column: Interactive Form Card */}
         <div data-reveal="" className="contact-form-card">

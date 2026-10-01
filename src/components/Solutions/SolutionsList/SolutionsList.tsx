@@ -21,10 +21,15 @@ export function SolutionsList() {
       `[data-nav-id="${sectionId}"]`
     ) as HTMLElement;
     if (activeCard) {
-      activeCard.scrollIntoView({
+      const container = navContainerRef.current;
+      const scrollLeft =
+        activeCard.offsetLeft -
+        container.offsetWidth / 2 +
+        activeCard.offsetWidth / 2;
+
+      container.scrollTo({
+        left: scrollLeft,
         behavior: "smooth",
-        block: "nearest",
-        inline: "center",
       });
     }
   }, []);
@@ -55,22 +60,8 @@ export function SolutionsList() {
       if (el) observer.observe(el);
     });
 
-    const handleScrollBottom = () => {
-      const atBottom =
-        window.innerHeight + Math.ceil(window.scrollY) >=
-        document.documentElement.scrollHeight - 30;
-      if (atBottom && window.scrollY > 0) {
-        const lastId = SECTION_IDS[SECTION_IDS.length - 1];
-        setActiveSection(lastId);
-        scrollActiveTabIntoView(lastId);
-      }
-    };
-
-    window.addEventListener("scroll", handleScrollBottom, { passive: true });
-
     return () => {
       observer.disconnect();
-      window.removeEventListener("scroll", handleScrollBottom);
     };
   }, [scrollActiveTabIntoView]);
 

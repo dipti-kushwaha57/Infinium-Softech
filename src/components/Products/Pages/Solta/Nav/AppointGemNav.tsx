@@ -22,17 +22,24 @@ const ACTIVATION_OFFSET = 140;
 
 export function AppointGemNav() {
   const [activeSection, setActiveSection] = useState(SECTION_IDS[0]);
-  const activeSectionRef = useRef(SECTION_IDS[0]);
+  const navContainerRef = useRef<HTMLDivElement | null>(null);
 
-  const activateSection = useCallback(
-    (sectionId: string) => {
-      if (activeSectionRef.current === sectionId) return;
-
-      activeSectionRef.current = sectionId;
-      setActiveSection(sectionId);
-    },
-    []
-  );
+  const scrollActiveTabIntoView = useCallback((sectionId: string) => {
+    const container = navContainerRef.current;
+    if (!container) return;
+    const activeCard = container.querySelector(
+      `[data-nav-id="${sectionId}"]`
+    ) as HTMLElement;
+    if (activeCard) {
+      const cardLeft = activeCard.offsetLeft;
+      const cardWidth = activeCard.offsetWidth;
+      const containerWidth = container.clientWidth;
+      container.scrollTo({
+        left: cardLeft - containerWidth / 2 + cardWidth / 2,
+        behavior: "smooth",
+      });
+    }
+  }, []);
 
   const updateActiveFromScroll = useCallback(() => {
     const scrollY = window.scrollY;
@@ -45,7 +52,8 @@ export function AppointGemNav() {
     if (atBottom && scrollY > 0) {
       const lastId = SECTION_IDS[SECTION_IDS.length - 1];
       if (document.getElementById(lastId)) {
-        activateSection(lastId);
+        setActiveSection(lastId);
+        scrollActiveTabIntoView(lastId);
         return;
       }
     }
@@ -63,8 +71,9 @@ export function AppointGemNav() {
       }
     }
 
-    activateSection(current);
-  }, [activateSection]);
+    setActiveSection(current);
+    scrollActiveTabIntoView(current);
+  }, [scrollActiveTabIntoView]);
 
   useEffect(() => {
     window.addEventListener("scroll", updateActiveFromScroll, { passive: true });
@@ -89,8 +98,8 @@ export function AppointGemNav() {
     const element = document.getElementById(id);
     if (!element) return;
 
-    activeSectionRef.current = id;
     setActiveSection(id);
+    scrollActiveTabIntoView(id);
 
     const y =
       element.getBoundingClientRect().top + window.scrollY - SCROLL_OFFSET;
@@ -99,10 +108,10 @@ export function AppointGemNav() {
 
   return (
     <nav
-      className="appointgem-subnav-sticky slota-subnav-sticky"
+      className="appointgem-subnav-sticky"
       aria-label="AppointGem Page Navigation"
     >
-      <div className="appointgem-subnav-container">
+      <div className="appointgem-subnav-container" ref={navContainerRef}>
         {NAV_ITEMS.map((item) => {
           const id = item.href.substring(1);
           const isActive = activeSection === id;
@@ -128,4 +137,4 @@ export function AppointGemNav() {
       </div>
     </nav >
   );
-} 
+}

@@ -141,10 +141,15 @@
     appearance: none;
     -webkit-appearance: none;
 
-    &:hover,
     &.is-active,
     &.is-route-active {
       background: rgba($color-ink, 0.06);
+      color: $color-ink;
+      border-bottom-color: $color-ink;
+    }
+
+    &:hover {
+      background: transparent;
       color: $color-ink;
       border-bottom-color: $color-ink;
     }

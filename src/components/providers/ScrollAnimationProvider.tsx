@@ -104,6 +104,8 @@ export function ScrollAnimationProvider({ children }: { children: React.ReactNod
 
     // 5. Smooth scroll on anchor link clicks
     const handleAnchorClick = (e: MouseEvent) => {
+      if (e.defaultPrevented) return;
+
       const target = e.target as HTMLElement | null;
       const anchor = target?.closest("a");
       if (!anchor) return;

@@ -14,14 +14,27 @@ const SECTION_IDS = TECHNOLOGY_HERO_INDEX_ITEMS.map((item) =>
   item.href.substring(1)
 );
 
-const ACTIVATION_OFFSET = 240;
-
 export function TechnologyList() {
   const categoryKeys = Object.keys(CATEGORY_HEADERS);
   const [activeSection, setActiveSection] = useState<string>(SECTION_IDS[0]);
   const navContainerRef = useRef<HTMLDivElement | null>(null);
-  const isClickScrollRef = useRef<boolean>(false);
-  const clickScrollTimeout = useRef<NodeJS.Timeout | null>(null);
+
+  const scrollToElement = useCallback((element: HTMLElement) => {
+    const headerHeight =
+      document.querySelector<HTMLElement>(".site-header-wrapper")
+        ?.getBoundingClientRect().height ?? 0;
+    const stickyBarHeight =
+      document.querySelector<HTMLElement>(".tech-sticky-bar-section")
+        ?.getBoundingClientRect().height ?? 0;
+    const targetY =
+      element.getBoundingClientRect().top +
+      window.scrollY -
+      headerHeight -
+      stickyBarHeight -
+      12;
+
+    window.scrollTo({ top: targetY, behavior: "smooth" });
+  }, []);
 
   const scrollActiveTabIntoView = useCallback((sectionId: string) => {
     if (!navContainerRef.current) return;
@@ -40,66 +53,36 @@ export function TechnologyList() {
     }
   }, []);
 
-  const getDynamicScrollOffset = useCallback(() => {
-    const stickyBar = document.querySelector(".tech-sticky-bar-section");
-    if (stickyBar) {
-      const computed = window.getComputedStyle(stickyBar);
-      const topVal = parseInt(computed.top, 10) || 75;
-      const height = stickyBar.getBoundingClientRect().height || 50;
-      
-      // Tuck the block exactly 5px behind the physical bottom of the sticky navigation
-      // This completely hides visual gap bleeds and ensures the header doesn't swallow the title on mobile
-      return topVal + height - 5; 
-    }
-    return 100;
-  }, []);
-
-  const updateActiveFromScroll = useCallback(() => {
-    if (isClickScrollRef.current) return;
-    
-    const scrollY = window.scrollY;
-    const scrollPosition = scrollY + ACTIVATION_OFFSET;
-    const atBottom =
-      window.innerHeight + Math.ceil(scrollY) >=
-      document.documentElement.scrollHeight - 30;
-
-    if (atBottom && scrollY > 0) {
-      const lastId = SECTION_IDS[SECTION_IDS.length - 1];
-      if (document.getElementById(lastId)) {
-        setActiveSection(lastId);
-        scrollActiveTabIntoView(lastId);
-        return;
-      }
-    }
-
-    let current = SECTION_IDS[0];
-
-    for (let i = SECTION_IDS.length - 1; i >= 0; i -= 1) {
-      const element = document.getElementById(SECTION_IDS[i]);
-      if (!element) continue;
-
-      const sectionTop = element.getBoundingClientRect().top + scrollY;
-      if (sectionTop <= scrollPosition) {
-        current = SECTION_IDS[i];
-        break;
-      }
-    }
-
-    setActiveSection(current);
-    scrollActiveTabIntoView(current);
-  }, [scrollActiveTabIntoView]);
-
   useEffect(() => {
-    window.addEventListener("scroll", updateActiveFromScroll, { passive: true });
-    window.addEventListener("resize", updateActiveFromScroll);
-    const initialUpdateFrame = window.requestAnimationFrame(updateActiveFromScroll);
+    const observerOptions: IntersectionObserverInit = {
+      root: null,
+      rootMargin: "-20% 0px -50% 0px",
+      threshold: 0.05,
+    };
+
+    const handleIntersect: IntersectionObserverCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          if (SECTION_IDS.includes(id)) {
+            setActiveSection(id);
+            scrollActiveTabIntoView(id);
+          }
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(handleIntersect, observerOptions);
+
+    SECTION_IDS.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
 
     return () => {
-      window.removeEventListener("scroll", updateActiveFromScroll);
-      window.removeEventListener("resize", updateActiveFromScroll);
-      window.cancelAnimationFrame(initialUpdateFrame);
+      observer.disconnect();
     };
-  }, [updateActiveFromScroll]);
+  }, [scrollActiveTabIntoView]);
 
   // Handle hash scrolling when arriving with a hash or when hash changes
   useEffect(() => {
@@ -121,16 +104,8 @@ export function TechnologyList() {
           scrollActiveTabIntoView(id);
         }
 
-        isClickScrollRef.current = true;
-        if (clickScrollTimeout.current) clearTimeout(clickScrollTimeout.current);
-        clickScrollTimeout.current = setTimeout(() => {
-          isClickScrollRef.current = false;
-        }, 1500);
-
         setTimeout(() => {
-          const targetY =
-            element.getBoundingClientRect().top + window.scrollY - getDynamicScrollOffset();
-          window.scrollTo({ top: targetY, behavior: "smooth" });
+          scrollToElement(element);
         }, 120);
       }
     };
@@ -138,7 +113,7 @@ export function TechnologyList() {
     handleHashScroll();
     window.addEventListener("hashchange", handleHashScroll);
     return () => window.removeEventListener("hashchange", handleHashScroll);
-  }, [scrollActiveTabIntoView]);
+  }, [scrollActiveTabIntoView, scrollToElement]);
 
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
@@ -151,18 +126,9 @@ export function TechnologyList() {
     const element = document.getElementById(id);
     if (!element) return;
 
-    isClickScrollRef.current = true;
-    if (clickScrollTimeout.current) clearTimeout(clickScrollTimeout.current);
-    clickScrollTimeout.current = setTimeout(() => {
-      isClickScrollRef.current = false;
-    }, 1000);
-
     setActiveSection(id);
     scrollActiveTabIntoView(id);
-
-    const targetY =
-      element.getBoundingClientRect().top + window.scrollY - getDynamicScrollOffset();
-    window.scrollTo({ top: targetY, behavior: "smooth" });
+    scrollToElement(element);
   };
 
   return (
@@ -177,7 +143,7 @@ export function TechnologyList() {
             {TECHNOLOGY_HERO_INDEX_ITEMS.map((item) => {
               const sectionId = item.href.substring(1);
               const isActive = activeSection === sectionId;
-              return (
+              return ( 
                 <a
                   key={item.num}
                   href={item.href}

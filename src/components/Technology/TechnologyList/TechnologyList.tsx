@@ -238,14 +238,27 @@ export function TechnologyList() {
                       <div className="mockup-card">
                         <div className="mockup-content">
                           <div className="image-frame">
-                            <Image
-                              src={item.image}
-                              alt={item.title}
-                              width={480}
-                              height={320}
-                              className="strivedge-tech-img"
-                              priority={cIdx === 0 && iIdx < 2}
-                            />
+                            {item.image ? (
+                              <Image
+                                src={item.image}
+                                alt={item.title}
+                                width={480}
+                                height={320}
+                                className="strivedge-tech-img"
+                                priority={cIdx === 0 && iIdx < 2}
+                                unoptimized={
+                                  item.image.endsWith(".svg") ||
+                                  item.id === "terraform"
+                                }
+                              />
+                            ) : (
+                              <span
+                                className="technology-image-fallback"
+                                aria-hidden="true"
+                              >
+                                {item.title}
+                              </span>
+                            )}
                           </div>
                         </div>
                         {/* <div className="mockup-footer">

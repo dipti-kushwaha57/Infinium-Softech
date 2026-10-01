@@ -4,7 +4,7 @@ export interface IndividualTechItem {
   categoryName: string;
   title: string;
   description: string;
-  image: string;
+  image: string | null;
   color: string;
 }
 
@@ -382,7 +382,7 @@ export const INDIVIDUAL_TECH_ITEMS: IndividualTechItem[] = [
     title: "WooCommerce",
     description:
       "WooCommerce turns a WordPress website into a fully functional online store. It supports flexible product catalogs, secure payment gateways, shipping options, coupons, and inventory management. We customize WooCommerce to create smooth shopping experiences that scale with your product range and sales volume.",
-    image: "/technology/wordpress.png",
+    image: null,
     color: "#8B3FE8",
   },
   {
@@ -412,7 +412,7 @@ export const INDIVIDUAL_TECH_ITEMS: IndividualTechItem[] = [
     title: "Drupal",
     description:
       "Drupal is an open-source CMS built for complex, secure, and content-heavy websites. With fine-grained user permissions, multilingual support, and a highly modular architecture, it is a strong choice for enterprises, government portals, and organizations with demanding content workflows.",
-    image: "/technology/drupal.png",
+    image: null,
     color: "#8B3FE8",
   },
   {
@@ -454,7 +454,7 @@ export const INDIVIDUAL_TECH_ITEMS: IndividualTechItem[] = [
     title: "Google Cloud Platform",
     description:
       "Google Cloud Platform offers scalable infrastructure, BigQuery analytics, Firebase, and managed Kubernetes services. We leverage GCP for data-driven applications, real-time backends, and containerized workloads that need performance, reliability, and global reach.",
-    image: "/technology/gcp.png",
+    image: null,
     color: "#E8A21F",
   },
   {

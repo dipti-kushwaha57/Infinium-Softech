@@ -1,15 +1,13 @@
 @use "../../../../../styles/variables" as *;
 @use "../../../../../styles/mixins" as *;
 
-.appointgem-subnav-sticky {
+.appointgem-subnav-sticky.slota-subnav-sticky {
   position: sticky;
   top: var(--site-header-height, 75px);
   z-index: 60;
   margin-top: 0;
   padding: 8px 0;
-  background: rgba(243, 242, 238, 0.95);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: #f3f2ee;
   // border-bottom: 1px solid rgba(12, 12, 13, 0.08);
 
   .appointgem-subnav-container {
@@ -20,7 +18,8 @@
     justify-content: flex-start;
     flex-wrap: nowrap;
     overflow-x: auto;
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
+    overflow-anchor: none;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     padding-top: 4px;
@@ -104,4 +103,4 @@
   @media (max-width: 768px) {
     padding: 6px 0;
   }
-}
+} 

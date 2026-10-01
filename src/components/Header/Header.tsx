@@ -1,6 +1,11 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import {
+  useState,
+  useRef,
+  useEffect,
+  type MouseEvent as ReactMouseEvent,
+} from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -147,10 +152,7 @@ export function Header() {
     };
     const route = routeByMenuKey[key];
 
-    if (route) {
-      setActiveMenu(null);
-      router.push(route);
-    }
+    if (route) navigateToHeaderRoute(route);
   };
 
   const handleMenuClick = (key: string) => {
@@ -162,8 +164,7 @@ export function Header() {
     const route = routeByMenuKey[key];
 
     if (!isMobile && route) {
-      setActiveMenu(null);
-      router.push(route);
+      navigateToHeaderRoute(route);
       return;
     }
 
@@ -185,8 +186,7 @@ export function Header() {
 
     if (isMobile && route) {
       if (activeMenu === key) {
-        setActiveMenu(null);
-        router.push(route);
+        navigateToHeaderRoute(route);
       } else {
         openMenu(key);
       }
@@ -194,6 +194,32 @@ export function Header() {
     }
 
     openMenu(key);
+  };
+
+  const scrollToPageTop = () => {
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  };
+
+  const navigateToHeaderRoute = (route: string) => {
+    setActiveMenu(null);
+    if (pathname === route) {
+      scrollToPageTop();
+      return;
+    }
+    router.push(route);
+  };
+
+  const handleHeaderLinkClick = (
+    event: ReactMouseEvent<HTMLElement>,
+    route: string
+  ) => {
+    setActiveMenu(null);
+    if (pathname !== route) return;
+
+    event.preventDefault();
+    scrollToPageTop();
   };
 
   const currentMenuKey = activeMenu || "products";
@@ -218,7 +244,7 @@ export function Header() {
           <Link
             href="/"
             className="logo"
-            onClick={() => setActiveMenu(null)}
+            onClick={(event) => handleHeaderLinkClick(event, "/")}
           >
             <Image
               src="/brand/logo-dark.png"
@@ -234,7 +260,7 @@ export function Header() {
             <Link
               href="/about"
               className={`nav-menu-btn ${!activeMenu && pathname === "/about" ? "is-route-active" : ""}`}
-              onClick={() => setActiveMenu(null)}
+              onClick={(event) => handleHeaderLinkClick(event, "/about")}
               onMouseEnter={() => {
                 if (!isMobile) setActiveMenu(null);
               }}
@@ -271,7 +297,7 @@ export function Header() {
             <Link
               href="/contact"
               className={`nav-menu-btn ${!activeMenu && pathname === "/contact" ? "is-route-active" : ""}`}
-              onClick={() => setActiveMenu(null)}
+              onClick={(event) => handleHeaderLinkClick(event, "/contact")}
               onMouseEnter={() => {
                 if (!isMobile) setActiveMenu(null);
               }}
@@ -285,7 +311,7 @@ export function Header() {
             <Link
               href="/book-a-demo"
               className="cta"
-              onClick={() => setActiveMenu(null)}
+              onClick={(event) => handleHeaderLinkClick(event, "/book-a-demo")}
             >
               Book a Demo <span aria-hidden="true">→</span>
             </Link>
@@ -353,7 +379,7 @@ export function Header() {
                     href="/about"
                     className="category-chip"
                     aria-current={pathname === "/about" ? "page" : undefined}
-                    onClick={() => setActiveMenu(null)}
+                    onClick={(event) => handleHeaderLinkClick(event, "/about")}
                   >
                     About
                   </Link>
@@ -381,7 +407,7 @@ export function Header() {
                     href="/contact"
                     className="category-chip"
                     aria-current={pathname === "/contact" ? "page" : undefined}
-                    onClick={() => setActiveMenu(null)}
+                    onClick={(event) => handleHeaderLinkClick(event, "/contact")}
                   >
                     Contact Us
                   </Link>
@@ -399,9 +425,9 @@ export function Header() {
                         href={`/products/${prod.id}`}
                         className={`product-card ${isSelected ? "is-selected" : ""}`}
                         onMouseEnter={() => setPreviewProductName(prod.name)}
-                        onClick={() => {
+                        onClick={(event) => {
                           setPreviewProductName(prod.name);
-                          setActiveMenu(null);
+                          handleHeaderLinkClick(event, `/products/${prod.id}`);
                         }}
                       >
                         <span

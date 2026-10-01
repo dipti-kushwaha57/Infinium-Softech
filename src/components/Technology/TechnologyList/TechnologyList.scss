@@ -189,14 +189,19 @@
 .technology-category-block {
   padding-top: 56px;
   padding-bottom: 72px;
-  scroll-margin-top: 130px;
+  scroll-margin-top: 100px;
   transition: background 0.3s ease, color 0.3s ease;
   border-bottom: 1px solid rgba(12, 12, 13, 0.06);
+
+  &:last-child {
+    min-height: 100vh;
+    padding-bottom: 350px;
+  }
 
   @include respond($bp-md) {
     padding-top: 72px;
     padding-bottom: 96px;
-    scroll-margin-top: 140px;
+    scroll-margin-top: 100px;
   }
 
   /* Paper Theme */

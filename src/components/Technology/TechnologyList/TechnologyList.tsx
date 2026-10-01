@@ -14,29 +14,49 @@ const SECTION_IDS = TECHNOLOGY_HERO_INDEX_ITEMS.map((item) =>
   item.href.substring(1)
 );
 
-const SCROLL_OFFSET = 125;
-const ACTIVATION_OFFSET = 160;
+const ACTIVATION_OFFSET = 240;
 
 export function TechnologyList() {
   const categoryKeys = Object.keys(CATEGORY_HEADERS);
   const [activeSection, setActiveSection] = useState<string>(SECTION_IDS[0]);
   const navContainerRef = useRef<HTMLDivElement | null>(null);
+  const isClickScrollRef = useRef<boolean>(false);
+  const clickScrollTimeout = useRef<NodeJS.Timeout | null>(null);
 
   const scrollActiveTabIntoView = useCallback((sectionId: string) => {
     if (!navContainerRef.current) return;
-    const activeCard = navContainerRef.current.querySelector(
+    const container = navContainerRef.current;
+    const activeCard = container.querySelector(
       `[data-nav-id="${sectionId}"]`
     ) as HTMLElement;
+    
     if (activeCard) {
-      activeCard.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest",
-        inline: "center",
+      // Horizontally scroll only, absolutely no vertical block alignment to prevent jumping
+      const scrollTarget = activeCard.offsetLeft - container.offsetWidth / 2 + activeCard.offsetWidth / 2;
+      container.scrollTo({
+        left: scrollTarget,
+        behavior: "smooth"
       });
     }
   }, []);
 
+  const getDynamicScrollOffset = useCallback(() => {
+    const stickyBar = document.querySelector(".tech-sticky-bar-section");
+    if (stickyBar) {
+      const computed = window.getComputedStyle(stickyBar);
+      const topVal = parseInt(computed.top, 10) || 75;
+      const height = stickyBar.getBoundingClientRect().height || 50;
+      
+      // Tuck the block exactly 5px behind the physical bottom of the sticky navigation
+      // This completely hides visual gap bleeds and ensures the header doesn't swallow the title on mobile
+      return topVal + height - 5; 
+    }
+    return 100;
+  }, []);
+
   const updateActiveFromScroll = useCallback(() => {
+    if (isClickScrollRef.current) return;
+    
     const scrollY = window.scrollY;
     const scrollPosition = scrollY + ACTIVATION_OFFSET;
     const atBottom =
@@ -101,9 +121,15 @@ export function TechnologyList() {
           scrollActiveTabIntoView(id);
         }
 
+        isClickScrollRef.current = true;
+        if (clickScrollTimeout.current) clearTimeout(clickScrollTimeout.current);
+        clickScrollTimeout.current = setTimeout(() => {
+          isClickScrollRef.current = false;
+        }, 1500);
+
         setTimeout(() => {
           const targetY =
-            element.getBoundingClientRect().top + window.scrollY - SCROLL_OFFSET;
+            element.getBoundingClientRect().top + window.scrollY - getDynamicScrollOffset();
           window.scrollTo({ top: targetY, behavior: "smooth" });
         }, 120);
       }
@@ -125,11 +151,17 @@ export function TechnologyList() {
     const element = document.getElementById(id);
     if (!element) return;
 
+    isClickScrollRef.current = true;
+    if (clickScrollTimeout.current) clearTimeout(clickScrollTimeout.current);
+    clickScrollTimeout.current = setTimeout(() => {
+      isClickScrollRef.current = false;
+    }, 1000);
+
     setActiveSection(id);
     scrollActiveTabIntoView(id);
 
     const targetY =
-      element.getBoundingClientRect().top + window.scrollY - SCROLL_OFFSET;
+      element.getBoundingClientRect().top + window.scrollY - getDynamicScrollOffset();
     window.scrollTo({ top: targetY, behavior: "smooth" });
   };
 

@@ -141,16 +141,6 @@ export const MENU_DEFS: Record<string, MenuDef> = {
     isProducts: true,
     productItems: ECOSYSTEM_PRODUCTS,
   },
-  about: {
-    key: "about",
-    label: "About Us",
-    eyebrow: "Company",
-  },
-  contact: {
-    key: "contact",
-    label: "Contact Us",
-    eyebrow: "Get in touch",
-  },
   solutions: {
     key: "solutions",
     label: "Solutions",
@@ -174,7 +164,7 @@ export const MENU_DEFS: Record<string, MenuDef> = {
       { name: "React Native", desc: "Shared iOS and Android codebase", tint: "#2AA8C4", product: "Trekvano", href: "/technology#tech-react-native", icon: "/technology/React-Native.png" },
       { name: "Node.js", desc: "Realtime services and APIs", tint: "#1E9E5A", product: "WelzoKart", href: "/technology#tech-nodejs", icon: "/technology/nodejs.png" },
       { name: "Laravel", desc: "Billing, admin and back office", tint: "#E0452F", product: "Needly", href: "/technology#tech-php", icon: "/technology/Laravel.png" },
-      { name: "AWS", desc: "Infrastructure as code, staged rollouts", tint: "#E8A21F", product: "LoadGo", href: "/technology#tech-aws", icon: "/technology/AWS.png" },
+      { name: "AWS", desc: "Infrastructure as code, staged rollouts", tint: "#E8A21F", product: "LoadGo", href: "/technology#tech-aws", icon: "/technology/aws.svg" },
       { name: "AI/ML", desc: "Intelligent automation and data-driven insights", tint: "#8B3FE8", product: "", href: "/technology#tech-python", icon: "/technology/ai-ml.svg" },
       { name: "View More", desc: "Discover more tools behind our products", tint: "#8B3FE8", product: "NurseWorth", href: "/technology#frontend" },
     ],

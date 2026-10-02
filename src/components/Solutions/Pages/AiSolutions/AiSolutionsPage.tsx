@@ -5,6 +5,7 @@ import { AiSolutionsHire } from "./Hire/AiSolutionsHire";
 import { AiSolutionsStrengths } from "./Strengths/AiSolutionsStrengths";
 import { AiSolutionsStack } from "./Stack/AiSolutionsStack";
 import { AiSolutionsProcess } from "./Process/AiSolutionsProcess";
+import { AiSolutionsConsultation } from "./Consultation/AiSolutionsConsultation";
 
 export function AiSolutionsPage() {
   return (
@@ -13,8 +14,9 @@ export function AiSolutionsPage() {
       <AiSolutionsOfferings />
       <AiSolutionsHire />
       <AiSolutionsStrengths />
-      <AiSolutionsStack />
       <AiSolutionsProcess />
+      <AiSolutionsConsultation />
+      <AiSolutionsStack />
     </main>
   );
 }

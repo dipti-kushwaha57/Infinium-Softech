@@ -64,6 +64,18 @@
       "changeFrequency": "weekly",
       "priority": 0.9
     },
+    "/solutions/[slug]": {
+      "title": "Solution Detail",
+      "description": "Explore how Infinium Softech builds custom digital solutions tailored to each business problem and operation.",
+      "changeFrequency": "monthly",
+      "priority": 0.7
+    },
+    "/ai-solutions": {
+      "title": "AI Solutions",
+      "description": "AI solutions built for business efficiency, automation, and smarter decision-making.",
+      "changeFrequency": "monthly",
+      "priority": 0.8
+    },
     "/technology": {
       "title": "Technology — Modern Frontend, Backend, Mobile, Cloud & Database Stack",
       "description": "Explore Infinium Softech's technology stack including React, Angular, Next.js, Node.js, Java, Swift, Android, AWS, Docker and databases.",

@@ -1,0 +1,49 @@
+@use "../../../../../styles/variables" as *;
+@use "../../../../../styles/mixins" as *;
+
+.ai-solutions-hire {
+  background: rgba(31, 49, 232, 0.03);
+  border-top: 1px solid $color-border;
+  border-bottom: 1px solid $color-border;
+  @include section-padding;
+
+  .ai-solutions-container {
+    @include container;
+  }
+
+  .hire-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr) auto;
+    gap: 24px;
+    align-items: center;
+
+    @media (max-width: 992px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .hire-copy {
+    h2 {
+      margin-top: 12px;
+      font-size: clamp(2.1rem, 2.5vw, 3.4rem);
+      line-height: 1.08;
+      max-width: 12ch;
+    }
+  }
+
+  .section-kicker {
+    @include section-eyebrow("light");
+  }
+
+  p {
+    margin: 0;
+    max-width: 560px;
+    font-size: 1.02rem;
+    line-height: 1.7;
+    color: $color-body;
+  }
+
+  .btn-primary {
+    @include btn-hero-primary;
+  }
+}

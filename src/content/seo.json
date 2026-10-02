@@ -76,6 +76,18 @@
       "changeFrequency": "monthly",
       "priority": 0.8
     },
+    "/web-applications": {
+      "title": "Web Applications",
+      "description": "Infinium Softech designs and builds responsive, secure web applications and business platforms around real workflows.",
+      "changeFrequency": "monthly",
+      "priority": 0.8
+    },
+    "/mobile-applications": {
+      "title": "Mobile Applications",
+      "description": "Infinium Softech builds secure, high-performance native and cross-platform mobile applications for iOS and Android.",
+      "changeFrequency": "monthly",
+      "priority": 0.8
+    },
     "/technology": {
       "title": "Technology — Modern Frontend, Backend, Mobile, Cloud & Database Stack",
       "description": "Explore Infinium Softech's technology stack including React, Angular, Next.js, Node.js, Java, Swift, Android, AWS, Docker and databases.",

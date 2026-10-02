@@ -1,9 +1,16 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import type { SolutionsSectionIntro, SolutionsStrengthItem } from "@/data/solutions/webApplicationsPageData";
 import "./AiSolutionsStrengths.scss";
 
-const strengths = [
+const defaultContent: SolutionsSectionIntro & { items: SolutionsStrengthItem[] } = {
+  eyebrow: "Why Infinium Softech",
+  titleStart: "AI built for work",
+  titleEnd: "that matters",
+  description:
+    "Practical AI, integrated with your products and workflows, and supported from the first use case through production.",
+  items: [
   {
     number: "01",
     title: "Pilot to production",
@@ -34,9 +41,11 @@ const strengths = [
     title: "Designed to scale",
     description: "Start with one workflow, then extend proven AI across products and teams.",
   },
-];
+  ],
+};
 
-export function AiSolutionsStrengths() {
+export function AiSolutionsStrengths({ content = defaultContent }: { content?: SolutionsSectionIntro & { items: SolutionsStrengthItem[] } } = {}) {
+  const strengths = content.items;
   const strengthsGridRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [visibleCards, setVisibleCards] = useState(1);
@@ -94,20 +103,19 @@ export function AiSolutionsStrengths() {
     <section className="ai-solutions-strengths" aria-labelledby="ai-strengths-title">
       <div className="ai-solutions-container">
         <div className="strengths-panel">
-          <div className="strengths-header">
+          <div data-reveal="" className="strengths-header">
             <div>
-              <span className="strengths-eyebrow">Why Infinium Softech</span>
+              <span className="strengths-eyebrow">{content.eyebrow}</span>
               <h2 id="ai-strengths-title" className="strengths-headline">
-                AI built for work<br className="mobile-title-break" /> that matters
+                {content.titleStart}<br className="mobile-title-break" /> {content.titleEnd}
               </h2>
             </div>
             <p className="strengths-subtitle">
-              Practical AI, integrated with your products and workflows, and supported from the
-              first use case through production.
+              {content.description}
             </p>
           </div>
 
-          <div className="strengths-grid-wrap">
+          <div data-reveal="" className="strengths-grid-wrap">
             {activeIndex > 0 && (
               <button
                 type="button"

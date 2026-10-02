@@ -1,29 +1,23 @@
 import Link from "next/link";
+import type { WebApplicationsPageContent } from "@/data/solutions/webApplicationsPageData";
 import "./AiSolutionsConsultation.scss";
 
-const consultationPaths = [
-  {
-    title: "AI strategy",
-    fit: "Prioritise a workflow and define measurable outcomes.",
-    tint: "#1F31E8",
-  },
-  {
-    title: "Pilot to production",
-    fit: "Connect models to your products, data, and teams.",
-    tint: "#1E9E5A",
-  },
-  {
-    title: "Responsible AI",
-    fit: "Plan for human review, privacy, and monitoring.",
-    tint: "#8B3FE8",
-  },
-];
+const defaultContent: WebApplicationsPageContent["consultation"] = {
+  titleStart: "Tell us the workflow.",
+  titleEnd: "We’ll shape the AI.",
+  description: "A 30-minute session with our team to map your use case, data, and product goals.",
+  paths: [
+    { title: "AI strategy", fit: "Prioritise a workflow and define measurable outcomes.", tint: "#1F31E8" },
+    { title: "Pilot to production", fit: "Connect models to your products, data, and teams.", tint: "#1E9E5A" },
+    { title: "Responsible AI", fit: "Plan for human review, privacy, and monitoring.", tint: "#8B3FE8" },
+  ],
+};
 
-export function AiSolutionsConsultation() {
+export function AiSolutionsConsultation({ content = defaultContent }: { content?: WebApplicationsPageContent["consultation"] } = {}) {
   return (
     <section className="ai-solutions-consultation" aria-label="Book an AI consultation">
       <div className="ai-solutions-container">
-        <div className="ai-consultation-card">
+        <div data-reveal="" className="ai-consultation-card">
           <div className="ai-consultation-glow" aria-hidden="true" />
 
           <div className="ai-consultation-content-wrap">
@@ -31,13 +25,13 @@ export function AiSolutionsConsultation() {
               <span className="ai-consultation-badge">Book consultation</span>
 
               <h2 className="ai-consultation-title">
-                Tell us the workflow.
+                {content.titleStart}
                 <br />
-                We&apos;ll shape the AI.
+                {content.titleEnd}
               </h2>
 
               <p className="ai-consultation-desc">
-                A 30-minute session with our team to map your use case, data, and product goals.
+                {content.description}
               </p>
 
               <div className="ai-consultation-actions">
@@ -51,7 +45,7 @@ export function AiSolutionsConsultation() {
             </div>
 
             <div className="ai-consultation-paths">
-              {consultationPaths.map((path) => (
+              {content.paths.map((path) => (
                 <div key={path.title} className="ai-consultation-path">
                   <span
                     className="ai-consultation-dot"

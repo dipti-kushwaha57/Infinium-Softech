@@ -1,9 +1,15 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState, type TouchEvent } from "react";
+import type { SolutionsSectionIntro, SolutionsServiceItem } from "@/data/solutions/webApplicationsPageData";
 import "./AiSolutionsOfferings.scss";
 
-const offerings = [
+const defaultContent: SolutionsSectionIntro & { items: SolutionsServiceItem[] } = {
+  eyebrow: "What we deliver",
+  titleStart: "AI services designed for",
+  titleEnd: "measurable business impact.",
+  description: "We put practical AI into your workflows to improve decisions, productivity, forecasting, and service quality.",
+  items: [
   {
     number: "01",
     tint: "#1F31E8",
@@ -60,14 +66,16 @@ const offerings = [
     description:
       "Add human review, access controls, and monitoring to keep AI accountable.",
   },
-];
+  ],
+};
 
-export function AiSolutionsOfferings() {
+export function AiSolutionsOfferings({ content = defaultContent }: { content?: SolutionsSectionIntro & { items: SolutionsServiceItem[] } } = {}) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [slideDirection, setSlideDirection] = useState<"next" | "prev">("next");
   const touchStartXRef = useRef<number | null>(null);
   const touchEndXRef = useRef<number | null>(null);
+  const offerings = content.items;
   const totalCards = offerings.length;
 
   const goToNext = useCallback(() => {
@@ -121,19 +129,18 @@ export function AiSolutionsOfferings() {
     <section id="ai-capabilities" className="ai-solutions-offerings">
       <div className="ai-solutions-container">
         <div className="offerings-header">
-          <span className="offerings-eyebrow">What we deliver</span>
-          <h2 className="offerings-headline">
-            AI services designed for
+          <span data-reveal="" className="offerings-eyebrow">{content.eyebrow}</span>
+          <h2 data-reveal="" className="offerings-headline">
+            {content.titleStart}
             <br />
-            measurable business impact.
+            {content.titleEnd}
           </h2>
-          <p className="offerings-intro">
-            We put practical AI into your workflows to improve decisions, productivity, forecasting,
-            and service quality.
+          <p data-reveal="" className="offerings-intro">
+            {content.description}
           </p>
         </div>
 
-        <div className="offerings-grid" aria-label="AI services">
+        <div data-reveal="" className="offerings-grid" aria-label="AI services">
           {offerings.map((offering) => (
             <article key={offering.number} className="offering-card">
               <div
@@ -147,7 +154,7 @@ export function AiSolutionsOfferings() {
           ))}
         </div>
 
-        <div className="offerings-mobile-slider-area">
+        <div data-reveal="" className="offerings-mobile-slider-area">
           <div
             className="offerings-slider-wrapper"
             onMouseEnter={() => setIsPaused(true)}

@@ -1,21 +1,31 @@
 import Link from "next/link";
+import type { WebApplicationsPageContent } from "@/data/solutions/webApplicationsPageData";
 import "./AiSolutionsHire.scss";
 
-export function AiSolutionsHire() {
+const defaultContent: WebApplicationsPageContent["hire"] = {
+  eyebrow: "Partner with us",
+  title: "Build AI that your teams can trust.",
+  description:
+    "Whether you need a sharper forecasting model, smarter automation, or a complete AI product strategy, we help turn complex technology into reliable operating systems.",
+  action: "Talk to our team",
+};
+
+export function AiSolutionsHire({ content = defaultContent }: { content?: WebApplicationsPageContent["hire"] } = {}) {
   return (
     <section className="ai-solutions-hire">
-      <div className="ai-solutions-container hire-grid">
-        <div className="hire-copy">
-          <span className="section-kicker">Partner with us</span>
-          <h2>Build AI that your teams can trust.</h2>
+      <div className="ai-solutions-container">
+        <div data-reveal="" className="hire-panel hire-grid">
+          <div className="hire-copy">
+            <span className="section-kicker">{content.eyebrow}</span>
+            <h2>{content.title}</h2>
+          </div>
+          <div className="hire-details">
+            <p>{content.description}</p>
+            <Link href="/contact" className="btn-primary">
+              {content.action}
+            </Link>
+          </div>
         </div>
-        <p>
-          Whether you need a sharper forecasting model, smarter automation, or a complete AI
-          product strategy, we help turn complex technology into reliable operating systems.
-        </p>
-        <Link href="/contact" className="btn-primary">
-          Talk to our team
-        </Link>
       </div>
     </section>
   );

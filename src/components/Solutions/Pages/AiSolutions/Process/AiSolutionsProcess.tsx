@@ -2,9 +2,15 @@
 
 import { useCallback, useEffect, useRef, useState, type TouchEvent } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import type { SolutionsProcessStep, SolutionsSectionIntro } from "@/data/solutions/webApplicationsPageData";
 import "./AiSolutionsProcess.scss";
 
-const process = [
+const defaultContent: SolutionsSectionIntro & { items: SolutionsProcessStep[] } = {
+  eyebrow: "How we work",
+  titleStart: "From first brief",
+  titleEnd: "to live AI.",
+  description: "A clear path from use case and data review to deployment and ongoing improvement.",
+  items: [
   {
     number: "01",
     tint: "#1F31E8",
@@ -41,9 +47,11 @@ const process = [
     title: "Monitor & improve",
     description: "Track accuracy and drift, then refine as your data changes.",
   },
-];
+  ],
+};
 
-export function AiSolutionsProcess() {
+export function AiSolutionsProcess({ content = defaultContent }: { content?: SolutionsSectionIntro & { items: SolutionsProcessStep[] } } = {}) {
+  const process = content.items;
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [slideDirection, setSlideDirection] = useState<"next" | "prev">("next");
@@ -102,18 +110,18 @@ export function AiSolutionsProcess() {
     <section className="ai-solutions-process" aria-labelledby="ai-process-title">
       <div className="ai-solutions-container">
         <div className="process-header">
-          <span className="process-eyebrow">How we work</span>
-          <h2 id="ai-process-title" className="process-headline">
-            From first brief
+          <span data-reveal="" className="process-eyebrow">{content.eyebrow}</span>
+          <h2 data-reveal="" id="ai-process-title" className="process-headline">
+            {content.titleStart}
             <br />
-            to live AI.
+            {content.titleEnd}
           </h2>
-          <p className="process-intro">
-            A clear path from use case and data review to deployment and ongoing improvement.
+          <p data-reveal="" className="process-intro">
+            {content.description}
           </p>
         </div>
 
-        <div className="process-grid" aria-label="AI delivery steps">
+        <div data-reveal="" className="process-grid" aria-label="AI delivery steps">
           {process.map((step) => (
             <article key={step.number} className="process-card">
               <span className="process-number" style={{ color: step.tint }}>{step.number}</span>
@@ -123,7 +131,7 @@ export function AiSolutionsProcess() {
           ))}
         </div>
 
-        <div className="process-mobile-slider-area">
+        <div data-reveal="" className="process-mobile-slider-area">
           <div
             className="process-slider-wrapper"
             onMouseEnter={() => setIsPaused(true)}

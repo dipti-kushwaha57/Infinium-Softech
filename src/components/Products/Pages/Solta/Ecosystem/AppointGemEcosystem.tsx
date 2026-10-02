@@ -34,8 +34,15 @@ function EcosystemCardView({
 
       <div className="card-body">
         <div className="card-identity">
-          <span className="card-badge" style={{ backgroundColor: prod.tint }}>
-            {prod.mark}
+          <span 
+            className="card-badge" 
+            style={{ backgroundColor: prod.logo ? "transparent" : prod.tint }}
+          >
+            {prod.logo ? (
+              <Image src={prod.logo} alt={prod.name} width={40} height={40} className="badge-logo" />
+            ) : (
+              prod.mark
+            )}
           </span>
           <h3 className="card-name" style={{ color: prod.tint }}>{prod.name}</h3>
         </div>
@@ -55,9 +62,10 @@ function EcosystemCardView({
 }
 
 export function AppointGemEcosystem() {
-  const RELATED_PRODUCTS = ECOSYSTEM_PRODUCTS.filter((p) =>
-    ["NurseWorth", "PureSpace", "Textora"].includes(p.name)
-  );
+  const slotaProducts = ["WelzoKart", "Needly", "NurseWorth"];
+  const RELATED_PRODUCTS = slotaProducts
+    .map((name) => ECOSYSTEM_PRODUCTS.find((p) => p.name === name))
+    .filter((p): p is EcosystemProduct => p !== undefined);
 
   const { scrollRef, activeIndex, scrollToIndex, handleNext, handlePrev } =
     useAboutCarousel(RELATED_PRODUCTS.length, 1024);

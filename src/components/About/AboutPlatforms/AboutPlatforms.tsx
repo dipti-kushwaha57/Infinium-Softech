@@ -35,7 +35,10 @@ function PlatformCardView({
 
       <div className="card-body">
         <div className="card-identity">
-          <span className="card-badge" style={{ backgroundColor: product.tint }}>
+          <span 
+            className="card-badge" 
+            style={{ backgroundColor: product.logo ? "transparent" : product.tint }}
+          >
             {product.logo ? (
               <Image src={product.logo} alt={product.name} width={40} height={40} className="badge-logo" />
             ) : (

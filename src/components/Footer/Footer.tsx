@@ -42,56 +42,64 @@ function LinkedinIcon({ size = 18 }: { size?: number }) {
   );
 }
 
-const FOOTER_COLUMNS = [
+type FooterLinkItem = {
+  label: string;
+  href: string;
+};
+
+type FooterColumn = {
+  title: string;
+  items: FooterLinkItem[];
+};
+
+const FOOTER_COLUMNS: FooterColumn[] = [
   {
     title: "Products",
     items: [
-      "Slota",
-      "WelzoKart",
-      "NurseWorth",
-      "LoadGo",
-      "Trekvano",
-      "Textora",
+      { label: "Slota", href: "/products/slota" },
+      { label: "WelzoKart", href: "/products/welzokart" },
+      { label: "NurseWorth", href: "/products/NurseWorth" },
+      { label: "LoadGo", href: "/products/truck-guru" },
+      { label: "Trekvano", href: "/products/trekvano" },
+      { label: "Textora", href: "/products/Textora" },
     ],
   },
   {
-    title: "Industries",
+    title: "Solutions",
     items: [
-      "Logistics",
-      "Healthcare",
-      "Commerce",
-      "Education",
-      "Home services",
-      "Communication",
+      { label: "Mobile Apps", href: "/solutions/mobile-applications" },
+      { label: "Web Applications", href: "/solutions/web-applications" },
+      { label: "Custom Software", href: "/solutions/custom-software" },
+      { label: "AI Solutions", href: "/solutions/ai-solutions" },
+      { label: "Enterprise Systems", href: "/solutions/enterprise-systems" },
+      { label: "Cloud Infrastructure", href: "/solutions/cloud-infrastructure" },
     ],
   },
   {
-    title: "Resources",
+    title: "Technology",
     items: [
-      "Customer Stories",
-      "Documentation",
-      "Help Center",
-      "Release Notes",
-      "Webinars",
-      "Status",
+      { label: "React", href: "/technology#tech-reactjs" },
+      { label: "Next.js", href: "/technology#tech-nextjs" },
+      { label: "Flutter", href: "/technology#tech-flutter" },
+      { label: "Node.js", href: "/technology#tech-nodejs" },
+      { label: "Laravel", href: "/technology#tech-php" },
+      { label: "AWS", href: "/technology#tech-aws" },
     ],
   },
   {
     title: "Company",
     items: [
-      "About Us",
-      "Careers",
-      "Partners",
-      "Contact Sales",
-      "Support",
+      { label: "About Us", href: "/about" },
+      { label: "Contact Us", href: "/contact" },
+      { label: "Book a Demo", href: "/book-a-demo" },
     ],
   },
 ];
 
 const LEGAL_LINKS = [
-  "Privacy Policy",
-  "Terms of Service",
-  "Security",
+  { label: "Privacy Policy", href: "/privacy-policy" },
+  { label: "Terms of Service", href: "/terms-of-service" },
+  { label: "Security", href: "/book-a-demo" },
 ];
 
 const SOCIAL_LINKS = [
@@ -110,18 +118,6 @@ export function Footer() {
     setOpenColumn((prev) =>
       prev === title ? null : title
     );
-  };
-
-  const getLink = (item: string) => {
-    if (item === "About Us") {
-      return "/about";
-    }
-
-    if (item === "Contact Sales") {
-      return "/contact";
-    }
-
-    return "/book-a-demo";
   };
 
   return (
@@ -209,9 +205,9 @@ export function Footer() {
               <div className="column-list-wrapper">
                 <ul className="column-list">
                   {col.items.map((item) => (
-                    <li key={item}>
-                      <Link href={getLink(item)}>
-                        {item}
+                    <li key={item.label}>
+                      <Link href={item.href}>
+                        {item.label}
                       </Link>
                     </li>
                   ))}
@@ -229,9 +225,9 @@ export function Footer() {
         </div>
 
         <div className="legal">
-          {LEGAL_LINKS.map((label) => (
-            <Link key={label} href="/book-a-demo">
-              {label}
+          {LEGAL_LINKS.map((link) => (
+            <Link key={link.label} href={link.href}>
+              {link.label}
             </Link>
           ))}
         </div>

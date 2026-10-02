@@ -207,6 +207,21 @@
       flex-shrink: 0;
     }
 
+    .chip-icon-wrapper {
+      width: 26px;
+      height: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+
+      .tech-chip-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+    }
+
     .chip-info {
       min-width: 0;
 

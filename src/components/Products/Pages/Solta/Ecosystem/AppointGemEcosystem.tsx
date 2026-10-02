@@ -18,7 +18,6 @@ function EcosystemCardView({
   return (
     <Link
       href={`/products/${prod.id}`}
-      data-reveal={isClone ? undefined : ""}
       className={`ecosystem-card ${isClone ? "ecosystem-card--clone" : ""}`}
       data-carousel-item
       aria-hidden={isClone ? "true" : undefined}

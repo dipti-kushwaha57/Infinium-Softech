@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { STACK_LAYERS, STACK_NOTES, StackLayer } from "@/data/stackData";
 import "./TechStack.scss";
 
@@ -167,11 +168,24 @@ export function TechStack() {
                     >
                       {layer.items.map((item, itemIdx) => (
                         <div key={itemIdx} className="tech-chip">
-                          <span
-                            className="chip-tint"
-                            style={{ backgroundColor: item.tint }}
-                            aria-hidden="true"
-                          />
+                          {item.icon ? (
+                            <div className="chip-icon-wrapper">
+                              <Image 
+                                src={item.icon} 
+                                alt={item.name} 
+                                width={24} 
+                                height={24} 
+                                unoptimized={item.icon.endsWith(".svg")}
+                                className="tech-chip-img"
+                              />
+                            </div>
+                          ) : (
+                            <span
+                              className="chip-tint"
+                              style={{ backgroundColor: item.tint }}
+                              aria-hidden="true"
+                            />
+                          )}
                           <div className="chip-info">
                             <span className="chip-name">{item.name}</span>
                             <span className="chip-role">{item.role}</span>

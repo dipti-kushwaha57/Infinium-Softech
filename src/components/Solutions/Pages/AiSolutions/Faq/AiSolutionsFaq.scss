@@ -34,11 +34,6 @@
     font-weight: 800;
     line-height: 0.94;
     letter-spacing: -0.045em;
-
-    @media (min-width: 768px) and (max-width: 1023px) {
-      font-size: 42px;
-      line-height: 1.02;
-    }
   }
 
   .ai-solutions-faq-intro {
@@ -361,6 +356,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .ai-solutions-faq .ai-faq-stage-card,
   .ai-solutions-faq .ai-solutions-faq-dot,
   .ai-solutions-faq .ai-faq-arrow {

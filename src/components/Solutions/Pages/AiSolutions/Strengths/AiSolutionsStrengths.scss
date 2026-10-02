@@ -51,7 +51,7 @@
     margin: 12px 0 0;
     color: #f1f0ec;
     font-family: $font-display;
-    font-size: clamp(30px, 4vw, 68px);
+    font-size: var(--fs-h2);
     font-weight: 800;
     line-height: 0.98;
     letter-spacing: -0.045em;

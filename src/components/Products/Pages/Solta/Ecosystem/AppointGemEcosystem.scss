@@ -35,16 +35,7 @@
   }
 
   .ecosystem-link {
-    font-size: 14px;
-    font-weight: 500;
-    color: $color-accent;
-    padding-bottom: 4px;
-    white-space: nowrap;
-    transition: color 0.2s ease;
-
-    &:hover {
-      color: $color-ink;
-    }
+    @include btn-hero-outline;
   }
 
   .ecosystem-grid {

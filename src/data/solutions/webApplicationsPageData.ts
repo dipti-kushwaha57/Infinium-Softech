@@ -30,7 +30,7 @@ export interface SolutionsSectionIntro {
   description: string;
 }
 
-export interface SolutionsProcessStep extends SolutionsServiceItem {}
+export interface SolutionsProcessStep extends SolutionsServiceItem { }
 
 export interface SolutionsConsultationPath {
   title: string;

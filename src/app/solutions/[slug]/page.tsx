@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { getPageMetadata, type RouteKey } from "@/lib/seo";
 import { SOLUTIONS_LIST_DATA } from "@/data/solutions/solutionsData";
 import { SolutionPlaceholder } from "@/components/Solutions/Pages/Placeholder/SolutionPlaceholder";
 import { AiSolutionsPage } from "@/components/Solutions/Pages/AiSolutions/AiSolutionsPage";
@@ -25,35 +26,29 @@ export async function generateMetadata({ params }: SolutionPageProps): Promise<M
     return { title: "Solution not found" };
   }
 
-  if (slug === "web-applications") {
+  // Define the exact route key this slug maps to in seo.json
+  const routeKey = `/${slug}` as RouteKey;
+
+  try {
+    // If we have explicit SEO data for this slug (e.g. /custom-software) in seo.json, use it perfectly!
+    const baseMetadata = getPageMetadata(routeKey);
+    // Explicitly set the canonical to the /solutions/ path so we don't conflict with root standalone routes
     return {
-      title: "Web Applications",
-      description:
-        "Infinium Softech designs and builds responsive, secure web applications and business platforms around real workflows.",
+      ...baseMetadata,
       alternates: {
-        canonical: "/solutions/web-applications",
+        canonical: `/solutions/${slug}`,
+      },
+    };
+  } catch (error) {
+    // Fallback if SEO JSON entry doesn't exist for a particular slug
+    return {
+      title: solution.title,
+      description: solution.description,
+      alternates: {
+        canonical: `/solutions/${solution.id}`,
       },
     };
   }
-
-  if (slug === "mobile-applications") {
-    return {
-      title: "Mobile Applications",
-      description:
-        "Infinium Softech designs and builds native and cross-platform mobile apps for customers, teams, and field operations.",
-      alternates: {
-        canonical: "/solutions/mobile-applications",
-      },
-    };
-  }
-
-  return {
-    title: solution.title,
-    description: solution.description,
-    alternates: {
-      canonical: `/solutions/${solution.id}`,
-    },
-  };
 }
 
 export default async function SolutionPage({ params }: SolutionPageProps) {

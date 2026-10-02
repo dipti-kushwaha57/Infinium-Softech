@@ -61,7 +61,7 @@ export const MOBILE_APPLICATIONS_PAGE_CONTENT: WebApplicationsPageContent = {
   },
   hire: {
     eyebrow: "Partner with us",
-    title: "Build a mobile app your users return to.",
+    title: "Build a mobile app\nyour users return to.",
     description:
       "Share your app idea, target users, and goals. We’ll help shape a focused product plan and a practical path to launch.",
     action: "Talk to our team",

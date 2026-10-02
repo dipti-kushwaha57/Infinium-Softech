@@ -36,7 +36,7 @@
   }
 
   .hire-copy {
-    h2 {
+    h3 {
       margin-top: 12px;
       color: $color-ink;
       font-family: $font-display;
@@ -44,7 +44,8 @@
       font-weight: 800;
       line-height: 1.08;
       letter-spacing: -0.035em;
-      max-width: 12ch;
+      white-space: pre-line;
+      text-wrap: balance;
     }
   }
 

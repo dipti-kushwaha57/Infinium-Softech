@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useAboutCarousel } from "@/components/About/useAboutCarousel";
 import type { SolutionsProject, SolutionsSectionIntro } from "@/data/solutions/webApplicationsPageData";
 import "./AiSolutionsWorks.scss";
@@ -105,7 +106,7 @@ export function AiSolutionsWorks({ content = defaultContent }: { content?: Solut
     <section className="ai-solutions-works" aria-labelledby="ai-solutions-works-title">
       <div className="ai-solutions-container">
         <div className="ai-solutions-works-header">
-          <div>
+          <div className="ai-solutions-works-header-left">
             <span data-reveal="" className="ai-solutions-works-eyebrow">{content.eyebrow}</span>
             <h2 data-reveal="" id="ai-solutions-works-title" className="ai-solutions-works-title">
               {content.titleStart}
@@ -113,10 +114,12 @@ export function AiSolutionsWorks({ content = defaultContent }: { content?: Solut
               {content.titleEnd}
             </h2>
           </div>
-          <p data-reveal="" className="ai-solutions-works-intro">{content.description}</p>
-          <a data-reveal="" className="ai-solutions-works-view-all" href="https://strivedge.com/portfolio/" target="_blank" rel="noreferrer">
-            View all projects <span aria-hidden="true">→</span>
-          </a>
+          <div className="ai-solutions-works-header-right">
+            <p data-reveal="" className="ai-solutions-works-intro">{content.description}</p>
+            <Link data-reveal="" href="/products" className="btn-secondary">
+              View all projects
+            </Link>
+          </div>
         </div>
 
         <div data-reveal="" className="ai-solutions-works-wrap">

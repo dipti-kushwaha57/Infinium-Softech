@@ -11,16 +11,21 @@
 
   .ai-solutions-works-header {
     display: flex;
-    align-items: flex-end;
     justify-content: space-between;
-    gap: 24px;
+    align-items: flex-end;
+    gap: 40px;
     padding-bottom: 22px;
     border-bottom: 1px solid rgba(12, 12, 13, 0.12);
-    flex-wrap: wrap;
 
-    @media (max-width: 640px) {
+    @media (max-width: 900px) {
+      flex-direction: column;
       align-items: flex-start;
+      gap: 24px;
     }
+  }
+
+  .ai-solutions-works-header-left {
+    flex: 1 1 50%;
   }
 
   .ai-solutions-works-eyebrow {
@@ -37,18 +42,28 @@
     letter-spacing: -0.045em;
   }
 
-  .ai-solutions-works-view-all {
-    padding-bottom: 4px;
-    color: $color-accent;
-    font-size: 14px;
-    font-weight: 500;
-    text-decoration: none;
-    white-space: nowrap;
-    transition: color 0.2s ease;
-
-    &:hover {
-      color: $color-ink;
+  .ai-solutions-works-header-right {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    
+    @media (min-width: 901px) {
+      max-width: 480px; 
     }
+  }
+
+  .ai-solutions-works-intro {
+    margin: 0;
+    color: $color-body;
+    font-size: 1.08rem;
+    line-height: 1.6;
+    max-width: none;
+  }
+
+  .btn-secondary {
+    @include btn-hero-outline;
   }
 
   .ai-solutions-works-wrap {

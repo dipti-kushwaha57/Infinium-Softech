@@ -88,6 +88,24 @@
       "changeFrequency": "monthly",
       "priority": 0.8
     },
+    "/cloud-infrastructure": {
+      "title": "Cloud Infrastructure",
+      "description": "Infinium Softech designs and manages secure, scalable cloud infrastructure and deployment environments.",
+      "changeFrequency": "monthly",
+      "priority": 0.8
+    },
+    "/enterprise-systems": {
+      "title": "Enterprise Solutions",
+      "description": "Infinium Softech designs and builds connected enterprise solutions that bring teams, data, applications, and business processes together.",
+      "changeFrequency": "monthly",
+      "priority": 0.8
+    },
+    "/custom-software": {
+      "title": "Custom Software",
+      "description": "Build custom software that fits your workflows, users, and business goals.",
+      "changeFrequency": "monthly",
+      "priority": 0.8
+    },
     "/technology": {
       "title": "Technology — Modern Frontend, Backend, Mobile, Cloud & Database Stack",
       "description": "Explore Infinium Softech's technology stack including React, Angular, Next.js, Node.js, Java, Swift, Android, AWS, Docker and databases.",

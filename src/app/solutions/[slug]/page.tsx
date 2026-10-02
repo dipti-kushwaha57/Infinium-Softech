@@ -5,6 +5,9 @@ import { SolutionPlaceholder } from "@/components/Solutions/Pages/Placeholder/So
 import { AiSolutionsPage } from "@/components/Solutions/Pages/AiSolutions/AiSolutionsPage";
 import { WebApplicationsPage } from "@/components/Solutions/Pages/WebApplications/WebApplicationsPage";
 import { MobileApplicationsPage } from "@/components/Solutions/Pages/MobileApplications/MobileApplicationsPage";
+import { CloudInfrastructurePage } from "@/components/Solutions/Pages/CloudInfrastructure/CloudInfrastructurePage";
+import { EnterpriseSolutionsPage } from "@/components/Solutions/Pages/EnterpriseSolutions/EnterpriseSolutionsPage";
+import { CustomSoftwarePage } from "@/components/Solutions/Pages/CustomSoftware/CustomSoftwarePage";
 
 type SolutionPageProps = {
   params: Promise<{ slug: string }>;
@@ -71,6 +74,18 @@ export default async function SolutionPage({ params }: SolutionPageProps) {
 
   if (slug === "mobile-applications") {
     return <MobileApplicationsPage />;
+  }
+
+  if (slug === "cloud-infrastructure") {
+    return <CloudInfrastructurePage />;
+  }
+
+  if (slug === "enterprise-systems") {
+    return <EnterpriseSolutionsPage />;
+  }
+
+  if (slug === "custom-software") {
+    return <CustomSoftwarePage />;
   }
 
   // Fallback for solutions that don't have a specific page built yet

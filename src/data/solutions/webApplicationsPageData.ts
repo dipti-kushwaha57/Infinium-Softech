@@ -183,7 +183,7 @@ export const WEB_APPLICATIONS_PAGE_CONTENT: WebApplicationsPageContent = {
   },
   hire: {
     eyebrow: "Partner with us",
-    title: "Build a web application your team can rely on.",
+    title: "Build digital solutions your team can rely on.",
     description:
       "Tell us about your users, workflows, and goals. We’ll help shape a practical web solution and a clear delivery plan.",
     action: "Talk to our team",

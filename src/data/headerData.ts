@@ -147,11 +147,11 @@ export const MENU_DEFS: Record<string, MenuDef> = {
     eyebrow: "How we build and ship",
     items: [
       { name: "AI Solutions", desc: "Forecasting, routing and instructions", tint: "#0F8F87", product: "Dishly", href: "/solutions/ai-solutions" },
-      { name: "Custom Software", desc: "Workflows shaped to your operation", tint: "#1E9E5A", product: "WelzoKart", href: "/solutions#custom-software" },
+      { name: "Custom Software", desc: "Workflows shaped to your operation", tint: "#1E9E5A", product: "WelzoKart", href: "/solutions/custom-software" },
       { name: "Web Applications", desc: "Dashboards on one component system", tint: "#1F31E8", product: "Slota", href: "/solutions/web-applications" },
       { name: "Mobile Apps", desc: "Customer, rider, crew and field apps", tint: "#2AA8C4", product: "Trekvano", href: "/solutions/mobile-applications" },
-      { name: "Enterprise Systems", desc: "SSO, roles, audit trails, compliance", tint: "#8B3FE8", product: "NurseWorth", href: "/solutions#enterprise-systems" },
-      { name: "Cloud Infrastructure", desc: "Multi-region AWS with autoscaling", tint: "#E8A21F", product: "LoadGo", href: "/solutions#cloud-infrastructure" },
+      { name: "Enterprise Systems", desc: "SSO, roles, audit trails, compliance", tint: "#8B3FE8", product: "NurseWorth", href: "/solutions/enterprise-systems" },
+      { name: "Cloud Infrastructure", desc: "Multi-region AWS with autoscaling", tint: "#E8A21F", product: "LoadGo", href: "/solutions/cloud-infrastructure" },
     ],
   },
   technology: {

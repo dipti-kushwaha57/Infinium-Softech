@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, BrainCircuit, ChevronRight, Sparkles } from "lucide-react";
+import { ArrowRight, BrainCircuit, ChevronRight } from "lucide-react";
 import "./AiSolutionsHero.scss";
 
 export function AiSolutionsHero() {
@@ -58,11 +58,6 @@ export function AiSolutionsHero() {
           </div>
         </div>
 
-        <div className="ai-solutions-hero-highlights" aria-label="AI delivery principles">
-          <span><Sparkles size={15} aria-hidden="true" /> Outcome-focused AI</span>
-          <span><BrainCircuit size={15} aria-hidden="true" /> Human-guided decisions</span>
-          <span><ArrowRight size={15} aria-hidden="true" /> Ready for real workflows</span>
-        </div>
       </div>
     </section>
   );

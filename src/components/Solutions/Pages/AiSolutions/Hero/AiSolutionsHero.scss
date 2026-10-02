@@ -135,28 +135,6 @@
   }
 }
 
-.ai-solutions-hero-highlights {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px 28px;
-  margin-top: 34px;
-  padding-top: 20px;
-  border-top: 1px solid rgba(12, 12, 13, 0.14);
-
-  span {
-    display: inline-flex;
-    align-items: center;
-    gap: 9px;
-    color: $color-body;
-    font-size: 13px;
-    font-weight: 500;
-  }
-
-  svg {
-    color: $color-accent;
-  }
-}
-
 @keyframes ai-solutions-pulse {
   0%,
   100% {
@@ -197,9 +175,4 @@
     }
   }
 
-  .ai-solutions-hero-highlights {
-    flex-direction: column;
-    gap: 13px;
-    margin-top: 26px;
-  }
 }
